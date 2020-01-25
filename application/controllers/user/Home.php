@@ -7,7 +7,7 @@ class Home extends MY_Controller{
     }
 
     public function index(){
-
+        $this->load->view('public/home');
     }
 
     public function login(){
