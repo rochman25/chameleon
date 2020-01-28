@@ -8,4 +8,10 @@ class Admin_model extends MY_Model
     {
         parent::__construct();
     }
+
+    function login($email){
+        $this->getWhere('email',$email);
+        return $this->getData()->row();
+    }
+
 }
