@@ -19,6 +19,19 @@ class Home extends MY_Controller
         }
     }
 
+    public function profile(){
+        if($this->adminIsLoggedIn()){
+            $data['admin'] = $this->admin->getAdmin();
+            if($this->input->post('kirim')){
+
+            }else{
+                $this->load->view('admin/pages/profile',$data);
+            }
+        }else{
+            redirect('admin/home/login');
+        }
+    }
+
     public function login()
     {
         if ($this->adminIsLoggedIn()) {
@@ -43,6 +56,7 @@ class Home extends MY_Controller
                             "username" => $cek->username,
                             "email" => $cek->email,
                             "status" => $cek->status,
+                            "role" => $cek->role
                         );
                         $this->session->set_userdata('admin_data', $user);
                         redirect('admin/home');

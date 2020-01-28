@@ -14,4 +14,14 @@ class Admin_model extends MY_Model
         return $this->getData()->row();
     }
 
+    function getAdmin(){
+        $this->getWhere('id_admin',$this->session->userdata['admin_data']['id']);
+        return $this->getData()->row();
+    }
+
+    function getAdmins(){
+        $this->getWhere('id_admin !=',$this->session->userdata['admin_data']['id']);
+        return $this->getData()->result_array();
+    }
+
 }
