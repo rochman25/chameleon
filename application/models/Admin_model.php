@@ -24,4 +24,9 @@ class Admin_model extends MY_Model
         return $this->getData()->result_array();
     }
 
+    function tambah_admin($data){
+        $this->db->set('id_admin','UUID()',false);
+        return $this->insert($data);
+    }
+
 }
