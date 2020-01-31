@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 24 Jan 2020 pada 15.10
+-- Generation Time: 28 Jan 2020 pada 15.13
 -- Versi Server: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `id` varchar(36) NOT NULL,
+  `id_admin` varchar(36) NOT NULL,
   `username` varchar(30) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -38,6 +38,13 @@ CREATE TABLE `admin` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `admin`
+--
+
+INSERT INTO `admin` (`id_admin`, `username`, `email`, `password`, `role`, `status`, `created_at`, `updated_at`) VALUES
+('a6c35fae-41d0-11ea-af65-646e69921e02', 'admin', 'admin@admin.com', 'admin123', '1', 1, '2020-01-28 00:00:00', '2020-01-28 14:30:41');
 
 -- --------------------------------------------------------
 
@@ -176,7 +183,7 @@ CREATE TABLE `transaksi` (
 -- Indexes for table `admin`
 --
 ALTER TABLE `admin`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_admin`);
 
 --
 -- Indexes for table `alamat_pengguna`

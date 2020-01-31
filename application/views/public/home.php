@@ -37,9 +37,9 @@
 <meta name="msapplication-TileImage" content="https://www.mensrepublic.id/assets/images/layout/favicon_new/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
 
-<link rel="stylesheet" href="<?= base_url()?>assets/public/jquery-ui-min.css">
-<link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/public/all.css">
-<link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/public/master.css">		<!-- Facebook Pixel Code -->
+<link rel="stylesheet" href="<?= base_url()?>assets/public/css/jquery-ui-min.css">
+<link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/public/css/all.css">
+<link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/public/css/master.css">		<!-- Facebook Pixel Code -->
 	<script>
         !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
             n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
