@@ -38,8 +38,8 @@
 <meta name="theme-color" content="#ffffff">
 
 <link rel="stylesheet" href="<?= base_url()?>assets/public/css/jquery-ui-min.css">
-<link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/public/css/all.css">
-<link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/public/css/master.css">		<!-- Facebook Pixel Code -->
+<link rel="stylesheet" type="text/css" href="https://www.mensrepublic.id/assets/web/css/all.css?id=01e8f5f360a10b450e35">
+<link rel="stylesheet" type="text/css" href="https://www.mensrepublic.id/assets/web/sass/master.css?id=9e0f65abec8cb3ae96f8">		<!-- Facebook Pixel Code -->
 	<script>
         !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
             n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
