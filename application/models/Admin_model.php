@@ -14,6 +14,11 @@ class Admin_model extends MY_Model
         return $this->getData()->row();
     }
 
+    function updateData($data,$id){
+        $this->getWhere('id_admin',$id);
+        return $this->update($data);
+    }
+
     function getAdmin(){
         $this->getWhere('id_admin',$this->session->userdata['admin_data']['id']);
         return $this->getData()->row();

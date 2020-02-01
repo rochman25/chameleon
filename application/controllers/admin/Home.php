@@ -50,7 +50,7 @@ class Home extends MY_Controller
                         $datas = array(
                             "updated_at" => date("Y-m-d H:i:s")
                         );
-                        $this->admin->update($datas, $cek->id_admin);
+                        $this->admin->updateData($datas, $cek->id_admin);
                         $user = array(
                             "id" => $cek->id_admin,
                             "username" => $cek->username,
