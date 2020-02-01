@@ -38,7 +38,8 @@
                                         <h4>Kategori List</h4>
                                     </div>
                                     <div class="card-body">
-                                        <button class="btn btn-primary" style="margin-bottom:10px"><i class="fa fa-plus"></i> Tambah Kategori</button>
+                                        <button data-target="#tambahModal" data-toggle="modal" class="btn btn-primary" style="margin-bottom:10px"><i class="fa fa-plus"></i> Tambah Kategori</button>
+                                        <?php echo $this->session->flashdata('pesan') ?>
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -57,8 +58,8 @@
                                                         <td><?= $row['nama_kategori'] ?></td>
                                                         <td><?= $row['deskripsi_kategori'] ?></td>
                                                         <td>
-                                                            <a href="#" class="btn btn-success">Ubah</a>
-                                                            <a href="#" class="btn btn-danger">Hapus</a>
+                                                            <button id="btnUbah" class="btn btn-success" data-target="#ubahModal" data-toggle="modal" data-id="<?=$row['id_kategori']?>" data-nama="<?=$row['nama_kategori']?>" data-deskripsi="<?=$row['deskripsi_kategori']?>">Ubah</button>
+                                                            <button id="btnHapus" class="btn btn-danger" data-target="#hapusModal" data-toggle="modal" data-id="<?=$row['id_kategori']?>">Hapus</button>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
@@ -71,11 +72,142 @@
                 </section>
             </div>
 
+            <!-- modal tambah -->
+            <div class="modal fade" tabindex="-1" role="dialog" id="tambahModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Tambah Kategori</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="<?= base_url() ?>admin/kategori/tambah" method="POST">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <label>Nama</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Nama Kategori" name="nama" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <label>Deskripsi (optional)</label>
+                                            <div class="input-group">
+                                                <textarea class="form-control" style="height:80px" placeholder="Deskripsi kategori" name="desc"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-whitesmoke br">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" name="kirim" value="Simpan" class="btn btn-primary">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- modal ubah -->
+            <div class="modal fade" tabindex="-1" role="dialog" id="ubahModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Ubah Kategori</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="<?= base_url() ?>admin/kategori/ubah" method="POST">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <label>Nama</label>
+                                            <div class="input-group">
+                                                <input type="hidden" class="form-control" name="id" id="id">
+                                                <input type="text" id="nama_kategori" class="form-control" placeholder="Nama Kategori" name="nama" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <label>Deskripsi (optional)</label>
+                                            <div class="input-group">
+                                                <textarea class="form-control" id="deskripsi_kategori" style="height:80px" placeholder="Deskripsi kategori" name="desc"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-whitesmoke br">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" name="kirim" value="Simpan" class="btn btn-primary">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- modal hapus -->
+            <div class="modal fade" tabindex="-1" role="dialog" id="hapusModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Hapus Kategori</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="<?= base_url() ?>admin/kategori/hapus" method="POST">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="input-group">
+                                            <input type="hidden" class="form-control" id="id_hapus" name="id" required>
+                                            <p><h6>Apakah anda yakin menghapus data ini?</h6></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer bg-whitesmoke br">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" name="kirim" value="Ya, Hapus!" class="btn btn-danger">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
             <!-- footer content -->
             <?php $this->load->view('admin/master/footer') ?>
         </div>
     </div>
     <?php $this->load->view('admin/assets/javascript') ?>
+    <script type="text/javascript">
+        $(document).on("click","#btnUbah", function(){
+            let id = $(this).data('id');
+            let nama = $(this).data('nama');
+            let desc = $(this).data('deskripsi');
+            $('input[id="id"]').val(id);
+            $('input[id="nama_kategori"]').val(nama);
+            $('#deskripsi_kategori').val(desc)
+        });
+        $(document).on("click","#btnHapus",function(){
+            let id = $(this).data('id');
+            $('input[id="id_hapus"]').val(id);
+        });
+    </script>
 </body>
 
 </html>
