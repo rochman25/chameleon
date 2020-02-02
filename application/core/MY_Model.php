@@ -98,6 +98,10 @@ class MY_Model extends CI_Model{
         return $this->db->insert_id();
     }
 
+    function limit($number){
+        return $this->db->limit($number);
+    }
+
     function Login($where)
     {
         return $this->db->get_where($this->table, $where);

@@ -62,7 +62,7 @@
                                                         <td><?= $row['harga_produk'] ?></td>
                                                         <td>
                                                             <a href="#" class="btn btn-success">Ubah</a>
-                                                            <a href="#" class="btn btn-danger">Hapus</a>
+                                                            <button id="btnHapus" data-target="#hapusModal" data-toggle="modal" data-id="<?=$row['id_produk']?>" class="btn btn-danger">Hapus</button>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
@@ -79,7 +79,47 @@
             <?php $this->load->view('admin/master/footer') ?>
         </div>
     </div>
+    <!-- modal hapus -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="hapusModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Hapus Produk</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="<?= base_url() ?>admin/produk/hapus" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="input-group">
+                                        <input type="hidden" class="form-control" id="id_hapus" name="id" required>
+                                        <p>
+                                            <h6>Apakah anda yakin menghapus data ini?</h6>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-whitesmoke br">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" name="kirim" value="Ya, Hapus!" class="btn btn-danger">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
     <?php $this->load->view('admin/assets/javascript') ?>
+    <script type="text/javascript">
+        $(document).on("click","#btnHapus",function(){
+            let id = $(this).data("id");
+            $("#id_hapus").val(id);
+        });
+    </script>
 </body>
 
 </html>

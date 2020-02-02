@@ -29,19 +29,19 @@ class Produk extends MY_Controller{
                 $kat_p = $this->input->post('kat_p');
                 $size_p = $this->input->post('size_p');
 
-                $kode_p = $this->produk->generateKode($kat_p);
+                $kode_p = $this->produk->generateKode($nama_p);
 
                 $data = array(
                     "kode_produk" => $kode_p,
                     "nama_produk" => $nama_p,
-                    // "deskripsi_produk" => $desc_p,
+                    "deskripsi_produk" => $desc_p,
                     "stok_produk" => $stok_p,
                     "harga_produk" => $harga_p,
                     "id_kategori" => $kat_p,
                     "size_produk" => $size_p,
                     "created_at" => date("Y-m-d H:i:s")
                 );
-                die(json_encode($data));
+                // die(json_encode($data));
                 if($this->produk->tambah_produk($data)){
                     $this->session->set_flashdata(
                         'pesan',
