@@ -23,6 +23,32 @@ class Home extends MY_Controller
         if($this->adminIsLoggedIn()){
             $data['admin'] = $this->admin->getAdmin();
             if($this->input->post('kirim')){
+                $id = $this->session->userdata['admin_data']['id'];
+                $username = $this->input->post('username');
+                $email = $this->input->post('email');
+                $nohp = $this->input->post('nohp');
+                $alamat = $this->input->post('alamat');
+
+                $datas = array(
+                    "username" => $username,
+                    "email" => $email,
+                    "no_hp" => $nohp,
+                    "alamat" => $alamat
+                );
+
+                if($this->admin->updateData($datas,$id)){
+                    $this->session->set_flashdata(
+                        'pesan',
+                        '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil diperbaharui</div>'
+                    );
+                    $this->load->view('admin/pages/profile',$data);
+                }else{
+                    $this->session->set_flashdata(
+                        'pesan',
+                        '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
+                    );
+                    $this->load->view('admin/pages/profile',$data);
+                }
 
             }else{
                 $this->load->view('admin/pages/profile',$data);
@@ -45,7 +71,7 @@ class Home extends MY_Controller
                 $cek = $this->admin->login($email);
                 // die(json_encode($cek));
                 if ($cek != null) {
-                    // if ($this->bcrypt->check_password($password, $cek->password)) {
+                    // if ($this->bcrypt->check_password($pass, $cek->password)) {
                     if ($cek->password == $pass) {
                         $datas = array(
                             "updated_at" => date("Y-m-d H:i:s")
@@ -68,6 +94,10 @@ class Home extends MY_Controller
                         $this->load->view('admin/pages/login');
                     }
                 } else {
+                    $this->session->set_flashdata(
+                        'pesan',
+                        '<div class="alert alert-danger mr-auto">Akun tidak ditemukan</div>'
+                    );
                     $this->load->view('admin/pages/login');
                 }
             }else{

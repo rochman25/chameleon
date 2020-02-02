@@ -33,15 +33,16 @@
                         <div class="row mt-sm-4">
                             <div class="col-12 col-md-12 col-lg-12">
                                 <div class="card">
-                                    <form method="post" class="needs-validation" novalidate="">
+                                    <form action="" method="post" class="needs-validation" novalidate="">
                                         <div class="card-header">
                                             <h4>Edit Profile</h4>
                                         </div>
                                         <div class="card-body">
+                                        <?=$this->session->flashdata('pesan')?>
                                             <div class="row">
                                                 <div class="form-group col-md-12 col-12">
                                                     <label>Username</label>
-                                                    <input type="text" class="form-control" value="<?=$admin->username?>" required="">
+                                                    <input type="text" class="form-control" name="username" value="<?=$admin->username?>" required="">
                                                     <div class="invalid-feedback">
                                                         Please fill in the first name
                                                     </div>
@@ -50,25 +51,25 @@
                                             <div class="row">
                                                 <div class="form-group col-md-7 col-12">
                                                     <label>Email</label>
-                                                    <input type="email" class="form-control" value="<?=$admin->email?>" required="">
+                                                    <input type="email" class="form-control" name="email" value="<?=$admin->email?>" required="">
                                                     <div class="invalid-feedback">
                                                         Please fill in the email
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-md-5 col-12">
                                                     <label>No Handphone</label>
-                                                    <input type="tel" class="form-control" value="<?=$admin->no_hp?>">
+                                                    <input type="tel" class="form-control" name="nohp" value="<?=$admin->no_hp?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="form-group col-12">
                                                     <label>Alamat</label>
-                                                    <textarea class="form-control summernote-simple"><?=$admin->alamat?></textarea>
+                                                    <textarea name="alamat" class="form-control summernote-simple"><?=$admin->alamat?></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="card-footer text-right">
-                                            <input type="input" name="kirim" value="Simpan" class="btn btn-primary">
+                                            <input type="submit" name="kirim" value="Simpan" class="btn btn-primary">
                                         </div>
                                     </form>
                                 </div>
