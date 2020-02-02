@@ -66,8 +66,39 @@ class Produk extends MY_Controller{
     public function ubah(){
         if($this->adminIsLoggedIn()){
             $id = $this->input->get('id');
+            $data['kat_p'] = $this->kategori->getData()->result_array();
             $data['produk'] = $this->produk->getById($id);
             if($this->input->post('kirim')){
+                $nama_p = $this->input->post('nama_p');
+                $desc_p = $this->input->post('desc_p');
+                $stok_p = $this->input->post('stok_p');
+                $harga_p = $this->input->post('harga_p');
+                $kat_p = $this->input->post('kat_p');
+                $size_p = $this->input->post('size_p');
+
+                $datas = array(
+                    "nama_produk" => $nama_p,
+                    "deskripsi_produk" => $desc_p,
+                    "stok_produk" => $stok_p,
+                    "harga_produk" => $harga_p,
+                    "id_kategori" => $kat_p,
+                    "size_produk" => $size_p,
+                    "updated_at" => date("Y-m-d H:i:s")
+                );
+
+                if($this->produk->updateData($datas,$id)){
+                    $this->session->set_flashdata(
+                        'pesan',
+                        '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil diubah</div>'
+                    );
+                    redirect('admin/produk');
+                }else{
+                    $this->session->set_flashdata(
+                        'pesan',
+                        '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
+                    );
+                    redirect('admin/produk');
+                }
 
             }else{
                 $this->load->view('admin/pages/produk/form_produk',$data);

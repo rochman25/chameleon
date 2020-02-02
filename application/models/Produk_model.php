@@ -36,4 +36,9 @@ class Produk_model extends MY_Model
         return $this->getData()->row();
     }
 
+    function updateData($data,$id){
+        $this->getWhere('id_produk',$id);
+        return $this->update($data);
+    }
+
 }

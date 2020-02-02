@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="section-body">
-                        <h2 class="section-title">Tambah Produk</h2>
+                        <h2 class="section-title">Form Produk</h2>
                         <p class="section-lead">
                             Silahkan lengkapi form dibawah ini untuk menambahkan produk baru.
                         </p>

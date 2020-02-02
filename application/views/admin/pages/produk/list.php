@@ -38,7 +38,8 @@
                                         <h4>Admin List</h4>
                                     </div>
                                     <div class="card-body">
-                                        <a href="<?=base_url()?>admin/produk/tambah" class="btn btn-primary" style="margin-bottom:10px"><i class="fa fa-plus"></i> Tambah Produk</a>
+                                        <a href="<?= base_url() ?>admin/produk/tambah" class="btn btn-primary" style="margin-bottom:10px"><i class="fa fa-plus"></i> Tambah Produk</a>
+                                        <?=$this->session->flashdata('pesan')?>
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -61,7 +62,7 @@
                                                         <td><?= $row['stok_produk'] ?></td>
                                                         <td><?= $row['harga_produk'] ?></td>
                                                         <td>
-                                                            <a href="#" class="btn btn-success">Ubah</a>
+                                                            <a href="<?=base_url()?>admin/produk/ubah?id=<?=$row['id_produk']?>" class="btn btn-success">Ubah</a>
                                                             <button id="btnHapus" data-target="#hapusModal" data-toggle="modal" data-id="<?=$row['id_produk']?>" class="btn btn-danger">Hapus</button>
                                                         </td>
                                                     </tr>
