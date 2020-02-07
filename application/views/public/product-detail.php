@@ -6,24 +6,11 @@
 	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 	<meta charset="UTF-8">
 	<meta name="title" content="Vale - Grey Brown">
-	<meta name="description" content="Mencirikan gentlemen yang tidak suka ribet, Vale merupakan sepatu terbaru MR dengan konsep modern dan merupakan terobosan dari model lama &#039;spica&#039;. Vale hanya memiliki 3 lubang, dimana jauh lebih simpel ketimbang sneakers pada umumnya, balutan warna brown juga memberikan sepatu ini sedikit kesan klasikalSpesifikasi- Warna : Grey / Abu-abu- Material : Action leather, we are not using animals skin (cruelty free). Don&#039;t worry, Men&#039;s Republic menggunakan material sintetis berkualitas tinggi. Action leather adalah kulit asli yang dihancurkan dan didaur ulang kembali lalu dilaminating menggunakan sintetis sehingga menjadi kulit sintetis yang sangat baik :)- Konstruksi : High cementing, proses pengeleman dan penekanan yang kuat.- Outsole : Microtech sole ecofriendly, jenis sole yang proses pembuatannya lebih ramah lingkungan dan dapat didaur ulang.- Insole : Breathable and comfortable insole, yang membuat setiap pijakan telapak kaki jauh lebih empuk dan nyaman.- Produksi : 100% material, pengrajin &amp; pemilik brand dari Indonesia- 3 fokus utama Men&#039;s Republic dalam menciptakan produk adalah comfortability, design, durability*Tersedia layanan retur produk jika ukuran tidak pas &amp; layanan garansi jika terdapat kecacatan / produk tidak sesuai :)Size Chart (diukur dari insole sepatu)- Size 39 : Panjang 26.5cm Lebar 9,25cm- Size 40 : Panjang 27cm Lebar 9,4cm- Size 41 : Panjang 27,5cm Lebar 9,5cm- Size 42 : Panjang 28cm Lebar 9,7cm- Size 43 : Panjang 28,6cm Lebar 10,1cm- Size 44 : Panjang 29,2cm Lebar 10,3cm">
-	<meta name="og:url" content="https://www.mensrepublic.id/product/vale-grey-brown">
-	<meta name="og:type" content="Website">
-	<meta name="og:title" content="Vale - Grey Brown">
-	<meta name="og:description" content="Mencirikan gentlemen yang tidak suka ribet, Vale merupakan sepatu terbaru MR dengan konsep modern dan merupakan terobosan dari model lama &#039;spica&#039;. Vale hanya memiliki 3 lubang, dimana jauh lebih simpel ketimbang sneakers pada umumnya, balutan warna brown juga memberikan sepatu ini sedikit kesan klasikalSpesifikasi- Warna : Grey / Abu-abu- Material : Action leather, we are not using animals skin (cruelty free). Don&#039;t worry, Men&#039;s Republic menggunakan material sintetis berkualitas tinggi. Action leather adalah kulit asli yang dihancurkan dan didaur ulang kembali lalu dilaminating menggunakan sintetis sehingga menjadi kulit sintetis yang sangat baik :)- Konstruksi : High cementing, proses pengeleman dan penekanan yang kuat.- Outsole : Microtech sole ecofriendly, jenis sole yang proses pembuatannya lebih ramah lingkungan dan dapat didaur ulang.- Insole : Breathable and comfortable insole, yang membuat setiap pijakan telapak kaki jauh lebih empuk dan nyaman.- Produksi : 100% material, pengrajin &amp; pemilik brand dari Indonesia- 3 fokus utama Men&#039;s Republic dalam menciptakan produk adalah comfortability, design, durability*Tersedia layanan retur produk jika ukuran tidak pas &amp; layanan garansi jika terdapat kecacatan / produk tidak sesuai :)Size Chart (diukur dari insole sepatu)- Size 39 : Panjang 26.5cm Lebar 9,25cm- Size 40 : Panjang 27cm Lebar 9,4cm- Size 41 : Panjang 27,5cm Lebar 9,5cm- Size 42 : Panjang 28cm Lebar 9,7cm- Size 43 : Panjang 28,6cm Lebar 10,1cm- Size 44 : Panjang 29,2cm Lebar 10,3cm">
-	<meta name="og:image" content="https://www.mensrepublic.id/assets/images/uploads/product/vale-grey-brown-1543229012-z9fg6v9ZrcFk.jpg">
-	<meta name="keywords" content="">
-	<meta name="author" content="Men's Republic">
 	<meta name="theme-color" content="black"/>
-	<link rel="canonical" href="https://www.mensrepublic.id/product/vale-grey-brown" />
 	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800|Open+Sans|Work+Sans" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href=""/>
     <meta property="fb:pages" content="" />
     <meta name="google-site-verification" content="YRtB-WBotW8z2AMh6hLyCgAjgQRundXTa1bC2AdzPxQ" />
-
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="https://www.mensrepublic.id/assets/images/layout/favicon_new/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
 
 <link rel="stylesheet"  href="<?= base_url()?>assets/public/css/jqueryuimin.css" >
 <link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/public/css/all.css">
@@ -46,29 +33,6 @@
 
 	<!-- Global site tag (gtag.js) - AdWords: 855532203 -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=AW-855532203"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-		gtag('config', 'AW-855532203');
-	</script>
-
-	<script>
-			fbq('track', 'ViewContent', {
-			value: '300000',
-			currency: 'IDR',
-			content_type: 'product',
-			content_ids: ['248'],
-			content_name: 'Vale - Grey Brown',
-			content_category: 'Sepatu'
-		});
-
-    gtag('event', 'conversion', {
-        'send_to': 'AW-855532203/U2a8CKyi0H8Qq8X5lwM',
-        'value': '300000',
-        'currency': 'IDR'
-    });
-	</script>
 </head>
 
 <body>
@@ -100,23 +64,23 @@
 
                 <div class="dropdown dropdown-collection">
                     <div class="dropdown-wrapper">
-                                                        <div class="collections">
-                                <div class="header">
-                                    <a href="https://www.mensrepublic.id/category/sepatu">
-                                        <div class="gradient"></div>
-                                        <img src="https://www.mensrepublic.id/assets/images/index/nav/sepatu-1546607531-sQ7Jr8iZWfUp.jpg" alt="Sepatu">
-                                        <h2>Sepatu</h2>
-                                    </a>
-                                </div>
-                                <ul>
-                                                                                <li><a href="https://www.mensrepublic.id/category/sepatu/boots">Boots</a></li>
-                                                                                <li><a href="https://www.mensrepublic.id/category/sepatu/sneakers">Sneakers</a></li>
-                                                                                <li><a href="https://www.mensrepublic.id/category/sepatu/formal">Formal</a></li>
-                                                                                <li><a href="https://www.mensrepublic.id/category/sepatu/sandal">Sandal</a></li>
-                                                                                <li><a href="https://www.mensrepublic.id/category/sepatu/casual-formal">Casual Formal</a></li>
-                                                                        </ul>
+                        <div class="collections">
+                            <div class="header">
+                                <a href="https://www.mensrepublic.id/category/sepatu">
+                                    <div class="gradient"></div>
+                                    <img src="https://www.mensrepublic.id/assets/images/index/nav/sepatu-1546607531-sQ7Jr8iZWfUp.jpg" alt="Sepatu">
+                                    <h2>Sepatu</h2>
+                                </a>
                             </div>
-                                                        <div class="collections">
+                                <ul>
+                                    <li><a href="https://www.mensrepublic.id/category/sepatu/boots">Boots</a></li>
+                                    <li><a href="https://www.mensrepublic.id/category/sepatu/sneakers">Sneakers</a></li>
+                                    <li><a href="https://www.mensrepublic.id/category/sepatu/formal">Formal</a></li>
+                                    <li><a href="https://www.mensrepublic.id/category/sepatu/sandal">Sandal</a></li>
+                                    <li><a href="https://www.mensrepublic.id/category/sepatu/casual-formal">Casual Formal</a></li>
+                                </ul>
+                            </div>
+                            <div class="collections">
                                 <div class="header">
                                     <a href="https://www.mensrepublic.id/category/tas">
                                         <div class="gradient"></div>
@@ -125,11 +89,11 @@
                                     </a>
                                 </div>
                                 <ul>
-                                                                                <li><a href="https://www.mensrepublic.id/category/tas/selempang">Selempang</a></li>
-                                                                                <li><a href="https://www.mensrepublic.id/category/tas/ransel">Ransel</a></li>
-                                                                        </ul>
+                                    <li><a href="https://www.mensrepublic.id/category/tas/selempang">Selempang</a></li>
+                                    <li><a href="https://www.mensrepublic.id/category/tas/ransel">Ransel</a></li>
+                                </ul>
                             </div>
-                                                        <div class="collections">
+                            <div class="collections">
                                 <div class="header">
                                     <a href="https://www.mensrepublic.id/category/apparel">
                                         <div class="gradient"></div>
@@ -138,139 +102,107 @@
                                     </a>
                                 </div>
                                 <ul>
-                                                                                <li><a href="https://www.mensrepublic.id/category/apparel/top">Top</a></li>
-                                                                                <li><a href="https://www.mensrepublic.id/category/apparel/bottom">Bottom</a></li>
-                                                                        </ul>
+                                    <li><a href="https://www.mensrepublic.id/category/apparel/top">Top</a></li>
+                                    <li><a href="https://www.mensrepublic.id/category/apparel/bottom">Bottom</a></li>
+                                </ul>
                             </div>
-                                                    <div class="right-collection">
+                        <div class="right-collection">
                             <ul>
                                 <li><a href="https://www.mensrepublic.id/most-selling">Produk Terlaris</a></li>
                                 <li><a href="https://www.mensrepublic.id/newest">Produk Terbaru</a></li>
                             </ul>
-                            
                         </div>
                     </div>
                 </div>
             </li>
             <li>
                 <a href="">promo</a>
-
                 <div class="dropdown dropdown-collection">
                     <div class="dropdown-wrapper">
-                                                    
-                                                                                    <div class="promos">
+                            <div class="promos">
                                 <a href="https://www.mensrepublic.id/promo/buy-1-get-1">
                                     <div class="gradient"></div>
                                     <img src="https://www.mensrepublic.id/assets/images/index/nav/thumb/18e124d9-bce0-8a65-906a-c5ae70131203.jpeg" alt="Buy 1 Get 1">
                                     <h2>Buy 1 Get 1</h2>
                                 </a>
                             </div>
-                                                        <div class="promos">
+                            <div class="promos">
                                 <a href="https://www.mensrepublic.id/promo/bundling-package">
                                     <div class="gradient"></div>
                                     <img src="https://www.mensrepublic.id/assets/images/index/nav/thumb/1bda05ae-d21e-de11-6cc1-b908bbde202b.jpg" alt="Bundling Package">
                                     <h2>Bundling Package</h2>
                                 </a>
                             </div>
-                                                        <div class="promos">
+                            <div class="promos">
                                 <a href="https://www.mensrepublic.id/promo/yoi-indonesiamelangkah">
                                     <div class="gradient"></div>
                                     <img src="https://www.mensrepublic.id/assets/images/index/nav/thumb/baada2cf-038b-9dde-748d-c2d144eea34b.jpg" alt="YOI #IndonesiaMelangkah">
                                     <h2>YOI #IndonesiaMelangkah</h2>
                                 </a>
                             </div>
-                                                        <div class="promos">
+                            <div class="promos">
                                 <a href="https://www.mensrepublic.id/promo/mystery-box">
                                     <div class="gradient"></div>
                                     <img src="https://www.mensrepublic.id/assets/images/index/nav/thumb/e8f75d63-4136-482e-7bf9-91fba725a32c.jpg" alt="Mystery Box">
                                     <h2>Mystery Box</h2>
                                 </a>
                             </div>
-                        
-                        <div class="promos">
-                            <a href="https://www.mensrepublic.id/discount">
-                                <div class="gradient"></div>
+                            <div class="promos">
+                                <a href="https://www.mensrepublic.id/discount">
+                                    <div class="gradient"></div>
                                 <img src="https://www.mensrepublic.id/assets/images/index/nav/diskon-nav.jpg" alt="">
-                                <h2>diskon men</h2>
-                            </a>
-                        </div>
-                        
+                                    <h2>diskon men</h2>
+                                </a>
+                            </div>
                     </div>
                 </div>
             </li>
             <li>
                 <a href="">jurnal</a>
-
                 <div class="dropdown dropdown-collection dropdown-article">
                     <div class="dropdown-wrapper">
-                                                        <div class="article">
+                            <div class="article">
                                 <a href="https://jurnal.mensrepublic.id/detail/pria-botak-terlihat-lebih-sukses-cerdas-dan-maskulin">
-                                                                            <img src="https://jurnal.mensrepublic.id/assets/images/uploads/jurnal/post/thumb/pria-botak-terlihat-lebih-sukses-cerdas-dan-maskulin.jpg">
+                                    <img src="https://jurnal.mensrepublic.id/assets/images/uploads/jurnal/post/thumb/pria-botak-terlihat-lebih-sukses-cerdas-dan-maskulin.jpg">
                                     <div>
-                                                                                        Lifestyle
-                                                                                                -
-                                                                                                                                        Romansa
-                                                                                                                                </div>
-                                    <h2>Pria Botak Terlihat Lebih Sukses, Cerdas dan Maskulin</h2>
+                                    Lifestyle-<h2>Pria Botak Terlihat Lebih Sukses, Cerdas dan Maskulin</h2>
+                                    </div>
                                 </a>
                             </div>
-                                                        <div class="article">
+                            <div class="article">
                                 <a href="https://jurnal.mensrepublic.id/detail/berdebat-itu-sehat-bagi-pasangan">
-                                                                            <img src="https://jurnal.mensrepublic.id/assets/images/uploads/jurnal/post/thumb/berdebat-itu-sehat-bagi-pasangan.jpg">
+                                    <img src="https://jurnal.mensrepublic.id/assets/images/uploads/jurnal/post/thumb/berdebat-itu-sehat-bagi-pasangan.jpg">
                                     <div>
-                                                                                        Romansa
-                                                                                                                                </div>
-                                    <h2>Berdebat Itu Sehat Bagi Pasangan</h2>
+                                    Romansa<h2>Berdebat Itu Sehat Bagi Pasangan</h2>
+                                    </div>
                                 </a>
                             </div>
-                                                        <div class="article">
+                            <div class="article">
                                 <a href="https://jurnal.mensrepublic.id/detail/ternyata-orang-no-1-google-memiliki-jimat-keberuntungan">
-                                                                            <img src="https://jurnal.mensrepublic.id/assets/images/uploads/jurnal/post/thumb/ternyata-orang-no-1-google-memiliki-jimat-keberuntungan.jpg">
-                                    <div>
-                                                                                        Lifestyle
-                                                                                                -
-                                                                                                                                        Romansa
-                                                                                                -
-                                                                                                                                        Success
-                                                                                                                                </div>
-                                    <h2>Ternyata Orang No 1 Google Memiliki Jimat Keberuntungan!   </h2>
+                                    <img src="https://jurnal.mensrepublic.id/assets/images/uploads/jurnal/post/thumb/ternyata-orang-no-1-google-memiliki-jimat-keberuntungan.jpg">
+                                    <div>Lifestyle-Romansa-<h2>Ternyata Orang No 1 Google Memiliki Jimat Keberuntungan!   </h2></div>
                                 </a>
                             </div>
-                                                        <div class="article">
+                            <div class="article">
                                 <a href="https://jurnal.mensrepublic.id/detail/6-hal-yang-menunjukkan-keseriusan-pria-dalam-berhubungan">
-                                                                            <img src="https://jurnal.mensrepublic.id/assets/images/uploads/jurnal/post/thumb/6-hal-yang-menunjukkan-keseriusan-pria-dalam-berhubungan-1572275154.jpg">
-                                    <div>
-                                                                                        Romansa
-                                                                                                                                </div>
-                                    <h2>6 Hal Yang Menunjukkan Keseriusan Pria Dalam Berhubungan</h2>
+                                    <img src="https://jurnal.mensrepublic.id/assets/images/uploads/jurnal/post/thumb/6-hal-yang-menunjukkan-keseriusan-pria-dalam-berhubungan-1572275154.jpg">
+                                    <div>Romansa-<h2>6 Hal Yang Menunjukkan Keseriusan Pria Dalam Berhubungan</h2></div>
                                 </a>
                             </div>
-                                                        <div class="article">
-                                <a href="https://jurnal.mensrepublic.id/detail/3-alasan-utama-kenapa-banyak-wanita-karier-jomblo">
-                                                                            <img src="https://jurnal.mensrepublic.id/assets/images/uploads/jurnal/post/thumb/3-alasan-utama-kenapa-banyak-wanita-karier-jomblo.jpg">
-                                    <div>
-                                                                                        Lifestyle
-                                                                                                -
-                                                                                                                                        Romansa
-                                                                                                                                </div>
-                                    <h2>3 Alasan Utama Kenapa Banyak Wanita Karier Jomblo</h2>
-                                </a>
-                            </div>
-                                                </div>
-                </div>
 
+                        </div>
+                </div>
             </li>
             <li><a href="https://www.mensrepublic.id/order/payment/confirmation"><span>konfirmasi pembayaran</span></a></li>
             <li><a href="https://www.womensrepublic.id" target="_blank">women's republic</a></li>
         </ul>
 
         <div class="header-right">
-
-                                <div class="icon-right icon-login">
-                    <a href="https://www.mensrepublic.id/login">
-                        <i class="svg_icon__header_login svg-icon"></i>
-                    </a>
-                </div>
+            <div class="icon-right icon-login">
+                <a href="https://www.mensrepublic.id/login">
+                    <i class="svg_icon__header_login svg-icon"></i>
+                 </a>
+            </div>
             
             <div class="icon-right icon-cart">
                 <a href="javascript:;">
@@ -283,7 +215,6 @@
                     <i class="svg_icon__wishlist svg-icon"></i>
                 </a>
             </div>
-
             <div class="search">
                 <form action="https://www.mensrepublic.id/category/all" method="get">
                     <button type="submit"><i class="svg_icon__header_search svg-icon"></i></button>
@@ -955,57 +886,6 @@
 </script>
 
 
-	<!--Start of GA Script-->
-	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-		ga('create', 'UA-97094891-1', 'auto');
-		ga('send', 'pageview');
-	</script>
-	<!--End of GA Script-->
-
-			<!--Start of Zendesk Chat Script-->
-		<script type="text/javascript">
-		window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-		d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-		_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
-		$.src="https://v2.zopim.com/?4ouXIGcOp1vRDziwPipNP7WYCUQu8ohq";z.t=+new Date;$.
-		type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
-		</script>
-		<!--End of Zendesk Chat Script-->
-	
-	<script type="application/ld+json">
-	{
-		"@context" : "http://schema.org",
-		"@type" : "Organization",
-		"name" : "Men's Republic",
-		"url" : "https://www.mensrepublic.id/",
-		"logo": "https://www.mensrepublic.id/assets/images/layout/logo/logo_text2.png",
-		"sameAs" : [
-			"https://www.facebook.com/mensrepublicid",
-			"https://www.twitter.com/mensrepublicid",
-			"https://www.instagram.com/mensrepublicid"
-		]
-	}
-	</script>
-
-	<script type="application/ld+json">
-	{
-		"@context": "http://schema.org",
-		"@type": "WebSite",
-		"url": "https://www.mensrepublic.id/",
-		"name":"mensrepublic.id",
-		"alternateName":"Mensrepublic",
-		"potentialAction": {
-			"@type": "SearchAction",
-			"target": "https://www.mensrepublic.id/category/all?search={search_term_string}",
-			"query-input": "required name=search_term_string"
-		}
-	}
-	</script>
 
 	<script>
 
