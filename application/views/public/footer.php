@@ -60,10 +60,7 @@
                     <a href="https://api.whatsapp.com/send?phone=6281808989412" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
                 </div>
             </div>
-            <div class="localize" data-active-lang="id">
-                <a href="https://www.mensrepublic.id/lang/en" class="">English</a>
-                <a href="https://www.mensrepublic.id/lang/id" class="active">Indonesia</a>
-            </div>
+           
         </div>
     </div>
 
@@ -71,7 +68,6 @@
         2019 Men’s Republic. Hak cipta dilindungi undang-undang    </div>
 </footer>
 
-<script type="text/javascript" src="https://app.midtrans.com/snap/snap.js" data-client-key="VT-client-94RiPWXpFG-jPh4p"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 <script src="<?= base_url()?>assets/public/js/all.js"></script>
@@ -105,35 +101,6 @@
 		</script>
 		<!--End of Zendesk Chat Script-->
 	
-	<script type="application/ld+json">
-	{
-		"@context" : "http://schema.org",
-		"@type" : "Organization",
-		"name" : "Men's Republic",
-		"url" : "https://www.mensrepublic.id/",
-		"logo": "https://www.mensrepublic.id/assets/images/layout/logo/logo_text2.png",
-		"sameAs" : [
-			"https://www.facebook.com/mensrepublicid",
-			"https://www.twitter.com/mensrepublicid",
-			"https://www.instagram.com/mensrepublicid"
-		]
-	}
-	</script>
-
-	<script type="application/ld+json">
-	{
-		"@context": "http://schema.org",
-		"@type": "WebSite",
-		"url": "https://www.mensrepublic.id/",
-		"name":"mensrepublic.id",
-		"alternateName":"Mensrepublic",
-		"potentialAction": {
-			"@type": "SearchAction",
-			"target": "https://www.mensrepublic.id/category/all?search={search_term_string}",
-			"query-input": "required name=search_term_string"
-		}
-	}
-	</script>
 
 	</body>
 </html>
