@@ -10,7 +10,7 @@ class Home extends MY_Controller{
         $this->load->view('public/home');
     }
     public function produk(){
-
+        $this->load->view('public/product-detail');
     }
     public function login(){
 
