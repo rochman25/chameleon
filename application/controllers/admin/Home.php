@@ -7,6 +7,7 @@ class Home extends MY_Controller
     {
         parent::__construct();
         $this->load->model('Admin_model', 'admin');
+        $this->load->library('bcrypt');
         $this->load->library('form_validation');
     }
 
@@ -58,6 +59,50 @@ class Home extends MY_Controller
         }
     }
 
+    public function ubah_pass(){
+        if($this->adminIsLoggedIn()){
+            if($this->input->post('kirim')){
+                $id = $this->session->userdata['admin_data']['id'];
+                $oldP = $this->input->post('pass_lama');
+                $newP = $this->input->post('pass_baru');
+
+                $cek = $this->admin->getAdmin();
+
+                // if($cek->password == $oldP){
+                if($this->bcrypt->check_password($oldP,$cek->password)){
+                    $data = [
+                        "password" => $this->bcrypt->hash_password($newP),
+                        "updated_at" => date("Y-m-d H:i:s")
+                    ];
+                    if($this->admin->updateData($data,$id)){
+                        $this->session->set_flashdata(
+                            'pesan',
+                            '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil diperbaharui</div>'
+                        );
+                        redirect('admin/home');
+                    }else{
+                        $this->session->set_flashdata(
+                            'pesan',
+                            '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
+                        );
+                        $this->load->view('admin/pages/ubah_password');
+                    }
+                }else{
+                    $this->session->set_flashdata(
+                        'pesan',
+                        '<div class="alert alert-danger mr-auto alert-dismissible">Password tidak dikenali</div>'
+                    );
+                    $this->load->view('admin/pages/ubah_password');
+                }
+
+            }else{
+                $this->load->view('admin/pages/ubah_password');
+            }
+        }else{
+            redirect('admin/home/login');
+        }
+    }
+
     public function login()
     {
         if ($this->adminIsLoggedIn()) {
@@ -71,8 +116,8 @@ class Home extends MY_Controller
                 $cek = $this->admin->login($email);
                 // die(json_encode($cek));
                 if ($cek != null) {
-                    // if ($this->bcrypt->check_password($pass, $cek->password)) {
-                    if ($cek->password == $pass) {
+                    if ($this->bcrypt->check_password($pass, $cek->password)) {
+                    // if ($cek->password == $pass) {
                         $datas = array(
                             "updated_at" => date("Y-m-d H:i:s")
                         );

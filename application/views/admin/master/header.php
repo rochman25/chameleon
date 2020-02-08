@@ -174,17 +174,30 @@
             </li>
             <li class="menu-header">Transaksi</li>
             <li class="nav-item">
+                <a href="<?= base_url() ?>admin/transaksi/pembayaran" class="nav-link"><i class="fas fa-shopping-bag"></i><span>Pembayaran</span></a>
+            </li>
+            <li class="nav-item">
+                <a href="<?= base_url() ?>admin/transaksi/pengiriman" class="nav-link"><i class="fas fa-paper-plane"></i><span>Pengiriman</span></a>
+            </li>
+            <li class="nav-item">
                 <a href="<?= base_url() ?>admin/transaksi" class="nav-link"><i class="fas fa-shopping-cart"></i><span>Transaksi</span></a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link"><i class="fas fa-cart-arrow-down"></i><span>Cart</span></a>
+                <a href="<?= base_url() ?>admin/transaksi/cart" class="nav-link"><i class="fas fa-cart-arrow-down"></i><span>Cart</span></a>
             </li>
             <?php if ($this->session->userdata['admin_data']['role'] == 1) { ?>
                 <li class="menu-header">Privileges</li>
                 <li class="nav-item">
+                    <a href="<?= base_url() ?>admin/pengguna" class="nav-link"><i class="fas fa-users"></i><span>Pengguna</span></a>
+                </li>
+                <li class="nav-item">
                     <a href="<?= base_url() ?>admin/akun" class="nav-link"><i class="fas fa-user-tie"></i><span>Admin</span></a>
                 </li>
             <?php } ?>
+            <li class="menu-header">Report</li>
+            <li class="nav-item">
+                <a href="#" class="nav-link"><i class="fas fa-file"></i><span>Laporan Penjualan</span></a>
+            </li>
         </ul>
     </aside>
 </div>
