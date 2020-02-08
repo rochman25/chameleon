@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 28 Jan 2020 pada 15.13
+-- Generation Time: 08 Feb 2020 pada 20.06
 -- Versi Server: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -33,6 +33,8 @@ CREATE TABLE `admin` (
   `username` varchar(30) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `no_hp` varchar(13) NOT NULL,
+  `alamat` text NOT NULL,
   `role` enum('1','0') NOT NULL,
   `status` tinyint(1) NOT NULL,
   `created_at` datetime NOT NULL,
@@ -43,8 +45,9 @@ CREATE TABLE `admin` (
 -- Dumping data untuk tabel `admin`
 --
 
-INSERT INTO `admin` (`id_admin`, `username`, `email`, `password`, `role`, `status`, `created_at`, `updated_at`) VALUES
-('a6c35fae-41d0-11ea-af65-646e69921e02', 'admin', 'admin@admin.com', 'admin123', '1', 1, '2020-01-28 00:00:00', '2020-01-28 14:30:41');
+INSERT INTO `admin` (`id_admin`, `username`, `email`, `password`, `no_hp`, `alamat`, `role`, `status`, `created_at`, `updated_at`) VALUES
+('02a4e573-4251-11ea-be05-646e69921e02', 'Zaenur', 'zaenur.rochman98@gmail.com', 'admin123', '081578988248', '<p>loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet <br></p>', '1', 1, '2020-01-29 05:37:00', '2020-02-08 18:43:18'),
+('93f1d773-44cc-11ea-865b-646e69921e02', 'Rochman', 'zaenur.rochaman98@outlook.com', '$2a$08$AXEZ09qa9t9w5m6SAYoVSeSrC9MGeQyIyZcV4.pSRPKdMkEoJDv6O', '', '', '0', 0, '2020-02-01 09:26:43', '2020-02-01 09:28:26');
 
 -- --------------------------------------------------------
 
@@ -72,6 +75,18 @@ CREATE TABLE `alamat_pengguna` (
 CREATE TABLE `cart_item` (
   `id_cart` varchar(36) NOT NULL,
   `id_pengguna` varchar(36) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `detail_cart_item`
+--
+
+CREATE TABLE `detail_cart_item` (
+  `id_cart` varchar(36) NOT NULL,
   `id_produk` varchar(36) NOT NULL,
   `quantity` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -100,8 +115,17 @@ CREATE TABLE `detail_transaksi` (
 CREATE TABLE `kategori` (
   `id_kategori` varchar(36) NOT NULL,
   `nama_kategori` varchar(50) NOT NULL,
-  `deskripsi_kategori` text NOT NULL
+  `deskripsi_kategori` text NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `kategori`
+--
+
+INSERT INTO `kategori` (`id_kategori`, `nama_kategori`, `deskripsi_kategori`, `created_at`, `updated_at`) VALUES
+('5ec5076b-44d4-11ea-865b-646e69921e02', 'testing', 'asdadasdadasdasdasdas', '2020-02-01 10:28:32', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -197,8 +221,14 @@ ALTER TABLE `alamat_pengguna`
 --
 ALTER TABLE `cart_item`
   ADD PRIMARY KEY (`id_cart`),
-  ADD KEY `fk_cart_pengguna` (`id_pengguna`),
-  ADD KEY `fk_cart_produk` (`id_produk`);
+  ADD KEY `fk_cart_pengguna` (`id_pengguna`);
+
+--
+-- Indexes for table `detail_cart_item`
+--
+ALTER TABLE `detail_cart_item`
+  ADD KEY `fk_detail_cart` (`id_cart`),
+  ADD KEY `fk_produk_detail_cart` (`id_produk`);
 
 --
 -- Indexes for table `detail_transaksi`
@@ -257,8 +287,14 @@ ALTER TABLE `alamat_pengguna`
 -- Ketidakleluasaan untuk tabel `cart_item`
 --
 ALTER TABLE `cart_item`
-  ADD CONSTRAINT `fk_cart_pengguna` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`),
-  ADD CONSTRAINT `fk_cart_produk` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`);
+  ADD CONSTRAINT `fk_cart_pengguna` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`);
+
+--
+-- Ketidakleluasaan untuk tabel `detail_cart_item`
+--
+ALTER TABLE `detail_cart_item`
+  ADD CONSTRAINT `fk_detail_cart` FOREIGN KEY (`id_cart`) REFERENCES `cart_item` (`id_cart`),
+  ADD CONSTRAINT `fk_produk_detail_cart` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`);
 
 --
 -- Ketidakleluasaan untuk tabel `detail_transaksi`
