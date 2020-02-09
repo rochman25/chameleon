@@ -35,7 +35,7 @@
                         <div class="row">
                             <div class="col-12 col-md-12 col-lg-12">
                                 <div class="card">
-                                    <form action="#" class="form-inlinea" method="POST">
+                                    <form action="#" class="form-inlinea" enctype="multipart/form-data" method="POST">
                                         <div class="card-header">
                                             <h4>Detail Produk</h4>
                                         </div>
@@ -90,6 +90,15 @@
                                                         <textarea class="summernote" name="desc_p" id="desc_p"><?php if (isset($produk)) {
                                                                                                                     echo $produk->deskripsi_produk;
                                                                                                                 } ?></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <label for="thumbnail">Foto Produk</label>
+                                                        <input type="file" class="form-control" name="thumbnail[]" accept="image/*" multiple>
+                                                        *note : blok file yang akan diupload jika lebih dari 1
                                                     </div>
                                                 </div>
                                             </div>

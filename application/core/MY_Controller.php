@@ -23,6 +23,13 @@ class MY_Controller extends CI_Controller{
         }
     }
 
+    function uploadFoto($image){
+        $config['upload_path'] = 'assets/uploads/thumbnail_produk';
+        $config['allowed_types'] = 'jpeg|jpg|png';
+        $config['file_name'] = $image;
+        $config['overwrite'] = true;
+        $this->upload->initialize($config);
+    }
 
 
 }
