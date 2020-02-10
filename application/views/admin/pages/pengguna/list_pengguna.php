@@ -67,7 +67,7 @@
                                                         </td>
                                                         <td>
                                                             <!-- <button class="btn btn-success" id="btnUbah" data-id="<?= $row['id_admin'] ?>" data-username="<?= $row['username'] ?>" data-role="<?= $row['role'] ?>" data-status="<?= $row['status'] ?>" data-email="<?= $row['email'] ?>" data-toggle="modal" data-target="#updateModal">Ubah</button> -->
-                                                            <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_admin'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button>
+                                                            <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_pengguna'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>

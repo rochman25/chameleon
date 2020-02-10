@@ -21,6 +21,35 @@ class Transaksi extends MY_Controller{
         }
     }
 
+    public function update(){
+        if($this->adminIsLoggedIn()){
+            $id = $this->input->post('id');
+            $status = $this->input->post('status');
+            $noresi = $this->input->post('noresi');
+
+            $data = [
+                "status_transaksi" => $status,
+                "no_resi" => $noresi
+            ];
+
+            if($this->transaksi->updateData($data,$id)){
+                $this->session->set_flashdata(
+                    'pesan',
+                    '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil diupdate</div>'
+                );
+                redirect('admin/transaksi/pengiriman');
+            }else{
+                $this->session->set_flashdata(
+                    'pesan',
+                    '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
+                );
+                redirect('admin/transaksi/pengiriman');
+            }
+        }else{
+            redirect('admin/home/login');
+        }
+    }
+
     public function pembayaran(){
         if($this->adminIsLoggedIn()){
             $transaksi = $this->transaksi->get_pembayaran();

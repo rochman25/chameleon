@@ -62,8 +62,8 @@
                                                         <td><?= $row['waktu_transaksi'] ?></td>
                                                         <td><?= $row['status_transaksi'] ?></td>
                                                         <td>
-                                                            <!-- <button class="btn btn-success" id="btnUbah" data-id="<?= $row['id_admin'] ?>" data-username="<?= $row['username'] ?>" data-role="<?= $row['role'] ?>" data-status="<?= $row['status'] ?>" data-email="<?= $row['email'] ?>" data-toggle="modal" data-target="#updateModal">Ubah</button> -->
-                                                            <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_admin'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button>
+                                                            <a href="#" class="btn btn-info" data-id="<?= $row['id_transaksi'] ?>">Detail</a>
+                                                            <!-- <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_transaksi'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button> -->
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
@@ -76,38 +76,40 @@
                 </section>
             </div>
 
-        <!-- modal hapus -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="hapusModal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Hapus Transaksi</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="<?= base_url() ?>admin/transaksi/hapus" method="POST">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="input-group">
-                                            <input type="hidden" class="form-control" id="id_hapus" name="id" required>
-                                            <p><h6>Apakah anda yakin menghapus data ini?</h6></p>
+            <!-- modal hapus -->
+            <div class="modal fade" tabindex="-1" role="dialog" id="hapusModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Hapus Transaksi</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="<?= base_url() ?>admin/transaksi/hapus" method="POST">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="input-group">
+                                                <input type="hidden" class="form-control" id="id_hapus" name="id" required>
+                                                <p>
+                                                    <h6>Apakah anda yakin menghapus data ini?</h6>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer bg-whitesmoke br">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <input type="submit" name="kirim" value="Ya, Hapus!" class="btn btn-danger">
-                        </div>
-                    </form>
+                            <div class="modal-footer bg-whitesmoke br">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" name="kirim" value="Ya, Hapus!" class="btn btn-danger">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
     <!-- footer content -->
     <?php $this->load->view('admin/master/footer') ?>

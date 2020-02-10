@@ -62,8 +62,8 @@
                                                         <td><?= $row['waktu_transaksi'] ?></td>
                                                         <td><?= $row['status_transaksi'] ?></td>
                                                         <td>
-                                                            <!-- <button class="btn btn-success" id="btnUbah" data-id="<?= $row['id_admin'] ?>" data-username="<?= $row['username'] ?>" data-role="<?= $row['role'] ?>" data-status="<?= $row['status'] ?>" data-email="<?= $row['email'] ?>" data-toggle="modal" data-target="#updateModal">Ubah</button> -->
-                                                            <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_admin'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button>
+                                                            <a href="#" class="btn btn-info" data-id="<?= $row['id_transaksi'] ?>">Detail</a>
+                                                            <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_transaksi'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
