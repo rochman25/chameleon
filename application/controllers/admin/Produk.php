@@ -140,6 +140,32 @@ class Produk extends MY_Controller
         }
     }
 
+    public function uploadFile()
+    {
+        if ($this->adminIsLoggedIn()) {
+            $this->session->set_userdata('test',$this->input->post('file_name'));
+            // $this->uploadFoto($this->input->post('file_name'));
+            // if ($this->upload->do_upload('userfile')) {
+            //     // $this->session->set_userdata('test',$_FILES['userfile']);
+            //     // $this->session->set_userdata('test', "done");
+            // } else {
+            //     $this->session->set_userdata('test', "failure");
+            // }
+
+            // echo $this->input->post('file_name');
+            // die(json)
+            // $this->uploadFoto("")
+            // return json_encode("test");
+        } else {
+            redirect('admin/home/login');
+        }
+    }
+
+    public function test()
+    {
+        die(json_encode($this->session->userdata()));
+    }
+
     public function hapus()
     {
         if ($this->adminIsLoggedIn()) {

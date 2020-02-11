@@ -35,7 +35,7 @@
                         <div class="row">
                             <div class="col-12 col-md-12 col-lg-12">
                                 <div class="card">
-                                    <form action="#" class="form-inlinea" enctype="multipart/form-data" method="POST">
+                                    <form action="#" enctype="multipart/form-data" method="POST">
                                         <div class="card-header">
                                             <h4>Detail Produk</h4>
                                         </div>
@@ -93,27 +93,28 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <label for="thumbnail">Foto Produk</label>
+                                                        <div class="dropzone-previews"></div>
                                                         <input type="file" class="form-control" name="thumbnail[]" accept="image/*" multiple>
                                                         *note : blok file yang akan diupload jika lebih dari 1
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!-- <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <label for="foto_p">Foto Produk</label>
-                                                    <form action="#" class="dropzone" id="mydropzone">
-                                                        <div class="fallback">
-                                                            <input name="file" type="file" multiple />
+                                            </div> -->
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <label for="foto_p">Foto Produk</label>
+                                                        <div class="dropzone" id="mydropzone">
+                                                            <!-- <div class="fallback">
+                                                                <input name="file" type="file" multiple/>
+                                                            </div> -->
                                                         </div>
-                                                    </form>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div> -->
                                         </div>
                                         <div class="card-footer">
                                             <input type="submit" name="kirim" class="btn btn-primary" value="Simpan">
@@ -133,8 +134,45 @@
     <!-- JS Libraies -->
     <script src="<?= base_url() ?>assets/admin/node_modules/dropzone/dist/min/dropzone.min.js"></script>
     <!-- Page Specific JS File -->
-    <script src="<?= base_url() ?>assets/admin/js/page/components-multiple-upload.js"></script>
-    <!-- <script src="<?= base_url() ?>assets/admin/node_modules/summernote/dist/summernote-bs4.js"></script> -->
+    <script>
+        var nama="default"
+        // document()
+        $(function(){
+            nama = $("#nama_p").val()
+        })
+        // let nama = $("#nama_p").val()
+        Dropzone.autoDiscover = false;
+
+        var foto_upload = new Dropzone(".dropzone", {
+            url: "<?php echo base_url('admin/produk/uploadFile') ?>",
+            maxFilesize: 2,
+            method: "post",
+            acceptedFiles: "image/*",
+            paramName: "userfile",
+            dictInvalidFileType: "Type file ini tidak dizinkan",
+            addRemoveLinks: true,
+        });
+
+
+        //Event ketika Memulai mengupload
+        foto_upload.on("sending", function(a, b, c) {
+            console.log(nama);
+            c.append("file_name",nama)
+            // c.append("")
+            // a.token = Math.random();
+            // c.append("token_foto", a.token); //Menmpersiapkan token untuk masing masing foto
+        });
+
+        // foto_upload.on("sendingmultiple",function(a, b, c){
+        //     c.append("file_name",nama)
+        // });
+
+        foto_upload.on("success", function(a,b,c){
+            console.log(nama);
+        });
+    </script>
+    <!-- <script src="<?= base_url() ?>assets/admin/js/page/components-multiple-upload.js"></script> -->
+    <script src="<?= base_url() ?>assets/admin/node_modules/summernote/dist/summernote-bs4.js"></script>
 </body>
 
 </html>

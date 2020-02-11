@@ -27,7 +27,7 @@ class MY_Controller extends CI_Controller{
         $config['upload_path'] = 'assets/uploads/thumbnail_produk';
         $config['allowed_types'] = 'jpeg|jpg|png';
         $config['file_name'] = $image;
-        $config['overwrite'] = true;
+        $config['overwrite'] = false;
         $this->upload->initialize($config);
     }
 
