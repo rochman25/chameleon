@@ -47,6 +47,8 @@ $this->load->view('public/cart');
                                 <!-- <span class="time">Tinggal 7 hari lagi</span> -->
                             </div>
                         </h2>
+                        <br>
+                        <span>Ukuran :</span>
                         <div id="size" class="size-product">
                             <ul class="clearfix">
                                     <li data-value="1" data-productdetailid="38840" class="size active ">
@@ -67,14 +69,30 @@ $this->load->view('public/cart');
                                     </div>
                             </ul>
                         </div>
+                        <br>
+                        <span>Jumlah :</span>
+                        <div id="size" class="size-product">
+                            <ul class="clearfix">
+                                    <li data-value="1" data-productdetailid="38840" class="size active ">
+                                        <span data-size="39" data-stock="2">-</span>
+                                    </li>
+                                    <li data-value="4" data-productdetailid="38843" class="size  ">
+                                        <span data-size="42" data-stock="11">1</span>
+                                    </li>
+                                    <li data-value="1" data-productdetailid="38840" class="size active ">
+                                        <span data-size="39" data-stock="2">+</span>
+                                    </li>
+                                    <div class="label-size">
+                                        <i class="svg-icon svg_icon__pdp_check"></i>
+                                        <span class="text-label"></span>
+                                    </div>
+                            </ul>
+                        </div>
                         <div class="button-action">
                             <button class="addToCart"><i class="svg-icon svg_icon__pdp_cart"></i>hajar men</button>
                             <span class="out-of-stock" style="display:none">HABIS MEN</span>
-                            <!-- <button class="wishlist " data-id="0">
-                                <i class="svg-icon svg_icon__pdp_wishlist"></i>
-                                <i class="svg-icon svg_icon__pdp_wishlist_active"></i>
-                            </button> -->
                         </div>
+                        
                         <div class="product-order">
                             <div class="list clearfix">
                                 <a href="https://www.mensrepublic.id/other/layanan/panduan-pemesanan">
@@ -115,7 +133,7 @@ $this->load->view('public/cart');
                         <div class="tab-content">
                             <div class="product-deskripsi">
                                 <?php if(empty($produk->deskripsi_produk)){
-                                    echo "<p>Belum ada deskripsi";
+                                    echo "<p>Belum ada deskripsi</p>";
                                 }else{
                                     echo $produk->deskripsi_produk;
                                 }?>

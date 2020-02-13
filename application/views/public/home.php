@@ -64,7 +64,7 @@ $this->load->view('public/cart');
                 </div>
         </section>
         <section class="six-banner">
-            <div class="banner-container" onclick="window.location.href='https://www.mensrepublic.id/product/yoi-red'" style="cursor: pointer;">
+            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/jas'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                     <h2>YOI RED</h2>
@@ -72,7 +72,7 @@ $this->load->view('public/cart');
                 </div>
                 <img src="<?= base_url()?>assets/images/Jas/1.png" alt="">
             </div>
-            <div class="banner-container" onclick="window.location.href='https://www.mensrepublic.id/product/yoi-blue'" style="cursor: pointer;">
+            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/jas'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                     <h2>YOI BLUE</h2>
@@ -80,7 +80,7 @@ $this->load->view('public/cart');
                 </div>
                 <img src="<?= base_url()?>assets/images/Jas/6.png" alt="">
             </div>
-            <div class="banner-container" onclick="window.location.href='https://www.mensrepublic.id/product/yoi-black'" style="cursor: pointer;">
+            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/jas'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                     <h2>YOI BLACK</h2>
@@ -88,7 +88,7 @@ $this->load->view('public/cart');
                 </div>
                 <img src="<?= base_url()?>assets/images/Jas/9.png" alt="">
             </div>
-            <div class="banner-container" onclick="window.location.href='https://www.mensrepublic.id/'" style="cursor: pointer;">
+            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/celana'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                     <h2>ORD Series</h2>
@@ -96,7 +96,7 @@ $this->load->view('public/cart');
                 </div>
                 <img src="<?= base_url()?>assets/images/Celana/P1.png" alt="">
             </div>
-            <div class="banner-container" onclick="window.location.href='https://www.mensrepublic.id/'" style="cursor: pointer;">
+            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/celana''" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                     <h2></h2>
@@ -104,7 +104,7 @@ $this->load->view('public/cart');
                 </div>
                 <img src="<?= base_url()?>assets/images/Celana/P2.png" alt="">
             </div>
-            <div class="banner-container" onclick="window.location.href='https://www.mensrepublic.id/'" style="cursor: pointer;">
+            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/celana'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                     <h2>Sneez</h2>
@@ -112,7 +112,7 @@ $this->load->view('public/cart');
                 </div>
                 <img src="<?= base_url()?>assets/images/Celana/P3.png" alt="">
             </div>
-            <div class="banner-container" onclick="window.location.href='https://www.mensrepublic.id/'" style="cursor: pointer;">
+            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/kemeja'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                     <h2>Semerus</h2>
@@ -120,7 +120,7 @@ $this->load->view('public/cart');
                 </div>
                 <img src="<?= base_url()?>assets/images/Kemeja/LRM_EXPORT_4.jpeg" alt="">
             </div>
-            <div class="banner-container" onclick="window.location.href='https://www.mensrepublic.id/'" style="cursor: pointer;">
+            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/kemeja'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                     <h2>Sparky Black</h2>
@@ -128,7 +128,7 @@ $this->load->view('public/cart');
                 </div>
                 <img src="<?= base_url()?>assets/images/Kemeja/LRM_EXPORT_5.jpeg" alt="">
             </div>
-            <div class="banner-container" onclick="window.location.href='https://www.mensrepublic.id/'" style="cursor: pointer;">
+            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/kemeja'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                     <h2>Musca</h2>

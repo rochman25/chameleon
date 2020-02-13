@@ -24,9 +24,9 @@
                     <div class="dropdown-wrapper">
                         <div class="collections">
                             <div class="header">
-                                <a href="https://www.mensrepublic.id/category/sepatu">
+                                <a href="<?= base_url();?>produk/celana'">
                                     <div class="gradient"></div>
-                                        <img src="https://www.mensrepublic.id/assets/images/index/nav/sepatu-1546607531-sQ7Jr8iZWfUp.jpg" alt="Sepatu">
+                                        <img src="<?= base_url()?>assets/images/Celana/P5.png" alt="Sepatu">
                                     <h2>Celana</h2>
                                 </a>
                             </div>
@@ -40,9 +40,9 @@
                         </div>
                         <div class="collections">
                             <div class="header">
-                                <a href="https://www.mensrepublic.id/category/tas">
+                                <a href="<?= base_url();?>produk/jas'">
                                     <div class="gradient"></div>
-                                        <img src="https://www.mensrepublic.id/assets/images/index/nav/tas-1546606143-OhA9X7xz0GNa.jpg" alt="Tas">
+                                        <img src="<?=base_url()?>assets/images/Jas/11.png" alt="Tas">
                                     <h2>Jas</h2>
                                 </a>
                             </div>
@@ -53,9 +53,9 @@
                             </div>
                             <div class="collections">
                                 <div class="header">
-                                    <a href="https://www.mensrepublic.id/category/apparel">
+                                    <a href="<?= base_url();?>produk/kemeja'">
                                         <div class="gradient"></div>
-                                        <img src="https://www.mensrepublic.id/assets/images/index/nav/apparel-1572597382-2dwQM2zTrHRs.png" alt="Apparel">
+                                        <img src="<?= base_url()?>assets/images/Kemeja/LRM_EXPORT_5.jpeg" alt="Apparel">
                                         <h2>Kemeja</h2>
                                     </a>
                                 </div>
@@ -136,7 +136,7 @@
         </ul>
         <div class="header-right">
             <div class="icon-right icon-login">
-                <a href="<?= base_url()?>index.php/User/Home/login">
+                <a href="<?= base_url()?>login">
                     <i class="svg_icon__header_login svg-icon"></i>
                 </a>
             </div>
@@ -146,12 +146,12 @@
                 </a>
             </div>
             <div class="icon-right icon-wishlist">
-                <a href="https://www.mensrepublic.id/wishlist">
+            <a href="<?= base_url()?>login">
                     <i class="svg_icon__wishlist svg-icon"></i>
                 </a>
             </div>
             <div class="search">
-                <form action="https://www.mensrepublic.id/category/all" method="get">
+                <form action="#" method="get">
                     <button type="submit"><i class="svg_icon__header_search svg-icon"></i></button>
                     <input type="text" name="search" class="autocomplete" placeholder="Masukan Kata Kunci">
                 </form>

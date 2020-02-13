@@ -23,28 +23,52 @@ class Home extends MY_Controller{
         $this->load->view('public/home',$data);
     }
     public function produk($kategori = ""){
-     //   die(json_encode($kategori));
+     
         if($kategori == ""){
-            
+            $thumbnail = array();
+                $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
+                $data['produk'] = $this->produk->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
+                $data['produk'] = $this->produk->getData()->result_array();
+                foreach ($data['produk'] as $row) {
+                    $foto = explode(',', $row['thumbnail_produk']);
+                    $thumbnail[$row['id_produk']] = $foto[0];
+                }
+                $data['thumbnail'] = $thumbnail;
         }else{
-            $kategori =  $this->kategori->getWhere('nama_kategori',$kategori);
-            $kategori = $this->kategori->getData()->row();
-            if($kategori->id_kategori == ""){
-                
+            $datakategori =  $this->kategori->getWhere('nama_kategori',$kategori);
+            $datakategori = $this->kategori->getData()->row();
+         //   die(json_encode($kategori));
+            if($datakategori == "" || empty($datakategori) || $datakategori == null){
+                $thumbnail = array();
+                // $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
+                // $data['produk'] = $this->produk->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
+                // $data['produk'] = $this->produk->getData()->result_array();
+                // foreach ($data['produk'] as $row) {
+                //     $foto = explode(',', $row['thumbnail_produk']);
+                //     $thumbnail[$row['id_produk']] = $foto[0];
+                // }
+                // $data['thumbnail'] = $thumbnail;
+                $data['produk'] = null;
+                $data['thumbnail'] = null;
+
+            }else{
+                $thumbnail = array();
+                $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
+                $data['produk'] = $this->produk->getWhere('produk.id_kategori',$datakategori->id_kategori);
+                $data['produk'] = $this->produk->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
+                $data['produk'] = $this->produk->getData()->result_array();
+                foreach ($data['produk'] as $row) {
+                    $foto = explode(',', $row['thumbnail_produk']);
+                    $thumbnail[$row['id_produk']] = $foto[0];
+                }
+                $data['thumbnail'] = $thumbnail;
             }
-            die(json_encode($kategori));
+
+            
         }
-        //     $thumbnail = array();
-        //     $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
-        //     $data['produk'] = $this->produk->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
-        //     $data['produk'] = $this->produk->getData()->result_array();
-        //     foreach ($data['produk'] as $row) {
-        //         $foto = explode(',', $row['thumbnail_produk']);
-        //         $thumbnail[$row['id_produk']] = $foto[0];
-        //     }
-        //     $data['thumbnail'] = $thumbnail;
-        //     //die(json_encode($data));
-        // $this->load->view('public/product',$data);
+
+            //die(json_encode($data));
+        $this->load->view('public/product',$data);
     }
     public function produk_detail(){
         $id_produk = $this->input->get('produk');
@@ -66,44 +90,41 @@ class Home extends MY_Controller{
     }
     public function login(){
         if ($this->userIsLoggedIn()) {
-            redirect('user/home');
+            redirect(base_url());
         } else {
             if ($this->input->post('kirim')) {
-                // die();
                 $email = $this->input->post('email');
                 $pass = $this->input->post('pass');
 
                 $cek = $this->user->login($email);
-                // die(json_encode($cek));
                 if ($cek != null) {
-                    //if ($this->bcrypt->check_password($pass, $cek->password)) {
-                     if ($cek->password == $pass) {
+                    if ($this->bcrypt->check_password($pass, $cek->password)) {
+                    //  if ($cek->password == $pass) {
                         $datas = array(
                             "updated_at" => date("Y-m-d H:i:s")
                         );
-                        $this->user->updateData($datas, $cek->id_admin);
+                        $this->user->updateData($datas, $cek->id_pengguan);
                         $user = array(
                             "id" => $cek->id_admin,
                             "username" => $cek->username,
                             "email" => $cek->email,
-                            "status" => $cek->status,
-                            "role" => $cek->role
+                            "status" => $cek->status
                         );
                         $this->session->set_userdata('admin_data', $user);
-                        redirect('admin/home');
+                        redirect(base_url());
                     } else {
                         $this->session->set_flashdata(
                             'pesan',
                             '<div class="alert alert-danger mr-auto">Password salah</div>'
                         );
-                        $this->load->view('user/home/login');
+                        $this->load->view('public/login');
                     }
                 } else {
                     $this->session->set_flashdata(
                         'pesan',
                         '<div class="alert alert-danger mr-auto">Akun tidak ditemukan</div>'
                     );
-                    $this->load->view('user/home/login');
+                    $this->load->view('public/login');
                 }
             }else{
                 $this->load->view('public/login');
@@ -112,23 +133,37 @@ class Home extends MY_Controller{
        
     }
     public function register(){
-        $this->load->view('public/register');
+        if ($this->userIsLoggedIn()) {
+            redirect(base_url());
+        } else {
+            if ($this->input->post('kirim')) {
+                $email = $this->input->post('email');
+                $pass = $this->input->post('pass');
+
+                $cek = $this->user->getWhere('email_pengguna',$email);
+                if ($cek != null) {
+        
+                } else {
+
+                    $this->load->view('public/register');
+                }
+            }else if($this->input->post('')){
+                $this->load->view('public/register');
+            }else{
+                $this->load->view('public/login');
+            }
+        }
     }
     public function profil(){
         $this->load->view('public/profil');
     }
 
     public function logout(){
-
-    }
-
-
-    public function userlogout(){
         if($this->userIsLoggedIn()){
-            $this->session->unset_userdata('admin_data');
-            redirect('admin/home/login');
+            $this->session->unset_userdata('user_data');
+            redirect(base_url('login'));
         }else{
-            redirect('admin/home/login');   
+            redirect(base_url('login'));   
         }
     }
 

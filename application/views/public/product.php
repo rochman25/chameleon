@@ -68,7 +68,8 @@ $this->load->view('public/cart');
                     </div>
                     <div class="right-side-wrapper">
                         <div class="all-product-card">
-                        <?php foreach($produk as $row){?>
+                        <?php if($produk != null){
+                             foreach($produk as $row){?>
                             <div class="product-card-wrapper">
                                     <a href="<?= base_url();?>user/Home/produk_detail?produk=<?= $row['id_produk'];?>">
                                         <div class="product-category">
@@ -92,7 +93,11 @@ $this->load->view('public/cart');
                                         </div>
                                     </a>
                             </div>
-                        <?php }?>
+                        <?php }
+                        }else{
+                            echo "<p>Tidak ditemukan</p>";
+                        } ?>
+        
                         </div>
                     </div>
 

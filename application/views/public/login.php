@@ -16,7 +16,7 @@ $this->load->view('public/m_heading');
         <div class="new-register none">
             <h1>Daftar</h1>
             <p>Sudah punya akun Men’s Republic <strong>Masuk</strong></p>
-            <form action="https://www.mensrepublic.id/register/email" method="post">
+            <form action="<?= base_url()?>daftar" method="post">
                 <h2>Email</h2>
                     <input type="email" name="email">
                     <input type="submit" value="Daftar">
@@ -25,7 +25,7 @@ $this->load->view('public/m_heading');
         <div class="new-login">
             <h1>Masuk</h1>
         <p>Belum punya akun Men’s Republic <strong>Daftar</strong></p>
-        <form action="<?= base_url()?>User/Home/login_proses" method="post">
+        <form action="" method="post">
             <h2>Email</h2>
             <input type="email" name="email">
             <h2>Password</h2>
