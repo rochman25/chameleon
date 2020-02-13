@@ -72,7 +72,7 @@ $this->load->view('public/cart');
                             <div class="product-card-wrapper">
                                     <a href="<?= base_url();?>user/Home/produk_detail?produk=<?= $row['id_produk'];?>">
                                         <div class="product-category">
-                                            <img src="" style="width:200px;height:100px;" alt="" data-src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>">
+                                            <img src="" style="width:300px;height:300px;" alt="" data-src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>">
                                             <h2 class="title"><?= $row['nama_produk'];?></h2>
                                             <div class="price-wrapper">
                                                 <!-- <div class="discount">-30%</div> -->

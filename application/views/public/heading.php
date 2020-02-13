@@ -27,15 +27,15 @@
                                 <a href="https://www.mensrepublic.id/category/sepatu">
                                     <div class="gradient"></div>
                                         <img src="https://www.mensrepublic.id/assets/images/index/nav/sepatu-1546607531-sQ7Jr8iZWfUp.jpg" alt="Sepatu">
-                                    <h2>Sepatu</h2>
+                                    <h2>Celana</h2>
                                 </a>
                             </div>
                             <ul>
-                                <li><a href="https://www.mensrepublic.id/category/sepatu/boots">Boots</a></li>
-                                <li><a href="https://www.mensrepublic.id/category/sepatu/sneakers">Sneakers</a></li>
-                                <li><a href="https://www.mensrepublic.id/category/sepatu/formal">Formal</a></li>
-                                <li><a href="https://www.mensrepublic.id/category/sepatu/sandal">Sandal</a></li>
-                                <li><a href="https://www.mensrepublic.id/category/sepatu/casual-formal">Casual Formal</a></li>
+                                <!-- <li><a href="https://www.mensrepublic.id/category/sepatu/boots">Boots</a></li> -->
+                                <!-- <li><a href="https://www.mensrepublic.id/category/sepatu/sneakers">Sneakers</a></li> -->
+                                <!-- <li><a href="https://www.mensrepublic.id/category/sepatu/formal">Formal</a></li> -->
+                                <!-- <li><a href="https://www.mensrepublic.id/category/sepatu/sandal">Sandal</a></li> -->
+                                <!-- <li><a href="https://www.mensrepublic.id/category/sepatu/casual-formal">Casual Formal</a></li> -->
                             </ul>
                         </div>
                         <div class="collections">
@@ -43,12 +43,12 @@
                                 <a href="https://www.mensrepublic.id/category/tas">
                                     <div class="gradient"></div>
                                         <img src="https://www.mensrepublic.id/assets/images/index/nav/tas-1546606143-OhA9X7xz0GNa.jpg" alt="Tas">
-                                    <h2>Tas</h2>
+                                    <h2>Jas</h2>
                                 </a>
                             </div>
                                 <ul>
-                                    <li><a href="https://www.mensrepublic.id/category/tas/selempang">Selempang</a></li>
-                                    <li><a href="https://www.mensrepublic.id/category/tas/ransel">Ransel</a></li>
+                                    <!-- <li><a href="https://www.mensrepublic.id/category/tas/selempang">Selempang</a></li> -->
+                                    <!-- <li><a href="https://www.mensrepublic.id/category/tas/ransel">Ransel</a></li> -->
                                 </ul>
                             </div>
                             <div class="collections">
@@ -56,18 +56,18 @@
                                     <a href="https://www.mensrepublic.id/category/apparel">
                                         <div class="gradient"></div>
                                         <img src="https://www.mensrepublic.id/assets/images/index/nav/apparel-1572597382-2dwQM2zTrHRs.png" alt="Apparel">
-                                        <h2>Apparel</h2>
+                                        <h2>Kemeja</h2>
                                     </a>
                                 </div>
                                 <ul>
-                                    <li><a href="https://www.mensrepublic.id/category/apparel/top">Top</a></li>
-                                    <li><a href="https://www.mensrepublic.id/category/apparel/bottom">Bottom</a></li>
+                                    <!-- <li><a href="https://www.mensrepublic.id/category/apparel/top">Top</a></li> -->
+                                    <!-- <li><a href="https://www.mensrepublic.id/category/apparel/bottom">Bottom</a></li> -->
                                 </ul>
                             </div>
                             <div class="right-collection">
                             <ul>
-                                <li><a href="https://www.mensrepublic.id/most-selling">Produk Terlaris</a></li>
-                                <li><a href="https://www.mensrepublic.id/newest">Produk Terbaru</a></li>
+                                <!-- <li><a href="https://www.mensrepublic.id/most-selling">Produk Terlaris</a></li> -->
+                                <!-- <li><a href="https://www.mensrepublic.id/newest">Produk Terbaru</a></li> -->
                             </ul>
                         </div>
                     </div>

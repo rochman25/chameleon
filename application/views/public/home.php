@@ -46,30 +46,21 @@ $this->load->view('public/cart');
         <section class="hot-product">
             <h1>Laku Banget Nih Men</h1>
                 <div class="container">
-                    <div class="product-hotcard">
-                        <a href="https://www.mensrepublic.id/product/dande-brown">
-                            <img src="https://www.mensrepublic.id/assets/images/uploads/product/300/dande-brown-1569470589-udPsF8stNvXx.jpg" alt="">
-                                <h1>Dande - Brown</h1>
-                                    <div class="price-before">Rp 429,000</div>
-                                    <div class="price-after">Rp 280,000</div>
-                                    <div class="rating-wrapper">
-                                        <img src="https://www.mensrepublic.id/assets/images/category/rating/star-5.png" alt="">
-                                        <span>(9)</span>
-                                    </div>
-                        </a>
-                    </div>
+               
+                    <?php foreach($produk as $p){?>
                     <div class="product-hotcard">
                         <a href="https://www.mensrepublic.id/product/edgard-coffee">
-                            <img src="https://www.mensrepublic.id/assets/images/uploads/product/300/edgard-1569399709-pgNdfzWUFV81.jpg" alt="">
-                                <h1>Edgard - Coffee</h1>
-                                    <div class="price-before">Rp 429,000</div>
-                                    <div class="price-after">Rp 320,000</div>
+                            <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$p['id_produk']] ?>" alt="">
+                                <h1><?= $p['nama_produk'];?></h1>
+                                    <!-- <div class="price-before">Rp 429,000</div> -->
+                                    <div class="price-after"><?= $p['harga_produk'];?></div>
                                     <div class="rating-wrapper">
-                                        <img src="https://www.mensrepublic.id/assets/images/category/rating/star-5.png" alt="">
-                                        <span>(2)</span>
+                                        <!-- <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$p['id_produk']] ?>" alt=""> -->
+                                        <span>Stok : <?= $p['stok_produk'];?></span>
                                     </div>
                         </a>
                     </div>
+                    <?php }?>
                 </div>
         </section>
         <section class="six-banner">
@@ -77,33 +68,33 @@ $this->load->view('public/cart');
             <div class="border"></div>
                 <div class="content">
                     <h2>YOI RED</h2>
-                    <h3>Nationalism</h3>
+                    <!-- <h3>Nationalism</h3> -->
                 </div>
-                <img src="https://www.mensrepublic.id/assets/images/uploads/card/desktop/1-1569396213-xzvd26yzSZHe.jpg" alt="">
+                <img src="<?= base_url()?>assets/images/Jas/1.png" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='https://www.mensrepublic.id/product/yoi-blue'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                     <h2>YOI BLUE</h2>
-                    <h3>Education</h3>
+                    <!-- <h3>Education</h3> -->
                 </div>
-                <img src="https://www.mensrepublic.id/assets/images/uploads/card/desktop/2-1569396240-pZ51jRACXAah.jpg" alt="">
+                <img src="<?= base_url()?>assets/images/Jas/6.png" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='https://www.mensrepublic.id/product/yoi-black'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                     <h2>YOI BLACK</h2>
-                    <h3>Youth</h3>
+                    <!-- <h3>Youth</h3> -->
                 </div>
-                <img src="https://www.mensrepublic.id/assets/images/uploads/card/desktop/3-1569396271-ZYnw1YPJPFqn.jpg" alt="">
+                <img src="<?= base_url()?>assets/images/Jas/9.png" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='https://www.mensrepublic.id/'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                     <h2>ORD Series</h2>
-                    <h3>Casual Formal</h3>
+                    <!-- <h3>Casual Formal</h3> -->
                 </div>
-                <img src="https://www.mensrepublic.id/assets/images/uploads/card/desktop/6-1569396408-YULrekpHz7pb.jpg" alt="">
+                <img src="<?= base_url()?>assets/images/Celana/P1.png" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='https://www.mensrepublic.id/'" style="cursor: pointer;">
             <div class="border"></div>
@@ -111,15 +102,15 @@ $this->load->view('public/cart');
                     <h2></h2>
                     <h3></h3>
                 </div>
-                <img src="https://www.mensrepublic.id/assets/images/uploads/card/desktop/10-1569396686-7aMs604CUc0h.jpg" alt="">
+                <img src="<?= base_url()?>assets/images/Celana/P2.png" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='https://www.mensrepublic.id/'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                     <h2>Sneez</h2>
-                    <h3>Everlasting Shoes</h3>
+                    <!-- <h3>Everlasting Shoes</h3> -->
                 </div>
-                <img src="https://www.mensrepublic.id/assets/images/uploads/card/desktop/8-1569396636-wbPVUbKyq4va.jpg" alt="">
+                <img src="<?= base_url()?>assets/images/Celana/P3.png" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='https://www.mensrepublic.id/'" style="cursor: pointer;">
             <div class="border"></div>
@@ -127,7 +118,7 @@ $this->load->view('public/cart');
                     <h2>Semerus</h2>
                     <h3>Temen Ngantor</h3>
                 </div>
-                <img src="https://www.mensrepublic.id/assets/images/uploads/card/desktop/11-1569396581-yBl0aZlKdqSw.jpg" alt="">
+                <img src="<?= base_url()?>assets/images/Kemeja/LRM_EXPORT_4.jpeg" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='https://www.mensrepublic.id/'" style="cursor: pointer;">
             <div class="border"></div>
@@ -135,7 +126,7 @@ $this->load->view('public/cart');
                     <h2>Sparky Black</h2>
                     <h3>Nyaman Banget</h3>
                 </div>
-                <img src="https://www.mensrepublic.id/assets/images/uploads/card/desktop/12-1569396599-Syjwyiy7hrVa.jpg" alt="">
+                <img src="<?= base_url()?>assets/images/Kemeja/LRM_EXPORT_5.jpeg" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='https://www.mensrepublic.id/'" style="cursor: pointer;">
             <div class="border"></div>
@@ -143,7 +134,7 @@ $this->load->view('public/cart');
                     <h2>Musca</h2>
                     <h3>Comfortable Sandal</h3>
                 </div>
-                <img src="https://www.mensrepublic.id/assets/images/uploads/card/desktop/13-1569396557-KxoHz36kKDKa.jpg" alt="">
+                <img src="<?= base_url()?>assets/images/Kemeja/LRM_EXPORT_6.jpeg" alt="">
             </div>
         </section>
         <section class="promo">

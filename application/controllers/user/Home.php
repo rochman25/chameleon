@@ -6,14 +6,11 @@ class Home extends MY_Controller{
         parent::__construct();
         $this->load->model('Produk_model', 'produk');
         $this->load->model('Pengguna_model', 'user');
+        $this->load->model('Kategori_model', 'kategori');
     }
 
     public function index(){
-        $this->load->view('public/home');
-    }
-    public function produk(){
-  
-            $thumbnail = array();
+        $thumbnail = array();
             $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
             $data['produk'] = $this->produk->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
             $data['produk'] = $this->produk->getData()->result_array();
@@ -23,7 +20,31 @@ class Home extends MY_Controller{
             }
             $data['thumbnail'] = $thumbnail;
             //die(json_encode($data));
-        $this->load->view('public/product',$data);
+        $this->load->view('public/home',$data);
+    }
+    public function produk($kategori = ""){
+     //   die(json_encode($kategori));
+        if($kategori == ""){
+            
+        }else{
+            $kategori =  $this->kategori->getWhere('nama_kategori',$kategori);
+            $kategori = $this->kategori->getData()->row();
+            if($kategori->id_kategori == ""){
+                
+            }
+            die(json_encode($kategori));
+        }
+        //     $thumbnail = array();
+        //     $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
+        //     $data['produk'] = $this->produk->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
+        //     $data['produk'] = $this->produk->getData()->result_array();
+        //     foreach ($data['produk'] as $row) {
+        //         $foto = explode(',', $row['thumbnail_produk']);
+        //         $thumbnail[$row['id_produk']] = $foto[0];
+        //     }
+        //     $data['thumbnail'] = $thumbnail;
+        //     //die(json_encode($data));
+        // $this->load->view('public/product',$data);
     }
     public function produk_detail(){
         $id_produk = $this->input->get('produk');
@@ -40,7 +61,7 @@ class Home extends MY_Controller{
                 }
             //}
             $data['thumbnail'] = $thumbnail;
-         //   die(json_encode($data));
+         // die(json_encode($data));
         $this->load->view('public/product-detail',$data);
     }
     public function login(){
