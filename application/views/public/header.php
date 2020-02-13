@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<title>Men's Republic</title>
 	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
@@ -12,6 +12,8 @@
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="https://www.mensrepublic.id/assets/images/layout/favicon_new/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
+	
+	<link rel="stylesheet"  href="<?= base_url()?>assets/public/css/fontawesome-all.css" >
 	<link rel="stylesheet"  href="<?= base_url()?>assets/public/css/jqueryuimin.css" >
 	<link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/public/css/all.css">
 	<link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/public/css/master.css?id=9e0f65abec8cb3ae96f8">		<!-- Facebook Pixel Code -->

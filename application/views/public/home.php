@@ -49,7 +49,7 @@ $this->load->view('public/cart');
                
                     <?php foreach($produk as $p){?>
                     <div class="product-hotcard">
-                        <a href="https://www.mensrepublic.id/product/edgard-coffee">
+                        <a href="<?= base_url()?>detail?produk=<?= $p['id_produk']?>">
                             <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$p['id_produk']] ?>" alt="">
                                 <h1><?= $p['nama_produk'];?></h1>
                                     <!-- <div class="price-before">Rp 429,000</div> -->
@@ -96,7 +96,7 @@ $this->load->view('public/cart');
                 </div>
                 <img src="<?= base_url()?>assets/images/Celana/P1.png" alt="">
             </div>
-            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/celana''" style="cursor: pointer;">
+            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/celana'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                     <h2></h2>

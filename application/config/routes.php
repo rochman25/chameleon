@@ -54,8 +54,10 @@ $route['default_controller'] = 'Welcome';
 $route['login'] = 'user/Home/login';
 $route['daftar'] = 'user/Home/register';
 $route['keluar'] = 'user/Home/logout';
+
 $route['produk'] = 'user/Home/produk';
 $route['produk/(:any)'] = 'user/Home/produk/$1';
+$route['detail'] = 'user/Home/produk_detail/';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

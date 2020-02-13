@@ -13,7 +13,7 @@ $this->load->view('public/m_heading');
 $this->load->view('public/cart');
 ?>
 <section id="content">
-    <div id="product" data-product-id="284">
+    <div id="product" data-product-id="<?= $produk->id_produk;?>">
         <div class="container">
             <div class="row">  
                 <div class="col-lg-5 col-md-5 gallery-container" data-image-count="7">
@@ -89,8 +89,26 @@ $this->load->view('public/cart');
                             </ul>
                         </div>
                         <div class="button-action">
-                            <button class="addToCart"><i class="svg-icon svg_icon__pdp_cart"></i>hajar men</button>
-                            <span class="out-of-stock" style="display:none">HABIS MEN</span>
+                            <?php 
+                            if(isset($this->session->userdata['user_data'])){
+                            ?>
+                                <button class="addToCart">
+                                    <i class="svg-icon svg_icon__pdp_cart"></i>hajar men
+                                </button>
+                               
+                            <?php
+                            }else{ 
+                                
+                            ?>
+                                <a href="<?= base_url();?>login" 
+                                style="padding:15px;"
+                                class="addToCart">
+                                    <i class="svg-icon svg_icon__pdp_cart"></i>hajar men
+                            </a>
+                                <!-- <span class="out-of-stock" style="display:none">HABIS MEN</span> -->
+                            <?php
+                            }?>
+                             <span class="out-of-stock" style="display:none">HABIS MEN</span>
                         </div>
                         
                         <div class="product-order">
@@ -157,7 +175,67 @@ $this->load->view('public/footer');
 		$(".svg-container").fadeOut("slow");
     });
 </script>
+<script type="text/javascript">
+$(document).ready(function () {
+    var base_url = '<?= base_url()?>'
+            $(".addToCart").on("click", function () {
+            // var t = null == $(".size-product:first ul").find(".active").data("value") ? 1 : $("size-product:first ul").find(".active").data("value"),
+            //     e = null == $(".size-product:first ul").find(".active").data("value"),
+            //     i = [],
+            //     n = !1;
+            // $(".bundling-row").each(function () {
+            //     var t = $(this).find(".init").children(".product-name").html(),
+            //         e = $(this).find(".option-child.selected"),
+            //         s = $(this).find(".size.active");
+            //     if (0 == s.children().attr("data-stock")) return alert("Maaf stock kosong."),
+            //         n = !0, !1;
+            //     if (null == e.attr("data-value") || "" == e.attr("data-value"))
+            //         return alert("Anda belum memilih produk."),
+            //             n = !0, !1;
+            //     n = !1;
+            //     var o = {
+            //         subcategory_id: e.attr("data-subcategory"),
+            //         product_name: t,
+            //         product_id:
+            //             e.attr("data-value"),
+            //         size_id: s.attr("data-value"),
+            //         size_name: s.find("span").html()
+            //     };
+            //     i.push(o)
+            // }), 0 == n && 
+            var id_cart = $("#product").data("product-id");
+            $.ajax({
+                url: base_url + "user/Home/add_cart",
+                type: "POST",
+                data: {
+                    id_cart: id_cart,
+                    id_pengguna: '<?= $this->session->userdata['user_data']['id']?>',
+                }
+            }).done(function (t) {
+                var res = JSON.parse(t);
+               // console.log(t);
+                // if ("true" === t.success) {
+                //     if ("new" === t.condition) {
+                //         $(".cart-wrapper").append(t.element);
+                //         var i = parseInt($(".icon-cart").find(".notif").html());
+                //         $(".icon-cart").find(".notif").html(i + 1)
+                //     } else "update" === t.condition && (e && location.reload(),
+                //         $("#cart_list_" + t.data.product_detail_id).find(".cart-quantity").html(t.data.quantity));
+                //     $(".total_sum").html(t.total_price),
+                //         $(".menu-cart").addClass("open"),
+                //         $(".overlay-desktop").addClass("active")
 
+                // } else
+                //     alert(t.message), location.reload()
+                console.log(res);
+
+            }).fail(function (t) {
+                console.log(t)
+                   //location.reload()
+            })
+        })
+    })
+</script>
 <script>
 	function callZoom(){
         $('#elevate-zoom').elevateZoom({

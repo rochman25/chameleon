@@ -8,7 +8,8 @@ class MY_Controller extends CI_Controller{
 
 
     function userIsLoggedIn(){
-        if (isset($this->session->userdata['user_data']['status']) && $this->session->userdata['user_data']['status'] == true) {
+        if (isset($this->session->userdata['user_data']) && 
+        $this->session->userdata['user_data'] == true) {
             return true;
         } else {
             return false;

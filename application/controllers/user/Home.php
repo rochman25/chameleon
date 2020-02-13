@@ -7,6 +7,7 @@ class Home extends MY_Controller{
         $this->load->model('Produk_model', 'produk');
         $this->load->model('Pengguna_model', 'user');
         $this->load->model('Kategori_model', 'kategori');
+        $this->load->model('Cart_model', 'cart');
         $this->load->library('bcrypt');
         $this->load->library('form_validation');
     }
@@ -42,14 +43,7 @@ class Home extends MY_Controller{
          //   die(json_encode($kategori));
             if($datakategori == "" || empty($datakategori) || $datakategori == null){
                 $thumbnail = array();
-                // $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
-                // $data['produk'] = $this->produk->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
-                // $data['produk'] = $this->produk->getData()->result_array();
-                // foreach ($data['produk'] as $row) {
-                //     $foto = explode(',', $row['thumbnail_produk']);
-                //     $thumbnail[$row['id_produk']] = $foto[0];
-                // }
-                // $data['thumbnail'] = $thumbnail;
+
                 $data['produk'] = null;
                 $data['thumbnail'] = null;
 
@@ -113,7 +107,8 @@ class Home extends MY_Controller{
                             "id" => $cek->id_pengguna,
                             "username" => $cek->username,
                             "email" => $cek->email,
-                            "status" => $cek->status
+                            "status" => $cek->status,
+                            "login" => true,
                         );
                         $this->session->set_userdata('user_data', $user);
                         redirect(base_url());
@@ -136,6 +131,45 @@ class Home extends MY_Controller{
             }
         }
        
+    }
+    public function add_cart(){
+        $idc = $this->input->post('id_cart');
+        $idp = $this->input->post('id_pengguna');
+
+        $data = array(
+            "id_cart" => $idc,
+            "id_pengguna" => $idp,
+            "created_at" => date("Y-m-d H:i:s"),
+        );
+        $simpan = $this->cart->insert($data);
+        if($simpan){
+            echo json_encode(array(
+                "status"=> "success",
+                "element" => '<div class="cart-list" id="cart_list_39223">
+    			<a href="#">
+        			<img src="#">
+        			<div class="content">
+            			<div class="name">Vale - Grey Brown</div>
+                        <div class="discount">
+                    		<span class="price-old">Rp 429,000</span> &nbsp;
+                    		<span style="color:red">-30%</span>
+                		</div>
+            			<div class="real">Rp 300,000</div>
+                            <div class="content-detail">
+                    			Jumlah : <strong class="cart-quantity">2 </strong> /
+                    			Ukuran : <strong>39 </strong>
+                			</div>
+        			</div>
+    			</a>
+    			<a class="delete-cart" data-id="39223" href="#">
+        			<i class="svg_icon__header_garbage svg-icon"></i>
+    			</a>
+			</div>',
+            ));
+        }else{
+            echo json_encode(array("status"=> "failed"));
+        }
+
     }
     public function register(){
         if ($this->userIsLoggedIn()) {
@@ -187,10 +221,13 @@ class Home extends MY_Controller{
     public function logout(){
         if($this->userIsLoggedIn()){
             $this->session->unset_userdata('user_data');
-            redirect(base_url('login'));
+           redirect(base_url('login'),'refresh');
+            //redirect('/user_view/user_login', 'refresh');
+            exit();
         }else{
-            redirect(base_url('login'));   
+           redirect(base_url('login'));   
         }
+       // die(json_encode($this->session->userdata('user_data')));
     }
 
 }

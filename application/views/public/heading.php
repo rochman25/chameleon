@@ -136,7 +136,7 @@
         </ul>
         <div class="header-right">
             <div class="icon-right icon-login">
-                <a href="<?= base_url()?>login">
+                <a href="<?= base_url()?>keluar">
                     <i class="svg_icon__header_login svg-icon"></i>
                 </a>
             </div>

@@ -107,7 +107,7 @@
                 <li><a href="https://www.mensrepublic.id/order/payment/confirmation"><span>konfirmasi pembayaran</span></a></li>
                 <!-- <li><a href="https://www.womensrepublic.id">women's republic</a></li> -->
             </ul>
-            <a href="<?= base_url()?>hapus" class="logout">
+            <a href="<?= base_url()?>keluar" class="logout">
                 <i class="svg-icon svg_icon__header_logout"></i>keluar
             </a>
         </div>
