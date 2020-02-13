@@ -97,6 +97,20 @@ class Transaksi extends MY_Controller{
         }
     }
 
+    public function laporan(){
+        if($this->adminIsLoggedIn()){
+            if($this->input->post('kirim')){
+                $tgl = $this->input->post('tgl');
+                
+                die(json_encode($tgl));
+            }else{
+                $this->load->view('admin/pages/laporan');
+            }
+        }else{
+            redirect('admin/home/login');
+        }
+    }
+
 }
 
 ?>

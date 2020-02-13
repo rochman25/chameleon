@@ -20,6 +20,9 @@ class Produk extends MY_Controller
             $data['produk'] = $this->produk->getData()->result_array();
             foreach ($data['produk'] as $row) {
                 $foto = explode(',', $row['thumbnail_produk']);
+                // foreach($foto as $rowf){
+                //     $thumbnail[$row['id_produk']][] = $rowf;
+                // }
                 $thumbnail[$row['id_produk']] = $foto[0];
             }
             $data['thumbnail'] = $thumbnail;

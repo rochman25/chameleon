@@ -25,6 +25,11 @@ class Transaksi_model extends MY_Model
         return $this->getData()->result();
     }
 
+    function getLaporan($tgl){
+        $this->getWhere("status_transaksi","selesai");
+        return $this->getData()->result_array();
+    }
+
     function get_pembayaran(){
         $this->getJoin("pengguna","pengguna.id_pengguna = transaksi.id_pengguna","inner");
         $this->order_by("kode_transaksi","ASC");
