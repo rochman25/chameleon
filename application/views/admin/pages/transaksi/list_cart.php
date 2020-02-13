@@ -76,42 +76,43 @@
                 </section>
             </div>
 
-        <!-- modal hapus -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="hapusModal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Hapus Transaksi</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="<?= base_url() ?>admin/transaksi/hapus" method="POST">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="input-group">
-                                            <input type="hidden" class="form-control" id="id_hapus" name="id" required>
-                                            <p><h6>Apakah anda yakin menghapus data ini?</h6></p>
+            <!-- modal hapus -->
+            <div class="modal fade" tabindex="-1" role="dialog" id="hapusModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Hapus Transaksi</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="<?= base_url() ?>admin/transaksi/hapus" method="POST">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="input-group">
+                                                <input type="hidden" class="form-control" id="id_hapus" name="id" required>
+                                                <p>
+                                                    <h6>Apakah anda yakin menghapus data ini?</h6>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer bg-whitesmoke br">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <input type="submit" name="kirim" value="Ya, Hapus!" class="btn btn-danger">
-                        </div>
-                    </form>
+                            <div class="modal-footer bg-whitesmoke br">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" name="kirim" value="Ya, Hapus!" class="btn btn-danger">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- footer content -->
-    <?php $this->load->view('admin/master/footer') ?>
-    </div>
+        <!-- footer content -->
+        <?php $this->load->view('admin/master/footer') ?>
     </div>
     <?php $this->load->view('admin/assets/javascript') ?>
     <script type="text/javascript">

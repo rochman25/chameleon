@@ -52,6 +52,8 @@
                                                 <address>
                                                     <strong>Waktu Transaksi:</strong><br>
                                                     <?= $transaksi[0]->waktu_transaksi ?><br><br>
+                                                    <strong>Status Transaksi:</strong><br>
+                                                    <?= $transaksi[0]->status_transaksi ?>
                                                 </address>
                                             </div>
                                         </div>
@@ -121,20 +123,119 @@
                             <hr>
                             <div class="text-md-right">
                                 <div class="float-lg-left mb-lg-0 mb-3">
-                                    <button class="btn btn-primary btn-icon icon-left"><i class="fas fa-credit-card"></i> Process Payment</button>
-                                    <button class="btn btn-danger btn-icon icon-left"><i class="fas fa-times"></i> Cancel</button>
+                                    <button class="btn btn-primary btn-icon icon-left" id="btnProses" data-target="#proses_modal" data-toggle="modal" data-id="<?=$transaksi[0]->id_transaksi?>"><i class="fas fa-credit-card"></i> Proses</button>
+                                    <button class="btn btn-danger btn-icon icon-left" id="btnBatal" data-target="#batal_modal" data-toggle="modal" data-id="<?=$transaksi[0]->id_transaksi?>"><i class="fas fa-times"></i> Batalkan</button>
                                 </div>
-                                <button class="btn btn-warning btn-icon icon-left"><i class="fas fa-print"></i> Print</button>
+                                <p><?= date("d/m/Y") ?></p>
+                                <!-- <button class="btn btn-warning btn-icon icon-left"><i class="fas fa-print"></i> Print</button> -->
                             </div>
                         </div>
                     </div>
                 </section>
             </div>
         </div>
-        <!-- footer content -->
-        <?php $this->load->view('admin/master/footer') ?>
+
+        <!-- modal proses -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="proses_modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Proses Transaksi</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="<?= base_url() ?>admin/transaksi/update" method="POST">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <label>Status Transaksi</label>
+                                        <div class="input-group">
+                                            <select id="status" name="status" class="form-control" required>
+                                                <option>Pilih Status Transaksi</option>
+                                                <option value="proses">Proses</option>
+                                                <option value="kirim">Kirim</option>
+                                                <!-- <option value="selesai">Selesai</option> -->
+                                            </select>
+                                            <!-- <input type="text" class="form-control" placeholder="Nama Kategori" name="nama" required> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <label>Nomor Resi</label>
+                                        <div class="input-group">
+                                            <input type="text" id="noresi" class="form-control" placeholder="Nomor Resi" name="noresi" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="input-group">
+                                            <input type="hidden" class="form-control" id="id_proses" name="id" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer bg-whitesmoke br">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" name="kirim" value="Simpan" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal batal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="batal_modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Batalkan Transaksi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="<?= base_url() ?>admin/transaksi/update" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="input-group">
+                                        <input type="hidden" class="form-control" id="id_batal" name="id" required>
+                                        <input type="hidden" class="form-control" name="status" value="batal">
+                                        <p>
+                                            <h6>Apakah anda yakin membatalkan transaksi ini?</h6>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-whitesmoke br">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" name="kirim" value="Ya, Batalkan!" class="btn btn-danger">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <!-- footer content -->
+    <?php $this->load->view('admin/master/footer') ?>
     </div>
     <?php $this->load->view('admin/assets/javascript') ?>
 </body>
+<script type="text/javascript">
+    $(document).on("click", "#btnBatal", function(){
+        let id = $(this).data("id");
+        $("#id_batal").val(id);
+    })
 
+    $(document).on("click", "#btnProses",function(){
+        let id = $(this).data("id");
+        $('#id_proses').val(id);
+    })
+</script>
 </html>

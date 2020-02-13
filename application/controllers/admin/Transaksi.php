@@ -48,13 +48,13 @@ class Transaksi extends MY_Controller{
                     'pesan',
                     '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil diupdate</div>'
                 );
-                redirect('admin/transaksi/pengiriman');
+                redirect('admin/transaksi');
             }else{
                 $this->session->set_flashdata(
                     'pesan',
                     '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
                 );
-                redirect('admin/transaksi/pengiriman');
+                redirect('admin/transaksi');
             }
         }else{
             redirect('admin/home/login');
