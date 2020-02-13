@@ -25,12 +25,12 @@ $this->load->view('public/m_heading');
         <div class="new-login">
             <h1>Masuk</h1>
         <p>Belum punya akun Men’s Republic <strong>Daftar</strong></p>
-        <form action="https://www.mensrepublic.id/login" method="post">
+        <form action="<?= base_url()?>User/Home/login_proses" method="post">
             <h2>Email</h2>
             <input type="email" name="email">
             <h2>Password</h2>
             <input type="password" name="password">
-            <a class="forget-pass" href="https://www.mensrepublic.id/forget-password">Lupa Password ?</a>
+            <a class="forget-pass" href="#">Lupa Password ?</a>
             <input type="submit" value="Masuk">
         </form>
 

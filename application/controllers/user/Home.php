@@ -5,7 +5,7 @@ class Home extends MY_Controller{
     public function __construct(){
         parent::__construct();
         $this->load->model('Produk_model', 'produk');
-        $this->load->model('Pengguna', 'user');
+        $this->load->model('Pengguna_model', 'user');
     }
 
     public function index(){
@@ -20,21 +20,6 @@ class Home extends MY_Controller{
         $this->load->view('public/product-detail');
     }
     public function login(){
-        $this->load->view('public/login');
-    }
-    public function register(){
-        $this->load->view('public/register');
-    }
-    public function profil(){
-        $this->load->view('public/profil');
-    }
-
-    public function logout(){
-
-    }
-
-    public function login_proses()
-    {
         if ($this->userIsLoggedIn()) {
             redirect('user/home');
         } else {
@@ -66,22 +51,34 @@ class Home extends MY_Controller{
                             'pesan',
                             '<div class="alert alert-danger mr-auto">Password salah</div>'
                         );
-                        $this->load->view('admin/pages/login');
+                        $this->load->view('user/home/login');
                     }
                 } else {
                     $this->session->set_flashdata(
                         'pesan',
                         '<div class="alert alert-danger mr-auto">Akun tidak ditemukan</div>'
                     );
-                    $this->load->view('admin/pages/login');
+                    $this->load->view('user/home/login');
                 }
             }else{
-                $this->load->view('admin/pages/login');
+                $this->load->view('public/login');
             }
         }
+       
+    }
+    public function register(){
+        $this->load->view('public/register');
+    }
+    public function profil(){
+        $this->load->view('public/profil');
     }
 
     public function logout(){
+
+    }
+
+
+    public function userlogout(){
         if($this->userIsLoggedIn()){
             $this->session->unset_userdata('admin_data');
             redirect('admin/home/login');
