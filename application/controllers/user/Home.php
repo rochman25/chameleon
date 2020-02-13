@@ -12,12 +12,36 @@ class Home extends MY_Controller{
         $this->load->view('public/home');
     }
     public function produk(){
-        $data['product'] = $this->produk->getData()->result();
-        //die(json_encode($data));
+  
+            $thumbnail = array();
+            $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
+            $data['produk'] = $this->produk->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
+            $data['produk'] = $this->produk->getData()->result_array();
+            foreach ($data['produk'] as $row) {
+                $foto = explode(',', $row['thumbnail_produk']);
+                $thumbnail[$row['id_produk']] = $foto[0];
+            }
+            $data['thumbnail'] = $thumbnail;
+            //die(json_encode($data));
         $this->load->view('public/product',$data);
     }
     public function produk_detail(){
-        $this->load->view('public/product-detail');
+        $id_produk = $this->input->get('produk');
+      
+        $thumbnail = array();
+            $data['produk'] = $this->produk->getWhere("id_produk", $id_produk);
+            $data['produk'] = $this->produk->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
+            $data['produk'] = $this->produk->getData()->row();
+          //  die(json_encode($data));
+          //  foreach ($data['produk'] as $row) {
+                $foto = explode(',', $data['produk']->thumbnail_produk);
+                foreach($foto as $f){
+                    $thumbnail[] = $f;
+                }
+            //}
+            $data['thumbnail'] = $thumbnail;
+         //   die(json_encode($data));
+        $this->load->view('public/product-detail',$data);
     }
     public function login(){
         if ($this->userIsLoggedIn()) {

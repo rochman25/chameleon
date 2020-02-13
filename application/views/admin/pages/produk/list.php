@@ -59,7 +59,7 @@
                                                     foreach ($produk as $row) { ?>
                                                         <tr>
                                                             <th scope="row"><?= $no++ ?></th>
-                                                            <td id="data-produk" data-id="<?= $row['kode_produk'] ?>"><a href="<?= base_url() ?>admin/produk/ubah?id=<?= $row['id_produk'] ?>"><?= $row['kode_produk'] ?></a></td>
+                                                            <td id="data-produk" data-id="<?= $row['kode_produk'] ?>"><a href="<?= base_url() ?>admin/produk/ubah?id=<?= $row['kode_produk'] ?>"><?= $row['kode_produk'] ?></a></td>
                                                             <td><?= $row['nama_produk'] ?></td>
                                                             <td>
                                                                 <?= $row['stok_produk'] ?>

@@ -14,8 +14,8 @@
         </ul>
     </div>
     <div class="mainheader">
-        <a href="https://www.mensrepublic.id" class="logo">
-            <img src="https://www.mensrepublic.id/assets/images/layout/logo/logo_new.png">
+        <a href="<?= base_url()?>" class="logo">
+            <img src="<?= base_url()?>assets/images/chameleon_cloth_logo.png">
         </a>
         <ul>
             <li>
@@ -37,7 +37,7 @@
                                 <li><a href="https://www.mensrepublic.id/category/sepatu/sandal">Sandal</a></li>
                                 <li><a href="https://www.mensrepublic.id/category/sepatu/casual-formal">Casual Formal</a></li>
                             </ul>
-                            </div>
+                        </div>
                         <div class="collections">
                             <div class="header">
                                 <a href="https://www.mensrepublic.id/category/tas">
@@ -73,7 +73,7 @@
                     </div>
                 </div>
             </li>
-            <li>
+            <!-- <li>
                 <a href="">promo</a>
                 <div class="dropdown dropdown-collection">
                     <div class="dropdown-wrapper">
@@ -130,9 +130,9 @@
                         </div>
                     </div>
                 </div>
-            </li>
-            <li><a href="https://www.mensrepublic.id/order/payment/confirmation"><span>konfirmasi pembayaran</span></a></li>
-            <li><a href="https://www.womensrepublic.id" target="_blank">women's republic</a></li>
+            </li> -->
+            <li><a href="#"><span>konfirmasi pembayaran</span></a></li>
+            <!-- <li><a href="https://www.womensrepublic.id" target="_blank">women's republic</a></li> -->
         </ul>
         <div class="header-right">
             <div class="icon-right icon-login">
