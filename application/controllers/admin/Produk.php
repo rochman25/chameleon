@@ -15,6 +15,7 @@ class Produk extends MY_Controller
     public function index()
     {
         if ($this->adminIsLoggedIn()) {
+            $thumbnail = array();
             $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
             $data['produk'] = $this->produk->getData()->result_array();
             foreach ($data['produk'] as $row) {

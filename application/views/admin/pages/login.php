@@ -26,7 +26,7 @@
 
                             <div class="card-body">
                                 <?= $this->session->flashdata('pesan') ?>
-                                <form method="POST" action="" class="needs-validation" novalidate="">
+                                <form method="POST" action="<?= base_url()?>admin/home/login" class="needs-validation" novalidate="">
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>

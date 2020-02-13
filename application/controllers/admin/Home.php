@@ -108,6 +108,7 @@ class Home extends MY_Controller
         if ($this->adminIsLoggedIn()) {
             redirect('admin/home');
         } else {
+            
             if ($this->input->post('kirim')) {
                 // die();
                 $email = $this->input->post('email');
@@ -117,7 +118,7 @@ class Home extends MY_Controller
                 // die(json_encode($cek));
                 if ($cek != null) {
                     if ($this->bcrypt->check_password($pass, $cek->password)) {
-                    // if ($cek->password == $pass) {
+                    //  if ($cek->password == $pass) {
                         $datas = array(
                             "updated_at" => date("Y-m-d H:i:s")
                         );
@@ -146,6 +147,10 @@ class Home extends MY_Controller
                     $this->load->view('admin/pages/login');
                 }
             }else{
+                // $this->session->set_flashdata(
+                //     'pesan',
+                //     '<div class="alert alert-danger mr-auto">Method Salah</div>'
+                // );
                 $this->load->view('admin/pages/login');
             }
         }
