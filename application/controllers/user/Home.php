@@ -7,6 +7,8 @@ class Home extends MY_Controller{
         $this->load->model('Produk_model', 'produk');
         $this->load->model('Pengguna_model', 'user');
         $this->load->model('Kategori_model', 'kategori');
+        $this->load->library('bcrypt');
+        $this->load->library('form_validation');
     }
 
     public function index(){
@@ -95,22 +97,25 @@ class Home extends MY_Controller{
             if ($this->input->post('kirim')) {
                 $email = $this->input->post('email');
                 $pass = $this->input->post('pass');
-
-                $cek = $this->user->login($email);
+                $where = array(
+                    'email'=>$email
+                );
+                $cek = $this->user->login($where)->row();
+           //     die(json_encode($cek));
                 if ($cek != null) {
                     if ($this->bcrypt->check_password($pass, $cek->password)) {
                     //  if ($cek->password == $pass) {
                         $datas = array(
                             "updated_at" => date("Y-m-d H:i:s")
                         );
-                        $this->user->updateData($datas, $cek->id_pengguan);
+                        $this->user->updateData($datas, $cek->id_pengguna);
                         $user = array(
-                            "id" => $cek->id_admin,
+                            "id" => $cek->id_pengguna,
                             "username" => $cek->username,
                             "email" => $cek->email,
                             "status" => $cek->status
                         );
-                        $this->session->set_userdata('admin_data', $user);
+                        $this->session->set_userdata('user_data', $user);
                         redirect(base_url());
                     } else {
                         $this->session->set_flashdata(
@@ -139,16 +144,37 @@ class Home extends MY_Controller{
             if ($this->input->post('kirim')) {
                 $email = $this->input->post('email');
                 $pass = $this->input->post('pass');
+                $uname = $this->input->post('username');
 
-                $cek = $this->user->getWhere('email_pengguna',$email);
+                $cek = $this->user->getWhere('email',$email);
+                $cek = $this->user->getData()->row();
+              //  die(json_encode($cek));
                 if ($cek != null) {
-        
-                } else {
-
+                    //sudah ada
                     $this->load->view('public/register');
+                    die(json_encode("ada"));
+                } else {
+                    $data = array(
+                        "email"=>$email,
+                        "username" => $uname,
+                        "password" => $this->bcrypt->hash_password($pass),
+                        "status" => 0,
+                        "token" => base64_encode($email),
+                        "created_at"=> date("Y-m-d H:i:s"),
+                    );
+                    $register = $this->user->set_data('id_pengguna', 'UUID()');
+                    $register = $this->user->insert( $data);
+                    // die(json_encode($register));
+                    if ($register) {
+                        $this->load->view('public/login');
+                    }else{
+                        $this->load->view('public/login');
+                    }
+                    
                 }
-            }else if($this->input->post('')){
-                $this->load->view('public/register');
+            }else if($this->input->post('email')){
+                $data['email'] = $this->input->post('email');
+                $this->load->view('public/register',$data);
             }else{
                 $this->load->view('public/login');
             }

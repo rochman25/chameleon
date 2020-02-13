@@ -31,7 +31,7 @@ $this->load->view('public/m_heading');
             <h2>Password</h2>
             <input type="password" name="password">
             <a class="forget-pass" href="#">Lupa Password ?</a>
-            <input type="submit" value="Masuk">
+            <input type="submit" name="kirim" value="Masuk">
         </form>
 
         <!-- <p class="separator">atau login dengan</p>
