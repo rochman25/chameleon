@@ -40,35 +40,37 @@
                                     <div class="card-body">
                                         <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#tambahModal" style="margin-bottom:10px"><i class="fa fa-plus"></i> Tambah Admin</button> -->
                                         <?php echo $this->session->flashdata('pesan') ?>
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">No</th>
-                                                    <th scope="col">Kode Transaksi</th>
-                                                    <th scope="col">Username</th>
-                                                    <th scope="col">Waktu Transaksi</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                $no = 1;
-                                                foreach ($transaksi as $row) { ?>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
                                                     <tr>
-                                                        <th scope="row"><?= $no++ ?></th>
-                                                        <td><?= $row['kode_transaksi'] ?></td>
-                                                        <td><?= $row['username'] ?></td>
-                                                        <td><?= $row['waktu_transaksi'] ?></td>
-                                                        <td><?= $row['status_transaksi'] ?></td>
-                                                        <td>
-                                                            <a href="#" class="btn btn-info" data-id="<?= $row['id_transaksi'] ?>">Detail</a>
-                                                            <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_transaksi'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button>
-                                                        </td>
+                                                        <th scope="col">No</th>
+                                                        <th scope="col">Kode Transaksi</th>
+                                                        <th scope="col">Username</th>
+                                                        <th scope="col">Waktu Transaksi</th>
+                                                        <th scope="col">Status</th>
+                                                        <th scope="col">Action</th>
                                                     </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    $no = 1;
+                                                    foreach ($transaksi as $row) { ?>
+                                                        <tr>
+                                                            <th scope="row"><?= $no++ ?></th>
+                                                            <td id="kode_t" data-id="<?=$row['id_transaksi']?>"><a href="<?=base_url()?>admin/transaksi/detail?id=<?=$row['id_transaksi']?>"><?= $row['kode_transaksi'] ?></a></td>
+                                                            <td><?= $row['username'] ?></td>
+                                                            <td><?= $row['waktu_transaksi'] ?></td>
+                                                            <td><?= $row['status_transaksi'] ?></td>
+                                                            <td>
+                                                                <a href="#" class="btn btn-info" data-id="<?= $row['id_transaksi'] ?>">Detail</a>
+                                                                <!-- <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_transaksi'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button> -->
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -76,41 +78,43 @@
                 </section>
             </div>
 
-        <!-- modal hapus -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="hapusModal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Hapus Transaksi</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="<?= base_url() ?>admin/transaksi/hapus" method="POST">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="input-group">
-                                            <input type="hidden" class="form-control" id="id_hapus" name="id" required>
-                                            <p><h6>Apakah anda yakin menghapus data ini?</h6></p>
+            <!-- modal hapus -->
+            <div class="modal fade" tabindex="-1" role="dialog" id="hapusModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Hapus Transaksi</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="<?= base_url() ?>admin/transaksi/hapus" method="POST">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="input-group">
+                                                <input type="hidden" class="form-control" id="id_hapus" name="id" required>
+                                                <p>
+                                                    <h6>Apakah anda yakin menghapus data ini?</h6>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer bg-whitesmoke br">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <input type="submit" name="kirim" value="Ya, Hapus!" class="btn btn-danger">
-                        </div>
-                    </form>
+                            <div class="modal-footer bg-whitesmoke br">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" name="kirim" value="Ya, Hapus!" class="btn btn-danger">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- footer content -->
-    <?php $this->load->view('admin/master/footer') ?>
+        <!-- footer content -->
+        <?php $this->load->view('admin/master/footer') ?>
     </div>
     </div>
     <?php $this->load->view('admin/assets/javascript') ?>
@@ -119,6 +123,12 @@
             let id = $(this).data('id');
             $('input[id="id_hapus"]').val(id)
         });
+
+        $(document).on("click","#kode_t",function(){
+            let id = $(this).data('id');
+            window.location.href="<?=base_url()?>admin/transaksi/detail?id="+id
+        });
+
     </script>
 
 

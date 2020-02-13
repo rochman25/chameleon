@@ -134,42 +134,73 @@
     <!-- JS Libraies -->
     <script src="<?= base_url() ?>assets/admin/node_modules/dropzone/dist/min/dropzone.min.js"></script>
     <!-- Page Specific JS File -->
-    <script>
-        var nama="default"
-        // document()
-        $(function(){
-            nama = $("#nama_p").val()
-        })
-        // let nama = $("#nama_p").val()
-        Dropzone.autoDiscover = false;
+    <script type="text/javascript">
+        var nama = "default"
+        var kode_p = ""
 
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = window.location.search.substring(1),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+                }
+            }
+        };
+
+        if(getUrlParameter('id')){
+            kode_p = getUrlParameter('id');
+        }
+
+        $(document).on("change", "#nama_p", function() {
+            nama = $(this).val()
+        })
+        Dropzone.autoDiscover = false;
         var foto_upload = new Dropzone(".dropzone", {
             url: "<?php echo base_url('admin/produk/uploadFile') ?>",
             maxFilesize: 2,
             method: "post",
             acceptedFiles: "image/*",
-            paramName: "userfile",
+            uploadMultiple: true,
+            paramName: "thumbnail",
             dictInvalidFileType: "Type file ini tidak dizinkan",
             addRemoveLinks: true,
         });
-
-
         //Event ketika Memulai mengupload
-        foto_upload.on("sending", function(a, b, c) {
+        foto_upload.on("sendingmultiple", function(a, b, c) {
             console.log(nama);
-            c.append("file_name",nama)
-            // c.append("")
-            // a.token = Math.random();
-            // c.append("token_foto", a.token); //Menmpersiapkan token untuk masing masing foto
+            c.append("file_name", nama)
+            c.append("kode_p", kode_p)
         });
 
-        // foto_upload.on("sendingmultiple",function(a, b, c){
-        //     c.append("file_name",nama)
-        // });
-
-        foto_upload.on("success", function(a,b,c){
-            console.log(nama);
-        });
+        foto_upload.on("removedfile", function(a, b, c) {
+            c.append("file_name", nama)
+            c.append("status", "remove")
+        })
+        $(document).ready(function() {
+            // if (getUrlParameter('id') != null) {
+            // console.log("done")
+            $.getJSON("<?= base_url() ?>admin/produk/getThumbnail/" + getUrlParameter('id'), function(data) {
+                $.each(data, function(key, value) {
+                    console.log(value);
+                    var mockFile = {
+                        name: value,
+                    };
+                    foto_upload.options.addedfile.call(foto_upload, mockFile);
+                    foto_upload.options.thumbnail.call(foto_upload, mockFile, "<?= base_url() ?>assets/uploads/thumbnail_produk/" + value);
+                })
+            })
+            // }
+        })
+        // })
+        // let nama = $("#nama_p").val()
+    </script>
+    <script type="text/javascript">
     </script>
     <!-- <script src="<?= base_url() ?>assets/admin/js/page/components-multiple-upload.js"></script> -->
     <script src="<?= base_url() ?>assets/admin/node_modules/summernote/dist/summernote-bs4.js"></script>

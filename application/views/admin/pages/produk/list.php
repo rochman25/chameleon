@@ -39,36 +39,44 @@
                                     </div>
                                     <div class="card-body">
                                         <a href="<?= base_url() ?>admin/produk/tambah" class="btn btn-primary" style="margin-bottom:10px"><i class="fa fa-plus"></i> Tambah Produk</a>
-                                        <?=$this->session->flashdata('pesan')?>
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">No</th>
-                                                    <th scope="col">Kode Produk</th>
-                                                    <th scope="col">Nama</th>
-                                                    <th scope="col">Stok</th>
-                                                    <th scope="col">Harga Satuan</th>
-                                                    <th scope="col">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                $no = 1;
-                                                foreach ($produk as $row) { ?>
+                                        <?= $this->session->flashdata('pesan') ?>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
                                                     <tr>
-                                                        <th scope="row"><?= $no++ ?></th>
-                                                        <td><?= $row['kode_produk'] ?></td>
-                                                        <td><?= $row['nama_produk'] ?></td>
-                                                        <td><?= $row['stok_produk'] ?></td>
-                                                        <td><?= $row['harga_produk'] ?></td>
-                                                        <td>
-                                                            <a href="<?=base_url()?>admin/produk/ubah?id=<?=$row['id_produk']?>" class="btn btn-success">Ubah</a>
-                                                            <button id="btnHapus" data-target="#hapusModal" data-toggle="modal" data-id="<?=$row['id_produk']?>" class="btn btn-danger">Hapus</button>
-                                                        </td>
+                                                        <th scope="col">No</th>
+                                                        <th scope="col">Kode Produk</th>
+                                                        <th scope="col">Nama</th>
+                                                        <th scope="col">Stok</th>
+                                                        <th scope="col">Harga Satuan</th>
+                                                        <th scope="col">Image</th>
+                                                        <th scope="col">Action</th>
                                                     </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    $no = 1;
+                                                    foreach ($produk as $row) { ?>
+                                                        <tr>
+                                                            <th scope="row"><?= $no++ ?></th>
+                                                            <td id="data-produk" data-id="<?= $row['kode_produk'] ?>"><a href="<?= base_url() ?>admin/produk/ubah?id=<?= $row['id_produk'] ?>"><?= $row['kode_produk'] ?></a></td>
+                                                            <td><?= $row['nama_produk'] ?></td>
+                                                            <td>
+                                                                <?= $row['stok_produk'] ?>
+                                                            </td>
+                                                            <td><?= $row['harga_produk'] ?></td>
+                                                            <td>
+                                                                <img style="margin:10px" width="100px" height="100px" src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>">
+                                                            </td>
+                                                            <td>
+                                                                <!-- <a href="<?= base_url() ?>admin/produk/ubah?id=<?= $row['id_produk'] ?>" class="btn btn-success">Ubah</a> -->
+                                                                <button id="btnHapus" data-target="#hapusModal" data-toggle="modal" data-id="<?= $row['id_produk'] ?>" class="btn btn-danger">Hapus</button>
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -116,9 +124,13 @@
     </div>
     <?php $this->load->view('admin/assets/javascript') ?>
     <script type="text/javascript">
-        $(document).on("click","#btnHapus",function(){
+        $(document).on("click", "#btnHapus", function() {
             let id = $(this).data("id");
             $("#id_hapus").val(id);
+        });
+        $(document).on("click", "#data-produk", function() {
+            // alert($(this).data('id'))
+            window.location.href = "<?= base_url() ?>admin/produk/ubah?id=" + $(this).data('id')
         });
     </script>
 </body>

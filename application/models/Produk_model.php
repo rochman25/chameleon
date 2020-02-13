@@ -22,7 +22,7 @@ class Produk_model extends MY_Model
             $number = (int) substr($number->kode_produk,-3);
             $number = $number+1;
         }
-        $kode .= strlen($kat_p)."-".date("YmdHis")."-".sprintf("%03s",$number);
+        $kode .= strlen($kat_p)."-".date("YmdHi")."-".sprintf("%03s",$number);
         return $kode;
     }
 
@@ -32,12 +32,12 @@ class Produk_model extends MY_Model
     }
 
     function getById($id){
-        $this->getWhere('id_produk',$id);
+        $this->getWhere('kode_produk',$id);
         return $this->getData()->row();
     }
 
     function updateData($data,$id){
-        $this->getWhere('id_produk',$id);
+        $this->getWhere('kode_produk',$id);
         return $this->update($data);
     }
 
