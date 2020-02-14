@@ -7,6 +7,7 @@ class Home extends MY_Controller
     {
         parent::__construct();
         $this->load->model('Admin_model', 'admin');
+        $this->load->model('Transaksi_model','transaksi');
         $this->load->library('bcrypt');
         $this->load->library('form_validation');
     }
@@ -14,7 +15,32 @@ class Home extends MY_Controller
     public function index()
     {
         if ($this->adminIsLoggedIn()) {
-            $this->load->view('admin/pages/dashboard');
+            $transaksi = $this->transaksi->get_transaksi();
+            $statistik = ["pending" => 0,"kirim" => 0,"selesai" => 0];
+            $penjualan = 0;
+            $produk = 0;
+            foreach($transaksi as $row){
+                if($row['status_transaksi'] == "pending"){
+                    $statistik['pending'] = $statistik['pending'] + count($row['status_transaksi']);
+                }else if($row['status_transaksi'] == "kirim"){
+                    $statistik['kirim'] =  $statistik['kirim'] + count($row['status_transaksi']);
+                }else if($row['status_transaksi'] == "selesai"){
+                    $statistik['selesai'] = $statistik['selesai'] + count($row['status_transaksi']);
+                }
+                $penjualan = $penjualan + ($row['total_harga'] + $row['total_ongkir']);
+                $produk = $produk + $row['jumlah_produk'];
+            }
+            $stat_penjualan = [3200, 1800, 4305, 3022, 6310, 5120, 1200, 2000, 1000, 6154, 2000, 6154];
+            $statistik['total'] = count($transaksi);
+            $data = [
+                "transaksi" => $transaksi,
+                "statistik" => $statistik,
+                "penjualan" => $penjualan,
+                "produk"    => $produk,
+                "statistik_penjualan" => $stat_penjualan
+            ];
+            // die(json_encode($data));
+            $this->load->view('admin/pages/dashboard',$data);
         } else {
             redirect('admin/home/login');
         }

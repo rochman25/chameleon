@@ -13,7 +13,7 @@ class Transaksi extends MY_Controller{
         if($this->adminIsLoggedIn()){
             $transaksi = $this->transaksi->get_transaksi();
             $data = [
-                "transaksi" => $transaksi
+                "transaksi" => $transaksi,
             ];
             $this->load->view('admin/pages/transaksi/list_transaksi',$data);
         }else{
@@ -108,6 +108,14 @@ class Transaksi extends MY_Controller{
             }else{
                 $this->load->view('admin/pages/laporan');
             }
+        }else{
+            redirect('admin/home/login');
+        }
+    }
+
+    public function export(){
+        if($this->adminIsLoggedIn()){
+            
         }else{
             redirect('admin/home/login');
         }

@@ -63,7 +63,9 @@
                                                             <td><?= $row['waktu_transaksi'] ?></td>
                                                             <td><?= $row['status_transaksi'] ?></td>
                                                             <td>
-                                                                <a href="#" class="btn btn-info" data-id="<?= $row['id_transaksi'] ?>">Detail</a>
+                                                                <button class="btn btn-primary btn-icon icon-left" id="btnProses" data-target="#proses_modal" data-toggle="modal" data-id="<?= $row['id_transaksi'] ?>"><i class="fas fa-credit-card"></i> Proses</button>
+                                                                <button class="btn btn-danger btn-icon icon-left" id="btnBatal" data-target="#batal_modal" data-toggle="modal" data-id="<?= $row['id_transaksi'] ?>"><i class="fas fa-times"></i> Batalkan</button>
+                                                                <!-- <a href="#" class="btn btn-info" data-id="<?= $row['id_transaksi'] ?>">Detail</a> -->
                                                                 <!-- <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_transaksi'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button> -->
                                                             </td>
                                                         </tr>
@@ -79,25 +81,41 @@
             </div>
 
             <!-- modal hapus -->
-            <div class="modal fade" tabindex="-1" role="dialog" id="hapusModal">
+            <!-- modal proses -->
+            <div class="modal fade" tabindex="-1" role="dialog" id="proses_modal">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Hapus Transaksi</h5>
+                            <h5 class="modal-title">Proses Transaksi</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="<?= base_url() ?>admin/transaksi/hapus" method="POST">
+                        <form action="<?= base_url() ?>admin/transaksi/update" method="POST">
                             <div class="modal-body">
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-12">
+                                            <label>Status Transaksi</label>
                                             <div class="input-group">
-                                                <input type="hidden" class="form-control" id="id_hapus" name="id" required>
-                                                <p>
-                                                    <h6>Apakah anda yakin menghapus data ini?</h6>
-                                                </p>
+                                                <select id="status" name="status" class="form-control" required>
+                                                    <option>Pilih Status Transaksi</option>
+                                                    <option value="proses">Proses</option>
+                                                    <option value="kirim">Kirim</option>
+                                                    <!-- <option value="selesai">Selesai</option> -->
+                                                </select>
+                                                <!-- <input type="text" class="form-control" placeholder="Nama Kategori" name="nama" required> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <label>Nomor Resi</label>
+                                            <div class="input-group">
+                                                <input type="text" id="noresi" class="form-control" placeholder="Nomor Resi" name="noresi">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="input-group">
+                                                <input type="hidden" class="form-control" id="id_proses" name="id" required>
                                             </div>
                                         </div>
                                     </div>
@@ -105,7 +123,7 @@
                             </div>
                             <div class="modal-footer bg-whitesmoke br">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <input type="submit" name="kirim" value="Ya, Hapus!" class="btn btn-danger">
+                                <input type="submit" name="kirim" value="Simpan" class="btn btn-primary">
                             </div>
                         </form>
                     </div>
@@ -113,16 +131,57 @@
             </div>
         </div>
 
+        <!-- modal batal -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="batal_modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Batalkan Transaksi</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="<?= base_url() ?>admin/transaksi/update" method="POST">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="input-group">
+                                            <input type="hidden" class="form-control" id="id_batal" name="id" required>
+                                            <input type="hidden" class="form-control" name="status" value="batal">
+                                            <p>
+                                                <h6>Apakah anda yakin membatalkan transaksi ini?</h6>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer bg-whitesmoke br">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" name="kirim" value="Ya, Batalkan!" class="btn btn-danger">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
         <!-- footer content -->
         <?php $this->load->view('admin/master/footer') ?>
     </div>
     </div>
     <?php $this->load->view('admin/assets/javascript') ?>
     <script type="text/javascript">
-        $(document).on("click", "#btnHapus", function() {
-            let id = $(this).data('id');
-            $('input[id="id_hapus"]').val(id)
-        });
+        $(document).on("click", "#btnBatal", function() {
+            let id = $(this).data("id");
+            $("#id_batal").val(id);
+        })
+
+        $(document).on("click", "#btnProses", function() {
+            let id = $(this).data("id");
+            $('#id_proses').val(id);
+        })
 
         $(document).on("click","#kode_t",function(){
             let id = $(this).data('id');
