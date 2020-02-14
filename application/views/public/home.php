@@ -140,24 +140,24 @@ $this->load->view('public/cart');
         <section class="promo">
             <h1>YOI #IndonesiaMelangkah</h1>
             <div class="owl-carousel owl-theme">
-                <a class="promo-card" href="https://www.mensrepublic.id/promo/yoi-indonesiamelangkah">
+                <a class="promo-card" href="#">
                     <img src="https://www.mensrepublic.id/assets/images/uploads/card/desktop/3-1572368332-sU3SiYJDFoEV.jpg">
                 </a>
-                <a class="promo-card" href="https://www.mensrepublic.id/promo/yoi-indonesiamelangkah">
+                <a class="promo-card" href="#">
                     <img src="https://www.mensrepublic.id/assets/images/uploads/card/desktop/4-1572368337-JvMU00W4aKhw.jpg">
                 </a>
             </div>
         </section>
         <section class="signup" style="background-image:url('https://www.mensrepublic.id/assets/images/index/logobg.png')">
             <i class="svg-icon svg_icon__home_envelope"></i>
-            <h1>Daftar untuk Email dari MR</h1>
-            <h2>Jadi yang pertama untuk mendapatkan produk terbaru dan penawaran dari Men’s Republic</h2>
-            <a href="https://www.mensrepublic.id/login" class="signup-button-wrapper">
+            <h1>Daftar Dengan Email</h1>
+            <h2>Jadi yang pertama untuk mendapatkan produk terbaru dan penawaran dari Chameleon</h2>
+            <a href="<?= base_url()?>login" class="signup-button-wrapper">
                 <div class="signup-button">hajar men</div>
                 <div class="signup-border"></div>
             </a>
         </section>
-        <?php $this->load->view('public/home-ig'); ?>
+        <?php //$this->load->view('public/home-ig'); ?>
 
     </div>
 </section>

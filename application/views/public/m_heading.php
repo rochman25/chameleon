@@ -49,11 +49,7 @@
                                         </a>
                                     </div>
                                     <ul>
-                                        <!-- <li><a href="https://www.mensrepublic.id/category/sepatu/boots">Boots</a></li>
-                                        <li><a href="https://www.mensrepublic.id/category/sepatu/sneakers">Sneakers</a></li>
-                                        <li><a href="https://www.mensrepublic.id/category/sepatu/formal">Formal</a></li>
-                                        <li><a href="https://www.mensrepublic.id/category/sepatu/sandal">Sandal</a></li>
-                                        <li><a href="https://www.mensrepublic.id/category/sepatu/casual-formal">Casual Formal</a></li> -->
+                                       
                                     </ul>
                                 </div>
                                 <div class="collection">
@@ -65,8 +61,7 @@
                                         </a>
                                     </div>
                                     <ul>
-                                        <!-- <li><a href="https://www.mensrepublic.id/category/tas/selempang">Selempang</a></li>
-                                        <li><a href="https://www.mensrepublic.id/category/tas/ransel">Ransel</a></li> -->
+     
                                     </ul>
                                 </div>
                                 <div class="collection">
@@ -78,34 +73,15 @@
                                         </a>
                                     </div>
                                     <ul>
-                                        <!-- <li><a href="https://www.mensrepublic.id/category/apparel/top">Top</a></li>
-                                        <li><a href="https://www.mensrepublic.id/category/apparel/bottom">Bottom</a></li> -->
+                                        
                                     </ul>
                                 </div>
                             </div>
                     </div>
                 </li>
-                <!-- <li>
-                    <a href="javascript:;">promo <i class="svg-icon svg_icon__header_carret_right"></i> </a>
-                    <div class="menu-lvl2 menu-promo">
-                        <div class="header">
-                            promo <i class="svg-icon svg_icon__header_carret_left"></i>
-                        </div>
-                        <ul>
-                            <li><a href="https://www.mensrepublic.id/discount">diskon men</a></li>
-                            <li><a href="https://www.mensrepublic.id/promo/buy-1-get-1">Buy 1 Get 1</a></li>
-                            <li><a href="https://www.mensrepublic.id/promo/bundling-package">Bundling Package</a></li>
-                            <li><a href="https://www.mensrepublic.id/promo/yoi-indonesiamelangkah">YOI #IndonesiaMelangkah</a></li>
-                            <li><a href="https://www.mensrepublic.id/promo/mystery-box">Mystery Box</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li><a href="https://jurnal.mensrepublic.id">jurnal</a> </li>
-                <li><a href="https://www.mensrepublic.id/most-selling">Produk Terlaris</a></li>
-                <li><a href="https://www.mensrepublic.id/newest">Produk Terbaru</a></li>
-                <li><a href="https://www.mensrepublic.id/preorder">preorder</a></li> -->
+
                 <li><a href="https://www.mensrepublic.id/order/payment/confirmation"><span>konfirmasi pembayaran</span></a></li>
-                <!-- <li><a href="https://www.womensrepublic.id">women's republic</a></li> -->
+              
             </ul>
             <a href="<?= base_url()?>keluar" class="logout">
                 <i class="svg-icon svg_icon__header_logout"></i>keluar

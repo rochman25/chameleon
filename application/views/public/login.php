@@ -33,17 +33,6 @@ $this->load->view('public/m_heading');
             <a class="forget-pass" href="#">Lupa Password ?</a>
             <input type="submit" name="kirim" value="Masuk">
         </form>
-
-        <!-- <p class="separator">atau login dengan</p>
-
-        <div class="socialmedia-login">
-            <a href="https://www.mensrepublic.id/facebook-redirect">
-                <i class="svg-icon svg_icon__facebook"></i> Facebook
-            </a>
-            <a href="https://www.mensrepublic.id/google-redirect">
-                <i class="svg-icon svg_icon__google"></i> Google
-            </a>
-        </div> -->
     </div>
 
 </div>

@@ -2,15 +2,15 @@
 <header class="desktop">
     <div class="header-fixed">
     <div class="subheader">
-        <a href="https://www.mensrepublic.id" class="slogan">
-            #DareToStepUp
+        <a href="<?= base_url()?>" class="slogan">
+            #Chameleon
         </a>
         <ul>
-            <li><a href="https://www.mensrepublic.id/ebook">ebook</a></li>
-            <li><a href="https://www.mensrepublic.id/other/layanan/panduan-pemesanan">Panduan Pemesanan</a></li>
-            <li><a href="https://www.mensrepublic.id/other/layanan/panduan-ukuran">Panduan Ukuran</a></li>
-            <li><a href="https://www.mensrepublic.id/other/layanan/panduan-perawatan">Panduan Perawatan</a></li>
-            <li><a href="https://www.mensrepublic.id/other/layanan/panduan-retur">Panduan Retur</a></li>
+            <li><a href="#">ebook</a></li>
+            <li><a href="#">Panduan Pemesanan</a></li>
+            <li><a href="#">Panduan Ukuran</a></li>
+            <li><a href="#">Panduan Perawatan</a></li>
+            <li><a href="#">Panduan Retur</a></li>
         </ul>
     </div>
     <div class="mainheader">
@@ -31,11 +31,6 @@
                                 </a>
                             </div>
                             <ul>
-                                <!-- <li><a href="https://www.mensrepublic.id/category/sepatu/boots">Boots</a></li> -->
-                                <!-- <li><a href="https://www.mensrepublic.id/category/sepatu/sneakers">Sneakers</a></li> -->
-                                <!-- <li><a href="https://www.mensrepublic.id/category/sepatu/formal">Formal</a></li> -->
-                                <!-- <li><a href="https://www.mensrepublic.id/category/sepatu/sandal">Sandal</a></li> -->
-                                <!-- <li><a href="https://www.mensrepublic.id/category/sepatu/casual-formal">Casual Formal</a></li> -->
                             </ul>
                         </div>
                         <div class="collections">
@@ -47,8 +42,6 @@
                                 </a>
                             </div>
                                 <ul>
-                                    <!-- <li><a href="https://www.mensrepublic.id/category/tas/selempang">Selempang</a></li> -->
-                                    <!-- <li><a href="https://www.mensrepublic.id/category/tas/ransel">Ransel</a></li> -->
                                 </ul>
                             </div>
                             <div class="collections">
@@ -60,79 +53,16 @@
                                     </a>
                                 </div>
                                 <ul>
-                                    <!-- <li><a href="https://www.mensrepublic.id/category/apparel/top">Top</a></li> -->
-                                    <!-- <li><a href="https://www.mensrepublic.id/category/apparel/bottom">Bottom</a></li> -->
                                 </ul>
                             </div>
                             <div class="right-collection">
                             <ul>
-                                <!-- <li><a href="https://www.mensrepublic.id/most-selling">Produk Terlaris</a></li> -->
-                                <!-- <li><a href="https://www.mensrepublic.id/newest">Produk Terbaru</a></li> -->
                             </ul>
                         </div>
                     </div>
                 </div>
             </li>
-            <!-- <li>
-                <a href="">promo</a>
-                <div class="dropdown dropdown-collection">
-                    <div class="dropdown-wrapper">
-                        <div class="promos">
-                                <a href="https://www.mensrepublic.id/promo/buy-1-get-1">
-                                    <div class="gradient"></div>
-                                    <img src="https://www.mensrepublic.id/assets/images/index/nav/thumb/18e124d9-bce0-8a65-906a-c5ae70131203.jpeg" alt="Buy 1 Get 1">
-                                    <h2>Buy 1 Get 1</h2>
-                                </a>
-                            </div>
-                        <div class="promos">
-                                <a href="https://www.mensrepublic.id/promo/bundling-package">
-                                    <div class="gradient"></div>
-                                    <img src="https://www.mensrepublic.id/assets/images/index/nav/thumb/1bda05ae-d21e-de11-6cc1-b908bbde202b.jpg" alt="Bundling Package">
-                                    <h2>Bundling Package</h2>
-                                </a>
-                            </div>
-                        <div class="promos">
-                                <a href="https://www.mensrepublic.id/promo/yoi-indonesiamelangkah">
-                                    <div class="gradient"></div>
-                                    <img src="https://www.mensrepublic.id/assets/images/index/nav/thumb/baada2cf-038b-9dde-748d-c2d144eea34b.jpg" alt="YOI #IndonesiaMelangkah">
-                                    <h2>YOI #IndonesiaMelangkah</h2>
-                                </a>
-                            </div>
-                        <div class="promos">
-                                <a href="https://www.mensrepublic.id/promo/mystery-box">
-                                    <div class="gradient"></div>
-                                    <img src="https://www.mensrepublic.id/assets/images/index/nav/thumb/e8f75d63-4136-482e-7bf9-91fba725a32c.jpg" alt="Mystery Box">
-                                    <h2>Mystery Box</h2>
-                                </a>
-                            </div>
-                        <div class="promos">
-                            <a href="https://www.mensrepublic.id/discount">
-                                <div class="gradient"></div>
-                                <img src="https://www.mensrepublic.id/assets/images/index/nav/diskon-nav.jpg" alt="">
-                                <h2>diskon men</h2>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <a href="">jurnal</a>
-                <div class="dropdown dropdown-collection dropdown-article">
-                    <div class="dropdown-wrapper">
-                        <div class="article">
-                            <a href="https://jurnal.mensrepublic.id/detail/pria-botak-terlihat-lebih-sukses-cerdas-dan-maskulin">
-                                <img src="https://jurnal.mensrepublic.id/assets/images/uploads/jurnal/post/thumb/pria-botak-terlihat-lebih-sukses-cerdas-dan-maskulin.jpg">
-                                    <div>
-                                    Lifestyle -
-                                    </div>
-                                    <h2>Pria Botak Terlihat Lebih Sukses, Cerdas dan Maskulin</h2>
-                                </a>
-                        </div>
-                    </div>
-                </div>
-            </li> -->
             <li><a href="#"><span>konfirmasi pembayaran</span></a></li>
-            <!-- <li><a href="https://www.womensrepublic.id" target="_blank">women's republic</a></li> -->
         </ul>
         <div class="header-right">
             <div class="icon-right icon-login">
