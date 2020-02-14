@@ -51,10 +51,13 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-2">
+                                                <div class="col-lg-4">
                                                     <div class="form-group">
                                                         <!-- <label></label> -->
                                                         <input type="submit" name="kirim" value="Tampilkan" class="btn btn-info">
+                                                        <?php if (!empty($transaksi)) { ?>
+                                                            <a href="#" class="btn btn-success"><i class="fa fa-file-excel"></i> Export Excel</a>
+                                                        <?php } ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -107,9 +110,9 @@
 <script type="text/javascript">
     $('.daterange-cus').daterangepicker({
         locale: {
-            format: 'YYYY-MM-DD'
+            format: 'YYYY/MM/DD'
         },
-        drops: 'down',
+        drops: 'up',
         opens: 'right'
     });
 </script>

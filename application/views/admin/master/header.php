@@ -173,12 +173,12 @@
                 <a href="<?= base_url() ?>admin/produk" class="nav-link"><i class="fas fa-boxes"></i><span>Produk</span></a>
             </li>
             <li class="menu-header">Transaksi</li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="<?= base_url() ?>admin/transaksi/pembayaran" class="nav-link"><i class="fas fa-shopping-bag"></i><span>Pembayaran</span></a>
             </li>
             <li class="nav-item">
                 <a href="<?= base_url() ?>admin/transaksi/pengiriman" class="nav-link"><i class="fas fa-paper-plane"></i><span>Pengiriman</span></a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a href="<?= base_url() ?>admin/transaksi" class="nav-link"><i class="fas fa-shopping-cart"></i><span>Transaksi</span></a>
             </li>
@@ -196,7 +196,7 @@
             <?php } ?>
             <li class="menu-header">Report</li>
             <li class="nav-item">
-                <a href="#" class="nav-link"><i class="fas fa-file"></i><span>Laporan Penjualan</span></a>
+                <a href="<?=base_url()?>admin/transaksi/laporan" class="nav-link"><i class="fas fa-file"></i><span>Laporan Penjualan</span></a>
             </li>
         </ul>
     </aside>
