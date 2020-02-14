@@ -131,13 +131,69 @@ class Home extends MY_Controller{
         }
        
     }
-    public function update_cart(){
+    public function get_cart(){
         if (!$this->userIsLoggedIn()) {
             echo json_encode(array(
                 "status"=> "unsuccess",
                 "success"=>false,
                 "id_cart" => "",
                 "message" => "Kam belum masuk",
+                "element" => '',
+            ));
+        } else {
+            $datafull = array();
+            $thumbnail = array();
+            $datacart = $this->cart_item->order_by("id_detail_item_cart", "ASC");
+            $datacart = $this->cart_item->getJoin("cart_item","cart_item.id_cart=detail_cart_item.id_cart","inner");
+            $datacart = $this->cart_item->getJoin("produk","produk.id_produk=detail_cart_item.id_produk","inner");
+            $datacart = $this->cart_item->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
+            $datacart = $this->cart_item->getWhere("cart_item.id_cart","Invoice-202002140634-002");
+            $datacart = $this->cart_item->getData()->result();
+            foreach($datacart as $d){
+                $foto = explode(',', $d->thumbnail_produk);
+                foreach($foto as $f){
+                    $thumbnail[] = $f;
+                }
+                $d = array(
+                    "id_cart"=>$d->id_cart,
+                    "nama_produk"=>$d->nama_produk,
+                    "qty"=>$d->quantity,
+                    "harga"=>$d->harga_produk,
+                    "kategori"=>$d->nama_kategori,
+                    "thumb" => $thumbnail,
+                    "element" => '<div class="cart-list" id="cart_list_39223">
+                    <a href="#">
+                        <img src="'.base_url().'assets/uploads/thumbnail_produk/'.$thumbnail[0].'">
+                        <div class="content">
+                            <div class="name">'.$d->nama_produk.'</div>
+                            <div class="discount">
+                                <span class="price-old">Rp 429,000</span> &nbsp;
+                                <span style="color:red">-30%</span>
+                            </div>
+                            <div class="real">Rp 300,000</div>
+                                <div class="content-detail">
+                                    Jumlah : <strong class="cart-quantity">'.$d->quantity.' </strong> /
+                                    Ukuran : <strong>39 </strong>
+                                </div>
+                        </div>
+                    </a>
+                    <a class="delete-cart" data-id="39223" href="#">
+                        <i class="svg_icon__header_garbage svg-icon"></i>
+                    </a>
+                </div>'
+                );
+                 array_push($datafull,$d);
+            }
+            echo json_encode($datafull);
+        }
+    }
+    public function update_cart(){
+        if (!$this->userIsLoggedIn()) {
+            echo json_encode(array(
+                "status"=> "unsuccess",
+                "success"=>false,
+                "id_cart" => "",
+                "message" => "Kamu belum masuk",
                 "element" => '',
             ));
         } else {

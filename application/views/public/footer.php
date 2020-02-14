@@ -69,9 +69,6 @@
 </footer>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-<script src="<?= base_url()?>assets/public/js/all.js"></script>
-<script src="<?= base_url()?>assets/public/js/cart.js"></script>
 
 <script type="text/javascript">
 	$(window).on('load',function(){

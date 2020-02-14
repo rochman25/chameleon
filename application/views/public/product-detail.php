@@ -51,16 +51,16 @@ $this->load->view('public/cart');
                         <span>Ukuran :</span>
                         <div id="size" class="size-product">
                             <ul class="clearfix">
-                                    <li data-value="1" data-productdetailid="38840" class="size active ">
+                                    <li data-value="S" data-productdetailid="38840" class="size active ">
                                         <span data-size="39" data-stock="2">S</span>
                                     </li>
-                                    <li data-value="2" data-productdetailid="38841" class="size  ">
+                                    <li data-value="M" data-productdetailid="38841" class="size  ">
                                         <span data-size="40" data-stock="1">M</span>
                                     </li>
-                                    <li data-value="3" data-productdetailid="38842" class="size  ">
+                                    <li data-value="X" data-productdetailid="38842" class="size  ">
                                         <span data-size="41" data-stock="3">X</span>
                                     </li>
-                                    <li data-value="4" data-productdetailid="38843" class="size  ">
+                                    <li data-value="XL" data-productdetailid="38843" class="size  ">
                                         <span data-size="42" data-stock="11">XL</span>
                                     </li>
                                     <div class="label-size">
@@ -167,8 +167,7 @@ $this->load->view('public/cart');
 <?php 
 $this->load->view('public/footer');
 ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-<script src="<?= base_url()?>assets/public/js/all.js"></script>
+
 
 <script type="text/javascript">
 	$(window).on('load',function(){

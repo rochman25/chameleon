@@ -8,8 +8,8 @@
 				$id = $his->session->userdata['user_data']['id'];
 				if(isset($his->session->userdata[$id])){
 					?>
-						<div class="cart-wrapper" data-cart-id="<?= $this->session->userdata[$id]["current_cart"];?>">
-			
+						<div class="cart-wrapper" id="cart" data-cart-id="<?= $this->session->userdata[$id]["current_cart"];?>">
+							
 						</div>
 					<?php
 				}
@@ -31,3 +31,36 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		var id_cart =   $("#cart").data("cart-id");
+		var base_url = '<?= base_url()?>';
+            $.get({
+                url: base_url + "user/Home/get_cart",
+                type: "GET",
+            }).done(function (t) {
+                var res = JSON.parse(t);
+				console.log(res.length);
+			if (res.length >=0) {
+				res.forEach(myFunction);
+
+					function myFunction(item, index) {
+  						console.log(item);
+  						$(".cart-wrapper").append(item.element);
+						
+						var notif = res.length;
+						$(".icon-cart").find(".notif").html(notif);
+						console.log(notif);
+					}
+				}else{
+
+				} 
+                
+            }).fail(function (t) {
+                console.log(t)
+                  // location.reload()
+            })
+        
+    })
+</script>

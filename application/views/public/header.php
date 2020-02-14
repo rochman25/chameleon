@@ -5,7 +5,7 @@
 	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 	<meta charset="UTF-8">
 	<meta name="title" content="Chaeleon | #Clotch">
-	<meta name="description" content="Chameleonp">
+	<meta name="description" content="Chameleons">
 	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800|Open+Sans|Work+Sans" rel="stylesheet">
     <meta property="fb:pages" content="" />
     <meta name="google-site-verification" content="YRtB-WBotW8z2AMh6hLyCgAjgQRundXTa1bC2AdzPxQ" />
@@ -17,6 +17,9 @@
 	<link rel="stylesheet"  href="<?= base_url()?>assets/public/css/jqueryuimin.css" >
 	<link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/public/css/all.css">
 	<link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/public/css/master.css?id=9e0f65abec8cb3ae96f8">		
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<script src="<?= base_url()?>assets/public/js/all.js"></script>
+<script src="<?= base_url()?>assets/public/js/cart.js"></script>
 	<!-- Facebook Pixel Code -->
 	<noscript>
 		<!-- <img height="1" width="1" style="display:none"
