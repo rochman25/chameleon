@@ -47,7 +47,8 @@
                                                                     <i class="fas fa-calendar"></i>
                                                                 </div>
                                                             </div>
-                                                            <input type="text" name="tgl" class="form-control daterange-cus">
+                                                            <input type="text" name="tgl" class="form-control daterange-cus" value="<?php if (!empty($tgl)) {
+                                                                                                                                        echo $tgl;} ?>" <?php if(!empty($tgl)){ ?> disabled="disabled" <?php } ?> >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -56,7 +57,7 @@
                                                         <!-- <label></label> -->
                                                         <input type="submit" name="kirim" value="Tampilkan" class="btn btn-info">
                                                         <?php if (!empty($transaksi)) { ?>
-                                                            <a href="#" class="btn btn-success"><i class="fa fa-file-excel"></i> Export Excel</a>
+                                                            <input type="submit" name="export" class="btn btn-success" value="Export Excel">
                                                         <?php } ?>
                                                     </div>
                                                 </div>
