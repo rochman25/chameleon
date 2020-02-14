@@ -13,7 +13,7 @@ $this->load->view('public/m_heading');
 $this->load->view('public/cart');
 ?>
 <section id="content">
-    <div id="product" data-product-id="<?= $produk->id_produk;?>">
+    <div id="product" data-product-nama="<?= $produk->nama_produk;?>" data-product-id="<?= $produk->id_produk;?>">
         <div class="container">
             <div class="row">  
                 <div class="col-lg-5 col-md-5 gallery-container" data-image-count="7">
@@ -203,31 +203,35 @@ $(document).ready(function () {
             //     };
             //     i.push(o)
             // }), 0 == n && 
-            var id_cart = $("#product").data("product-id");
+            var id_prod = $("#product").data("product-id");
+            var nama_barang = $("#product").data("product-nama");
             $.ajax({
                 url: base_url + "user/Home/add_cart",
                 type: "POST",
                 data: {
-                    id_cart: id_cart,
                     id_pengguna: '<?= $this->session->userdata['user_data']['id']?>',
+                    id_produk: id_prod,
+                    qty : 1,
+                    nama_barang : nama_barang
                 }
             }).done(function (t) {
                 var res = JSON.parse(t);
                // console.log(t);
-                // if ("true" === t.success) {
+                 if (true == res.success) {
                 //     if ("new" === t.condition) {
-                //         $(".cart-wrapper").append(t.element);
-                //         var i = parseInt($(".icon-cart").find(".notif").html());
-                //         $(".icon-cart").find(".notif").html(i + 1)
+                         $(".cart-wrapper").append(res.element);
+                         var i = parseInt($(".icon-cart").find(".notif").html());
+                         $(".icon-cart").find(".notif").html(i + 1)
                 //     } else "update" === t.condition && (e && location.reload(),
                 //         $("#cart_list_" + t.data.product_detail_id).find(".cart-quantity").html(t.data.quantity));
                 //     $(".total_sum").html(t.total_price),
-                //         $(".menu-cart").addClass("open"),
-                //         $(".overlay-desktop").addClass("active")
+                         $(".menu-cart").addClass("open"),
+                         $(".overlay-desktop").addClass("active")
 
-                // } else
+                 } 
+                 //else
                 //     alert(t.message), location.reload()
-                console.log(res);
+                //console.log(res);
 
             }).fail(function (t) {
                 console.log(t)

@@ -8,6 +8,7 @@ class Home extends MY_Controller{
         $this->load->model('Pengguna_model', 'user');
         $this->load->model('Kategori_model', 'kategori');
         $this->load->model('Cart_model', 'cart');
+        $this->load->model('Detailcart_model', 'cart_item');
         $this->load->library('bcrypt');
         $this->load->library('form_validation');
     }
@@ -63,25 +64,24 @@ class Home extends MY_Controller{
             
         }
 
-            //die(json_encode($data));
         $this->load->view('public/product',$data);
     }
     public function produk_detail(){
+        //die(json_encode($this->session->userdata("c72e6711-4ea1-11ea-9a04-e03f4931b17e")));
         $id_produk = $this->input->get('produk');
       
         $thumbnail = array();
             $data['produk'] = $this->produk->getWhere("id_produk", $id_produk);
             $data['produk'] = $this->produk->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
             $data['produk'] = $this->produk->getData()->row();
-          //  die(json_encode($data));
-          //  foreach ($data['produk'] as $row) {
+    
                 $foto = explode(',', $data['produk']->thumbnail_produk);
                 foreach($foto as $f){
                     $thumbnail[] = $f;
                 }
-            //}
+   
             $data['thumbnail'] = $thumbnail;
-         // die(json_encode($data));
+
         $this->load->view('public/product-detail',$data);
     }
     public function login(){
@@ -95,7 +95,6 @@ class Home extends MY_Controller{
                     'email'=>$email
                 );
                 $cek = $this->user->login($where)->row();
-           //     die(json_encode($cek));
                 if ($cek != null) {
                     if ($this->bcrypt->check_password($pass, $cek->password)) {
                     //  if ($cek->password == $pass) {
@@ -132,31 +131,50 @@ class Home extends MY_Controller{
         }
        
     }
-    public function add_cart(){
-        $idc = $this->input->post('id_cart');
-        $idp = $this->input->post('id_pengguna');
-
-        $data = array(
-            "id_cart" => $idc,
-            "id_pengguna" => $idp,
-            "created_at" => date("Y-m-d H:i:s"),
-        );
-        $simpan = $this->cart->insert($data);
-        if($simpan){
+    public function update_cart(){
+        if (!$this->userIsLoggedIn()) {
             echo json_encode(array(
+                "status"=> "unsuccess",
+                "success"=>false,
+                "id_cart" => "",
+                "message" => "Kam belum masuk",
+                "element" => '',
+            ));
+        } else {
+            $idc = $this->input->post('id_cart');
+            $idp = $this->input->post('id_pengguna');
+            $id_produk = $this->input->post('id_produk');
+            $qty = $this->input->post('qty');
+            $nama_barang = $this->input->post('nama_barang');
+            $data_item = array(
+                "id_cart" => $idc,
+                "id_produk" => $id_produk,
+                "quantity" => $qty
+            );
+
+            $simpan_item = $this->cart_item->insert($data_item);
+            if($simpan_item){
+                $session_cart = array(
+                    "current_cart" => $idc,
+                    "created_at" => date("Y-m-d H:i:s")
+                );
+                $this->session->set_userdata($idp, $session_cart);
+                echo json_encode(array(
                 "status"=> "success",
+                "success"=>true,
+                "id_cart" => $idc,
                 "element" => '<div class="cart-list" id="cart_list_39223">
     			<a href="#">
         			<img src="#">
         			<div class="content">
-            			<div class="name">Vale - Grey Brown</div>
+            			<div class="name">'.$nama_barang.'</div>
                         <div class="discount">
                     		<span class="price-old">Rp 429,000</span> &nbsp;
                     		<span style="color:red">-30%</span>
                 		</div>
             			<div class="real">Rp 300,000</div>
                             <div class="content-detail">
-                    			Jumlah : <strong class="cart-quantity">2 </strong> /
+                    			Jumlah : <strong class="cart-quantity">'.$qty.' </strong> /
                     			Ukuran : <strong>39 </strong>
                 			</div>
         			</div>
@@ -166,9 +184,92 @@ class Home extends MY_Controller{
     			</a>
 			</div>',
             ));
-        }else{
-            echo json_encode(array("status"=> "failed"));
+            }else{
+
+            }
         }
+    }
+    public function add_cart(){
+        if (!$this->userIsLoggedIn()) {
+            echo json_encode(array(
+                "status"=> "unsuccess",
+                "success"=>false,
+                "id_cart" => "",
+                "message" => "Kam belum masuk",
+                "element" => '',
+            ));
+        } else {
+         $idc = $this->cart->generateKode();//$this->input->post('id_cart');
+         $idp = $this->input->post('id_pengguna');
+         $id_produk = $this->input->post('id_produk');
+         $qty = $this->input->post('qty');
+         $nama_barang = $this->input->post('nama_barang');
+
+
+        $data = array(
+            "id_cart" => $idc,
+            "id_pengguna" => $idp,
+            "created_at" => date("Y-m-d H:i:s"),
+        );
+        $data_item = array(
+            "id_cart" => $idc,
+            "id_produk" => $id_produk,
+            "quantity" => $qty
+        );
+
+
+        $simpan = $this->cart->insert($data);
+        if($simpan){
+            $simpan_item = $this->cart_item->insert($data_item);
+            if($simpan_item){
+                $session_cart = array(
+                    "current_cart" => $idc,
+                    "created_at" => date("Y-m-d H:i:s")
+                );
+                $this->session->set_userdata($idp, $session_cart);
+            echo json_encode(array(
+                "status"=> "success",
+                "success"=>true,
+                "id_cart" => $idc,
+                "element" => '<div class="cart-list" id="cart_list_39223">
+    			<a href="#">
+        			<img src="#">
+        			<div class="content">
+            			<div class="name">'.$nama_barang.'</div>
+                        <div class="discount">
+                    		<span class="price-old">Rp 429,000</span> &nbsp;
+                    		<span style="color:red">-30%</span>
+                		</div>
+            			<div class="real">Rp 300,000</div>
+                            <div class="content-detail">
+                    			Jumlah : <strong class="cart-quantity">'.$qty.' </strong> /
+                    			Ukuran : <strong>39 </strong>
+                			</div>
+        			</div>
+    			</a>
+    			<a class="delete-cart" data-id="39223" href="#">
+        			<i class="svg_icon__header_garbage svg-icon"></i>
+    			</a>
+			</div>',
+            ));
+            }else{
+                echo json_encode(array(
+                    "status"=> "unsuccess",
+                    "success"=>false,
+                    "id_cart" => $idc,
+                    "message" => "berhasil diinput tapi gagall input item",
+                    "element" => '',
+                ));
+            }
+        }else{
+            echo json_encode(array(
+                "status"=> "unsuccess",
+            "success"=>false,
+            "id_cart" => "",
+            "message" => "berhasil diinput tapi gagall input item",
+            "element" => '',));
+        }
+    }
 
     }
     public function register(){
