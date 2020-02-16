@@ -182,24 +182,21 @@ class Home extends MY_Controller{
                
                 $harga = $harga + $d->harga_produk;
                 $d = array(
-                    "id_cart"=>$d->id_cart,
+                    "id_cart" => $d->id_cart,
                     "nama_produk"=>$d->nama_produk,
                     "qty"=>$d->quantity,
                     "harga"=>$d->harga_produk,
                     "kategori"=>$d->nama_kategori,
                     "thumb" => $thumbnail,
-                    "element" => '<div class="cart-list" id="cart_list_39223">
+                    "element" => '<div class="cart-list" >
                     <a href="#">
                         <img src="'.base_url().'assets/uploads/thumbnail_produk/'.$thumbnail[0].'">
                         <div class="content">
                             <div class="name">'.$d->nama_produk.'</div>
-                            <div class="discount">
-                                <span class="price-old">Rp 429,000</span> &nbsp;
-                                <span style="color:red">-30%</span>
-                            </div>
-                            <div class="real">Rp 300,000</div>
+              
+                            <div class="real">Rp '.$d->harga_produk.'</div>
                                 <div class="content-detail">
-                                    Jumlah : <strong class="cart-quantity">'.$d->quantity.' </strong> /
+                                    Jumlah : <strong class="cart-quantity">'.$d->quantity.' </strong> 
                                 
                                 </div>
                         </div>
@@ -210,6 +207,7 @@ class Home extends MY_Controller{
                 </div>'
                 );
                  array_push($datafull,$d);
+                 $thumbnail = [];
             }
             
             echo json_encode(array("data"=>$datafull,"total"=>$harga));
@@ -225,7 +223,90 @@ class Home extends MY_Controller{
                 "element" => '',
             ));
         } else {
+            
+        }
+    }
+    public function add_cart(){
+        if (!$this->userIsLoggedIn()) {
+            echo json_encode(array(
+                "status"=> "unsuccess",
+                "success"=>false,
+                "id_cart" => "",
+                "message" => "Kam belum masuk",
+                "element" => '',
+            ));
+        } else {
             $idc = $this->input->post('id_cart');
+        //$this->input->post('id_cart');
+         $idp = $this->input->post('id_pengguna');
+         $id_produk = $this->input->post('id_produk');
+         $qty = $this->input->post('qty');
+         $size = $this->input->post('size');
+         $nama_barang = $this->input->post('nama_barang');
+        if($idc== "" || empty($idc) || $idc == null){
+            $idc = $this->cart->generateKode();
+            $data = array(
+                "id_cart" => $idc,
+                "id_pengguna" => $idp,
+                "created_at" => date("Y-m-d H:i:s"),
+            );
+            $data_item = array(
+                "id_cart" => $idc,
+                "id_produk" => $id_produk,
+                "quantity" => $qty
+            );
+            $simpan = $this->cart->insert($data);
+            if($simpan){
+                $simpan_item = $this->cart_item->insert($data_item);
+                if($simpan_item){
+                    $session_cart = array(
+                        "current_cart" => $idc,
+                        "created_at" => date("Y-m-d H:i:s")
+                    );
+                    $this->session->set_userdata($idp, $session_cart);
+                echo json_encode(array(
+                    "status"=> "success",
+                    "success"=>true,
+                    "id_cart" => $idc,
+                    "element" => '<div class="cart-list" id="cart_list_39223">
+                    <a href="#">
+                        <img src="#">
+                        <div class="content">
+                            <div class="name">'.$nama_barang.'</div>
+                            <div class="discount">
+                                <span class="price-old">Rp 429,000</span> &nbsp;
+                                <span style="color:red">-30%</span>
+                            </div>
+                            <div class="real">Rp 300,000</div>
+                                <div class="content-detail">
+                                    Jumlah : <strong class="cart-quantity">'.$qty.' </strong> 
+                                </div>
+                        </div>
+                    </a>
+                    <a class="delete-cart" data-id="39223" href="#">
+                        <i class="svg_icon__header_garbage svg-icon"></i>
+                    </a>
+                </div>',
+                ));
+                }else{
+                    echo json_encode(array(
+                        "status"=> "unsuccess",
+                        "success"=>false,
+                        "id_cart" => $idc,
+                        "message" => "berhasil diinput tapi gagall input item",
+                        "element" => '',
+                    ));
+                }
+            }else{
+                echo json_encode(array(
+                    "status"=> "unsuccess",
+                "success"=>false,
+                "id_cart" => "",
+                "message" => "berhasil diinput tapi gagall input item",
+                "element" => '',));
+            }
+        }else{
+            
             $idp = $this->input->post('id_pengguna');
             $id_produk = $this->input->post('id_produk');
             $qty = $this->input->post('qty');
@@ -248,7 +329,7 @@ class Home extends MY_Controller{
                 "status"=> "success",
                 "success"=>true,
                 "id_cart" => $idc,
-                "element" => '<div class="cart-list" id="cart_list_39223">
+                "element" => '<div class="cart-list" ">
     			<a href="#">
         			<img src="'.base_url().'assets/uploads/thumbnail_produk/'.$img.'">
         			<div class="content">
@@ -269,93 +350,15 @@ class Home extends MY_Controller{
 			</div>',
             ));
             }else{
-
-            }
-        }
-    }
-    public function add_cart(){
-        if (!$this->userIsLoggedIn()) {
-            echo json_encode(array(
-                "status"=> "unsuccess",
-                "success"=>false,
-                "id_cart" => "",
-                "message" => "Kam belum masuk",
-                "element" => '',
-            ));
-        } else {
-         $idc = $this->cart->generateKode();//$this->input->post('id_cart');
-         $idp = $this->input->post('id_pengguna');
-         $id_produk = $this->input->post('id_produk');
-         $qty = $this->input->post('qty');
-         $size = $this->input->post('size');
-         $nama_barang = $this->input->post('nama_barang');
-
-
-        $data = array(
-            "id_cart" => $idc,
-            "id_pengguna" => $idp,
-            "created_at" => date("Y-m-d H:i:s"),
-        );
-        $data_item = array(
-            "id_cart" => $idc,
-            "id_produk" => $id_produk,
-            "quantity" => $qty
-        );
-
-
-        $simpan = $this->cart->insert($data);
-        if($simpan){
-            $simpan_item = $this->cart_item->insert($data_item);
-            if($simpan_item){
-                $session_cart = array(
-                    "current_cart" => $idc,
-                    "created_at" => date("Y-m-d H:i:s")
-                );
-                $this->session->set_userdata($idp, $session_cart);
-            echo json_encode(array(
-                "status"=> "success",
-                "success"=>true,
-                "id_cart" => $idc,
-                "element" => '<div class="cart-list" id="cart_list_39223">
-    			<a href="#">
-        			<img src="#">
-        			<div class="content">
-            			<div class="name">'.$nama_barang.'</div>
-                        <div class="discount">
-                    		<span class="price-old">Rp 429,000</span> &nbsp;
-                    		<span style="color:red">-30%</span>
-                		</div>
-            			<div class="real">Rp 300,000</div>
-                            <div class="content-detail">
-                    			Jumlah : <strong class="cart-quantity">'.$qty.' </strong> /
-                    			Ukuran : <strong>39 </strong>
-                			</div>
-        			</div>
-    			</a>
-    			<a class="delete-cart" data-id="39223" href="#">
-        			<i class="svg_icon__header_garbage svg-icon"></i>
-    			</a>
-			</div>',
-            ));
-            }else{
                 echo json_encode(array(
                     "status"=> "unsuccess",
-                    "success"=>false,
-                    "id_cart" => $idc,
-                    "message" => "berhasil diinput tapi gagall input item",
-                    "element" => '',
-                ));
+                "success"=>false,
+                "id_cart" => "",
+                "message" => "berhasil diinput tapi gagall input item",
+                "element" => '',));
             }
-        }else{
-            echo json_encode(array(
-                "status"=> "unsuccess",
-            "success"=>false,
-            "id_cart" => "",
-            "message" => "berhasil diinput tapi gagall input item",
-            "element" => '',));
-        }
     }
-
+        }
     }
     public function register(){
         if ($this->userIsLoggedIn()) {

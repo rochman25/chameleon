@@ -176,7 +176,6 @@ $this->load->view('public/footer');
     var base_url = '<?= base_url()?>';
     var def_jml = 1;
     var def_Size = "S";
-    var img = '<?= $thumbnail[0]; ?>';
     var stok = '<?= $produk->stok_produk;?>';
     // /var size_view = 
     function ubahjml(state){
@@ -208,14 +207,16 @@ $(document).ready(function () {
                 url: base_url + "user/Home/add_cart",
                 type: "POST",
                 data: {
+                    id_cart : '<?php if (!$id_cart == null || !$id_cart == ""){
+			echo $id_cart->id_cart; }else{echo "";}?>',
                     id_pengguna: '<?php if(empty($this->session->userdata['user_data']['id'])){
                         echo "";
                     }else{
                         echo $this->session->userdata['user_data']['id'];
                     }?>',
-                    id_produk: id_prod,
+                    id_produk: '<?= $produk->id_produk;?>',
                     qty : def_jml,
-                    img:img,
+                    img:'<?= $thumbnail[0]; ?>',
                     nama_barang : nama_barang,
                 //    size : def_Ssize,
                 }
