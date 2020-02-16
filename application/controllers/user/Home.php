@@ -25,7 +25,13 @@ class Home extends MY_Controller{
                 $thumbnail[$row['id_produk']] = $foto[0];
             }
             $data['thumbnail'] = $thumbnail;
-            //die(json_encode($data));
+            if ($this->userIsLoggedIn()) {
+                $data['id_cart'] = $this->cart->getWhere("id_pengguna",$this->session->userdata['user_data']['id']);
+                $data['id_cart'] = $this->cart->getData()->row();
+            }else{
+                $data['id_cart'] = "";
+                }
+         //   die(json_encode($data));
         $this->load->view('public/home',$data);
     }
     public function produk($kategori = ""){
@@ -65,7 +71,8 @@ class Home extends MY_Controller{
 
             
         }
-
+        $data['id_cart'] = $this->cart->getWhere("id_pengguna",$this->session->userdata['user_data']['id']);
+        $data['id_cart'] = $this->cart->getData()->row()->id_cart;
         $this->load->view('public/product',$data);
     }
     public function produk_detail(){
@@ -83,7 +90,13 @@ class Home extends MY_Controller{
                 }
    
             $data['thumbnail'] = $thumbnail;
-
+            if ($this->userIsLoggedIn()) {
+                $data['id_cart'] = $this->cart->getWhere("id_pengguna",$this->session->userdata['user_data']['id']);
+                $data['id_cart'] = $this->cart->getData()->row();
+            }else{
+            $data['id_cart'] = "";
+            }
+           // die(json_encode($data));
         $this->load->view('public/product-detail',$data);
     }
     public function login(){
@@ -151,6 +164,7 @@ class Home extends MY_Controller{
                 "element" => '',
             ));
         } else {
+            
             $datafull = array();
             $thumbnail = array();
             $harga = 0;
@@ -158,7 +172,7 @@ class Home extends MY_Controller{
             $datacart = $this->cart_item->getJoin("cart_item","cart_item.id_cart=detail_cart_item.id_cart","inner");
             $datacart = $this->cart_item->getJoin("produk","produk.id_produk=detail_cart_item.id_produk","inner");
             $datacart = $this->cart_item->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
-            $datacart = $this->cart_item->getWhere("cart_item.id_cart","Invoice-202002140634-002");
+            $datacart = $this->cart_item->getWhere("cart_item.id_cart",$this->input->get('id'));
             $datacart = $this->cart_item->getData()->result();
             foreach($datacart as $d){
                 $foto = explode(',', $d->thumbnail_produk);
@@ -186,7 +200,7 @@ class Home extends MY_Controller{
                             <div class="real">Rp 300,000</div>
                                 <div class="content-detail">
                                     Jumlah : <strong class="cart-quantity">'.$d->quantity.' </strong> /
-                                    Ukuran : <strong>39 </strong>
+                                
                                 </div>
                         </div>
                     </a>
@@ -215,6 +229,7 @@ class Home extends MY_Controller{
             $idp = $this->input->post('id_pengguna');
             $id_produk = $this->input->post('id_produk');
             $qty = $this->input->post('qty');
+            $img = $this->input->post('img');
             $nama_barang = $this->input->post('nama_barang');
             $data_item = array(
                 "id_cart" => $idc,
@@ -235,7 +250,7 @@ class Home extends MY_Controller{
                 "id_cart" => $idc,
                 "element" => '<div class="cart-list" id="cart_list_39223">
     			<a href="#">
-        			<img src="#">
+        			<img src="'.base_url().'assets/uploads/thumbnail_produk/'.$img.'">
         			<div class="content">
             			<div class="name">'.$nama_barang.'</div>
                         <div class="discount">
@@ -245,7 +260,6 @@ class Home extends MY_Controller{
             			<div class="real">Rp 300,000</div>
                             <div class="content-detail">
                     			Jumlah : <strong class="cart-quantity">'.$qty.' </strong> /
-                    			Ukuran : <strong>39 </strong>
                 			</div>
         			</div>
     			</a>
@@ -273,6 +287,7 @@ class Home extends MY_Controller{
          $idp = $this->input->post('id_pengguna');
          $id_produk = $this->input->post('id_produk');
          $qty = $this->input->post('qty');
+         $size = $this->input->post('size');
          $nama_barang = $this->input->post('nama_barang');
 
 
@@ -399,7 +414,8 @@ class Home extends MY_Controller{
                 }
                 // die(json_encode($data));
             }else{
-                $this->load->view('public/login');
+
+                $this->load->view('public/login',$data);
             }
         }
     }

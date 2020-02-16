@@ -34,36 +34,40 @@
 
 <script type="text/javascript">
 	$(document).ready(function () {
-		var id_cart =   $("#cart").data("cart-id");
+		
+		//var id_cart =   $("#cart").data("cart-id");
 		var base_url = '<?= base_url()?>';
             $.get({
-                url: base_url + "user/Home/get_cart",
+                url: base_url + "user/Home/get_cart?id=<?php if (!$id_cart == null || !$id_cart == ""){
+			echo $id_cart->id_cart; }else{echo "";}?>",
                 type: "GET",
             }).done(function (t) {
                 var res = JSON.parse(t);
 				
-	
-			if (res.data.length >=0) {
-				var harga = 0;
-				var notif = res.data.length;
-				console.log("ini"+notif);
-				res.data.forEach(myFunction);
-					function myFunction(item, index) {
-  						console.log(item);
-  						$(".cart-wrapper").append(item.element);
+				console.log(res);
+			//	if(res.success){
+					if (res.data.length >=0) {
+						var harga = 0;
+						var notif = res.data.length;
+						console.log("ini"+notif);
+						res.data.forEach(myFunction);
+							function myFunction(item, index) {
+  							console.log(item);
+  							$(".cart-wrapper").append(item.element);
+								
+							$(".icon-cart").find(".notif").html(notif);
+							$("#totalharga").html("Rp "+res.total);
 						
-						$(".icon-cart").find(".notif").html(notif);
-						$("#totalharga").html("Rp "+res.total);
-						
-					}
-				}else{
+						}
+				// }else{
 
-				} 
+				// } 
+			}
                 
             }).fail(function (t) {
                 console.log(t)
                   // location.reload()
             })
-        
+		
     })
 </script>

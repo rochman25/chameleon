@@ -41,27 +41,28 @@ $this->load->view('public/cart');
                     <div class="product-info">
                         <h1><?= $produk->nama_produk;?></h1>
                         <h2>    
-                            <div class="price_before"> Rp <?= $produk->harga_produk;?> </div>
+                            <!-- <div class="price_before"> Rp <?= $produk->harga_produk;?> </div> -->
                             <div class="price_after">
                                 <span class="value">Rp <?= $produk->harga_produk;?></span>
+                                <span id="stok" class="value">Stok <?= $produk->stok_produk;?></span>
                                 <!-- <span class="time">Tinggal 7 hari lagi</span> -->
                             </div>
                         </h2>
                         <br>
-                        <span>Ukuran :</span>
+                        <!-- <span>Ukuran :</span>
                         <div id="size" class="size-product">
                             <ul class="clearfix">
-                                    <li data-value="S" data-productdetailid="38840" class="size active ">
-                                        <span data-size="39" data-stock="2">S</span>
+                                    <li onclick="changeSize('S');" class="size active ">
+                                        <span >S</span>
                                     </li>
-                                    <li data-value="M" data-productdetailid="38841" class="size  ">
-                                        <span data-size="40" data-stock="1">M</span>
+                                    <li onclick="changeSize('M');" class="size  ">
+                                        <span>M</span>
                                     </li>
-                                    <li data-value="X" data-productdetailid="38842" class="size  ">
-                                        <span data-size="41" data-stock="3">X</span>
+                                    <li onclick="changeSize('L');" class="size  ">
+                                        <span>L</span>
                                     </li>
-                                    <li data-value="XL" data-productdetailid="38843" class="size  ">
-                                        <span data-size="42" data-stock="11">XL</span>
+                                    <li onclick="changeSize('XL');" class="size  ">
+                                        <span >XL</span>
                                     </li>
                                     <div class="label-size">
                                         <i class="svg-icon svg_icon__pdp_check"></i>
@@ -69,23 +70,20 @@ $this->load->view('public/cart');
                                     </div>
                             </ul>
                         </div>
-                        <br>
+                        <br> -->
                         <span>Jumlah :</span>
                         <div id="size" class="size-product">
                             <ul class="clearfix">
-                                    <li data-value="1" data-productdetailid="38840" class="size active ">
-                                        <span data-size="39" data-stock="2">-</span>
+                                    <li onclick="ubahjml(2);"  class=" size active ">
+                                        <span>-</span>
                                     </li>
-                                    <li data-value="4" data-productdetailid="38843" class="size  ">
-                                        <span data-size="42" data-stock="11">1</span>
+                                    <li class="size  ">
+                                        <span id="value">1</span>
                                     </li>
-                                    <li data-value="1" data-productdetailid="38840" class="size active ">
-                                        <span data-size="39" data-stock="2">+</span>
+                                    <li onclick="ubahjml(1);" class=" size active ">
+                                        <span>+</span>
                                     </li>
-                                    <div class="label-size">
-                                        <i class="svg-icon svg_icon__pdp_check"></i>
-                                        <span class="text-label"></span>
-                                    </div>
+                                   
                             </ul>
                         </div>
                         <div class="button-action">
@@ -113,7 +111,7 @@ $this->load->view('public/cart');
                         
                         <div class="product-order">
                             <div class="list clearfix">
-                                <a href="https://www.mensrepublic.id/other/layanan/panduan-pemesanan">
+                                <a href="#">
                                     <div class="image">
                                         <i class="svg-icon svg_icon__pdp_cart "></i>
                                     </div>
@@ -123,7 +121,7 @@ $this->load->view('public/cart');
                                 </a>
                             </div>
                             <div class="list clearfix">
-                                <a href="https://www.mensrepublic.id/other/layanan/panduan-perawatan">
+                                <a href="#">
                                     <div class="image">
                                         <i class="svg-icon svg_icon__pdp_shoes "></i>
                                     </div>
@@ -133,7 +131,7 @@ $this->load->view('public/cart');
                                 </a>
                             </div>
                             <div class="list clearfix">
-                                <a href="https://www.mensrepublic.id/other/layanan/panduan-ukuran">
+                                <a href="#">
                                     <div class="image">
                                         <i class="svg-icon svg_icon__pdp_ruler "></i>
                                     </div>
@@ -175,9 +173,34 @@ $this->load->view('public/footer');
     });
 </script>
 <script type="text/javascript">
+    var base_url = '<?= base_url()?>';
+    var def_jml = 1;
+    var def_Size = "S";
+    var img = '<?= $thumbnail[0]; ?>';
+    var stok = '<?= $produk->stok_produk;?>';
+    // /var size_view = 
+    function ubahjml(state){
+        console.log(state);
+        if(state == 1){
+            if(def_jml < stok){
+                def_jml++
+            }else{
+                
+            }
+        }else{
+            if(def_jml <= 1){
+                def_jml = 1;
+            }else{
+                def_jml--;
+            }
+        }
+        document.getElementById('value').innerHTML = def_jml;
+    }
+
 $(document).ready(function () {
-    var base_url = '<?= base_url()?>'
-            $(".addToCart").on("click", function () {
+    console.log(stok);
+
+    $(".addToCart").on("click", function () {
            
             var id_prod = $("#product").data("product-id");
             var nama_barang = $("#product").data("product-nama");
@@ -185,10 +208,16 @@ $(document).ready(function () {
                 url: base_url + "user/Home/add_cart",
                 type: "POST",
                 data: {
-                    id_pengguna: '<?= $this->session->userdata['user_data']['id']?>',
+                    id_pengguna: '<?php if(empty($this->session->userdata['user_data']['id'])){
+                        echo "";
+                    }else{
+                        echo $this->session->userdata['user_data']['id'];
+                    }?>',
                     id_produk: id_prod,
-                    qty : 1,
-                    nama_barang : nama_barang
+                    qty : def_jml,
+                    img:img,
+                    nama_barang : nama_barang,
+                //    size : def_Ssize,
                 }
             }).done(function (t) {
                 var res = JSON.parse(t);
@@ -205,7 +234,7 @@ $(document).ready(function () {
 
             }).fail(function (t) {
                 console.log(t)
-                   location.reload()
+                //   location.reload()
             })
         })
     })

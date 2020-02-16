@@ -24,7 +24,7 @@ $this->load->view('public/m_heading');
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-xs-12">
                                     <h2>Email</h2>
-                                    <input type="email" placeholder="Email" name="email" value="<?=$email?>" required>
+                                    <input type="email" placeholder="Email" name="email" value="<?= $email?>" required>
                                 </div>
                             </div>
 

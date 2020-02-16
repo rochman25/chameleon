@@ -14,7 +14,7 @@ class Cart_model extends MY_Model
         return $this->insert($data);
     }
 
-    function generateKode($kat_p){
+    function generateKode(){
         date_default_timezone_set('Asia/Jakarta');
         $kode = "Invoice";
         $number = $this->select('id_cart');
