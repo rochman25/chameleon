@@ -25,6 +25,7 @@ $this->load->view('public/m_heading');
         <div class="new-login">
             <h1>Masuk</h1>
         <p>Belum punya akun Men’s Republic <strong>Daftar</strong></p>
+        <p style="color: red"><b><?= $this->session->flashdata('pesan') ?></b></p>
         <form action="" method="post">
             <h2>Email</h2>
             <input type="email" name="email">
@@ -34,14 +35,7 @@ $this->load->view('public/m_heading');
             <input type="submit" name="kirim" value="Masuk">
         </form>
     </div>
-
 </div>
 	</section>
-
-	
-
-	<?php 
-
-$this->load->view('public/footer');
-?>
+	<?php $this->load->view('public/footer'); ?>
 	

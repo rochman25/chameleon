@@ -98,25 +98,33 @@ class Home extends MY_Controller{
                 );
                 $cek = $this->user->login($where)->row();
                 if ($cek != null) {
-                    if ($this->bcrypt->check_password($pass, $cek->password)) {
-                    //  if ($cek->password == $pass) {
-                        $datas = array(
-                            "updated_at" => date("Y-m-d H:i:s")
-                        );
-                        $this->user->updateData($datas, $cek->id_pengguna);
-                        $user = array(
-                            "id" => $cek->id_pengguna,
-                            "username" => $cek->username,
-                            "email" => $cek->email,
-                            "status" => $cek->status,
-                            "login" => true,
-                        );
-                        $this->session->set_userdata('user_data', $user);
-                        redirect(base_url());
-                    } else {
+                    if($cek->status == true){
+                        if ($this->bcrypt->check_password($pass, $cek->password)) {
+                        //  if ($cek->password == $pass) {
+                            $datas = array(
+                                "updated_at" => date("Y-m-d H:i:s")
+                            );
+                            $this->user->updateData($datas, $cek->id_pengguna);
+                            $user = array(
+                                "id" => $cek->id_pengguna,
+                                "username" => $cek->username,
+                                "email" => $cek->email,
+                                "status" => $cek->status,
+                                "login" => true,
+                            );
+                            $this->session->set_userdata('user_data', $user);
+                            redirect(base_url());
+                        } else {
+                            $this->session->set_flashdata(
+                                'pesan',
+                                '<div class="alert alert-danger mr-auto">Password salah</div>'
+                            );
+                            $this->load->view('public/login');
+                        }
+                    }else{
                         $this->session->set_flashdata(
                             'pesan',
-                            '<div class="alert alert-danger mr-auto">Password salah</div>'
+                            '<div class="alert alert-danger mr-auto">Akun belum diverifikasi silahkan cek email untuk verfikasi akun.</div>'
                         );
                         $this->load->view('public/login');
                     }
@@ -347,9 +355,10 @@ class Home extends MY_Controller{
                 $cek = $this->user->getData()->row();
               //  die(json_encode($cek));
                 if ($cek != null) {
+                    $this->session->set_flashdata("pesan","Email yang anda masukkan sudah terdaftar ");
                     //sudah ada
                     $this->load->view('public/register');
-                    die(json_encode("ada"));
+                    // die(json_encode("ada"));
                 } else {
                     $data = array(
                         "email"=>$email,
@@ -363,6 +372,11 @@ class Home extends MY_Controller{
                     $register = $this->user->insert( $data);
                     // die(json_encode($register));
                     if ($register) {
+                        if($this->send_verification($email,base64_encode($email))){
+                            $this->session->set_flashdata("pesan","Anda berhasil registrasi, silahkan cek email anda untuk memverifikasi akun");   
+                        }else{
+                            $this->session->set_flashdata("pesan","ada masalah ");
+                        }
                         $this->load->view('public/login');
                     }else{
                         $this->load->view('public/login');
@@ -370,13 +384,45 @@ class Home extends MY_Controller{
                     
                 }
             }else if($this->input->post('email')){
-                $data['email'] = $this->input->post('email');
-                $this->load->view('public/register',$data);
+                $email = $this->input->post('email');
+                $cek = $this->user->getWhere('email',$email);
+                $cek = $this->user->getData()->row();
+
+                $data['email'] = $email;
+                if ($cek != null) {
+                    $this->session->set_flashdata("pesan","Email yang anda masukkan sudah terdaftar ");
+                    //sudah ada
+                    $this->load->view('public/login');
+                    // die(json_encode("ada"));
+                }else{
+                    $this->load->view('public/register',$data);
+                }
+                // die(json_encode($data));
             }else{
                 $this->load->view('public/login');
             }
         }
     }
+
+    public function verifikasi(){
+        $code = $this->input->get('code');
+        // die(json_encode(base64_decode($code)));
+        $cek = $this->user->getWhere('email', base64_decode($code));
+		$cek = $this->user->getData('user')->row();
+		if ($cek != null) {
+			$data = array(
+				"status" => true
+            );
+            if($this->user->updateData($data,$cek->id_pengguna)){
+                echo "Selamat akun anda sudah aktif!. Silahkan klik <a href='".base_url('login')."'>login</a>";
+            }else{
+                echo "ada masalah";
+            }
+		} else {
+            echo "verifikasi kode ilegal.";
+		}
+    }
+
     public function profil(){
         $idp =$this->session->userdata['user_data']['id'];
         $data['profil'] = $this->user->getWhere("id_pengguna", $idp);
@@ -407,6 +453,45 @@ class Home extends MY_Controller{
         }
        // die(json_encode($this->session->userdata('user_data')));
     }
+
+    private function send_verification($email, $code)
+	{
+		$config = array(
+			'protocol' => 'smtp',
+			'smtp_host' => 'smtp.googlemail.com',
+			'smtp_port' => '465',
+			'smtp_user' => 'zaenur.rochman98@gmail.com', // informasi rahasia ini jangan di gunakan sembarangan
+			'smtp_pass' => 'rochman25', // informasi rahasia ini jangan di gunakan sembarangan
+			'smtp_crypto' => 'ssl',
+			'mailtype' => 'html',
+			'charset' => 'iso-8859-1',
+			'wordwrap' => TRUE
+		);
+
+		$message =     "
+                  <html>
+                  <head>
+                      <title>Verifikasi Akun anda</title>
+                  </head>
+                  <body>
+                      <h2>Terima kasih sudah Mendaftar.</h2>
+                      <p>Akun anda:</p>
+                      <p>Email: " . $email . "</p>
+                      <p>Silahkan klik link berikut untuk memverifikasi akun anda.</p>
+                      <h4><a href='" . base_url() . "verifikasi?code=" . $code . "'>Verifikasi Akun Saya</a></h4>
+                  </body>
+                  </html>
+                  ";
+
+		$this->load->library('email', $config);
+		$this->email->set_newline("\r\n");
+		$this->email->from($config['smtp_user']);
+		$this->email->to($email);
+		$this->email->subject('Verifikasi akun');
+		$this->email->message($message);
+
+		return $this->email->send();
+	}
 
 }
 

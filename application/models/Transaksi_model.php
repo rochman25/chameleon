@@ -12,7 +12,8 @@ class Transaksi_model extends MY_Model
 
     function get_transaksi(){
         $this->getJoin("pengguna","pengguna.id_pengguna = transaksi.id_pengguna","inner");
-        $this->order_by("kode_transaksi","ASC");
+        $this->getJoin("detail_transaksi","detail_transaksi.id_transaksi = transaksi.id_transaksi","inner");
+        $this->order_by("transaksi.kode_transaksi","ASC");
         return $this->getData()->result_array();
     }
 
@@ -26,7 +27,9 @@ class Transaksi_model extends MY_Model
     }
 
     function getLaporan($tgl){
-        $this->getWhere("status_transaksi","selesai");
+        $this->getJoin("pengguna","pengguna.id_pengguna = transaksi.id_pengguna","inner");
+        $this->getWhereArr("waktu_transaksi BETWEEN '".date("Y-m-d", strtotime($tgl[0]))."' and '".date("Y-m-d", strtotime($tgl[1]))."'");
+        // $this->getWhere("status_transaksi","selesai");
         return $this->getData()->result_array();
     }
 

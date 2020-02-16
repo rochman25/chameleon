@@ -164,7 +164,7 @@
                                     <div class="col-lg-12">
                                         <label>Nomor Resi</label>
                                         <div class="input-group">
-                                            <input type="text" id="noresi" class="form-control" placeholder="Nomor Resi" name="noresi" required>
+                                            <input type="text" id="noresi" class="form-control" placeholder="Nomor Resi" name="noresi">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">

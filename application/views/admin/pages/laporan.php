@@ -47,14 +47,18 @@
                                                                     <i class="fas fa-calendar"></i>
                                                                 </div>
                                                             </div>
-                                                            <input type="text" name="tgl" class="form-control daterange-cus">
+                                                            <input type="text" name="tgl" class="form-control daterange-cus" value="<?php if (!empty($tgl)) {
+                                                                                                                                        echo $tgl;} ?>" <?php if(!empty($tgl)){ ?> disabled="disabled" <?php } ?> >
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-2">
+                                                <div class="col-lg-4">
                                                     <div class="form-group">
                                                         <!-- <label></label> -->
                                                         <input type="submit" name="kirim" value="Tampilkan" class="btn btn-info">
+                                                        <?php if (!empty($transaksi)) { ?>
+                                                            <input type="submit" name="export" class="btn btn-success" value="Export Excel">
+                                                        <?php } ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -107,9 +111,9 @@
 <script type="text/javascript">
     $('.daterange-cus').daterangepicker({
         locale: {
-            format: 'YYYY-MM-DD'
+            format: 'YYYY/MM/DD'
         },
-        drops: 'down',
+        drops: 'up',
         opens: 'right'
     });
 </script>

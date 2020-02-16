@@ -59,6 +59,7 @@ $route['profil'] = 'user/Home/profil';
 $route['produk'] = 'user/Home/produk';
 $route['produk/(:any)'] = 'user/Home/produk/$1';
 $route['detail'] = 'user/Home/produk_detail/';
+$route['verifikasi'] = 'user/home/verifikasi';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
