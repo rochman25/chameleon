@@ -54,6 +54,7 @@ $route['default_controller'] = 'Welcome';
 $route['login'] = 'user/Home/login';
 $route['daftar'] = 'user/Home/register';
 $route['keluar'] = 'user/Home/logout';
+$route['profil'] = 'user/Home/profil';
 
 $route['produk'] = 'user/Home/produk';
 $route['produk/(:any)'] = 'user/Home/produk/$1';

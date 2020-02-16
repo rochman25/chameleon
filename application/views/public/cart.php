@@ -24,7 +24,7 @@
 		<div class="cart-footer">
 			<div>
 				<span class="sum">Total</span>
-				<span class="total_sum">Rp 0</span>
+				<span id="totalharga" class="total_sum">Rp 0</span>
 				<div class="clearfix"></div>
 			</div>
 			<a class="confirm" href="<?= base_url()?>order">hajar men</a>
@@ -41,17 +41,20 @@
                 type: "GET",
             }).done(function (t) {
                 var res = JSON.parse(t);
-				console.log(res.length);
-			if (res.length >=0) {
-				res.forEach(myFunction);
-
+				
+	
+			if (res.data.length >=0) {
+				var harga = 0;
+				var notif = res.data.length;
+				console.log("ini"+notif);
+				res.data.forEach(myFunction);
 					function myFunction(item, index) {
   						console.log(item);
   						$(".cart-wrapper").append(item.element);
 						
-						var notif = res.length;
 						$(".icon-cart").find(".notif").html(notif);
-						console.log(notif);
+						$("#totalharga").html("Rp "+res.total);
+						
 					}
 				}else{
 

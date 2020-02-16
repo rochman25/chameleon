@@ -8,7 +8,9 @@ class Home extends MY_Controller{
         $this->load->model('Pengguna_model', 'user');
         $this->load->model('Kategori_model', 'kategori');
         $this->load->model('Cart_model', 'cart');
+        $this->load->model('Alamat_model', 'alamat');
         $this->load->model('Detailcart_model', 'cart_item');
+        $this->load->model('Transaksi_model', 'transaksi');
         $this->load->library('bcrypt');
         $this->load->library('form_validation');
     }
@@ -143,6 +145,7 @@ class Home extends MY_Controller{
         } else {
             $datafull = array();
             $thumbnail = array();
+            $harga = 0;
             $datacart = $this->cart_item->order_by("id_detail_item_cart", "ASC");
             $datacart = $this->cart_item->getJoin("cart_item","cart_item.id_cart=detail_cart_item.id_cart","inner");
             $datacart = $this->cart_item->getJoin("produk","produk.id_produk=detail_cart_item.id_produk","inner");
@@ -154,6 +157,8 @@ class Home extends MY_Controller{
                 foreach($foto as $f){
                     $thumbnail[] = $f;
                 }
+               
+                $harga = $harga + $d->harga_produk;
                 $d = array(
                     "id_cart"=>$d->id_cart,
                     "nama_produk"=>$d->nama_produk,
@@ -184,7 +189,8 @@ class Home extends MY_Controller{
                 );
                  array_push($datafull,$d);
             }
-            echo json_encode($datafull);
+            
+            echo json_encode(array("data"=>$datafull,"total"=>$harga));
         }
     }
     public function update_cart(){
@@ -372,7 +378,22 @@ class Home extends MY_Controller{
         }
     }
     public function profil(){
-        $this->load->view('public/profil');
+        $idp =$this->session->userdata['user_data']['id'];
+        $data['profil'] = $this->user->getWhere("id_pengguna", $idp);
+        $data['profil'] = $this->user->getData()->row();
+
+        $data['transaksi'] = $this->transaksi->order_by("transaksi.id_transaksi", "ASC");
+        $data['transaksi'] = $this->transaksi->getJoin("detail_transaksi","detail_transaksi.id_transaksi=transaksi.id_transaksi","inner");
+        $data['transaksi'] = $this->transaksi->getJoin("produk","produk.id_produk=detail_transaksi.id_produk","inner");
+        $data['transaksi'] = $this->transaksi->getJoin("pengguna","pengguna.id_pengguna=transaksi.id_pengguna","inner");
+        $data['transaksi'] = $this->transaksi->getJoin("alamat_pengguna","alamat_pengguna.id_alamat=transaksi.id_alamat","inner");
+        $data['transaksi'] = $this->transaksi->getWhere("pengguna.id_pengguna",$idp);
+        $data['transaksi'] = $this->transaksi->getData()->result();
+        
+        $data['alamat'] = $this->alamat->getWhere("id_pengguna", $idp);
+        $data['alamat'] = $this->alamat->getData()->result();
+        die(json_encode($data));
+        $this->load->view('public/profil',$data);
     }
 
     public function logout(){
