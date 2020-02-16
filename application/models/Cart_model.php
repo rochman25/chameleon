@@ -9,6 +9,11 @@ class Cart_model extends MY_Model
         parent::__construct();
     }
 
+    function tambah_cart($data){
+        $this->db->set('id_cart','UUID()',false);
+        return $this->insert($data);
+    }
+
     function generateKode($kat_p){
         date_default_timezone_set('Asia/Jakarta');
         $kode = "CC-";
