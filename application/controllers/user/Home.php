@@ -99,6 +99,28 @@ class Home extends MY_Controller{
            // die(json_encode($data));
         $this->load->view('public/product-detail',$data);
     }
+    public function hapus_item(){
+        $id_item = $this->input->post('id_item');
+        $hapus = $this->cart_item->delete("id_detail_item_cart",$id_item);
+        if($hapus){
+            echo json_encode(array(
+                "status"=> "success",
+                "success"=>true,
+                "id_item" => $id_item,
+                "message" => "Berhasil",
+                "element" => '',
+            ));    
+           
+        }else{
+            echo json_encode(array(
+                "status"=> "unsuccess",
+                "success"=>false,
+                "id_item" => $id_item,
+                "message" => "gagal",
+                "element" => '',
+            ));    
+    }
+    }
     public function login(){
         if ($this->userIsLoggedIn()) {
             redirect(base_url());
@@ -183,6 +205,7 @@ class Home extends MY_Controller{
                 $harga = $harga + $d->harga_produk;
                 $d = array(
                     "id_cart" => $d->id_cart,
+                    "id_item" => $d->id_detail_item_cart,
                     "nama_produk"=>$d->nama_produk,
                     "qty"=>$d->quantity,
                     "harga"=>$d->harga_produk,
@@ -201,7 +224,7 @@ class Home extends MY_Controller{
                                 </div>
                         </div>
                     </a>
-                    <a class="delete-cart" data-id="39223" href="#">
+                    <a class="delete-cart" onclick="deleteitem('.$d->id_detail_item_cart.');;" >
                         <i class="svg_icon__header_garbage svg-icon"></i>
                     </a>
                 </div>'

@@ -177,6 +177,28 @@ $this->load->view('public/footer');
     var def_jml = 1;
     var def_Size = "S";
     var stok = '<?= $produk->stok_produk;?>';
+    function deleteitem(state){
+        $.ajax({
+                url: base_url + "user/Home/hapus_item",
+                type: "POST",
+                data: {
+                   id_item : state
+                }
+            }).done(function (t) {
+                var res = JSON.parse(t);
+                console.log(res);
+                 if (true == res.success) {
+                    location.reload()
+                         
+
+                 } 
+                 
+
+            }).fail(function (t) {
+                console.log(t)
+                //   location.reload()
+            })
+    }
     // /var size_view = 
     function ubahjml(state){
         console.log(state);
