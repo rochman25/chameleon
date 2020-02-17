@@ -224,7 +224,7 @@ class Home extends MY_Controller{
                                 </div>
                         </div>
                     </a>
-                    <a class="delete-cart" onclick="deleteitem('.$d->id_detail_item_cart.');;" >
+                    <a class="delete-cart" onclick="deleteitem(' . "'". $d->id_detail_item_cart . "'".');" >
                         <i class="svg_icon__header_garbage svg-icon"></i>
                     </a>
                 </div>'
@@ -310,49 +310,50 @@ class Home extends MY_Controller{
                         <i class="svg_icon__header_garbage svg-icon"></i>
                     </a>
                 </div>',
-                ));
-                }else{
+                        ));
+                    } else {
+                        echo json_encode(array(
+                            "status" => "unsuccess",
+                            "success" => false,
+                            "id_cart" => $idc,
+                            "message" => "berhasil diinput tapi gagall input item",
+                            "element" => '',
+                        ));
+                    }
+                } else {
                     echo json_encode(array(
-                        "status"=> "unsuccess",
-                        "success"=>false,
-                        "id_cart" => $idc,
+                        "status" => "unsuccess",
+                        "success" => false,
+                        "id_cart" => "",
                         "message" => "berhasil diinput tapi gagall input item",
                         "element" => '',
                     ));
                 }
-            }else{
-                echo json_encode(array(
-                    "status"=> "unsuccess",
-                "success"=>false,
-                "id_cart" => "",
-                "message" => "berhasil diinput tapi gagall input item",
-                "element" => '',));
-            }
-        }else{
-            
-            $idp = $this->input->post('id_pengguna');
-            $id_produk = $this->input->post('id_produk');
-            $qty = $this->input->post('qty');
-            $img = $this->input->post('img');
-            $nama_barang = $this->input->post('nama_barang');
-            $data_item = array(
-                "id_cart" => $idc,
-                "id_produk" => $id_produk,
-                "quantity" => $qty
-            );
+            } else {
 
-            $simpan_item = $this->cart_item->insert($data_item);
-            if($simpan_item){
-                $session_cart = array(
-                    "current_cart" => $idc,
-                    "created_at" => date("Y-m-d H:i:s")
+                $idp = $this->input->post('id_pengguna');
+                $id_produk = $this->input->post('id_produk');
+                $qty = $this->input->post('qty');
+                $img = $this->input->post('img');
+                $nama_barang = $this->input->post('nama_barang');
+                $data_item = array(
+                    "id_cart" => $idc,
+                    "id_produk" => $id_produk,
+                    "quantity" => $qty
                 );
-                $this->session->set_userdata($idp, $session_cart);
-                echo json_encode(array(
-                "status"=> "success",
-                "success"=>true,
-                "id_cart" => $idc,
-                "element" => '<div class="cart-list" ">
+
+                $simpan_item = $this->cart_item->tambahDetailCart($data_item);
+                if ($simpan_item) {
+                    $session_cart = array(
+                        "current_cart" => $idc,
+                        "created_at" => date("Y-m-d H:i:s")
+                    );
+                    $this->session->set_userdata($idp, $session_cart);
+                    echo json_encode(array(
+                        "status" => "success",
+                        "success" => true,
+                        "id_cart" => $idc,
+                        "element" => '<div class="cart-list" ">
     			<a href="#">
         			<img src="'.base_url().'assets/uploads/thumbnail_produk/'.$img.'">
         			<div class="content">
