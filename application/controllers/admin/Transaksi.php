@@ -13,6 +13,7 @@ class Transaksi extends MY_Controller
         parent::__construct();
         $this->load->model('Transaksi_model', 'transaksi');
         $this->load->model('Cart_model', 'cart');
+        $this->load->model('Detailcart_model','detail');
     }
 
     public function index()
@@ -99,12 +100,32 @@ class Transaksi extends MY_Controller
     public function cart()
     {
         if ($this->adminIsLoggedIn()) {
+            $cart = $this->cart->getJoin("pengguna","pengguna.id_pengguna = cart_item.id_pengguna","inner");
             $cart = $this->cart->getData()->result_array();
             $data = [
                 "cart" => $cart
             ];
             $this->load->view('admin/pages/transaksi/list_cart', $data);
         } else {
+            redirect('admin/home/login');
+        }
+    }
+
+    public function detailCart(){
+        if($this->adminIsLoggedIn()){
+            $id = $this->input->get('id');
+            $cart = $this->detail->getWhere('detail_cart_item.id_cart',$id);
+            $cart = $this->detail->getJoin("produk","produk.id_produk = detail_cart_item.id_produk","inner");
+            $cart = $this->detail->getData()->result_array();
+            $total = 0;
+            foreach($cart as $row){
+                $total += $row['harga_produk'] * $row['quantity'];
+            }
+            $data['total'] = $total;
+            $data['cart'] = $cart;
+            $this->load->view('admin/pages/transaksi/detail_cart',$data);
+            // die(json_encode($cart));
+        }else{
             redirect('admin/home/login');
         }
     }

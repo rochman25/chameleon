@@ -29,6 +29,12 @@ class Transaksi_model extends MY_Model
 
     function get_transaksi(){
         $this->getJoin("pengguna","pengguna.id_pengguna = transaksi.id_pengguna","inner");
+        $this->order_by("transaksi.kode_transaksi","ASC");
+        return $this->getData()->result_array();
+    }
+
+    function getDetailTransaksi(){
+        $this->getJoin("pengguna","pengguna.id_pengguna = transaksi.id_pengguna","inner");
         $this->getJoin("detail_transaksi","detail_transaksi.id_transaksi = transaksi.id_transaksi","inner");
         $this->order_by("transaksi.kode_transaksi","ASC");
         return $this->getData()->result_array();

@@ -40,35 +40,38 @@
                                     <div class="card-body">
                                         <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#tambahModal" style="margin-bottom:10px"><i class="fa fa-plus"></i> Tambah Admin</button> -->
                                         <?php echo $this->session->flashdata('pesan') ?>
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">No</th>
-                                                    <th scope="col">ID Cart</th>
-                                                    <th scope="col">Username</th>
-                                                    <!-- <th scope="col">Produk</th>
-                                                    <th scope="col">Status</th> -->
-                                                    <th scope="col">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                $no = 1;
-                                                foreach ($cart as $row) { ?>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
                                                     <tr>
-                                                        <th scope="row"><?= $no++ ?></th>
-                                                        <td><?= $row['id_cart'] ?></td>
-                                                        <td><?= $row['username'] ?></td>
-                                                        <!-- <td><?= $row['waktu_transaksi'] ?></td>
-                                                        <td><?= $row['status_transaksi'] ?></td> -->
-                                                        <td>
-                                                            <!-- <button class="btn btn-success" id="btnUbah" data-id="<?= $row['id_admin'] ?>" data-username="<?= $row['username'] ?>" data-role="<?= $row['role'] ?>" data-status="<?= $row['status'] ?>" data-email="<?= $row['email'] ?>" data-toggle="modal" data-target="#updateModal">Ubah</button> -->
-                                                            <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_admin'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button>
-                                                        </td>
+                                                        <th scope="col">No</th>
+                                                        <th scope="col">ID Cart</th>
+                                                        <th scope="col">Username</th>
+                                                        <!-- <th scope="col">Produk</th>
+                                                    <th scope="col">Status</th> -->
+                                                        <th scope="col">Action</th>
                                                     </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    $no = 1;
+                                                    foreach ($cart as $row) { ?>
+                                                        <tr>
+                                                            <th scope="row"><?= $no++ ?></th>
+                                                            <td id="detail_cart" data-id="<?=$row['id_cart']?>"><a href="<?=base_url()?>admin/transaksi/detailCart?id=<?=$row['id_cart']?>"><?= $row['id_cart'] ?></td>
+                                                            <td><?= $row['username'] ?></td>
+                                                            <!-- <td><?= $row['waktu_transaksi'] ?></td>
+                                                        <td><?= $row['status_transaksi'] ?></td> -->
+                                                            <td>
+                                                                <a href="<?= base_url() ?>admin/transaksi/detailCart?id=<?= $row['id_cart'] ?>" class="btn btn-info">Detail</a>
+                                                                <!-- <button class="btn btn-success" id="btnUbah" data-id="<?= $row['id_admin'] ?>" data-username="<?= $row['username'] ?>" data-role="<?= $row['role'] ?>" data-status="<?= $row['status'] ?>" data-email="<?= $row['email'] ?>" data-toggle="modal" data-target="#updateModal">Ubah</button> -->
+                                                                <!-- <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_cart'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button> -->
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -119,6 +122,10 @@
         $(document).on("click", "#btnHapus", function() {
             let id = $(this).data('id');
             $('input[id="id_hapus"]').val(id)
+        });
+        $(document).on("click", "#detail_cart", function() {
+            let id = $(this).data('id');
+            window.location.href = "<?= base_url() ?>admin/transaksi/detailCart?id="+id
         });
     </script>
 

@@ -15,7 +15,7 @@ class Home extends MY_Controller
     public function index()
     {
         if ($this->adminIsLoggedIn()) {
-            $transaksi = $this->transaksi->get_transaksi();
+            $transaksi = $this->transaksi->getDetailTransaksi();
             $statistik = ["pending" => 0,"kirim" => 0,"selesai" => 0];
             $penjualan = 0;
             $produk = 0;
