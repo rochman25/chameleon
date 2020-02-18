@@ -66,8 +66,8 @@
                                                             } ?>
                                                         </td>
                                                         <td>
-                                                            <!-- <button class="btn btn-success" id="btnUbah" data-id="<?= $row['id_admin'] ?>" data-username="<?= $row['username'] ?>" data-role="<?= $row['role'] ?>" data-status="<?= $row['status'] ?>" data-email="<?= $row['email'] ?>" data-toggle="modal" data-target="#updateModal">Ubah</button> -->
-                                                            <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_pengguna'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button>
+                                                            <button class="btn btn-success" id="btnUbah" data-id="<?= $row['id_pengguna'] ?>" data-username="<?= $row['username'] ?>" data-status="<?= $row['status'] ?>" data-email="<?= $row['email'] ?>" data-toggle="modal" data-target="#updateModal">Ubah</button>
+                                                            <!-- <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_pengguna'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button> -->
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
@@ -139,6 +139,50 @@
                     </div>
                 </div>
             </div>
+
+            <!-- modal ubah -->
+            <div class="modal fade" tabindex="-1" role="dialog" id="updateModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Ubah Status Pengguna</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="<?= base_url() ?>admin/pengguna/ubah" method="POST">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label>Status</label>
+                                            <div class="input-group">
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" id="customRadioInline3" name="status_u" class="custom-control-input" value="1" required>
+                                                    <label class="custom-control-label" for="customRadioInline3">Aktif</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" id="customRadioInline4" name="status_u" class="custom-control-input" value="0" required>
+                                                    <label class="custom-control-label" for="customRadioInline4">Tidak Aktif</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="hidden" class="form-control" name="id" id="id_ubah">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-whitesmoke br">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" name="kirim" value="Simpan" class="btn btn-primary">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- modal hapus -->
         <div class="modal fade" tabindex="-1" role="dialog" id="hapusModal">
             <div class="modal-dialog" role="document">
@@ -156,7 +200,9 @@
                                     <div class="col-lg-12">
                                         <div class="input-group">
                                             <input type="hidden" class="form-control" id="id_hapus" name="id" required>
-                                            <p><h6>Apakah anda yakin menghapus data ini?</h6></p>
+                                            <p>
+                                                <h6>Apakah anda yakin menghapus data ini?</h6>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -178,6 +224,16 @@
     </div>
     <?php $this->load->view('admin/assets/javascript') ?>
     <script type="text/javascript">
+        $(document).on("click", "#btnUbah", function() {
+            let status = $(this).data('status');
+            let id = $(this).data('id');
+            $('input[id="id_ubah"]').val(id);
+            if (status == 1) {
+                $('input[id="customRadioInline3"]').prop('checked', true);
+            } else {
+                $('input[id="customRadioInline4"]').prop('checked', true);
+            }
+        });
 
         $(document).on("click", "#btnHapus", function() {
             let id = $(this).data('id');

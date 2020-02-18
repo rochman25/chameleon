@@ -20,4 +20,35 @@ class Pengguna extends MY_Controller{
        }
     }
 
+    public function ubah(){
+        if($this->adminIsLoggedIn()){
+            $id = $this->input->post('id');
+            $status = $this->input->post('status_u');
+
+            $data = array(
+                "status" => $status,
+                "updated_at" => date("Y-m-d H:i:s")
+            );
+
+            // die(json_encode($data));
+
+            if($this->pengguna->updateData($data, $id)){
+                $this->session->set_flashdata(
+                    'pesan',
+                    '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil diubah</div>'
+                );
+                redirect('admin/pengguna');
+            }else{
+                $this->session->set_flashdata(
+                    'pesan',
+                    '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
+                );
+                redirect('admin/pengguna');
+            }
+
+        }else{
+            redirect('admin/home/login');
+        }
+    }
+
 }
