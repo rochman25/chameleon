@@ -111,8 +111,9 @@ class Transaksi extends MY_Controller
         }
     }
 
-    public function detailCart(){
-        if($this->adminIsLoggedIn()){
+    public function detailCart()
+    {
+        if ($this->adminIsLoggedIn()) {
             $id = $this->input->get('id');
             $cart = $this->detail->getWhere('detail_cart_item.id_cart',$id);
             $cart = $this->detail->getJoin("produk","produk.id_produk = detail_cart_item.id_produk","inner");
@@ -139,12 +140,33 @@ class Transaksi extends MY_Controller
                 $data['transaksi'] = $transaksi;
                 $data['tgl'] = $this->input->post('tgl');
                 $this->load->view('admin/pages/laporan', $data);
-                // die(json_encode($transaksi));
             } else if ($this->input->post('export')) {
                 $tgl = explode("-", $this->input->post('tgl'));
+
                 $transaksi = $this->transaksi->getLaporan($tgl);
                 $spreadsheet = new Spreadsheet;
-                
+
+                $spreadsheet->setActiveSheetIndex(0)
+                    ->setCellValue('A1', 'No')
+                    ->setCellValue('B1', 'Kode Transaksi')
+                    ->setCellValue('C1', 'Nama Lengkap')
+                    ->setCellValue('D1', 'Status')
+                    ->setCellValue('E1', 'Total');
+
+                $kolom = 2;
+                $nomor = 1;
+
+                foreach ($transaksi as $row) {
+                    $spreadsheet->setActiveSheetIndex(0)
+                        ->setCellValue('A' . $kolom, $nomor)
+                        ->setCellValue('B' . $kolom, $row['kode_transaksi'])
+                        ->setCellValue('C' . $kolom, $row['nama_lengkap'])
+                        ->setCellValue('D' . $kolom, $row['status_transaksi'])
+                        ->setCellValue('E' . $kolom, ($row['total_harga'] + $row['total_ongkir']));
+                    $kolom++;
+                    $nomor++;
+                }
+                // die(json_encode($spreadsheet));
                 $writer = new Xlsx($spreadsheet);
 
                 header('Content-Type: application/vnd.ms-excel');
@@ -159,13 +181,4 @@ class Transaksi extends MY_Controller
             redirect('admin/home/login');
         }
     }
-
-    // public function export(){
-    //     if($this->adminIsLoggedIn()){
-
-    //     }else{
-    //         redirect('admin/home/login');
-    //     }
-    // }
-
 }

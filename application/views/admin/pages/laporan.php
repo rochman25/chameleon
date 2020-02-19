@@ -48,7 +48,7 @@
                                                                 </div>
                                                             </div>
                                                             <input type="text" name="tgl" class="form-control daterange-cus" value="<?php if (!empty($tgl)) {
-                                                                                                                                        echo $tgl;} ?>" <?php if(!empty($tgl)){ ?> disabled="disabled" <?php } ?> >
+                                                                                                                                        echo $tgl;} ?>" <?php if(!empty($tgl)){ ?> readonly="readonly" <?php } ?> >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -73,7 +73,7 @@
                                                             <th scope="col">Username</th>
                                                             <th scope="col">Waktu Transaksi</th>
                                                             <th scope="col">Status</th>
-                                                            <th scope="col">Action</th>
+                                                            <!-- <th scope="col">Action</th> -->
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -86,10 +86,10 @@
                                                                 <td><?= $row['username'] ?></td>
                                                                 <td><?= $row['waktu_transaksi'] ?></td>
                                                                 <td><?= $row['status_transaksi'] ?></td>
-                                                                <td>
-                                                                    <a href="#" class="btn btn-info" data-id="<?= $row['id_transaksi'] ?>">Detail</a>
+                                                                <!-- <td> -->
+                                                                    <!-- <a href="#" class="btn btn-info" data-id="<?= $row['id_transaksi'] ?>">Detail</a> -->
                                                                     <!-- <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_transaksi'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button> -->
-                                                                </td>
+                                                                <!-- </td> -->
                                                             </tr>
                                                         <?php } ?>
                                                     </tbody>
