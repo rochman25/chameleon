@@ -21,43 +21,43 @@
         <div class="footer-list">
            <h1>Tentang Kami</h1>
            <ul>
-                <li><a href="https://www.mensrepublic.id/other/tentang-kami/cerita">Cerita</a></li>
-                <li><a href="https://www.mensrepublic.id/other/tentang-kami/pencapaian">Pencapaian</a></li>
-                <li><a href="https://www.mensrepublic.id/other/tentang-kami/kontak-alamat">Kontak &amp; Alamat</a></li>
-                <li><a href="https://www.mensrepublic.id/other/tentang-kami/peluang-karir">Peluang Karir</a></li>
+                <li><a href="#">Cerita</a></li>
+                <li><a href="#">Pencapaian</a></li>
+                <li><a href="#">Kontak &amp; Alamat</a></li>
+                <li><a href="#">Peluang Karir</a></li>
             </ul>
             </div>
             <div class="footer-list">
                 <h1>Layanan</h1>
                 <ul>
-                    <li><a href="https://www.mensrepublic.id/other/layanan/panduan-pemesanan">Panduan Pemesanan</a></li>
-                    <li><a href="https://www.mensrepublic.id/other/layanan/panduan-ukuran">Panduan Ukuran</a></li>
-                    <li><a href="https://www.mensrepublic.id/other/layanan/panduan-perawatan">Panduan Perawatan</a></li>
-                    <li><a href="https://www.mensrepublic.id/other/layanan/panduan-retur">Panduan Retur</a></li>
+                    <li><a href="#">Panduan Pemesanan</a></li>
+                    <li><a href="#">Panduan Ukuran</a></li>
+                    <li><a href="#">Panduan Perawatan</a></li>
+                    <li><a href="#">Panduan Retur</a></li>
                 </ul>
             </div>
         
         <div class="pull-right-footer">
             <div class="social">
                 <div class="socialmedia-item">
-                    <a href="https://www.facebook.com/mensrepublicid" target="_blank"><i class="fa fa-facebook fa-2x"></i></a>
+                    <a href="#" target="_blank"><i class="fa fa-facebook fa-2x"></i></a>
                 </div>
                 <div class="socialmedia-item">
-                    <a href="https://www.twitter.com/mensrepublicid" target="_blank"><i class="fa fa-twitter fa-2x"></i></a>
+                    <a href="#" target="_blank"><i class="fa fa-twitter fa-2x"></i></a>
                 </div>
                 <div class="socialmedia-item">
-                    <a href="https://www.instagram.com/mensrepublicid" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+                    <a href="#" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
                 </div>
                 <div class="socialmedia-item">
-                    <a href="https://www.youtube.com/mensrepublicid" target="_blank"><i class="fa fa-youtube fa-2x"></i></a>
+                    <a href="#" target="_blank"><i class="fa fa-youtube fa-2x"></i></a>
                 </div>
                 <div class="socialmedia-item">
-                    <a href="https://line.me/R/ti/p/%40mensrepublicid" target="_blank">
-                        <img src="https://www.mensrepublic.id/assets/images/layout/logo/line@.png" alt="" style="width:86%;margin-top:3px;">
+                    <a href="#" target="_blank">
+                        <img src="#g" alt="" style="width:86%;margin-top:3px;">
                     </a>
                 </div>
                 <div class="socialmedia-item">
-                    <a href="https://api.whatsapp.com/send?phone=6281808989412" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+                    <a href="https://api.whatsapp.com/send?phone=628193" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
                 </div>
             </div>
            
