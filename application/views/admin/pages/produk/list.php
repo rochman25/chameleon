@@ -62,6 +62,7 @@
                                                             <td id="data-produk" data-id="<?= $row['kode_produk'] ?>"><a href="<?= base_url() ?>admin/produk/ubah?id=<?= $row['kode_produk'] ?>"><?= $row['kode_produk'] ?></a></td>
                                                             <td><?= $row['nama_produk'] ?></td>
                                                             <td>
+                                                                <!-- <?= sprintf("%.2f%%", $row['stok_produk'] * 100) ?> -->
                                                                 <?= $row['stok_produk'] ?>
                                                             </td>
                                                             <td><?= $row['harga_produk'] ?></td>
@@ -69,8 +70,9 @@
                                                                 <img style="margin:10px" width="100px" height="100px" src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>">
                                                             </td>
                                                             <td>
+                                                                <button id="btnUbah" data-toggle="modal" data-target="#updateModal" data-id="<?=$row['kode_produk'];?>" data-stok="<?=$row['stok_produk'];?>" class="btn btn-success"><i class="fa fa-pencil" style="margin-right:5px"></i> Stok</button>
                                                                 <!-- <a href="<?= base_url() ?>admin/produk/ubah?id=<?= $row['id_produk'] ?>" class="btn btn-success">Ubah</a> -->
-                                                                <button id="btnHapus" data-target="#hapusModal" data-toggle="modal" data-id="<?= $row['id_produk'] ?>" class="btn btn-danger">Hapus</button>
+                                                                <!-- <button id="btnHapus" data-target="#hapusModal" data-toggle="modal" data-id="<?= $row['id_produk'] ?>" class="btn btn-danger">Hapus</button> -->
                                                             </td>
                                                         </tr>
                                                     <?php } ?>
@@ -121,6 +123,37 @@
             </div>
         </div>
     </div>
+
+    <!-- modal update -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="updateModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ubah Stok Produk</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="<?= base_url() ?>admin/produk/stok" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="input-group">
+                                        <input type="hidden" class="form-control" id="id_ubah" name="id" required>
+                                        <input type="number" class="form-control" id="stok_num" name="stok" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-whitesmoke br">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" name="kirim" value="Simpan" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <?php $this->load->view('admin/assets/javascript') ?>
     <script type="text/javascript">
@@ -131,6 +164,12 @@
         $(document).on("click", "#data-produk", function() {
             // alert($(this).data('id'))
             window.location.href = "<?= base_url() ?>admin/produk/ubah?id=" + $(this).data('id')
+        });
+        $(document).on("click", "#btnUbah", function(){
+            let id = $(this).data('id');
+            let stok = $(this).data('stok');
+            $("#id_ubah").val(id);
+            $("#stok_num").val(stok);
         });
     </script>
 </body>

@@ -150,6 +150,36 @@ class Produk extends MY_Controller
         }
     }
 
+    public function stok()
+    {
+        if ($this->adminIsLoggedIn()) {
+            if ($this->input->post('kirim')) {
+                $id = $this->input->post('id');
+                $stok = $this->input->post('stok');
+
+                $data = array(
+                    "stok_produk" => $stok
+                );
+                // die(json_encode($data));
+                if ($this->produk->updateData($data, $id)) {
+                    $this->session->set_flashdata(
+                        'pesan',
+                        '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil diubah</div>'
+                    );
+                    redirect('admin/produk');
+                } else {
+                    $this->session->set_flashdata(
+                        'pesan',
+                        '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
+                    );
+                    redirect('admin/produk');
+                }
+            }
+        } else {
+            redirect('admin/home/login');
+        }
+    }
+
     public function uploadFile()
     {
         if ($this->adminIsLoggedIn()) {
