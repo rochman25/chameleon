@@ -673,7 +673,7 @@ header.desktop .mainheader .logo {
 }
 header.desktop .mainheader .logo img {
 	width: 110px;
-	height: 44px;
+	height: 60px;
 }
 header.desktop .mainheader > ul {
 	float: left;
@@ -1038,7 +1038,8 @@ header.mobile .logo {
 	align-items: center;
 }
 header.mobile .logo img {
-	height: 37px;
+	/* height: 37px; */
+	height: 80px;
 }
 header.mobile .mainheader {
 	position: relative;

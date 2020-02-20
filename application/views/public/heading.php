@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </li>
-            <li><a href="#"><span>konfirmasi pembayaran</span></a></li>
+            <li><a href="https://api.whatsapp.com/send?phone=628"><span>konfirmasi pembayaran</span></a></li>
         </ul>
         <div class="header-right">
             <div class="icon-right icon-login">

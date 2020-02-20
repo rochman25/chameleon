@@ -8,7 +8,7 @@
                 <li><a href="https://www.mensrepublic.id/category/apparel">Apparel</a></li>
             </ul>
         </div>
-        <div class="footer-list">
+        <!-- <div class="footer-list">
             <h1>promo</h1>
             <ul>
                 <li><a href="https://www.mensrepublic.id/discount">diskon men</a></li>
@@ -17,7 +17,7 @@
                 <li><a href="https://www.mensrepublic.id/promo/yoi-indonesiamelangkah">YOI #IndonesiaMelangkah</a></li>
                 <li><a href="https://www.mensrepublic.id/promo/mystery-box">Mystery Box</a></li>
             </ul>
-        </div>
+        </div> -->
         <div class="footer-list">
            <h1>Tentang Kami</h1>
            <ul>
@@ -65,7 +65,7 @@
     </div>
 
     <div class="container copyright">
-        2019 Men’s Republic. Hak cipta dilindungi undang-undang    </div>
+        Made by Chameleon Cloth 2020    </div>
 </footer>
 
 

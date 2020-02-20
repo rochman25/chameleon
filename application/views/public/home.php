@@ -16,31 +16,22 @@ $this->load->view('public/cart');
 	<div class="homepage">
         <section class="banner">
             <div class="owl-carousel owl-theme">
-                <a href="https://www.mensrepublic.id/promo/yoi-indonesiamelangkah">
+                <a href="#">
                     <div class="banner-card">
-                        <img src="https://www.mensrepublic.id/assets/images/uploads/banner/desktop/44-1572367791-h81mzAOzym36.jpg">
+                        <img src="<?= base_url()?>assets/images/bg_all/formal.jpeg">
                     </div>
                 </a>
-                <a href="https://www.mensrepublic.id/promo/yoi-indonesiamelangkah">
+                <a href="#">
                     <div class="banner-card">
-                        <img src="https://www.mensrepublic.id/assets/images/uploads/banner/desktop/45-1572367798-oBIfj796m6yZ.jpg">
+                        <img src="<?= base_url()?>assets/images/bg_all/moff.jpeg">
                     </div>
                 </a>
-                <a href="https://www.mensrepublic.id/product/mystery-box">
+                <a href="#">
                     <div class="banner-card">
-                        <img src="https://www.mensrepublic.id/assets/images/uploads/banner/desktop/39-1572367739-iCQI4SceWpxN.jpg">
+                        <img src="<?= base_url()?>assets/images/bg_all/paket-lengkap.jpeg">
                     </div>
                 </a>
-                <a href="https://www.mensrepublic.id/category/sepatu/formal">
-                    <div class="banner-card">
-                        <img src="https://www.mensrepublic.id/assets/images/uploads/banner/desktop/40-1572367745-4FYXR5e5qA1M.jpg">
-                    </div>
-                </a>
-                <a href="https://www.mensrepublic.id/category/sepatu/sneakers">
-                    <div class="banner-card">
-                        <img src="https://www.mensrepublic.id/assets/images/uploads/banner/desktop/41-1572367752-ZN0ZHbzB4EL7.jpg">
-                    </div>
-                </a>
+
             </div>
         </section>
         <section class="hot-product">
@@ -102,7 +93,7 @@ $this->load->view('public/cart');
                     <h2></h2>
                     <h3></h3>
                 </div>
-                <img src="<?= base_url()?>assets/images/Celana/P2.png" alt="">
+                <img src="<?= base_url()?>assets/images/bg_all/comingsoon.png" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/celana'" style="cursor: pointer;">
             <div class="border"></div>
