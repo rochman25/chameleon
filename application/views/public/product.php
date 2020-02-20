@@ -18,11 +18,11 @@ $this->load->view('public/cart');
 ?>
 <section id="content">
 	<div class="category-page">
-        <div class="header" style="background-image:url(https://www.mensrepublic.id/assets/images/uploads/category/sepatu-1571885735-pV0DzYBjF3hy.jpg)">
+        <div class="header" style="background-image:url(<?= $bg;?>)">
             <div class="container">
                 <div class="bottom_absolute">
                     <h1>  </h1>
-                    <h2>Sepatu</h2>
+                    <h2><?= $section;?></h2>
                 </div>
             </div>
         </div>

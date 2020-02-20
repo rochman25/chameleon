@@ -71,8 +71,24 @@ class Home extends MY_Controller{
 
             
         }
-        $data['id_cart'] = $this->cart->getWhere("id_pengguna",$this->session->userdata['user_data']['id']);
-        $data['id_cart'] = $this->cart->getData()->row()->id_cart;
+        $data['thumbnail'] = $thumbnail;
+        if ($this->userIsLoggedIn()) {
+            $data['id_cart'] = $this->cart->getWhere("id_pengguna",$this->session->userdata['user_data']['id']);
+            $data['id_cart'] = $this->cart->getData()->row();
+        }else{
+            $data['id_cart'] = "";
+        }
+        $data['section'] = $kategori;
+        if($kategori == "celana"){
+            $data['bg'] = base_url('assets/images/bg_all/Celana-BG.png');
+            
+        }else if($kategori == "kemeja"){
+            $data['bg'] = base_url('assets/images/bg_all/Kemeja-BG.png');
+        }else if($kategori == "jas"){
+            $data['bg'] = base_url('assets/images/bg_all/Jas-BG.png');
+        }else{
+            $data['bg'] = base_url('assets/images/bg_all/Celana-BG.png');
+        }
         $this->load->view('public/product',$data);
     }
     public function produk_detail(){
