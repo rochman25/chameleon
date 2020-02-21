@@ -20,6 +20,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 <script src="<?= base_url()?>assets/public/js/all.js"></script>
 <script src="<?= base_url()?>assets/public/js/cart.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- Facebook Pixel Code -->
 	<noscript>
 		<!-- <img height="1" width="1" style="display:none"

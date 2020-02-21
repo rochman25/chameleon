@@ -3,28 +3,17 @@
         <div class="footer-list">
             <h1>koleksi</h1>
             <ul>
-                <li><a href="https://www.mensrepublic.id/category/sepatu">Sepatu</a></li>
-                <li><a href="https://www.mensrepublic.id/category/tas">Tas</a></li>
-                <li><a href="https://www.mensrepublic.id/category/apparel">Apparel</a></li>
+                <li><a href="<?= base_url()?>produk/jas">Jas</a></li>
+                <li><a href="<?= base_url()?>produk/kemeja">Kemeja</a></li>
+                <li><a href="<?= base_url()?>produk/celana">Celana</a></li>
             </ul>
         </div>
-        <!-- <div class="footer-list">
-            <h1>promo</h1>
-            <ul>
-                <li><a href="https://www.mensrepublic.id/discount">diskon men</a></li>
-                <li><a href="https://www.mensrepublic.id/promo/buy-1-get-1">Buy 1 Get 1</a></li>
-                <li><a href="https://www.mensrepublic.id/promo/bundling-package">Bundling Package</a></li>
-                <li><a href="https://www.mensrepublic.id/promo/yoi-indonesiamelangkah">YOI #IndonesiaMelangkah</a></li>
-                <li><a href="https://www.mensrepublic.id/promo/mystery-box">Mystery Box</a></li>
-            </ul>
-        </div> -->
+
         <div class="footer-list">
            <h1>Tentang Kami</h1>
            <ul>
-                <li><a href="#">Cerita</a></li>
-                <li><a href="#">Pencapaian</a></li>
+               
                 <li><a href="#">Kontak &amp; Alamat</a></li>
-                <li><a href="#">Peluang Karir</a></li>
             </ul>
             </div>
             <div class="footer-list">
@@ -32,7 +21,7 @@
                 <ul>
                     <li><a href="#">Panduan Pemesanan</a></li>
                     <li><a href="#">Panduan Ukuran</a></li>
-                    <li><a href="#">Panduan Perawatan</a></li>
+                    <!-- <li><a href="#">Panduan Perawatan</a></li> -->
                     <li><a href="#">Panduan Retur</a></li>
                 </ul>
             </div>
@@ -48,16 +37,16 @@
                 <div class="socialmedia-item">
                     <a href="#" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
                 </div>
-                <div class="socialmedia-item">
+                <!-- <div class="socialmedia-item">
                     <a href="#" target="_blank"><i class="fa fa-youtube fa-2x"></i></a>
-                </div>
-                <div class="socialmedia-item">
+                </div> -->
+                <!-- <div class="socialmedia-item">
                     <a href="#" target="_blank">
                         <img src="#g" alt="" style="width:86%;margin-top:3px;">
                     </a>
-                </div>
+                </div> -->
                 <div class="socialmedia-item">
-                    <a href="https://api.whatsapp.com/send?phone=628193" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+                    <a href="https://api.whatsapp.com/send?phone=6283116200500" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
                 </div>
             </div>
            
