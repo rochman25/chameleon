@@ -483,6 +483,7 @@ class Home extends MY_Controller{
     }
 
     public function profil(){
+        if($this->userIsLoggedIn()){
         $idp =$this->session->userdata['user_data']['id'];
         $data['profil'] = $this->user->getWhere("id_pengguna", $idp);
         $data['profil'] = $this->user->getData()->row();
@@ -497,8 +498,11 @@ class Home extends MY_Controller{
         
         $data['alamat'] = $this->alamat->getWhere("id_pengguna", $idp);
         $data['alamat'] = $this->alamat->getData()->result();
-        die(json_encode($data));
+       // die(json_encode($data));
         $this->load->view('public/profil',$data);
+        }else{
+            redirect(base_url('login'));
+        }
     }
 
     public function logout(){
