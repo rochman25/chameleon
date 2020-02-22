@@ -58,7 +58,7 @@ $this->load->view('public/cart');
             <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/jas'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
-                    <h2>YOI RED</h2>
+                    <!-- <h2>YOI RED</h2> -->
                     <!-- <h3>Nationalism</h3> -->
                 </div>
                 <img src="<?= base_url()?>assets/images/Jas/1.png" alt="">
@@ -66,15 +66,15 @@ $this->load->view('public/cart');
             <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/jas'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
-                    <h2>YOI BLUE</h2>
+                    <!-- <h2>YOI BLUE</h2> -->
                     <!-- <h3>Education</h3> -->
                 </div>
-                <img src="<?= base_url()?>assets/images/Jas/6.png" alt="">
+                <img src="<?= base_url()?>assets/images/Jas/Jas-BG.png" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/jas'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
-                    <h2>YOI BLACK</h2>
+                    <!-- <h2>YOI BLACK</h2> -->
                     <!-- <h3>Youth</h3> -->
                 </div>
                 <img src="<?= base_url()?>assets/images/Jas/9.png" alt="">
@@ -82,7 +82,7 @@ $this->load->view('public/cart');
             <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/celana'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
-                    <h2>ORD Series</h2>
+                    <!-- <h2>ORD Series</h2> -->
                     <!-- <h3>Casual Formal</h3> -->
                 </div>
                 <img src="<?= base_url()?>assets/images/Celana/P1.png" alt="">
@@ -90,15 +90,15 @@ $this->load->view('public/cart');
             <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/celana'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
-                    <h2></h2>
-                    <h3></h3>
+                    <!-- <h2></h2> -->
+                    <!-- <h3></h3> -->
                 </div>
                 <img src="<?= base_url()?>assets/images/bg_all/comingsoon.png" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/celana'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
-                    <h2>Sneez</h2>
+                    <!-- <h2>Sneez</h2> -->
                     <!-- <h3>Everlasting Shoes</h3> -->
                 </div>
                 <img src="<?= base_url()?>assets/images/Celana/P3.png" alt="">
@@ -106,24 +106,24 @@ $this->load->view('public/cart');
             <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/kemeja'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
-                    <h2>Semerus</h2>
-                    <h3>Temen Ngantor</h3>
+                    <!-- <h2>Semerus</h2> -->
+                    <!-- <h3>Temen Ngantor</h3> -->
                 </div>
                 <img src="<?= base_url()?>assets/images/Kemeja/LRM_EXPORT_4.jpeg" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/kemeja'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
-                    <h2>Sparky Black</h2>
-                    <h3>Nyaman Banget</h3>
+                    <!-- <h2>Sparky Black</h2> -->
+                    <!-- <h3>Nyaman Banget</h3> -->
                 </div>
-                <img src="<?= base_url()?>assets/images/Kemeja/LRM_EXPORT_5.jpeg" alt="">
+                <img src="<?= base_url()?>assets/images/Kemeja/Kemeja-BG.png" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/kemeja'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
-                    <h2>Musca</h2>
-                    <h3>Comfortable Sandal</h3>
+                    <!-- <h2>Musca</h2> -->
+                    <!-- <h3>Comfortable Sandal</h3> -->
                 </div>
                 <img src="<?= base_url()?>assets/images/Kemeja/LRM_EXPORT_6.jpeg" alt="">
             </div>

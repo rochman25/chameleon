@@ -6,11 +6,10 @@
             #Chameleon
         </a>
         <ul>
-            <li><a href="#">ebook</a></li>
-            <li><a href="#">Panduan Pemesanan</a></li>
-            <li><a href="#">Panduan Ukuran</a></li>
-            <li><a href="#">Panduan Perawatan</a></li>
-            <li><a href="#">Panduan Retur</a></li>
+        
+            <li><a href="<?= base_url()?>panduan/pemesanan"">Panduan Pemesanan</a></li>
+            <li><a href="<?= base_url()?>panduan/ukuran">Panduan Ukuran</a></li>
+            <li><a href="<?= base_url()?>panduan/retur">Panduan Retur</a></li>
         </ul>
     </div>
     <div class="mainheader">
@@ -19,7 +18,7 @@
         </a>
         <ul>
             <li>
-                <a href="">koleksi</a>
+                <a href="#">koleksi</a>
                 <div class="dropdown dropdown-collection">
                     <div class="dropdown-wrapper">
                         <div class="collections">
@@ -62,7 +61,11 @@
                     </div>
                 </div>
             </li>
-            <li><a href="https://api.whatsapp.com/send?phone=628"><span>konfirmasi pembayaran</span></a></li>
+            <li>
+                <a href="https://api.whatsapp.com/send?phone=6283116200500">
+                    <span>konfirmasi pembayaran</span>
+                </a>
+            </li>
         </ul>
         <div class="header-right">
             <div class="icon-right icon-login">

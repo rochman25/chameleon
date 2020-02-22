@@ -83,11 +83,13 @@ class Home extends MY_Controller{
             $data['bg'] = base_url('assets/images/bg_all/Celana-BG.png');
             
         }else if($kategori == "kemeja"){
-            $data['bg'] = base_url('assets/images/bg_all/Kemeja-BG.png');
+            $data['bg'] = base_url('assets/images/Kemeja/Kemeja-BG.png');
         }else if($kategori == "jas"){
-            $data['bg'] = base_url('assets/images/bg_all/Jas-BG.png');
+            $data['bg'] = base_url('assets/images/Jas/Jas-BG.png');
+        }else if($kategori == "celana"){
+            $data['bg'] = base_url('assets/images/Celana/Celana-BG.png');
         }else{
-            $data['bg'] = base_url('assets/images/bg_all/Celana-BG.png');
+            $data['bg'] = base_url('assets/images/Celana/Celana-BG.png');
         }
         $this->load->view('public/product',$data);
     }
@@ -504,7 +506,16 @@ class Home extends MY_Controller{
             redirect(base_url('login'));
         }
     }
-
+    public function panduan_ukuran(){
+        //
+        $this->load->view('public/panduan_ukuran');
+    }
+    public function panduan_return(){
+        //
+    }
+    public function panduan_pemesanan(){
+        //
+    }
     public function logout(){
         if($this->userIsLoggedIn()){
             $this->session->unset_userdata('user_data');
