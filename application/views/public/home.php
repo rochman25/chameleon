@@ -54,81 +54,66 @@ $this->load->view('public/cart');
                     <?php }?>
                 </div>
         </section>
-        <section class="six-banner">
+        <!-- <section class="six-banner">
             <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/jas'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
-                    <!-- <h2>YOI RED</h2> -->
-                    <!-- <h3>Nationalism</h3> -->
                 </div>
                 <img src="<?= base_url()?>assets/images/Jas/1.png" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/jas'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
-                    <!-- <h2>YOI BLUE</h2> -->
-                    <!-- <h3>Education</h3> -->
                 </div>
                 <img src="<?= base_url()?>assets/images/Jas/Jas-BG.png" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/jas'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
-                    <!-- <h2>YOI BLACK</h2> -->
-                    <!-- <h3>Youth</h3> -->
+                   
                 </div>
                 <img src="<?= base_url()?>assets/images/Jas/9.png" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/celana'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
-                    <!-- <h2>ORD Series</h2> -->
-                    <!-- <h3>Casual Formal</h3> -->
+                    
                 </div>
                 <img src="<?= base_url()?>assets/images/Celana/P1.png" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/celana'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
-                    <!-- <h2></h2> -->
-                    <!-- <h3></h3> -->
+                 
                 </div>
                 <img src="<?= base_url()?>assets/images/bg_all/comingsoon.png" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/celana'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
-                    <!-- <h2>Sneez</h2> -->
-                    <!-- <h3>Everlasting Shoes</h3> -->
                 </div>
                 <img src="<?= base_url()?>assets/images/Celana/P3.png" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/kemeja'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
-                    <!-- <h2>Semerus</h2> -->
-                    <!-- <h3>Temen Ngantor</h3> -->
                 </div>
                 <img src="<?= base_url()?>assets/images/Kemeja/LRM_EXPORT_4.jpeg" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/kemeja'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
-                    <!-- <h2>Sparky Black</h2> -->
-                    <!-- <h3>Nyaman Banget</h3> -->
                 </div>
                 <img src="<?= base_url()?>assets/images/Kemeja/Kemeja-BG.png" alt="">
             </div>
             <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/kemeja'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
-                    <!-- <h2>Musca</h2> -->
-                    <!-- <h3>Comfortable Sandal</h3> -->
                 </div>
                 <img src="<?= base_url()?>assets/images/Kemeja/LRM_EXPORT_6.jpeg" alt="">
             </div>
-        </section>
-        <section class="promo">
+        </section> -->
+        <!-- <section class="promo">
             <h1>YOI #IndonesiaMelangkah</h1>
             <div class="owl-carousel owl-theme">
                 <a class="promo-card" href="#">
@@ -138,14 +123,17 @@ $this->load->view('public/cart');
                     <img src="https://www.mensrepublic.id/assets/images/uploads/card/desktop/4-1572368337-JvMU00W4aKhw.jpg">
                 </a>
             </div>
-        </section>
+        </section> -->
         <section class="signup" style="background-image:url('https://www.mensrepublic.id/assets/images/index/logobg.png')">
             <i class="svg-icon svg_icon__home_envelope"></i>
             <h1>Daftar Dengan Email</h1>
             <h2>Jadi yang pertama untuk mendapatkan produk terbaru dan penawaran dari Chameleon</h2>
-            <a href="<?= base_url()?>login" class="signup-button-wrapper">
-                <div class="signup-button">hajar men</div>
-                <div class="signup-border"></div>
+            <a href="<?= base_url()?>login" class="home_button">
+           
+                    GABUNG SEKARANG
+             
+                <!-- <div class="signup-button">hajar men</div> -->
+                <!-- <div class="signup-border"></div> -->
             </a>
         </section>
         <?php //$this->load->view('public/home-ig'); ?>

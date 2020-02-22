@@ -714,6 +714,16 @@ header.desktop .mainheader > ul > li span {
 	background-color: #03cc00;
 	padding: 7px 10px;
 }
+/* 
+
+*/
+.home_button {
+	border-radius: 4px;
+	background-color: #03cc00;
+	padding: 10px 20px;
+	color: #ffff;
+}
+
 header.desktop .mainheader > ul > li .dropdown {
 	display: none;
 }
@@ -1807,7 +1817,7 @@ footer.footer .copyright {
 #product .product-info .price_after .value {
 	font-size: 24px;
 	font-weight: 700;
-	color: rgba(183, 77, 36, 0.7);
+	color: #03cc00;
 	display: inline-block;
 	line-height: normal;
 	margin-right: 12px;
