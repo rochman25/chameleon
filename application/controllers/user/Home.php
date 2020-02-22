@@ -512,9 +512,11 @@ class Home extends MY_Controller{
     }
     public function panduan_return(){
         //
+        $this->load->view('public/panduan_return');
     }
     public function panduan_pemesanan(){
         //
+        $this->load->view('public/panduan_pemesanan');
     }
     public function logout(){
         if($this->userIsLoggedIn()){

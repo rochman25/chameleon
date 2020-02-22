@@ -26,13 +26,13 @@
         <div class="pull-right-footer">
             <div class="social">
                 <div class="socialmedia-item">
-                    <a href="www.facebook.com/chameleonclothindonesia" target="_blank"><i class="fa fa-facebook fa-2x"></i></a>
+                    <a href="https://facebook.com/chameleonclothindonesia" target="blank"><i class="fa fa-facebook fa-2x"></i></a>
                 </div>
                 <div class="socialmedia-item">
                     <a href="https://mobile.twitter.com/chameleoncloth_" target="_blank"><i class="fa fa-twitter fa-2x"></i></a>
                 </div>
                 <div class="socialmedia-item">
-                    <a href="www.instagram.com/chameleoncloth.co.id" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+                    <a href="https://instagram.com/chameleoncloth.co.id" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
                 </div>
                 <div class="socialmedia-item">
                     <a href="https://m.youtube.com/channel/UCDdDpkjX-TVzufeMUq3D0Hw" target="_blank"><i class="fa fa-youtube fa-2x"></i></a>
