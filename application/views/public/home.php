@@ -47,7 +47,7 @@ $this->load->view('public/cart');
                                     <div class="price-after"><?= $p['harga_produk'];?></div>
                                     <div class="rating-wrapper">
                                         <!-- <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$p['id_produk']] ?>" alt=""> -->
-                                        <span>Stok : <?= $p['stok_produk'];?></span>
+                                        <!-- <span>Stok : <?= $p['stok_produk'];?></span> -->
                                     </div>
                         </a>
                     </div>

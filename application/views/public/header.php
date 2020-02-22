@@ -4,15 +4,16 @@
 	<title>Chameleon Cloth</title>
 	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 	<meta charset="UTF-8">
-	<meta name="title" content="Chaeleon | #Clotch">
+	<meta name="title" content="Chaeleon | #Cloth">
 	<meta name="description" content="Chameleons">
 	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800|Open+Sans|Work+Sans" rel="stylesheet">
     <meta property="fb:pages" content="" />
     <meta name="google-site-verification" content="YRtB-WBotW8z2AMh6hLyCgAjgQRundXTa1bC2AdzPxQ" />
 	<meta name="msapplication-TileColor" content="#ffffff">
-	<meta name="msapplication-TileImage" content="https://www.mensrepublic.id/assets/images/layout/favicon_new/ms-icon-144x144.png">
+	<meta name="msapplication-TileImage" content="<?= base_url()?>assets/images/chameleon_cloth_logo_black.png">
 	<meta name="theme-color" content="#ffffff">
 	
+	<link rel="shortcut icon" href="<?= base_url()?>assets/images/chameleon_cloth_logo_black.png" />
 	<link rel="stylesheet"  href="<?= base_url()?>assets/public/css/fontawesome-all.css" >
 	<link rel="stylesheet"  href="<?= base_url()?>assets/public/css/jqueryuimin.css" >
 	<link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/public/css/all.css">
