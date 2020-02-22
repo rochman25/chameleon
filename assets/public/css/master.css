@@ -4238,7 +4238,7 @@ footer.footer .copyright {
 	float: right;
 	width: 170px;
 	height: 42px;
-	background: #b74d24;
+	background: #03cc00;
 	border-radius: 4px;
 	color: #fff;
 	font-size: 12px;
@@ -5479,7 +5479,7 @@ footer.footer .copyright {
 	font-weight: 600;
 	font-size: 12px;
 	line-height: normal;
-	color: #b74d24;
+	color: #03cc00;
 }
 .new-login > form h2 {
 	font-size: 12px;
@@ -5507,7 +5507,7 @@ footer.footer .copyright {
 	font-size: 12px;
 	line-height: normal;
 	text-transform: capitalize;
-	color: #b74d24;
+	color: #03cc00;
 	text-decoration: none;
 }
 .new-login > form input[type="submit"] {
@@ -5600,7 +5600,7 @@ footer.footer .copyright {
 	font-weight: 600;
 	font-size: 12px;
 	line-height: normal;
-	color: #b74d24;
+	color: #03cc00;
 }
 .new-register > form h2 {
 	font-size: 12px;

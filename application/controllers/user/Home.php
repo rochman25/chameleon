@@ -447,8 +447,13 @@ class Home extends MY_Controller{
                 $email = $this->input->post('email');
                 $cek = $this->user->getWhere('email',$email);
                 $cek = $this->user->getData()->row();
-
-                $data['email'] = $email;
+                $data['email'] = "";
+                if(empty($email)){
+                    $data['email'] = "";
+                }else{
+                    $data['email'] = $email;
+                }
+               
                 if ($cek != null) {
                     $this->session->set_flashdata("pesan","Email yang anda masukkan sudah terdaftar ");
                     //sudah ada
@@ -459,7 +464,7 @@ class Home extends MY_Controller{
                 }
                 // die(json_encode($data));
             }else{
-
+                $data['email'] = "";
                 $this->load->view('public/login',$data);
             }
         }
