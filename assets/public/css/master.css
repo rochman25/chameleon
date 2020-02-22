@@ -721,6 +721,7 @@ header.desktop .mainheader > ul > li span {
 	border-radius: 4px;
 	background-color: #03cc00;
 	padding: 10px 20px;
+	text-decoration: none;
 	color: #ffff;
 }
 
@@ -1049,7 +1050,7 @@ header.mobile .logo {
 }
 header.mobile .logo img {
 	/* height: 37px; */
-	height: 80px;
+	height: 70px;
 }
 header.mobile .mainheader {
 	position: relative;

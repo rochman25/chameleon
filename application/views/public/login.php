@@ -15,7 +15,7 @@ $this->load->view('public/m_heading');
 	<div class="new-login-register">
         <div class="new-register none">
             <h1>Daftar</h1>
-            <p>Sudah punya akun Men’s Republic <strong>Masuk</strong></p>
+            <p>Sudah punya akun Chameleon Cloth <strong>Masuk</strong></p>
             <form action="<?= base_url()?>daftar" method="post">
                 <h2>Email</h2>
                     <input type="email" name="email">
