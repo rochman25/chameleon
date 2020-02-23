@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data Akun Pengguna</title>
     <?php $this->load->view('admin/assets/stylesheets') ?>
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/admin/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/admin/node_modules/datatables.net-select-bs4/css/select.bootstrap4.min.css">
 </head>
 
 <body>
@@ -40,39 +43,43 @@
                                     <div class="card-body">
                                         <button class="btn btn-primary" data-toggle="modal" data-target="#tambahModal" style="margin-bottom:10px"><i class="fa fa-plus"></i> Tambah Pengguna</button>
                                         <?php echo $this->session->flashdata('pesan') ?>
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">No</th>
-                                                    <th scope="col">Username</th>
-                                                    <th scope="col">Email</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                $no = 1;
-                                                foreach ($pengguna as $row) { ?>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover" id="table-1">
+                                                <thead>
                                                     <tr>
-                                                        <th scope="row"><?= $no++ ?></th>
-                                                        <td><?= $row['username'] ?></td>
-                                                        <td><?= $row['email'] ?></td>
-                                                        <td>
-                                                            <?php if ($row['status'] == 0) {
-                                                                echo "Tidak Aktif";
-                                                            } else {
-                                                                echo "Aktif";
-                                                            } ?>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-success" id="btnUbah" data-id="<?= $row['id_pengguna'] ?>" data-username="<?= $row['username'] ?>" data-status="<?= $row['status'] ?>" data-email="<?= $row['email'] ?>" data-toggle="modal" data-target="#updateModal">Ubah</button>
-                                                            <!-- <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_pengguna'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button> -->
-                                                        </td>
+                                                        <th scope="col">No</th>
+                                                        <th scope="col">Username</th>
+                                                        <th scope="col">Email</th>
+                                                        <th scope="col">Status</th>
+                                                        <th scope="col">Action</th>
                                                     </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    $no = 1;
+                                                    foreach ($pengguna as $row) { ?>
+                                                        <tr>
+                                                            <th scope="row"><?= $no++ ?></th>
+                                                            <td id="detail_col" data-id="<?= $row['id_pengguna'] ?>">
+                                                                <a href="<?= base_url() ?>admin/pengguna/detail?id=<?= $row['id_pengguna'] ?>"><?= $row['username'] ?></a>
+                                                            </td>
+                                                            <td><?= $row['email'] ?></td>
+                                                            <td>
+                                                                <?php if ($row['status'] == 0) {
+                                                                    echo "Tidak Aktif";
+                                                                } else {
+                                                                    echo "Aktif";
+                                                                } ?>
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-success" id="btnUbah" data-id="<?= $row['id_pengguna'] ?>" data-username="<?= $row['username'] ?>" data-status="<?= $row['status'] ?>" data-email="<?= $row['email'] ?>" data-toggle="modal" data-target="#updateModal">Ubah</button>
+                                                                <!-- <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_pengguna'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button> -->
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -218,11 +225,16 @@
         </div>
     </div>
 
+
+
     <!-- footer content -->
     <?php $this->load->view('admin/master/footer') ?>
     </div>
     </div>
     <?php $this->load->view('admin/assets/javascript') ?>
+    <!-- JS Libraies -->
+    <script src="<?= base_url() ?>assets/admin/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url() ?>assets/admin/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript">
         $(document).on("click", "#btnUbah", function() {
             let status = $(this).data('status');
@@ -238,6 +250,18 @@
         $(document).on("click", "#btnHapus", function() {
             let id = $(this).data('id');
             $('input[id="id_hapus"]').val(id)
+        });
+
+        $(document).on("click","#detail_col", function() {
+            let id = $(this).data('id');
+            window.location.href = "<?= base_url() ?>admin/pengguna/detail?id="+id;
+        });
+
+        $("#table-1").dataTable({
+            "columnDefs": [{
+                "sortable": false,
+                "targets": [2, 3]
+            }]
         });
     </script>
 

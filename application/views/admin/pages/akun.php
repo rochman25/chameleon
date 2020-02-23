@@ -237,8 +237,8 @@
         </div>
     </div>
 
-        <!-- footer content -->
-        <?php $this->load->view('admin/master/footer') ?>
+    <!-- footer content -->
+    <?php $this->load->view('admin/master/footer') ?>
     </div>
     </div>
     <?php $this->load->view('admin/assets/javascript') ?>

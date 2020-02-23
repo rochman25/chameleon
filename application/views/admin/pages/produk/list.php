@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data Akun admin</title>
     <?php $this->load->view('admin/assets/stylesheets') ?>
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/admin/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/admin/node_modules/datatables.net-select-bs4/css/select.bootstrap4.min.css">
 </head>
 
 <body>
@@ -41,7 +44,7 @@
                                         <a href="<?= base_url() ?>admin/produk/tambah" class="btn btn-primary" style="margin-bottom:10px"><i class="fa fa-plus"></i> Tambah Produk</a>
                                         <?= $this->session->flashdata('pesan') ?>
                                         <div class="table-responsive">
-                                            <table class="table table-hover">
+                                            <table class="table table-hover" id="table-1">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">No</th>
@@ -70,7 +73,7 @@
                                                                 <img style="margin:10px" width="100px" height="100px" src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>">
                                                             </td>
                                                             <td>
-                                                                <button id="btnUbah" data-toggle="modal" data-target="#updateModal" data-id="<?=$row['kode_produk'];?>" data-stok="<?=$row['stok_produk'];?>" class="btn btn-success"><i class="fa fa-pencil" style="margin-right:5px"></i> Stok</button>
+                                                                <button id="btnUbah" data-toggle="modal" data-target="#updateModal" data-id="<?= $row['kode_produk']; ?>" data-stok="<?= $row['stok_produk']; ?>" class="btn btn-success"><i class="fa fa-pencil" style="margin-right:5px"></i> Stok</button>
                                                                 <!-- <a href="<?= base_url() ?>admin/produk/ubah?id=<?= $row['id_produk'] ?>" class="btn btn-success">Ubah</a> -->
                                                                 <!-- <button id="btnHapus" data-target="#hapusModal" data-toggle="modal" data-id="<?= $row['id_produk'] ?>" class="btn btn-danger">Hapus</button> -->
                                                             </td>
@@ -155,7 +158,11 @@
             </div>
         </div>
     </div>
+
     <?php $this->load->view('admin/assets/javascript') ?>
+    <!-- JS Libraies -->
+    <script src="<?= base_url() ?>assets/admin/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url() ?>assets/admin/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript">
         $(document).on("click", "#btnHapus", function() {
             let id = $(this).data("id");
@@ -165,11 +172,18 @@
             // alert($(this).data('id'))
             window.location.href = "<?= base_url() ?>admin/produk/ubah?id=" + $(this).data('id')
         });
-        $(document).on("click", "#btnUbah", function(){
+        $(document).on("click", "#btnUbah", function() {
             let id = $(this).data('id');
             let stok = $(this).data('stok');
             $("#id_ubah").val(id);
             $("#stok_num").val(stok);
+        });
+
+        $("#table-1").dataTable({
+            "columnDefs": [{
+                "sortable": false,
+                "targets": [2, 3]
+            }]
         });
     </script>
 </body>

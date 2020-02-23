@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Data Transaksi</title>
     <?php $this->load->view('admin/assets/stylesheets') ?>
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/admin/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/admin/node_modules/datatables.net-select-bs4/css/select.bootstrap4.min.css">
 </head>
 
 <body>
@@ -41,7 +44,7 @@
                                         <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#tambahModal" style="margin-bottom:10px"><i class="fa fa-plus"></i> Tambah Admin</button> -->
                                         <?php echo $this->session->flashdata('pesan') ?>
                                         <div class="table-responsive">
-                                            <table class="table table-hover">
+                                            <table class="table table-hover" id="table-1">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">No</th>
@@ -182,7 +185,11 @@
     </div>
     </div>
     <?php $this->load->view('admin/assets/javascript') ?>
+    <!-- JS Libraies -->
+    <script src="<?= base_url() ?>assets/admin/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url() ?>assets/admin/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript">
+        "use strict";
         $(document).on("click", "#btnBatal", function() {
             let id = $(this).data("id");
             $("#id_batal").val(id);
@@ -198,6 +205,12 @@
             window.location.href="<?=base_url()?>admin/transaksi/detail?id="+id
         });
 
+        $("#table-1").dataTable({
+            "columnDefs": [{
+                "sortable": false,
+                "targets": [2, 3]
+            }]
+        });
     </script>
 
 

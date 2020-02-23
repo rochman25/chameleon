@@ -20,6 +20,23 @@ class Pengguna extends MY_Controller{
        }
     }
 
+    public function detail(){
+        if($this->adminIsLoggedIn()){
+            $id = $this->input->get('id');
+            if($id){
+                $cek = $this->pengguna->getWhere('pengguna.id_pengguna',$id);
+                $cek = $this->pengguna->getJoin("alamat_pengguna","alamat_pengguna.id_pengguna = pengguna.id_pengguna", "left");
+                $cek = $this->pengguna->getData()->row();
+                if($cek){
+                    $data['pengguna'] = $cek;
+                    $this->load->view('admin/pages/pengguna/detail_pengguna',$data);
+                }
+            }
+        }else{
+            redirect('admin/home/login');
+        }
+    }
+
     public function ubah(){
         if($this->adminIsLoggedIn()){
             $id = $this->input->post('id');
