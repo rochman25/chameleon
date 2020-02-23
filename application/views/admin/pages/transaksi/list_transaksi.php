@@ -65,14 +65,14 @@
                                                             <td><?= $row['username'] ?></td>
                                                             <td><?= $row['waktu_transaksi'] ?></td>
                                                             <td>
-                                                                <?php if($row['status_transaksi'] == 'pending'){
-                                                                    echo "<span class='badge badge-secondary'>".$row['status_transaksi']."</span>";
-                                                                }else if($row['status_transaksi'] == 'kirim'){
-                                                                    echo "<span class='badge badge-info'>".$row['status_transaksi']."</span>";
-                                                                }else if($row['status_transaksi'] == 'selesai'){
-                                                                    echo "<span class='badge badge-success'>".$row['status_transaksi']."</span>";
-                                                                }else if($row['status_transaksi'] == 'batal'){
-                                                                    echo "<span class='badge badge-danger'>".$row['status_transaksi']."</span>";
+                                                                <?php if ($row['status_transaksi'] == 'pending') {
+                                                                    echo "<span class='badge badge-secondary'>" . $row['status_transaksi'] . "</span>";
+                                                                } else if ($row['status_transaksi'] == 'kirim') {
+                                                                    echo "<span class='badge badge-info'>" . $row['status_transaksi'] . "</span>";
+                                                                } else if ($row['status_transaksi'] == 'selesai') {
+                                                                    echo "<span class='badge badge-success'>" . $row['status_transaksi'] . "</span>";
+                                                                } else if ($row['status_transaksi'] == 'batal') {
+                                                                    echo "<span class='badge badge-danger'>" . $row['status_transaksi'] . "</span>";
                                                                 } ?>
                                                             </td>
                                                             <td>
@@ -113,6 +113,7 @@
                                             <div class="input-group">
                                                 <select id="status" name="status" class="form-control" required>
                                                     <option>Pilih Status Transaksi</option>
+                                                    <option value="validasi">Validasi</option>
                                                     <option value="proses">Proses</option>
                                                     <option value="kirim">Kirim</option>
                                                     <!-- <option value="selesai">Selesai</option> -->
@@ -180,8 +181,8 @@
         </div>
     </div>
 
-        <!-- footer content -->
-        <?php $this->load->view('admin/master/footer') ?>
+    <!-- footer content -->
+    <?php $this->load->view('admin/master/footer') ?>
     </div>
     </div>
     <?php $this->load->view('admin/assets/javascript') ?>
@@ -200,9 +201,9 @@
             $('#id_proses').val(id);
         })
 
-        $(document).on("click","#kode_t",function(){
+        $(document).on("click", "#kode_t", function() {
             let id = $(this).data('id');
-            window.location.href="<?=base_url()?>admin/transaksi/detail?id="+id
+            window.location.href = "<?= base_url() ?>admin/transaksi/detail?id=" + id
         });
 
         $("#table-1").dataTable({
