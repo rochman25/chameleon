@@ -14,6 +14,11 @@ class Kategori_model extends MY_Model
         return $this->insert($data);
     }
 
+    function getById($id){
+        $this->getWhere('id_kategori',$id);
+        return $this->getData()->row();
+    }
+
     function updateData($data,$id){
         $this->getWhere('id_kategori',$id);
         return $this->update($data);

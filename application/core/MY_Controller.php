@@ -38,6 +38,14 @@ class MY_Controller extends CI_Controller
         $this->upload->initialize($config);
     }
 
+    function uploadFotoKategori($image){
+        $config['upload_path'] = 'assets/uploads/thumbnail_kategori';
+        $config['allowed_types'] = 'jpeg|jpg|png';
+        $config['file_name'] = $image;
+        $config['overwrite'] = true;
+        $this->upload->initialize($config);
+    }
+
     public function getrajaongkir($type, $mode = "GET")
     {
         // die(json_encode($mode));

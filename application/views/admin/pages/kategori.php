@@ -56,7 +56,7 @@
                                                     <tr>
                                                         <th scope="row"><?= $no++ ?></th>
                                                         <td><?= $row['nama_kategori'] ?></td>
-                                                        <td><img src="<?= base_url() ?>assets/uploads/thumbnail_kategori/<?= $row['thumbnail_kategori'] ?>" alt="<?= $row['nama_kategori'] ?>"></td>
+                                                        <td><img style="margin:10px;" width="150px" src="<?= base_url() ?>assets/uploads/thumbnail_kategori/<?= $row['thumbnail_kategori'] ?>" alt="<?= $row['nama_kategori'] ?>"></td>
                                                         <td>
                                                             <button id="btnUbah" class="btn btn-success" data-target="#ubahModal" data-toggle="modal" data-id="<?= $row['id_kategori'] ?>" data-nama="<?= $row['nama_kategori'] ?>" data-deskripsi="<?= $row['deskripsi_kategori'] ?>">Ubah</button>
                                                             <button id="btnHapus" class="btn btn-danger" data-target="#hapusModal" data-toggle="modal" data-id="<?= $row['id_kategori'] ?>">Hapus</button>
@@ -82,7 +82,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="<?= base_url() ?>admin/kategori/tambah" method="POST">
+                        <form action="<?= base_url() ?>admin/kategori/tambah" method="POST" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="form-group">
                                     <div class="row">
@@ -134,7 +134,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="<?= base_url() ?>admin/kategori/ubah" method="POST">
+                        <form action="<?= base_url() ?>admin/kategori/ubah" method="POST" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="form-group">
                                     <div class="row">
@@ -162,7 +162,7 @@
                                         <div class="col-lg-12">
                                             <label for="thumbnail">Foto Kategori</label>
                                             <div class="input-group">
-                                                <input type="file" class="form-control" name="thumbnail" id="thumbnail" accept="image/gif,image/jpeg,image/png,image/jpg">
+                                                <input type="file" class="form-control" name="thumbnail" id="thumbnail" accept="image/jpeg,image/png,image/jpg">
                                             </div>
                                         </div>
                                     </div>
