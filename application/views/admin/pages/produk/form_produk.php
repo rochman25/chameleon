@@ -93,16 +93,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- <div class="form-group">
+                                            <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-12">
-                                                        <label for="thumbnail">Foto Produk</label>
-                                                        <div class="dropzone-previews"></div>
-                                                        <input type="file" class="form-control" name="thumbnail[]" accept="image/*" multiple>
-                                                        *note : blok file yang akan diupload jika lebih dari 1
+                                                        <label for="link">Link Video</label>
+                                                        <input type="text" name="link" id="link" class="form-control" placeholder="Masukkan link video" value="<?php if (isset($produk)) {
+                                                                                                                                                                    echo $produk->video_link;
+                                                                                                                                                                } ?>">
                                                     </div>
                                                 </div>
-                                            </div> -->
+                                            </div>
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-12">

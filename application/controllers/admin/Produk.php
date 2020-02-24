@@ -44,6 +44,7 @@ class Produk extends MY_Controller
                 $harga_p = $this->input->post('harga_p');
                 $kat_p = $this->input->post('kat_p');
                 $size_p = $this->input->post('size_p');
+                $link = $this->input->post('link');
                 $namaFile = "";
                 // $thumbnail = $_FILES['file']['name'];
                 if ($this->session->userdata('produk_data') != null) {
@@ -64,6 +65,7 @@ class Produk extends MY_Controller
                     "id_kategori" => $kat_p,
                     "size_produk" => $size_p,
                     "thumbnail_produk" => $namaFile,
+                    "video_link" => $link,
                     "created_at" => date("Y-m-d H:i:s")
                 );
                 // die(json_encode($data));
@@ -102,6 +104,7 @@ class Produk extends MY_Controller
                 $harga_p = $this->input->post('harga_p');
                 $kat_p = $this->input->post('kat_p');
                 $size_p = $this->input->post('size_p');
+                $link = $this->input->post('link');
 
                 if($this->session->userdata('produk_data') != null){
                     $thumbnail = implode(",", $this->session->userdata['produk_data']['thumbnail']);
@@ -113,6 +116,7 @@ class Produk extends MY_Controller
                         "id_kategori" => $kat_p,
                         "thumbnail_produk" => $thumbnail,
                         "size_produk" => $size_p,
+                        "video_link" => $link,
                         "updated_at" => date("Y-m-d H:i:s")
                     );
                     $this->session->unset_userdata('produk_data');
@@ -124,6 +128,7 @@ class Produk extends MY_Controller
                         "harga_produk" => $harga_p,
                         "id_kategori" => $kat_p,
                         "size_produk" => $size_p,
+                        "video_link" => $link,
                         "updated_at" => date("Y-m-d H:i:s")
                     );
                 }
