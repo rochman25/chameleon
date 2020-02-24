@@ -59,7 +59,7 @@
                                                         <td><img style="margin:10px;" width="150px" src="<?= base_url() ?>assets/uploads/thumbnail_kategori/<?= $row['thumbnail_kategori'] ?>" alt="<?= $row['nama_kategori'] ?>"></td>
                                                         <td>
                                                             <button id="btnUbah" class="btn btn-success" data-target="#ubahModal" data-toggle="modal" data-id="<?= $row['id_kategori'] ?>" data-nama="<?= $row['nama_kategori'] ?>" data-deskripsi="<?= $row['deskripsi_kategori'] ?>">Ubah</button>
-                                                            <button id="btnHapus" class="btn btn-danger" data-target="#hapusModal" data-toggle="modal" data-id="<?= $row['id_kategori'] ?>">Hapus</button>
+                                                            <button id="btnHapus" class="btn btn-danger" data-target="#hapusModal" data-toggle="modal" data-id="<?= $row['id_kategori'] ?>" data-foto="<?=$row['thumbnail_kategori']?>">Hapus</button>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
@@ -193,6 +193,7 @@
                                         <div class="col-lg-12">
                                             <div class="input-group">
                                                 <input type="hidden" class="form-control" id="id_hapus" name="id" required>
+                                                <input type="hidden" class="form-control" id="foto" name="thumbnail" required>
                                                 <p>
                                                     <h6>Apakah anda yakin menghapus data ini?</h6>
                                                 </p>
@@ -227,7 +228,9 @@
         });
         $(document).on("click", "#btnHapus", function() {
             let id = $(this).data('id');
+            let foto = $(this).data('foto')
             $('input[id="id_hapus"]').val(id);
+            $('input[id="foto"]').val(foto);
         });
     </script>
 </body>

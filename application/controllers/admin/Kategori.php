@@ -124,6 +124,10 @@ class Kategori extends MY_Controller
     {
         if ($this->adminIsLoggedIn()) {
             $id = $this->input->post('id');
+            $thumbnail = $this->input->post('thumbnail');
+            if ($thumbnail != null) {
+                unlink("assets/uploads/thumbnail_kategori/" . $thumbnail);
+            }
             if ($this->kategori->delete("id_kategori", $id)) {
                 $this->session->set_flashdata(
                     'pesan',
