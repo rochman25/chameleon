@@ -52,6 +52,7 @@
                                                         <th scope="col">Username</th>
                                                         <th scope="col">Waktu Transaksi</th>
                                                         <th scope="col">Status</th>
+                                                        <th scope="col">Bukti Pembayaran</th>
                                                         <th scope="col">Action</th>
                                                     </tr>
                                                 </thead>
@@ -66,6 +67,8 @@
                                                             <td><?= $row['waktu_transaksi'] ?></td>
                                                             <td>
                                                                 <?php if ($row['status_transaksi'] == 'pending') {
+                                                                    echo "<span class='badge badge-warning'>" . $row['status_transaksi'] . "</span>";
+                                                                } else if ($row['status_transaksi'] == 'validasi') {
                                                                     echo "<span class='badge badge-secondary'>" . $row['status_transaksi'] . "</span>";
                                                                 } else if ($row['status_transaksi'] == 'kirim') {
                                                                     echo "<span class='badge badge-info'>" . $row['status_transaksi'] . "</span>";
@@ -74,6 +77,13 @@
                                                                 } else if ($row['status_transaksi'] == 'batal') {
                                                                     echo "<span class='badge badge-danger'>" . $row['status_transaksi'] . "</span>";
                                                                 } ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php if ($row['bukti_transfer'] != null) { ?>
+                                                                    <a href="<?= base_url() ?>assets/bukti_transfer/<?=$row['bukti_transfer']?>" target="_blank"><span class='badge badge-primary'>Lihat Bukti</span></a>
+                                                                <?php } else { ?>
+                                                                    <span class='badge badge-danger'>Belum ada</span>
+                                                                <?php } ?>
                                                             </td>
                                                             <td>
                                                                 <button class="btn btn-primary btn-icon icon-left" id="btnProses" data-target="#proses_modal" data-toggle="modal" data-id="<?= $row['id_transaksi'] ?>"><i class="fas fa-credit-card"></i> Proses</button>
@@ -122,11 +132,16 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
+                                            <div id="sub_form">
+
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-lg-12">
                                             <label>Nomor Resi</label>
                                             <div class="input-group">
                                                 <input type="text" id="noresi" class="form-control" placeholder="Nomor Resi" name="noresi">
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-lg-12">
                                             <div class="input-group">
                                                 <input type="hidden" class="form-control" id="id_proses" name="id" required>
@@ -191,26 +206,45 @@
     <script src="<?= base_url() ?>assets/admin/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript">
         "use strict";
-        $(document).on("click", "#btnBatal", function() {
-            let id = $(this).data("id");
-            $("#id_batal").val(id);
-        })
+        $(document).ready(function() {
+            // $("#noresi").attr()
+            $(document).on("click", "#btnBatal", function() {
+                let id = $(this).data("id");
+                $("#id_batal").val(id);
+            })
 
-        $(document).on("click", "#btnProses", function() {
-            let id = $(this).data("id");
-            $('#id_proses').val(id);
-        })
+            $(document).on("click", "#btnProses", function() {
+                let id = $(this).data("id");
+                $('#id_proses').val(id);
+            })
 
-        $(document).on("click", "#kode_t", function() {
-            let id = $(this).data('id');
-            window.location.href = "<?= base_url() ?>admin/transaksi/detail?id=" + id
-        });
+            $(document).on("click", "#kode_t", function() {
+                let id = $(this).data('id');
+                window.location.href = "<?= base_url() ?>admin/transaksi/detail?id=" + id
+            });
 
-        $("#table-1").dataTable({
-            "columnDefs": [{
-                "sortable": false,
-                "targets": [2, 3]
-            }]
+            $("#table-1").dataTable({
+                "columnDefs": [{
+                    "sortable": false,
+                    "targets": [2, 3]
+                }]
+            });
+            $("#status").change(function (e){
+                var status = $(this).val();
+                if (status == "kirim") {
+                    $('#sub_form').append('<label>No Resi</label><div class="input-group"><input type="text" id="noresi" class="form-control" placeholder="Nomor Resi" name="noresi"></div>');
+                }else{
+                    $('#sub_form').remove()
+                }
+            });
+            // $(document).on("change", "#status", function() {
+            //     let status = $(this).val();
+            //     if (status == "kirim") {
+            //         $('#sub_form').append('<label>No Resi</label><div class="input-group"><input type="text" id="noresi" class="form-control" placeholder="Nomor Resi" name="noresi"></div>');
+            //     }else{
+            //         $('#sub_form').remove()
+            //     }
+            // });
         });
     </script>
 
