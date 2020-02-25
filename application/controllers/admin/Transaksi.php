@@ -142,7 +142,7 @@ class Transaksi extends MY_Controller
                 $this->load->view('admin/pages/laporan', $data);
             } else if ($this->input->post('export')) {
                 $tgl = explode("-", $this->input->post('tgl'));
-
+                $name = "Laporan_transaksi_".$this->input->post('tgl');
                 $transaksi = $this->transaksi->getLaporan($tgl);
                 $spreadsheet = new Spreadsheet;
 
@@ -150,8 +150,9 @@ class Transaksi extends MY_Controller
                     ->setCellValue('A1', 'No')
                     ->setCellValue('B1', 'Kode Transaksi')
                     ->setCellValue('C1', 'Nama Lengkap')
-                    ->setCellValue('D1', 'Status')
-                    ->setCellValue('E1', 'Total');
+                    ->setCellValue('D1', 'No Telp')
+                    ->setCellValue('E1', 'Alamat Lengkap')
+                    ->setCellValue('F1', 'Status');
 
                 $kolom = 2;
                 $nomor = 1;
@@ -161,16 +162,23 @@ class Transaksi extends MY_Controller
                         ->setCellValue('A' . $kolom, $nomor)
                         ->setCellValue('B' . $kolom, $row['kode_transaksi'])
                         ->setCellValue('C' . $kolom, $row['nama_lengkap'])
-                        ->setCellValue('D' . $kolom, $row['status_transaksi'])
-                        ->setCellValue('E' . $kolom, ($row['total_harga'] + $row['total_ongkir']));
+                        ->setCellValue('D' . $kolom, $row['no_telp'])
+                        ->setCellValue('E' . $kolom, $row['alamat_1']." ".$row['alamat_2']." ".$row['kota']." ".$row['kabupaten']." ".$row['kode_pos'])
+                        ->setCellValue('F' . $kolom, $row['status_transaksi']);
                     $kolom++;
                     $nomor++;
                 }
+                $spreadsheet->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+                $spreadsheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+                $spreadsheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+                $spreadsheet->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+                $spreadsheet->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+                // $spreadsheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
                 // die(json_encode($spreadsheet));
                 $writer = new Xlsx($spreadsheet);
 
                 header('Content-Type: application/vnd.ms-excel');
-                header('Content-Disposition: attachment;filename="Latihan.xlsx"');
+                header('Content-Disposition: attachment;filename='.$name.".xlsx");
                 header('Cache-Control: max-age=0');
 
                 $writer->save('php://output');

@@ -48,7 +48,8 @@
                                                                 </div>
                                                             </div>
                                                             <input type="text" name="tgl" class="form-control daterange-cus" value="<?php if (!empty($tgl)) {
-                                                                                                                                        echo $tgl;} ?>" <?php if(!empty($tgl)){ ?> readonly="readonly" <?php } ?> >
+                                                                                                                                        echo $tgl;
+                                                                                                                                    } ?>" <?php if (!empty($tgl)) { ?> readonly="readonly" <?php } ?>>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -85,10 +86,22 @@
                                                                 <td id="kode_t" data-id="<?= $row['id_transaksi'] ?>"><a href="<?= base_url() ?>admin/transaksi/detail?id=<?= $row['id_transaksi'] ?>"><?= $row['kode_transaksi'] ?></a></td>
                                                                 <td><?= $row['username'] ?></td>
                                                                 <td><?= $row['waktu_transaksi'] ?></td>
-                                                                <td><?= $row['status_transaksi'] ?></td>
+                                                                <td>
+                                                                    <?php if ($row['status_transaksi'] == 'pending') {
+                                                                        echo "<span class='badge badge-warning'>" . $row['status_transaksi'] . "</span>";
+                                                                    } else if ($row['status_transaksi'] == 'validasi') {
+                                                                        echo "<span class='badge badge-secondary'>" . $row['status_transaksi'] . "</span>";
+                                                                    } else if ($row['status_transaksi'] == 'kirim') {
+                                                                        echo "<span class='badge badge-info'>" . $row['status_transaksi'] . "</span>";
+                                                                    } else if ($row['status_transaksi'] == 'selesai') {
+                                                                        echo "<span class='badge badge-success'>" . $row['status_transaksi'] . "</span>";
+                                                                    } else if ($row['status_transaksi'] == 'batal') {
+                                                                        echo "<span class='badge badge-danger'>" . $row['status_transaksi'] . "</span>";
+                                                                    } ?>
+                                                                </td>
                                                                 <!-- <td> -->
-                                                                    <!-- <a href="#" class="btn btn-info" data-id="<?= $row['id_transaksi'] ?>">Detail</a> -->
-                                                                    <!-- <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_transaksi'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button> -->
+                                                                <!-- <a href="#" class="btn btn-info" data-id="<?= $row['id_transaksi'] ?>">Detail</a> -->
+                                                                <!-- <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_transaksi'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button> -->
                                                                 <!-- </td> -->
                                                             </tr>
                                                         <?php } ?>
