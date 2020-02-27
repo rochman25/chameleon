@@ -179,8 +179,22 @@
         });
 
         foto_upload.on("removedfile", function(a, b, c) {
-            c.append("file_name", nama)
-            c.append("status", "remove")
+            // var name = file.name;
+            // var id=0;
+            // var id = 
+            var request;
+            request = $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('admin/produk/deleteFile') ?>',
+                data: {"id":getUrlParameter('id'),"nama":a.name},
+                dataType: 'html'
+            });
+            request.done(function(response, data, jqXHR) {
+                // Log a message to the console
+                console.log(response);
+            });
+            // c.append("file_name", nama)
+            // c.append("status", "remove")
         })
         $(document).ready(function() {
             // if (getUrlParameter('id') != null) {

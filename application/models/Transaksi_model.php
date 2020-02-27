@@ -27,6 +27,13 @@ class Transaksi_model extends MY_Model
         return $kode;
     }
 
+    function getStatistik(){
+        $date = date("y-m-d");
+        $sql = "SELECT * FROM transaksi WHERE `waktu_transaksi` BETWEEN DATE_SUB( CURDATE( ), INTERVAL 1 YEAR)";
+        $query = $this->custom($sql)->result();
+        return $query;
+    }
+
     function get_transaksi(){
         $this->getJoin("pengguna","pengguna.id_pengguna = transaksi.id_pengguna","inner");
         $this->order_by("transaksi.kode_transaksi","ASC");
