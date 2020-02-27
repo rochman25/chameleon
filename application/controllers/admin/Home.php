@@ -16,6 +16,7 @@ class Home extends MY_Controller
     {
         if ($this->adminIsLoggedIn()) {
             $transaksi = $this->transaksi->getDetailTransaksi();
+            // $stat = $this->transaksi->getStatistik();
             $statistik = ["pending" => 0,"kirim" => 0,"selesai" => 0];
             $penjualan = 0;
             $produk = 0;
@@ -39,7 +40,7 @@ class Home extends MY_Controller
                 "produk"    => $produk,
                 "statistik_penjualan" => $stat_penjualan
             ];
-            // die(json_encode($data));
+            // die(json_encode($stat));
             $this->load->view('admin/pages/dashboard',$data);
         } else {
             redirect('admin/home/login');

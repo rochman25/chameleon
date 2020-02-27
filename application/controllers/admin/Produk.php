@@ -266,6 +266,31 @@ class Produk extends MY_Controller
         }
     }
 
+    public function deleteFile(){
+        $id = $this->input->post('id');
+        $nama = $this->input->post('nama');
+        $tp = [];
+        $data = $this->produk->getById($id);
+        $thumbnail = explode(',',$data->thumbnail_produk);
+        foreach($thumbnail as $row){
+            if($nama != $row){
+                $tp[] = $row;
+            }else{
+                unlink("assets/uploads/thumbnail_produk/" . $row);
+            }
+        }
+        $thumbnail = implode(",", $tp);
+        $data = array(
+            "thumbnail_produk" => $thumbnail
+        );
+        $query = $this->produk->updateData($data,$id);
+        if($query){
+            echo json_encode(['message' => "success"]);
+        }else{
+            echo json_encode(['message' => "error"]);
+        }
+    }
+
     public function getThumbnail($id = null)
     {
         if ($this->adminIsLoggedIn()) {
