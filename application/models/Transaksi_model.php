@@ -28,10 +28,10 @@ class Transaksi_model extends MY_Model
     }
 
     function getStatistik(){
-        $date = date("y-m-d");
-        $sql = "SELECT * FROM transaksi WHERE `waktu_transaksi` BETWEEN DATE_SUB( CURDATE( ), INTERVAL 1 YEAR)";
-        $query = $this->custom($sql)->result();
-        return $query;
+        $tgl = date("Y")."-1-1";
+        $this->select('transaksi.kode_transaksi,transaksi.waktu_transaksi,transaksi.total_harga,transaksi.total_ongkir');
+        $this->getWhereArr("transaksi.waktu_transaksi BETWEEN '".date("Y-m-d", strtotime($tgl))."' and '".date("Y-m-d")."'");
+        return $this->getData()->result_array();
     }
 
     function get_transaksi(){
