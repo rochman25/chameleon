@@ -78,7 +78,7 @@ $this->load->view('public/cart');
                                         <span>-</span>
                                     </li>
                                     <li class="size  ">
-                                        <span id="value">1</span>
+                                        <span style="color:black;" id="value">1</span>
                                     </li>
                                     <li onclick="ubahjml(1);" class=" size active ">
                                         <span>+</span>
@@ -86,6 +86,24 @@ $this->load->view('public/cart');
                                    
                             </ul>
                         </div>
+                        <span>Ukuran :</span>
+                        <div id="size" class="size-product">
+                            <ul class="clearfix">
+                                    <li onclick=""  class=" size active ">
+                                        <span>S</span>
+                                    </li>
+                                    <li onclick=""  class=" size active ">
+                                        <span>M</span>
+                                    </li> 
+                                    <li onclick=""  class=" size active ">
+                                        <span>L</span>
+                                    </li>
+                                    <li onclick=""  class=" size active ">
+                                        <span>XL</span>
+                                    </li>       
+                            </ul>
+                        </div>
+                        
                         <div class="button-action">
                             <?php 
                             if(isset($this->session->userdata['user_data'])){
@@ -143,7 +161,7 @@ $this->load->view('public/cart');
                         </div>
                         <ul class="nav nav-tabs">
                             <li class="active" data-target="product-deskripsi">
-                                <a href="javascript:;">Deskripsi</a></li>
+                                <a style="color:white;background-color:none;" href="javascript:;">Deskripsi</a></li>
                             <!-- <li data-target="review"><a href="javascript:;">Rating dan Ulasan ( 5/5 )</a></li> -->
                         </ul>
                         <div class="tab-content">
