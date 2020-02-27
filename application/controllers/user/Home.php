@@ -93,6 +93,10 @@ class Home extends MY_Controller{
         }
         $this->load->view('public/product',$data);
     }
+    public function promo()
+    {
+        $this->load->view('public/product-promo');
+    }
     public function produk_detail(){
         //die(json_encode($this->session->userdata("c72e6711-4ea1-11ea-9a04-e03f4931b17e")));
         $id_produk = $this->input->get('produk');
