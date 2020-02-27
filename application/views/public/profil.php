@@ -50,7 +50,7 @@ $this->load->view('public/cart');
                         <?php
                             }
                         } ?>
-                        <li><i class="svg-icon svg_icon__dashboard_phone"></i> <span><?=$alamat[0]->no_telp?></span></li>
+                        <!-- <li><i class="svg-icon svg_icon__dashboard_phone"></i> <span><?=$alamat[0]->no_telp?></span></li> -->
 
                     </ul>
                     <button class="expand">
