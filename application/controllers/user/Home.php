@@ -80,7 +80,7 @@ class Home extends MY_Controller{
         }
         $data['section'] = $kategori;
         if($kategori == "celana"){
-            $data['bg'] = base_url('assets/images/celana/Celana-BG.png');
+            $data['bg'] = base_url('assets/images/Celana/Celana-BG.png');
             
         }else if($kategori == "kemeja"){
             $data['bg'] = base_url('assets/images/Kemeja/Kemeja-BG.png');

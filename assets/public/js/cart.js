@@ -40,10 +40,11 @@ $(document).ready(function () {
         ]
     }), $(".image-gallery-mobile").owlCarousel({
         items: 1, loop: !0, pagination: !0, dots: !0, nav: !1
-    }), $("#size ul li").on("click", function () {
-        $("#size ul li").removeClass("active"),
-            $(this).addClass("active")
     }),
+        // $("#size ul li").on("click", function () {
+        //     $("#size ul li").removeClass("active"),
+        //         $(this).addClass("active")
+        // }),
         $(".product-info .nav-tabs li").on("click", function () {
             $(".product-info .nav-tabs li").removeClass("active"),
                 $(this).addClass("active");
