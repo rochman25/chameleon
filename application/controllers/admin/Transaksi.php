@@ -12,6 +12,7 @@ class Transaksi extends MY_Controller
     {
         parent::__construct();
         $this->load->model('Transaksi_model', 'transaksi');
+        $this->load->model('Produk_model','produk');
         $this->load->model('Cart_model', 'cart');
         $this->load->model('Detailcart_model','detail');
     }
@@ -52,8 +53,19 @@ class Transaksi extends MY_Controller
                 "status_transaksi" => $status,
                 "no_resi" => $noresi
             ];
+            $data_p = [];
+            if($status == "validasi"){
 
-            if($this->transaksi->updateData($data,$id)){
+                $data_t = $this->transaksi->get_transaksiById($id);
+                foreach($data_t as $row){
+                    $data_p[] = [
+                        "id_produk" => $row->id_produk,
+                        "stok_produk" => ($row->stok_produk - $row->jumlah_produk)
+                    ];
+                }
+                $this->produk->update_multiple($data_p,"id_produk");
+            }
+            if ($this->transaksi->updateData($data, $id)) {
                 $this->session->set_flashdata(
                     'pesan',
                     '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil diupdate</div>'
