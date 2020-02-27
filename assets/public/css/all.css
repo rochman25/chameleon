@@ -1080,7 +1080,7 @@ body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	line-height: 1.42857143;
-	color: #333;
+	color: #ffff;
 	background-color: #fff;
 }
 button,
@@ -12636,7 +12636,7 @@ button.close {
 	margin: 0 auto;
 }
 #content {
-	background-color: #ededee;
+	background-color: #020202; /*#ededee;*/
 	margin: 0;
 }
 .alert {

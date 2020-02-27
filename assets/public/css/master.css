@@ -109,7 +109,7 @@
 	background-color: transparent;
 }
 .homepage .hot-product {
-	background-color: #fff;
+	background-color: 101010;
 	padding: 52px 0;
 }
 .homepage .hot-product a {
@@ -121,7 +121,7 @@
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: normal;
-	color: rgba(0, 0, 0, 0.7);
+	color: #ffff;
 	margin-bottom: 16px;
 	font-family: Nunito Sans;
 }
@@ -155,7 +155,7 @@
 	font-stretch: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	color: rgba(0, 0, 0, 0.7);
+	color: #ffff;
 }
 .homepage .hot-product .product-hotcard .price-before {
 	margin: 0 0 4px;
@@ -166,7 +166,7 @@
 	line-height: normal;
 	letter-spacing: normal;
 	text-decoration: line-through;
-	color: rgba(0, 0, 0, 0.4);
+	color: #ffff;
 }
 .homepage .hot-product .product-hotcard .price-after {
 	font-size: 16px;
@@ -175,7 +175,7 @@
 	font-stretch: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	color: rgba(183, 77, 36, 0.7);
+	color: rgba(0, 129, 11, 0.7);
 }
 .homepage .hot-product .product-hotcard .rating-wrapper {
 	margin-top: 4px;
@@ -1770,7 +1770,7 @@ footer.footer .copyright {
 }
 #product {
 	padding-top: 40px;
-	background-color: #fff;
+	background-color: #0e0e0e;
 }
 #product .product-ribbon .ribbon-item {
 	border: 1px solid #eaeaea;
@@ -1796,7 +1796,7 @@ footer.footer .copyright {
 	font-weight: 700;
 	line-height: normal;
 	font-size: 28px;
-	color: rgba(0, 0, 0, 0.7);
+	color: #ffff;
 	margin: 16px 0 0;
 }
 #product .product-info h2 {
@@ -1856,11 +1856,11 @@ footer.footer .copyright {
 #product .product-info ul.nav-tabs li a {
 	border: none;
 	color: rgba(0, 0, 0, 0.2);
-	padding: 0;
+	/* padding: 0; */
 	cursor: pointer;
 }
 #product .product-info ul.nav-tabs li a:hover {
-	background-color: initial;
+	/* background-color: initial; */
 }
 #product .product-info ul.nav-tabs li.active {
 	border-color: rgba(0, 0, 0, 0.7);
@@ -2071,7 +2071,7 @@ footer.footer .copyright {
 	font-stretch: normal;
 	line-height: 1.7;
 	letter-spacing: normal;
-	color: rgba(0, 0, 0, 0.7);
+	color: #ffff;
 }
 #product .product-info .review {
 	display: none;
@@ -5456,7 +5456,7 @@ footer.footer .copyright {
 	top: 32px;
 	left: 50%;
 	transform: translateX(-50%);
-	background: #fff;
+	background: #0a0a0a;
 	box-shadow: 3px 4px 15px rgba(0, 0, 0, 0.1);
 	border-radius: 8px;
 	padding: 32px;
@@ -5472,7 +5472,7 @@ footer.footer .copyright {
 .new-login > h1 {
 	font-weight: 600;
 	font-size: 18px;
-	color: rgba(0, 0, 0, 0.7);
+	color: #ffff;
 	margin-bottom: 12px;
 }
 .new-login > h1,
@@ -5482,7 +5482,7 @@ footer.footer .copyright {
 }
 .new-login > p {
 	font-size: 12px;
-	color: rgba(0, 0, 0, 0.5);
+	color: #ffff;
 	margin-bottom: 32px;
 }
 .new-login > p strong {
@@ -5496,7 +5496,7 @@ footer.footer .copyright {
 	font-size: 12px;
 	line-height: normal;
 	text-transform: capitalize;
-	color: rgba(0, 0, 0, 0.5);
+	color: #ffff;
 	margin-bottom: 4px;
 }
 .new-login > form input[type="email"],
@@ -5577,7 +5577,7 @@ footer.footer .copyright {
 	top: 32px;
 	left: 50%;
 	transform: translateX(-50%);
-	background: #fff;
+	background: #0a0a0a;
 	box-shadow: 3px 4px 15px rgba(0, 0, 0, 0.1);
 	border-radius: 8px;
 	padding: 32px;
@@ -5593,7 +5593,7 @@ footer.footer .copyright {
 .new-register > h1 {
 	font-weight: 600;
 	font-size: 18px;
-	color: rgba(0, 0, 0, 0.7);
+	color: #ffff;
 	margin-bottom: 12px;
 }
 .new-register > h1,
@@ -5603,7 +5603,7 @@ footer.footer .copyright {
 }
 .new-register > p {
 	font-size: 12px;
-	color: rgba(0, 0, 0, 0.5);
+	color: #ffff;
 	margin-bottom: 32px;
 }
 .new-register > p strong {
@@ -5617,7 +5617,7 @@ footer.footer .copyright {
 	font-size: 12px;
 	line-height: normal;
 	text-transform: capitalize;
-	color: rgba(0, 0, 0, 0.5);
+	color: #ffff;
 	margin-bottom: 4px;
 }
 .new-register > form input[type="email"],

@@ -44,7 +44,7 @@ $this->load->view('public/cart');
                             <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$p['id_produk']] ?>" alt="">
                                 <h1><?= $p['nama_produk'];?></h1>
                                     <!-- <div class="price-before">Rp 429,000</div> -->
-                                    <div class="price-after"><?= $p['harga_produk'];?></div>
+                                    <div class="price-after">Rp.<?= $p['harga_produk'];?></div>
                                     <div class="rating-wrapper">
                                         <!-- <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$p['id_produk']] ?>" alt=""> -->
                                         <!-- <span>Stok : <?= $p['stok_produk'];?></span> -->
@@ -124,7 +124,7 @@ $this->load->view('public/cart');
                 </a>
             </div>
         </section> -->
-        <section class="signup" style="background-image:url('https://www.mensrepublic.id/assets/images/index/logobg.png')">
+        <section class="signup" >
             <i class="svg-icon svg_icon__home_envelope"></i>
             <h1>Daftar Dengan Email</h1>
             <h2>Jadi yang pertama untuk mendapatkan produk terbaru dan penawaran dari Chameleon</h2>
