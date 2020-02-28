@@ -74,16 +74,16 @@ $this->load->view('public/cart');
                         <span>Ukuran :</span>
                         <div id="size" class="size-product">
                             <ul class="clearfix">
-                                    <li onclick="changeSize('S');" class="size active ">
+                                    <li id="S" onclick="changeSizeS();" style="color:black !important;" class="size active ">
                                         <span >S</span>
                                     </li>
-                                    <li onclick="changeSize('M');" class="size  ">
+                                    <li id="M" onclick="changeSizeM();" style="color:black !important;" class="size  ">
                                         <span>M</span>
                                     </li>
-                                    <li onclick="changeSize('L');" class="size  ">
+                                    <li id="L" onclick="changeSizeL();" style="color:black !important;" class="size  ">
                                         <span>L</span>
                                     </li>
-                                    <li onclick="changeSize('XL');" class="size  ">
+                                    <li id="XL" onclick="changeSizeXL();" style="color:black !important;" class="size  ">
                                         <span >XL</span>
                                     </li>
                                     <div class="label-size">
@@ -108,24 +108,7 @@ $this->load->view('public/cart');
                                    
                             </ul>
                         </div>
-                        <!-- <span>Ukuran :</span>
-                        <div id="ukuran" class="size-product">
-                            <ul class="clearfix">
-                                    <li  class="size">
-                                        <span>S</span>
-                                    </li>
-                                    <li  class="size ">
-                                        <span>M</span>
-                                    </li> 
-                                    <li  class="size">
-                                        <span>L</span>
-                                    </li>
-                                    <li  class="size">
-                                        <span>XL</span>
-                                    </li>       
-                            </ul>
-                        </div> -->
-                        
+                       
                         <div class="button-action">
                             <?php 
                             if(isset($this->session->userdata['user_data'])){
@@ -217,8 +200,49 @@ $this->load->view('public/footer');
     var def_jml = 1;
     var def_Size = "S";
     var stok = '<?= $produk->stok_produk;?>';
-    function changeSize(param){
+    function changeSizeS(){
+        var S = document.getElementById('S');
+        var M = document.getElementById('M');
+        var L = document.getElementById('L');
+        var XL = document.getElementById('XL');
 
+        S.classList.add('active');
+        M.classList.remove('active');
+        L.classList.remove('active');
+        XL.classList.remove('active');
+
+    }
+    function changeSizeM(){
+        var S = document.getElementById('S');
+        var M = document.getElementById('M');
+        var L = document.getElementById('L');
+        var XL = document.getElementById('XL');
+    
+        S.classList.remove('active');
+        M.classList.add('active');
+        L.classList.remove('active');
+        XL.classList.remove('active');
+    }
+    function changeSizeL(){
+        var S = document.getElementById('S');
+        var M = document.getElementById('M');
+        var L = document.getElementById('L');
+        var XL = document.getElementById('XL');
+        S.classList.remove('active');
+        M.classList.remove('active');
+        L.classList.add('active');
+        XL.classList.remove('active');
+    }
+    function changeSizeXL(){
+        var S = document.getElementById('S');
+        var M = document.getElementById('M');
+        var L = document.getElementById('L');
+        var XL = document.getElementById('XL');
+        XL.classList.add('active');
+        S.classList.remove('active');
+        M.classList.remove('active');
+        L.classList.remove('active');
+        XL.classList.add('active');
     }
     function deleteitem(state){
         $.ajax({
