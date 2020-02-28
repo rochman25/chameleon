@@ -13,173 +13,154 @@ $this->load->view('public/m_heading');
 $this->load->view('public/cart');
 ?>
 <section id="content">
-    <div id="product" data-product-nama="<?= $produk->nama_produk;?>" data-product-id="<?= $produk->id_produk;?>">
+    <div class="category-page">
+        <div class="header" style="background-image:url(https://www.mensrepublic.id/assets/images/uploads/banner/fe2298aa-b7e7-54f1-e8d4-80a9049a31aa.jpg)">
         <div class="container">
-            <div class="row">  
-                <div class="col-lg-5 col-md-5 gallery-container" data-image-count="7">
-                    <div class="image-gallery">
-                        <img id="elevate-zoom" class="img-responsive" src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[0]; ?>" 
-                        data-zoom-image="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[0]; ?>"/>
-                    </div>
-                    <div class="image-thumbnail owl-carousel clearfix">
-                        <?php foreach($thumbnail as $p){?>
-                        <div class="image-thumbnail--list">
-                            <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>" data-zoom-image="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>"/>
-                        </div>
-                        
-                        <?php }?>
-                    </div>
-                </div>
-                <div class="image-gallery-mobile owl-carousel">
-                <?php foreach($thumbnail as $p){?>
-                    <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>" />
-                <?php }?>
-                </div>
-                <div class="col-lg-7 col-md-7 col-xs-12">
-                    <div class="product-ribbon clearfix">
-                    </div>
-                    <div class="product-info">
-                        <h1><?= $produk->nama_produk;?></h1>
-                        <h2>    
-                            <!-- <div class="price_before"> Rp <?= $produk->harga_produk;?> </div> -->
-                            <div class="price_after">
-                                <span class="value">Rp <?= $produk->harga_produk;?></span>
-                                <!-- <span id="stok" class="value">Stok <?= $produk->stok_produk;?></span> -->
-                                <!-- <span class="time">Tinggal 7 hari lagi</span> -->
+            <div class="bottom_absolute">
+                <h1> Promo </h1>
+                <h2>YOI #IndonesiaMelangkah</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="all-product-card-wrapper clearfix">
+
+                <!-- <div class="left-side-wrapper">
+
+                    <div class="filtering">
+
+                        <div class="sorting">
+                            <div class="labels">Urutkan</div>
+                            <div>
+                                <select id="order" onchange="location = this.value" data-sort="" data-order="">
+                                    <option value="?sort=published_at&order=">Terbaru</option>
+                                    <option value="?sort=price&order=asc">Termurah</option>
+                                    <option value="?sort=price&order=desc">Termahal</option>
+                                </select>
                             </div>
-                        </h2>
-                        <br>
-                        <!-- <span>Ukuran :</span>
-                        <div id="size" class="size-product">
-                            <ul class="clearfix">
-                                    <li onclick="changeSize('S');" class="size active ">
-                                        <span >S</span>
-                                    </li>
-                                    <li onclick="changeSize('M');" class="size  ">
-                                        <span>M</span>
-                                    </li>
-                                    <li onclick="changeSize('L');" class="size  ">
-                                        <span>L</span>
-                                    </li>
-                                    <li onclick="changeSize('XL');" class="size  ">
-                                        <span >XL</span>
-                                    </li>
-                                    <div class="label-size">
-                                        <i class="svg-icon svg_icon__pdp_check"></i>
-                                        <span class="text-label"></span>
-                                    </div>
-                            </ul>
                         </div>
-                        <br> -->
-                        <span>Jumlah :</span>
-                        <div id="size" class="size-product">
-                            <ul class="clearfix">
-                                    <li onclick="ubahjml(2);"  class=" size active ">
-                                        <span>-</span>
-                                    </li>
-                                    <li class="size  ">
-                                        <span style="color:black;" id="value">1</span>
-                                    </li>
-                                    <li onclick="ubahjml(1);" class=" size active ">
-                                        <span>+</span>
-                                    </li>
-                                   
-                            </ul>
+
+                        <div class="size">
+                            <h2>Ukuran</h2>
+                            <ul class="size_wrapper">
+                                                                        <li data-id="2" class="size_2">40</li>
+                                                                        <li data-id="3" class="size_3">41</li>
+                                                                        <li data-id="4" class="size_4">42</li>
+                                                                        <li data-id="5" class="size_5">43</li>
+                                                                        <li data-id="6" class="size_6">44</li>
+                                                                </ul>
                         </div>
-                        <span>Ukuran :</span>
-                        <div id="size" class="size-product">
-                            <ul class="clearfix">
-                                    <li onclick=""  class=" size active ">
-                                        <span>S</span>
-                                    </li>
-                                    <li onclick=""  class=" size active ">
-                                        <span>M</span>
-                                    </li> 
-                                    <li onclick=""  class=" size active ">
-                                        <span>L</span>
-                                    </li>
-                                    <li onclick=""  class=" size active ">
-                                        <span>XL</span>
-                                    </li>       
-                            </ul>
+                        <div class="color">
+                            <h2>Warna</h2>
+                            <ul class="color_wrapper">
+                                                                        <li data-id="1" data-toggle="tooltip" title="Black" class="color_1" style="background-color: #000000" ></li>
+                                                                        <li data-id="4" data-toggle="tooltip" title="Blue" class="color_4" style="background-color: #1d5ca6" ></li>
+                                                                        <li data-id="10" data-toggle="tooltip" title="Red" class="color_10" style="background-color: #ff2600" ></li>
+                                                                </ul>
                         </div>
-                        
-                        <div class="button-action">
-                            <?php 
-                            if(isset($this->session->userdata['user_data'])){
-                            ?>
-                                <button class="addToCart">
-                                    <i class="svg-icon svg_icon__pdp_cart"></i>hajar men
-                                </button>
-                               
-                            <?php
-                            }else{ 
-                                
-                            ?>
-                                <a href="<?= base_url();?>login" 
-                                style="padding:15px;"
-                                class="addToCart">
-                                    <i class="svg-icon svg_icon__pdp_cart"></i>hajar men
+
+                    </div>
+                </div> -->
+
+                <div class="right-side-wrapper">
+
+                <img src="https://www.mensrepublic.id/assets/images/uploads/banner/71378638-d886-93a1-25ac-840ef2d5a0c5.jpg" alt="YOI #IndonesiaMelangkah" class="image-category">
+                    
+                    <!-- <div class="all-product-card">
+                        <div class="product-card-wrapper">
+                            <a href="https://www.mensrepublic.id/product/yoi-black">
+                                    <div class="product-category">
+                                        <img src="" alt="" data-src="https://www.mensrepublic.id/assets/images/uploads/product/300/yoi-black-1569393534-2esdqAXcmCM1.jpg">
+                                        <h2 class="title">YOI BLACK</h2>
+
+                                        
+                                        <div class="price-wrapper">
+
+                                            
+                                            <div class="price">Rp 290,000</div>
+
+                                            
+                                        </div>
+
+                                        <div class="rating-wrapper">
+                                                                                                <img src="https://www.mensrepublic.id/assets/images/category/rating/star-5.png" alt="">
+                                                <span>(7)</span>
+                                                                                        </div>
+
+                                        
+                                        <div class="new-po">
+                                            
+                                                                                        </div>
+
+                                                                                </div>
                             </a>
-                                
-                            <?php
-                            }?>
-                             <span class="out-of-stock" style="display:none">HABIS MEN</span>
                         </div>
-                        
-                        <div class="product-order">
-                            <div class="list clearfix">
-                                <a href="#">
-                                    <div class="image">
-                                        <i class="svg-icon svg_icon__pdp_cart "></i>
-                                    </div>
-                                    <div class="content">
-                                        Cara Pemesanan									
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="list clearfix">
-                                <a href="#">
-                                    <div class="image">
-                                        <i class="svg-icon svg_icon__pdp_shoes "></i>
-                                    </div>
-                                    <div class="content">
-                                        Cara Perawatan									
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="list clearfix">
-                                <a href="#">
-                                    <div class="image">
-                                        <i class="svg-icon svg_icon__pdp_ruler "></i>
-                                    </div>
-                                    <div class="content">
-                                        Panduan Ukuran									
-                                    </div>
-                                </a>
-                            </div>
+                        <div class="product-card-wrapper">
+                            <a href="https://www.mensrepublic.id/product/yoi-blue">
+                                    <div class="product-category">
+                                        <img src="" alt="" data-src="https://www.mensrepublic.id/assets/images/uploads/product/300/yoi-blue-1569393568-xpXIeLv7isbZ.jpg">
+                                        <h2 class="title">YOI BLUE</h2>
+
+                                        
+                                        <div class="price-wrapper">
+
+                                            
+                                            <div class="price">Rp 290,000</div>
+
+                                            
+                                        </div>
+
+                                        <div class="rating-wrapper">
+                                                                                                <img src="https://www.mensrepublic.id/assets/images/category/rating/star-5.png" alt="">
+                                                <span>(3)</span>
+                                                                                        </div>
+
+                                        
+                                        <div class="new-po">
+                                            
+                                                                                        </div>
+
+                                                                                </div>
+                            </a>
                         </div>
-                        <ul class="nav nav-tabs">
-                            <li class="active" data-target="product-deskripsi">
-                                <a style="color:white;background-color:none;" href="javascript:;">Deskripsi</a></li>
-                            <!-- <li data-target="review"><a href="javascript:;">Rating dan Ulasan ( 5/5 )</a></li> -->
-                        </ul>
-                        <div class="tab-content">
-                            <div class="product-deskripsi">
-                                <?php if(empty($produk->deskripsi_produk)){
-                                    echo "<p>Belum ada deskripsi</p>";
-                                }else{
-                                    echo $produk->deskripsi_produk;
-                                }?>
-                            </div>
-                        <div class="review">
+                        <div class="product-card-wrapper">
+                            <a href="https://www.mensrepublic.id/product/yoi-red">
+                                    <div class="product-category">
+                                        <img src="" alt="" data-src="https://www.mensrepublic.id/assets/images/uploads/product/300/yoi-red-1569393587-ExGR7KSmTm1M.jpg">
+                                        <h2 class="title">YOI RED</h2>
+
+                                        
+                                        <div class="price-wrapper">
+
+                                            
+                                            <div class="price">Rp 290,000</div>
+
+                                            
+                                        </div>
+
+                                        <div class="rating-wrapper">
+                                                                                                <img src="https://www.mensrepublic.id/assets/images/category/rating/star-5.png" alt="">
+                                                <span>(5)</span>
+                                                                                        </div>
+
+                                        
+                                        <div class="new-po">
+                                            
+                                                                                        </div>
+
+                                                                                </div>
+                            </a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
+
             </div>
         </div>
     </div>
 </section>
+
 <?php 
 $this->load->view('public/footer');
 ?>

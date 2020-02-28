@@ -4123,7 +4123,6 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav-tabs > li.active > a:hover {
 	color: #555;
 	cursor: default;
-	background-color: #fff;
 	border: 1px solid #ddd;
 	border-bottom-color: transparent;
 }
@@ -12667,8 +12666,8 @@ button {
 }
 input[type="text"],
 select {
-	color: #000;
-	background-color: #fff;
+	color: #fff;
+	background-color: black;
 }
 .modal-body form h2 {
 	font-size: 14px;

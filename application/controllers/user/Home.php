@@ -80,7 +80,7 @@ class Home extends MY_Controller{
         }
         $data['section'] = $kategori;
         if($kategori == "celana"){
-            $data['bg'] = base_url('assets/images/bg_all/Celana-BG.png');
+            $data['bg'] = base_url('assets/images/Celana/Celana-BG.png');
             
         }else if($kategori == "kemeja"){
             $data['bg'] = base_url('assets/images/Kemeja/Kemeja-BG.png');
@@ -92,6 +92,10 @@ class Home extends MY_Controller{
             $data['bg'] = base_url('assets/images/Celana/Celana-BG.png');
         }
         $this->load->view('public/product',$data);
+    }
+    public function promo()
+    {
+        $this->load->view('public/product-promo');
     }
     public function produk_detail(){
         //die(json_encode($this->session->userdata("c72e6711-4ea1-11ea-9a04-e03f4931b17e")));

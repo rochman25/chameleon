@@ -16,17 +16,17 @@ $this->load->view('public/cart');
 	<div class="homepage">
         <section class="banner">
             <div class="owl-carousel owl-theme">
-                <a href="#">
+                <a href="<?= base_url()?>promo">
                     <div class="banner-card">
                         <img src="<?= base_url()?>assets/images/bg_all/formal.jpeg">
                     </div>
                 </a>
-                <a href="#">
+                <a href="<?= base_url()?>promo">
                     <div class="banner-card">
                         <img src="<?= base_url()?>assets/images/bg_all/moff.jpeg">
                     </div>
                 </a>
-                <a href="#">
+                <a href="<?= base_url()?>promo">
                     <div class="banner-card">
                         <img src="<?= base_url()?>assets/images/bg_all/paket-lengkap.jpeg">
                     </div>

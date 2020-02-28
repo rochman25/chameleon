@@ -669,7 +669,7 @@ header.desktop .mainheader {
 }
 header.desktop .mainheader .logo {
 	float: left;
-	padding: 6px 0;
+	/* padding: 6px 0; */
 }
 header.desktop .mainheader .logo img {
 	width: 110px;
@@ -1931,7 +1931,7 @@ footer.footer .copyright {
 }
 #product .product-info #size ul li.active {
 	background-color: #03cc00;
-	color: #fff;
+	/* color: #fff; */
 }
 #product .product-info #size ul li.empty {
 	border: none;
@@ -3632,7 +3632,7 @@ footer.footer .copyright {
 	}
 }
 .category-page {
-	background-color: #fff;
+	/* background-color: #fff; */
 	min-height: 800px;
 }
 .category-page .bogo-banner {
@@ -3742,7 +3742,7 @@ footer.footer .copyright {
 	font-stretch: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	color: rgba(0, 0, 0, 0.7);
+	color: white;
 }
 .category-page
 	.all-product-card
@@ -3784,7 +3784,7 @@ footer.footer .copyright {
 	font-stretch: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	color: rgba(183, 77, 36, 0.7);
+	color: rgba(38, 183, 36, 0.7);
 }
 .category-page
 	.all-product-card
@@ -3915,7 +3915,7 @@ footer.footer .copyright {
 	width: 176px;
 	height: 36px;
 	font-size: 12px;
-	color: rgba(0, 0, 0, 0.7);
+	/* color: rgba(0, 0, 0, 0.7); */
 	padding: 0 8px;
 	display: block;
 }
@@ -3946,7 +3946,7 @@ footer.footer .copyright {
 .category-page .filtering ul.size_wrapper li {
 	height: 35px;
 	border-radius: 4px;
-	border: 1px solid rgba(0, 0, 0, 0.12);
+	border: 1px solid white;
 	line-height: 35px;
 	padding: 0 10px;
 	font-size: 12px;
@@ -3954,7 +3954,7 @@ footer.footer .copyright {
 	font-style: normal;
 	font-stretch: normal;
 	letter-spacing: normal;
-	color: rgba(0, 0, 0, 0.7);
+	color: white;
 	list-style-type: none;
 	margin: 3px;
 	cursor: pointer;
@@ -4200,7 +4200,7 @@ footer.footer .copyright {
 	}
 }
 .confirm-payment-form {
-	background-color: #fff;
+	background-color: #020202;
 }
 .confirm-payment-form .wrapper {
 	margin-top: 42px;
@@ -4217,14 +4217,12 @@ footer.footer .copyright {
 	font-weight: 600;
 	font-size: 18px;
 	line-height: normal;
-	color: rgba(0, 0, 0, 0.7);
 	margin: 0 0 24px;
 }
 .confirm-payment-form h2 {
 	font-size: 12px;
 	line-height: normal;
 	text-transform: capitalize;
-	color: rgba(0, 0, 0, 0.5);
 	margin: 0 0 8px;
 }
 .confirm-payment-form input[type="date"],
@@ -5502,6 +5500,7 @@ footer.footer .copyright {
 .new-login > form input[type="email"],
 .new-login > form input[type="password"] {
 	border: 1px solid #ccc;
+	color: black;
 	box-sizing: border-box;
 	border-radius: 4px;
 	height: 42px;
