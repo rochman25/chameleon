@@ -40,22 +40,32 @@ $this->load->view('public/cart');
                 </div>
 
                 <!--  -->
-                <div id="containermvideo" class="image-gallery-mobile owl-carousel">
+               
+                <div id="containermgallery" class="image-gallery-mobile owl-carousel">
+                
                 <?php foreach($thumbnail as $p){?>
                     <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>" />
                 <?php }?>
+                
                 </div>
+               
                 <!--  -->
-                <div id="containermgallery" class="image-gallery-mobile owl-carousel">
-                <?php foreach($thumbnail as $p){?>
+                <div id="containermvideo" class="image-gallery-mobile owl-carousel">
                     <iframe src="https://drive.google.com/file/d/1avvSzpe5BjHDAtkVmxD2oGSB7oxakz4g/preview" 
-                    style="border:0;height:400px;width:400px;align-content: center;margin-left:50px;">
+                    style="border:0;height:400px;width:100%;align-content: center;margin-left:50px;">
                 
                     </iframe>
-                <?php }?>
+                
                 </div>
+                <div class="image-gallery-mobile owl-carousel">
+            
+                    <input onclick="toggleMVideo();" type="button" value="VIDEO"/>
+                </div>
+                
                 <!--  -->
                 <div class="col-lg-7 col-md-7 col-xs-12">
+               
+
                     <div class="product-ribbon clearfix">
                     </div>
                     <div class="product-info">
@@ -198,20 +208,42 @@ $this->load->view('public/footer');
     var def_jml = 1;
     var def_Size = "S";
     var stok = '<?= $produk->stok_produk;?>';
+    
 
     var containervideo = document.getElementById('containervideo');
     var containergallery = document.getElementById('containergallery');
+    var containermvideo = document.getElementById('containermvideo');
+    var containermgallery = document.getElementById('containermgallery');
     containervideo.style.display="none";
+    containermvideo.style.display = "none";
     var ishide = true;
+    var ismhide = true;
     function toggleVideo(){
         if(ishide){
             containervideo.style.display ="none";
             containergallery.style.display = "block";
+            
+            
             ishide= false;
         }else{
             containervideo.style.display = "block";
             containergallery.style.display  ="none";
+           
             ishide= true;
+        }
+    }
+    function toggleMVideo(){
+        if(ismhide){
+          
+            containermvideo.style.display ="none";
+            containermgallery.style.display = "block";
+            
+            ismhide= false;
+        }else{
+          
+            containermvideo.style.display = "block";
+            containermgallery.style.display  ="none";
+            ismhide= true;
         }
     }
 
@@ -225,7 +257,7 @@ $this->load->view('public/footer');
         M.classList.remove('active');
         L.classList.remove('active');
         XL.classList.remove('active');
-
+        def_Size = "S";
     }
     function changeSizeM(){
         var S = document.getElementById('S');
@@ -237,6 +269,7 @@ $this->load->view('public/footer');
         M.classList.add('active');
         L.classList.remove('active');
         XL.classList.remove('active');
+        def_Size = "M";
     }
     function changeSizeL(){
         var S = document.getElementById('S');
@@ -247,6 +280,7 @@ $this->load->view('public/footer');
         M.classList.remove('active');
         L.classList.add('active');
         XL.classList.remove('active');
+        def_Size = "L";
     }
     function changeSizeXL(){
         var S = document.getElementById('S');
@@ -258,6 +292,7 @@ $this->load->view('public/footer');
         M.classList.remove('active');
         L.classList.remove('active');
         XL.classList.add('active');
+        def_Size = "XL";
     }
     function deleteitem(state){
         $.ajax({
@@ -322,7 +357,8 @@ $(document).ready(function () {
                     qty : def_jml,
                     img:'<?= $thumbnail[0]; ?>',
                     nama_barang : nama_barang,
-                //    size : def_Ssize,
+                  
+                   size : def_Size,
                 }
             }).done(function (t) {
                 var res = JSON.parse(t);
