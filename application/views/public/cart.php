@@ -45,7 +45,7 @@
                 var res = JSON.parse(t);
 				
 				console.log(res);
-			//	if(res.success){
+				if(res.success =="success"){
 					if (res.data.length >=0) {
 						var harga = 0;
 						var notif = res.data.length;
@@ -59,9 +59,9 @@
 							$("#totalharga").html("Rp "+res.total);
 						
 						}
-				// }else{
+				}else{
 
-				// } 
+				} 
 			}
                 
             }).fail(function (t) {

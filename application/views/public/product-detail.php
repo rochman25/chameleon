@@ -15,40 +15,38 @@ $this->load->view('public/cart');
 <section id="content">
     <div id="product" data-product-nama="<?= $produk->nama_produk;?>" data-product-id="<?= $produk->id_produk;?>">
         <div class="container">
-            <div class="row">  
-                <!-- <div class="col-lg-5 col-md-5 gallery-container" data-image-count="7">
-                    <div class="image-gallery">
+            <div class="row"> 
+             <!--  -->
+                <div class="col-lg-5 col-md-5 gallery-container" data-image-count="7">
+                    <div id="containergallery" class="image-gallery">
                         <img id="elevate-zoom" class="img-responsive" src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[0]; ?>" 
                         data-zoom-image="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[0]; ?>"/>
                     </div>
-                    <div class="image-thumbnail owl-carousel clearfix">
-                        <?php foreach($thumbnail as $p){?>
-                        <div class="image-thumbnail--list">
-                            <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>" data-zoom-image="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>"/>
-                        </div>
-                        
-                        <?php }?>
-                    </div>
-                </div> -->
-                <div class="col-lg-5 col-md-5 gallery-container" data-image-count="7">
-                    <div class="image-gallery">
+                    <div id="containervideo" class="image-gallery">
                     <iframe src="https://drive.google.com/file/d/1avvSzpe5BjHDAtkVmxD2oGSB7oxakz4g/preview" 
                     style="border:0;height:400px;width:400px">
                 
                     </iframe>
                     </div>
                     <div class="image-thumbnail owl-carousel clearfix">
-         
+                        <?php foreach($thumbnail as $p){?>
+                        <div class="image-thumbnail--list">
+                            <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>" data-zoom-image="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>"/>
+                        </div>
+                        <?php }?>
+                       
                     </div>
+                    <input onclick="toggleVideo();" type="button" value="VIDEO"/>
                 </div>
+
                 <!--  -->
-                <!-- <div class="image-gallery-mobile owl-carousel">
+                <div id="containermvideo" class="image-gallery-mobile owl-carousel">
                 <?php foreach($thumbnail as $p){?>
                     <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>" />
                 <?php }?>
-                </div> -->
+                </div>
                 <!--  -->
-                <div class="image-gallery-mobile owl-carousel">
+                <div id="containermgallery" class="image-gallery-mobile owl-carousel">
                 <?php foreach($thumbnail as $p){?>
                     <iframe src="https://drive.google.com/file/d/1avvSzpe5BjHDAtkVmxD2oGSB7oxakz4g/preview" 
                     style="border:0;height:400px;width:400px;align-content: center;margin-left:50px;">
@@ -200,6 +198,23 @@ $this->load->view('public/footer');
     var def_jml = 1;
     var def_Size = "S";
     var stok = '<?= $produk->stok_produk;?>';
+
+    var containervideo = document.getElementById('containervideo');
+    var containergallery = document.getElementById('containergallery');
+    containervideo.style.display="none";
+    var ishide = true;
+    function toggleVideo(){
+        if(ishide){
+            containervideo.style.display ="none";
+            containergallery.style.display = "block";
+            ishide= false;
+        }else{
+            containervideo.style.display = "block";
+            containergallery.style.display  ="none";
+            ishide= true;
+        }
+    }
+
     function changeSizeS(){
         var S = document.getElementById('S');
         var M = document.getElementById('M');
