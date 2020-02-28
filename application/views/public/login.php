@@ -18,7 +18,7 @@ $this->load->view('public/m_heading');
             <p>Sudah punya akun Chameleon Cloth <strong>Masuk</strong></p>
             <form action="<?= base_url()?>daftar" method="post">
                 <h2>Email</h2>
-                    <input type="email" name="email">
+                    <input type="email" name="email" value="">
                     <input type="submit" value="Daftar">
             </form>
         </div>
@@ -26,7 +26,7 @@ $this->load->view('public/m_heading');
             <h1>Masuk</h1>
         <p>Belum punya akun Men’s Republic <strong>Daftar</strong></p>
         <p style="color: red"><b><?= $this->session->flashdata('pesan') ?></b></p>
-        <form action="" method="post">
+        <form action="<?= base_url()?>login" method="post">
             <h2>Email</h2>
             <input type="email" name="email">
             <h2>Password</h2>

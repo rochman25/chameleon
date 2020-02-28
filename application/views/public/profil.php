@@ -76,7 +76,7 @@ $this->load->view('public/cart');
                                 <td><?=$no++?></td>
                                 <td><?=$row['kode_transaksi']?></td>
                                 <td><?=$row['status_transaksi']?></td>
-                                <td><a class="btn btn-success">Konfirmasi</a></td>
+                                <td><a href="<?= base_url()?>pembayaran" class="btn btn-success">Konfirmasi</a></td>
                             </tr>
                             <?php } ?>
                         </table>

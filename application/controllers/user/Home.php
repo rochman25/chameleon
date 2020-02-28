@@ -576,7 +576,11 @@ class Home extends MY_Controller{
 		$this->email->message($message);
 
 		return $this->email->send();
-	}
+    }
+    public function konfirmasi()
+    {
+        $this->load->view('public/konfirmasi-pembayaran');
+    }
 
 }
 
