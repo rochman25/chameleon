@@ -1949,6 +1949,47 @@ footer.footer .copyright {
 	height: 12px;
 	margin-right: 4px;
 }
+
+#product .product-info #ukuran ul {
+	width: 100%;
+	padding-left: 0;
+	list-style-type: none;
+	margin-bottom: 0;
+}
+#product .product-info #ukuran ul li {
+	height: 38px;
+	text-align: center;
+	line-height: 38px;
+	margin-right: 8px;
+	padding: 0 11px;
+	margin-top: 8px;
+	float: left;
+	cursor: pointer;
+	border-radius: 4px;
+	border: 1px solid #e0e0e0;
+	background-color: #fff;
+}
+#product .product-info #ukuran ul li.active {
+	background-color: #03cc00;
+	/* color: #fff; */
+}
+#product .product-info #ukuran ul li.empty {
+	border: none;
+}
+#product .product-info #ukuran .label-size {
+	display: none;
+	line-height: 38px;
+	margin-top: 8px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #80bf66;
+}
+#product .product-info #ukuran .svg_icon__pdp_check {
+	width: 12px;
+	height: 12px;
+	margin-right: 4px;
+}
+
 #product .product-info .button-action {
 	display: flex;
 	justify-content: flex-start;

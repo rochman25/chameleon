@@ -16,7 +16,7 @@ $this->load->view('public/cart');
     <div id="product" data-product-nama="<?= $produk->nama_produk;?>" data-product-id="<?= $produk->id_produk;?>">
         <div class="container">
             <div class="row">  
-                <div class="col-lg-5 col-md-5 gallery-container" data-image-count="7">
+                <!-- <div class="col-lg-5 col-md-5 gallery-container" data-image-count="7">
                     <div class="image-gallery">
                         <img id="elevate-zoom" class="img-responsive" src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[0]; ?>" 
                         data-zoom-image="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[0]; ?>"/>
@@ -29,12 +29,34 @@ $this->load->view('public/cart');
                         
                         <?php }?>
                     </div>
+                </div> -->
+                <div class="col-lg-5 col-md-5 gallery-container" data-image-count="7">
+                    <div class="image-gallery">
+                    <iframe src="https://drive.google.com/file/d/1avvSzpe5BjHDAtkVmxD2oGSB7oxakz4g/preview" 
+                    style="border:0;height:400px;width:400px">
+                
+                    </iframe>
+                    </div>
+                    <div class="image-thumbnail owl-carousel clearfix">
+         
+                    </div>
                 </div>
-                <div class="image-gallery-mobile owl-carousel">
+                <!--  -->
+                <!-- <div class="image-gallery-mobile owl-carousel">
                 <?php foreach($thumbnail as $p){?>
                     <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>" />
                 <?php }?>
+                </div> -->
+                <!--  -->
+                <div class="image-gallery-mobile owl-carousel">
+                <?php foreach($thumbnail as $p){?>
+                    <iframe src="https://drive.google.com/file/d/1avvSzpe5BjHDAtkVmxD2oGSB7oxakz4g/preview" 
+                    style="border:0;height:400px;width:400px;align-content: center;margin-left:50px;">
+                
+                    </iframe>
+                <?php }?>
                 </div>
+                <!--  -->
                 <div class="col-lg-7 col-md-7 col-xs-12">
                     <div class="product-ribbon clearfix">
                     </div>
@@ -49,7 +71,7 @@ $this->load->view('public/cart');
                             </div>
                         </h2>
                         <br>
-                        <!-- <span>Ukuran :</span>
+                        <span>Ukuran :</span>
                         <div id="size" class="size-product">
                             <ul class="clearfix">
                                     <li onclick="changeSize('S');" class="size active ">
@@ -70,11 +92,11 @@ $this->load->view('public/cart');
                                     </div>
                             </ul>
                         </div>
-                        <br> -->
+                        <br>
                         <span>Jumlah :</span>
                         <div id="size" class="size-product">
                             <ul class="clearfix">
-                                    <li onclick="ubahjml(2);"  class=" size active ">
+                                    <li onclick="ubahjml(2);"  class="size active ">
                                         <span>-</span>
                                     </li>
                                     <li class="size  ">
@@ -86,23 +108,23 @@ $this->load->view('public/cart');
                                    
                             </ul>
                         </div>
-                        <span>Ukuran :</span>
-                        <div id="size" class="size-product">
+                        <!-- <span>Ukuran :</span>
+                        <div id="ukuran" class="size-product">
                             <ul class="clearfix">
-                                    <li onclick=""  class=" size active ">
+                                    <li  class="size">
                                         <span>S</span>
                                     </li>
-                                    <li onclick=""  class=" size active ">
+                                    <li  class="size ">
                                         <span>M</span>
                                     </li> 
-                                    <li onclick=""  class=" size active ">
+                                    <li  class="size">
                                         <span>L</span>
                                     </li>
-                                    <li onclick=""  class=" size active ">
+                                    <li  class="size">
                                         <span>XL</span>
                                     </li>       
                             </ul>
-                        </div>
+                        </div> -->
                         
                         <div class="button-action">
                             <?php 
@@ -195,6 +217,9 @@ $this->load->view('public/footer');
     var def_jml = 1;
     var def_Size = "S";
     var stok = '<?= $produk->stok_produk;?>';
+    function changeSize(param){
+
+    }
     function deleteitem(state){
         $.ajax({
                 url: base_url + "user/Home/hapus_item",
@@ -288,72 +313,8 @@ $(document).ready(function () {
         });
 	}
 
-	function generateSize(index, product_id) {
-		$.ajax({
-			method: 'GET',
-			url: '/product/detail/'+product_id,
-			success: function(data) {
-				val = '';
-				size_lists = data.results.product.productdetails;
 
-				if($('#size-box-'+index).length) {
-					$('#size-box-'+index).empty();
-				}
-				for(i = 0; i < size_lists.length; i++) {
-					if(i == 0) {
-						is_active = 'active';
-						val = size_lists[i].stock;
-					}
-					else is_active = '';
-					coret = (size_lists[i].stock == 0) ? 'line-through' : 'none';
 
-					$('#size-box-'+index).append(
-							'<li data-value="'+ size_lists[i].size.id +'" class="size '+ is_active +'" onClick="setSize(event)">'
-						+ 	 '<span style="text-decoration:'+ coret +'" data-size="'+ size_lists[i].size.measure +'" data-stock="'+ size_lists[i].stock +'">'+ size_lists[i].size.measure +' </span>'
-						+ '</li>'
-					);
-				}
-
-				// Badge sisa stock
-				if(val >= 1 && val <= 3) {
-                    $('.size-box-'+index).css('display','inline-block');
-					$('.size-box-'+index).text(val + ' stok tersisa');
-				}
-				else {
-                    $('.size-box-'+index).css('display','none');
-					$('.size-box-'+index).text('');
-				}
-			}
-		});
-	}
-
-	function setSize(event) {
-		var val = '';
-		var badge_name = '';
-		if(event.target.nodeName == 'SPAN') {
-			node = '#' + event.target.parentNode.parentNode.id + ' li';
-			$(node).removeClass('active');
-			$(event.target).parent('li').addClass('active');
-			val = $(event.target).attr('data-stock');
-			badge_name = '.'+event.target.parentNode.parentNode.id;
-		}
-		else if(event.target.nodeName == "LI") {
-			node = '#' + event.target.parentNode.id + ' li';
-			$(node).removeClass('active');
-			$(event.target).addClass('active');
-			val = $(event.target).children('span').attr('data-stock');
-			badge_name = '.'+event.target.parentNode.id;
-		}
-
-		if(val >= 1 && val <= 3) {
-            $(badge_name).css('display','inline-block');
-			$(badge_name).text(val + ' stok tersisa');
-		}
-		else {
-            $(badge_name).css('display','none');
-			$(badge_name).text('');
-		}
-	}
 
     $(document).ready(function() {
 
