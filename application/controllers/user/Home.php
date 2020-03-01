@@ -533,25 +533,36 @@ class Home extends MY_Controller{
            redirect(base_url('login'),'refresh');
             //redirect('/user_view/user_login', 'refresh');
             exit();
-        }else{
-           redirect(base_url('login'));   
+        } else {
+            redirect(base_url('login'));
         }
-       // die(json_encode($this->session->userdata('user_data')));
+        // die(json_encode($this->session->userdata('user_data')));
     }
 
+    // public function test(){
+    //     $email = "zaenur.rochman98@gmail.com";
+    //     $code = base64_encode($email);
+    //     if ($this->send_verification($email, $code)) {
+    //         $this->session->set_flashdata("pesan", "Anda berhasil registrasi, silahkan cek email anda untuk memverifikasi akun");
+    //     } else {
+    //         $this->session->set_flashdata("pesan", "ada masalah ");
+    //     }
+    //     echo json_encode($this->session->flashdata('pesan'));
+    // }
+
     private function send_verification($email, $code)
-	{
-		$config = array(
-			'protocol' => 'smtp',
-			'smtp_host' => 'smtp.googlemail.com',
-			'smtp_port' => '465',
-			'smtp_user' => 'zaenur.rochman98@gmail.com', // informasi rahasia ini jangan di gunakan sembarangan
-			'smtp_pass' => 'rochman25', // informasi rahasia ini jangan di gunakan sembarangan
-			'smtp_crypto' => 'ssl',
-			'mailtype' => 'html',
-			'charset' => 'iso-8859-1',
-			'wordwrap' => TRUE
-		);
+    {
+        $config = array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'mail.chameleoncloth.co.id',
+            'smtp_port' => '465',
+            'smtp_user' => 'admin@chameleoncloth.co.id',
+            'smtp_pass' => '${Admin123}', // informasi rahasia ini jangan di gunakan sembarangan
+            'smtp_crypto' => 'ssl',
+            'mailtype' => 'html',
+            'charset' => 'iso-8859-1',
+            'wordwrap' => TRUE
+        );
 
 		$message =     "
                   <html>

@@ -20,7 +20,7 @@ class Home extends MY_Controller
             $index=0;
             $transaksi = $this->transaksi->getDetailTransaksi();
             $stat = $this->transaksi->getStatistik();
-            $statistik = ["pending" => 0,"kirim" => 0,"selesai" => 0];
+            $statistik = ["validasi" => 0,"pending" => 0,"kirim" => 0,"selesai" => 0];
             $penjualan = 0;
             $produk = 0;
             foreach($transaksi as $row){
@@ -30,6 +30,8 @@ class Home extends MY_Controller
                     $statistik['kirim'] =  $statistik['kirim'] + count($row['status_transaksi']);
                 }else if($row['status_transaksi'] == "selesai"){
                     $statistik['selesai'] = $statistik['selesai'] + count($row['status_transaksi']);
+                }else if($row['status_transaksi'] == "validasi"){
+                    $statistik['validasi'] = $statistik['validasi'] + count($row['status_transaksi']);
                 }
                 $penjualan = $penjualan + ($row['total_harga'] + $row['total_ongkir']);
                 $produk = $produk + $row['jumlah_produk'];
