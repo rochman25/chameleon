@@ -47,14 +47,19 @@
                                                                     <i class="fas fa-calendar"></i>
                                                                 </div>
                                                             </div>
-                                                            <input type="text" name="tgl" class="form-control daterange-cus">
+                                                            <input type="text" name="tgl" class="form-control daterange-cus" value="<?php if (!empty($tgl)) {
+                                                                                                                                        echo $tgl;
+                                                                                                                                    } ?>" <?php if (!empty($tgl)) { ?> readonly="readonly" <?php } ?>>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-2">
+                                                <div class="col-lg-4">
                                                     <div class="form-group">
                                                         <!-- <label></label> -->
                                                         <input type="submit" name="kirim" value="Tampilkan" class="btn btn-info">
+                                                        <?php if (!empty($transaksi)) { ?>
+                                                            <input type="submit" name="export" class="btn btn-success" value="Export Excel">
+                                                        <?php } ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -69,7 +74,7 @@
                                                             <th scope="col">Username</th>
                                                             <th scope="col">Waktu Transaksi</th>
                                                             <th scope="col">Status</th>
-                                                            <th scope="col">Action</th>
+                                                            <!-- <th scope="col">Action</th> -->
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -81,11 +86,23 @@
                                                                 <td id="kode_t" data-id="<?= $row['id_transaksi'] ?>"><a href="<?= base_url() ?>admin/transaksi/detail?id=<?= $row['id_transaksi'] ?>"><?= $row['kode_transaksi'] ?></a></td>
                                                                 <td><?= $row['username'] ?></td>
                                                                 <td><?= $row['waktu_transaksi'] ?></td>
-                                                                <td><?= $row['status_transaksi'] ?></td>
                                                                 <td>
-                                                                    <a href="#" class="btn btn-info" data-id="<?= $row['id_transaksi'] ?>">Detail</a>
-                                                                    <!-- <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_transaksi'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button> -->
+                                                                    <?php if ($row['status_transaksi'] == 'pending') {
+                                                                        echo "<span class='badge badge-warning'>" . $row['status_transaksi'] . "</span>";
+                                                                    } else if ($row['status_transaksi'] == 'validasi') {
+                                                                        echo "<span class='badge badge-secondary'>" . $row['status_transaksi'] . "</span>";
+                                                                    } else if ($row['status_transaksi'] == 'kirim') {
+                                                                        echo "<span class='badge badge-info'>" . $row['status_transaksi'] . "</span>";
+                                                                    } else if ($row['status_transaksi'] == 'selesai') {
+                                                                        echo "<span class='badge badge-success'>" . $row['status_transaksi'] . "</span>";
+                                                                    } else if ($row['status_transaksi'] == 'batal') {
+                                                                        echo "<span class='badge badge-danger'>" . $row['status_transaksi'] . "</span>";
+                                                                    } ?>
                                                                 </td>
+                                                                <!-- <td> -->
+                                                                <!-- <a href="#" class="btn btn-info" data-id="<?= $row['id_transaksi'] ?>">Detail</a> -->
+                                                                <!-- <button class="btn btn-danger" id="btnHapus" data-id="<?= $row['id_transaksi'] ?>" data-target="#hapusModal" data-toggle="modal">Hapus</button> -->
+                                                                <!-- </td> -->
                                                             </tr>
                                                         <?php } ?>
                                                     </tbody>
@@ -107,9 +124,9 @@
 <script type="text/javascript">
     $('.daterange-cus').daterangepicker({
         locale: {
-            format: 'YYYY-MM-DD'
+            format: 'YYYY/MM/DD'
         },
-        drops: 'down',
+        drops: 'up',
         opens: 'right'
     });
 </script>

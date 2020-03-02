@@ -45,7 +45,7 @@
                                                 <tr>
                                                     <th scope="col">No</th>
                                                     <th scope="col">Nama Kategori</th>
-                                                    <th scope="col">Deskripsi Kategori</th>
+                                                    <th scope="col">Foto</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
@@ -56,10 +56,10 @@
                                                     <tr>
                                                         <th scope="row"><?= $no++ ?></th>
                                                         <td><?= $row['nama_kategori'] ?></td>
-                                                        <td><?= $row['deskripsi_kategori'] ?></td>
+                                                        <td><img style="margin:10px;" width="150px" src="<?= base_url() ?>assets/uploads/thumbnail_kategori/<?= $row['thumbnail_kategori'] ?>" alt="<?= $row['nama_kategori'] ?>"></td>
                                                         <td>
-                                                            <button id="btnUbah" class="btn btn-success" data-target="#ubahModal" data-toggle="modal" data-id="<?=$row['id_kategori']?>" data-nama="<?=$row['nama_kategori']?>" data-deskripsi="<?=$row['deskripsi_kategori']?>">Ubah</button>
-                                                            <button id="btnHapus" class="btn btn-danger" data-target="#hapusModal" data-toggle="modal" data-id="<?=$row['id_kategori']?>">Hapus</button>
+                                                            <button id="btnUbah" class="btn btn-success" data-target="#ubahModal" data-toggle="modal" data-id="<?= $row['id_kategori'] ?>" data-nama="<?= $row['nama_kategori'] ?>" data-deskripsi="<?= $row['deskripsi_kategori'] ?>">Ubah</button>
+                                                            <button id="btnHapus" class="btn btn-danger" data-target="#hapusModal" data-toggle="modal" data-id="<?= $row['id_kategori'] ?>" data-foto="<?=$row['thumbnail_kategori']?>">Hapus</button>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
@@ -82,7 +82,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="<?= base_url() ?>admin/kategori/tambah" method="POST">
+                        <form action="<?= base_url() ?>admin/kategori/tambah" method="POST" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="form-group">
                                     <div class="row">
@@ -100,6 +100,16 @@
                                             <label>Deskripsi (optional)</label>
                                             <div class="input-group">
                                                 <textarea class="form-control" style="height:80px" placeholder="Deskripsi kategori" name="desc"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <label for="thumbnail">Foto Kategori</label>
+                                            <div class="input-group">
+                                                <input type="file" class="form-control" name="thumbnail" id="thumbnail" accept="image/gif,image/jpeg,image/png,image/jpg">
                                             </div>
                                         </div>
                                     </div>
@@ -124,7 +134,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="<?= base_url() ?>admin/kategori/ubah" method="POST">
+                        <form action="<?= base_url() ?>admin/kategori/ubah" method="POST" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="form-group">
                                     <div class="row">
@@ -147,6 +157,16 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <label for="thumbnail">Foto Kategori</label>
+                                            <div class="input-group">
+                                                <input type="file" class="form-control" name="thumbnail" id="thumbnail" accept="image/jpeg,image/png,image/jpg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal-footer bg-whitesmoke br">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -158,44 +178,47 @@
             </div>
             <!-- modal hapus -->
             <div class="modal fade" tabindex="-1" role="dialog" id="hapusModal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Hapus Kategori</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="<?= base_url() ?>admin/kategori/hapus" method="POST">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="input-group">
-                                            <input type="hidden" class="form-control" id="id_hapus" name="id" required>
-                                            <p><h6>Apakah anda yakin menghapus data ini?</h6></p>
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Hapus Kategori</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="<?= base_url() ?>admin/kategori/hapus" method="POST">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="input-group">
+                                                <input type="hidden" class="form-control" id="id_hapus" name="id" required>
+                                                <input type="hidden" class="form-control" id="foto" name="thumbnail" required>
+                                                <p>
+                                                    <h6>Apakah anda yakin menghapus data ini?</h6>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer bg-whitesmoke br">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <input type="submit" name="kirim" value="Ya, Hapus!" class="btn btn-danger">
-                        </div>
-                    </form>
+                            <div class="modal-footer bg-whitesmoke br">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" name="kirim" value="Ya, Hapus!" class="btn btn-danger">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-            <!-- footer content -->
-            <?php $this->load->view('admin/master/footer') ?>
-        </div>
+        <!-- footer content -->
+        <?php $this->load->view('admin/master/footer') ?>
+    </div>
     </div>
     <?php $this->load->view('admin/assets/javascript') ?>
     <script type="text/javascript">
-        $(document).on("click","#btnUbah", function(){
+        $(document).on("click", "#btnUbah", function() {
             let id = $(this).data('id');
             let nama = $(this).data('nama');
             let desc = $(this).data('deskripsi');
@@ -203,9 +226,11 @@
             $('input[id="nama_kategori"]').val(nama);
             $('#deskripsi_kategori').val(desc)
         });
-        $(document).on("click","#btnHapus",function(){
+        $(document).on("click", "#btnHapus", function() {
             let id = $(this).data('id');
+            let foto = $(this).data('foto')
             $('input[id="id_hapus"]').val(id);
+            $('input[id="foto"]').val(foto);
         });
     </script>
 </body>

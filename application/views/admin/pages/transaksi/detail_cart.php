@@ -18,59 +18,20 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Data Detail Transaksi</h1>
+                        <h1>Data Detail Keranjang</h1>
                         <div class="section-header-breadcrumb">
                             <div class="breadcrumb-item"><a href="<?= base_url() ?>admin/home">Dashboard</a></div>
                             <div class="breadcrumb-item active"><a href="<?= base_url() ?>admin/akun">Transaksi</a></div>
                         </div>
                     </div>
                     <div class="section-body">
-                        <!-- <h2 class="section-title">Detail Transaksi</h2>
+                        <!-- <h2 class="section-title">Detail Keranjang</h2>
                         <p class="section-lead">
-                            Berikut data detail transaksi.
+                            Berikut data detail keranjang.
                         </p> -->
                         <div class="invoice">
                             <div class="invoice-print">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="invoice-title">
-                                            <h2>Detail Transaksi</h2>
-                                            <div class="invoice-number"> #<?= $transaksi[0]->kode_transaksi ?></div>
-                                        </div>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <address>
-                                                    <strong>Data diri pembayar:</strong><br>
-                                                    <?= $transaksi[0]->nama_lengkap ?><br>
-                                                    <?= $transaksi[0]->alamat_1 ?><br>
-                                                    <?= $transaksi[0]->alamat_2 ?><br>
-                                                    <?= $transaksi[0]->kota ?>, <?= $transaksi[0]->kode_pos ?>
-                                                </address>
-                                            </div>
-                                            <div class="col-md-6 text-md-right">
-                                                <address>
-                                                    <strong>Waktu Transaksi:</strong><br>
-                                                    <?= $transaksi[0]->waktu_transaksi ?><br><br>
-                                                    <strong>Status Transaksi:</strong><br>
-                                                    <?= $transaksi[0]->status_transaksi ?>
-                                                </address>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <address>
-                                                    <strong>Email dan No Telphone:</strong><br>
-                                                    <?= $transaksi[0]->no_telp ?><br>
-                                                    <?= $transaksi[0]->email ?>
-                                                </address>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row mt-4">
+                                <div class="row mt-0">
                                     <div class="col-md-12">
                                         <div class="section-title">Daftar Pesanan Produk</div>
                                         <p class="section-lead">List barang ini tidak bisa dihapus.</p>
@@ -84,15 +45,15 @@
                                                         <th class="text-center">Jumlah</th>
                                                         <th class="text-right">Total</th>
                                                     </tr>
-                                                    <?php 
+                                                    <?php
                                                     $no = 1;
-                                                    foreach ($transaksi as $row => $val) { ?>
+                                                    foreach ($cart as $row => $val) { ?>
                                                         <tr>
-                                                            <td><?=$no++;?></td>
-                                                            <td><?=$val->nama_produk?></td>
-                                                            <td class="text-center">Rp.<?=number_format($val->harga_produk,2)?></td>
-                                                            <td class="text-center"><?=$val->jumlah_produk?></td>
-                                                            <td class="text-right">Rp.<?=number_format($val->jumlah_produk * $val->harga_produk,2)?></td>
+                                                            <td><?= $no++; ?></td>
+                                                            <td><?= $val['nama_produk'] ?></td>
+                                                            <td class="text-center">Rp.<?= number_format($val['harga_produk'], 2) ?></td>
+                                                            <td class="text-center"><?= $val['quantity'] ?></td>
+                                                            <td class="text-right">Rp.<?= number_format($val['quantity'] * $val['harga_produk'], 2) ?></td>
                                                         </tr>
                                                     <?php } ?>
                                                 </tbody>
@@ -102,18 +63,10 @@
                                             <div class="col-lg-8">
                                             </div>
                                             <div class="col-lg-4 text-right">
-                                                <div class="invoice-detail-item">
-                                                    <div class="invoice-detail-name">Subtotal</div>
-                                                    <div class="invoice-detail-value">Rp.<?=number_format($val->total_harga,2)?></div>
-                                                </div>
-                                                <div class="invoice-detail-item">
-                                                    <div class="invoice-detail-name">Ongkir</div>
-                                                    <div class="invoice-detail-value">Rp.<?=number_format($val->total_ongkir,2)?></div>
-                                                </div>
                                                 <hr class="mt-2 mb-2">
                                                 <div class="invoice-detail-item">
                                                     <div class="invoice-detail-name">Total</div>
-                                                    <div class="invoice-detail-value invoice-detail-value-lg">Rp.<?=number_format($val->total_harga + $val->total_ongkir,2)?></div>
+                                                    <div class="invoice-detail-value invoice-detail-value-lg">Rp.<?= number_format($total, 2) ?></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -121,14 +74,14 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="text-md-right">
+                            <!-- <div class="text-md-right">
                                 <div class="float-lg-left mb-lg-0 mb-3">
                                     <button class="btn btn-primary btn-icon icon-left" id="btnProses" data-target="#proses_modal" data-toggle="modal" data-id="<?=$transaksi[0]->id_transaksi?>"><i class="fas fa-credit-card"></i> Proses</button>
                                     <button class="btn btn-danger btn-icon icon-left" id="btnBatal" data-target="#batal_modal" data-toggle="modal" data-id="<?=$transaksi[0]->id_transaksi?>"><i class="fas fa-times"></i> Batalkan</button>
                                 </div>
                                 <p><?= date("d/m/Y") ?></p>
-                                <!-- <button class="btn btn-warning btn-icon icon-left"><i class="fas fa-print"></i> Print</button> -->
-                            </div>
+                                <button class="btn btn-warning btn-icon icon-left"><i class="fas fa-print"></i> Print</button>
+                            </div> -->
                         </div>
                     </div>
                 </section>

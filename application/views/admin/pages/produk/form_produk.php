@@ -93,16 +93,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- <div class="form-group">
+                                            <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-12">
-                                                        <label for="thumbnail">Foto Produk</label>
-                                                        <div class="dropzone-previews"></div>
-                                                        <input type="file" class="form-control" name="thumbnail[]" accept="image/*" multiple>
-                                                        *note : blok file yang akan diupload jika lebih dari 1
+                                                        <label for="link">Link Video</label>
+                                                        <input type="text" name="link" id="link" class="form-control" placeholder="Masukkan link video" value="<?php if (isset($produk)) {
+                                                                                                                                                                    echo $produk->video_link;
+                                                                                                                                                                } ?>">
                                                     </div>
                                                 </div>
-                                            </div> -->
+                                            </div>
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-12">
@@ -179,8 +179,22 @@
         });
 
         foto_upload.on("removedfile", function(a, b, c) {
-            c.append("file_name", nama)
-            c.append("status", "remove")
+            // var name = file.name;
+            // var id=0;
+            // var id = 
+            var request;
+            request = $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('admin/produk/deleteFile') ?>',
+                data: {"id":getUrlParameter('id'),"nama":a.name},
+                dataType: 'html'
+            });
+            request.done(function(response, data, jqXHR) {
+                // Log a message to the console
+                console.log(response);
+            });
+            // c.append("file_name", nama)
+            // c.append("status", "remove")
         })
         $(document).ready(function() {
             // if (getUrlParameter('id') != null) {
