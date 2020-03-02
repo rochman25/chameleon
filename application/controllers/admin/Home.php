@@ -24,13 +24,13 @@ class Home extends MY_Controller
             $penjualan = 0;
             $produk = 0;
             foreach($transaksi as $row){
-                if($row['status_transaksi'] == "pending"){
+                if(!empty($row['status_transaksi']) && $row['status_transaksi'] == "pending"){
                     $statistik['pending'] = $statistik['pending'] + count($row['status_transaksi']);
-                }else if($row['status_transaksi'] == "kirim"){
+                }else if(!empty($row['status_transaksi']) && $row['status_transaksi'] == "kirim"){
                     $statistik['kirim'] =  $statistik['kirim'] + count($row['status_transaksi']);
-                }else if($row['status_transaksi'] == "selesai"){
+                }else if(!empty($row['status_transaksi']) && $row['status_transaksi'] == "selesai"){
                     $statistik['selesai'] = $statistik['selesai'] + count($row['status_transaksi']);
-                }else if($row['status_transaksi'] == "validasi"){
+                }else if(!empty($row['status_transaksi']) && $row['status_transaksi'] == "validasi"){
                     $statistik['validasi'] = $statistik['validasi'] + count($row['status_transaksi']);
                 }
                 $penjualan = $penjualan + ($row['total_harga'] + $row['total_ongkir']);
