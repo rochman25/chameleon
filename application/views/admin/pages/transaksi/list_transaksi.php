@@ -70,7 +70,9 @@
                                                                     echo "<span class='badge badge-warning'>" . $row['status_transaksi'] . "</span>";
                                                                 } else if ($row['status_transaksi'] == 'validasi') {
                                                                     echo "<span class='badge badge-secondary'>" . $row['status_transaksi'] . "</span>";
-                                                                } else if ($row['status_transaksi'] == 'kirim') {
+                                                                } else if($row['status_transaksi'] == 'proses'){
+                                                                    echo "<span class='badge badge-primary'>" . $row['status_transaksi'] . "</span>";
+                                                                }else if ($row['status_transaksi'] == 'kirim') {
                                                                     echo "<span class='badge badge-info'>" . $row['status_transaksi'] . "</span>";
                                                                 } else if ($row['status_transaksi'] == 'selesai') {
                                                                     echo "<span class='badge badge-success'>" . $row['status_transaksi'] . "</span>";

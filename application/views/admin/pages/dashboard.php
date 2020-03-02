@@ -28,6 +28,14 @@
                                             <div class="card-stats-item-label">Pending</div>
                                         </div>
                                         <div class="card-stats-item">
+                                            <div class="card-stats-item-count"><?= $statistik['validasi'] ?></div>
+                                            <div class="card-stats-item-label">Validasi</div>
+                                        </div>
+                                        <div class="card-stats-item">
+                                            <div class="card-stats-item-count"><?= $statistik['proses'] ?></div>
+                                            <div class="card-stats-item-label">Proses</div>
+                                        </div>
+                                        <div class="card-stats-item">
                                             <div class="card-stats-item-count"><?= $statistik['kirim'] ?></div>
                                             <div class="card-stats-item-label">Kirim</div>
                                         </div>

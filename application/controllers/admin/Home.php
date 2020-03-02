@@ -20,18 +20,20 @@ class Home extends MY_Controller
             $index=0;
             $transaksi = $this->transaksi->getDetailTransaksi();
             $stat = $this->transaksi->getStatistik();
-            $statistik = ["validasi" => 0,"pending" => 0,"kirim" => 0,"selesai" => 0];
+            $statistik = ["proses" => 0,"validasi" => 0,"pending" => 0,"kirim" => 0,"selesai" => 0];
             $penjualan = 0;
             $produk = 0;
             foreach($transaksi as $row){
-                if(!empty($row['status_transaksi']) && $row['status_transaksi'] == "pending"){
+                if($row['status_transaksi'] == "pending"){
                     $statistik['pending'] = $statistik['pending'] + count($row['status_transaksi']);
-                }else if(!empty($row['status_transaksi']) && $row['status_transaksi'] == "kirim"){
+                }else if($row['status_transaksi'] == "kirim"){
                     $statistik['kirim'] =  $statistik['kirim'] + count($row['status_transaksi']);
-                }else if(!empty($row['status_transaksi']) && $row['status_transaksi'] == "selesai"){
+                }else if($row['status_transaksi'] == "selesai"){
                     $statistik['selesai'] = $statistik['selesai'] + count($row['status_transaksi']);
-                }else if(!empty($row['status_transaksi']) && $row['status_transaksi'] == "validasi"){
+                }else if($row['status_transaksi'] == "validasi"){
                     $statistik['validasi'] = $statistik['validasi'] + count($row['status_transaksi']);
+                }else if($row['status_transaksi'] == "proses"){
+                    $statistik['proses'] = $statistik['proses'] + count($row['status_transaksi']);
                 }
                 $penjualan = $penjualan + ($row['total_harga'] + $row['total_ongkir']);
                 $produk = $produk + $row['jumlah_produk'];
