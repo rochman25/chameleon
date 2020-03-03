@@ -115,16 +115,22 @@ class Home extends MY_Controller{
         $id_produk = $this->input->get('produk');
       
         $thumbnail = array();
+        $ukuran = array();
             $data['produk'] = $this->produk->getWhere("id_produk", $id_produk);
             $data['produk'] = $this->produk->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
             $data['produk'] = $this->produk->getData()->row();
     
                 $foto = explode(',', $data['produk']->thumbnail_produk);
+                $size = explode(',',$data['produk']->size_produk);
                 foreach($foto as $f){
                     $thumbnail[] = $f;
                 }
+                foreach($size as $u){
+                    $ukuran[] = $u;
+                }
    
             $data['thumbnail'] = $thumbnail;
+            $data['size'] = $ukuran;
             if ($this->userIsLoggedIn()) {
                 $data['id_cart'] = $this->cart->getWhere("id_pengguna",$this->session->userdata['user_data']['id']);
                 $data['id_cart'] = $this->cart->getData()->row();

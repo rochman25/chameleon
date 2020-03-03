@@ -82,22 +82,14 @@ $this->load->view('public/cart');
                         <span>Ukuran :</span>
                         <div id="size" class="size-product">
                             <ul class="clearfix">
-                                    <li id="S" onclick="changeSizeS();" style="color:black !important;" class="size active ">
-                                        <span >S</span>
+                                <?php foreach($size as $s){
+                                    ?>
+                                       <li id="S" style="color:black !important;" class="size ">
+                                        <span ><?= $s; ?></span>
                                     </li>
-                                    <li id="M" onclick="changeSizeM();" style="color:black !important;" class="size  ">
-                                        <span>M</span>
-                                    </li>
-                                    <li id="L" onclick="changeSizeL();" style="color:black !important;" class="size  ">
-                                        <span>L</span>
-                                    </li>
-                                    <li id="XL" onclick="changeSizeXL();" style="color:black !important;" class="size  ">
-                                        <span >XL</span>
-                                    </li>
-                                    <div class="label-size">
-                                        <i class="svg-icon svg_icon__pdp_check"></i>
-                                        <span class="text-label"></span>
-                                    </div>
+                                    <?php
+                                }?>
+                                   
                             </ul>
                         </div>
                         <br>
