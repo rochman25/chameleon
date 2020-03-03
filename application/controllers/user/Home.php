@@ -34,6 +34,19 @@ class Home extends MY_Controller{
          //   die(json_encode($data));
         $this->load->view('public/home',$data);
     }
+    public function search(){
+        $cari = $this->input->post('search');
+        $data['cari'] = $this->produk->search($cari,"produk");
+        $thumbnail = array();
+        if($data['cari']->num_rows() >=1 ){
+        foreach ($data['produk']->result_array() as $row) {
+            $foto = explode(',', $row['thumbnail_produk']);
+            $thumbnail[$row['id_produk']] = $foto[0];
+        }
+    }
+        $data['thumbnail'] = $thumbnail;
+        $this->load->view('public/product',$data);
+    }
     public function produk($kategori = ""){
      
         if($kategori == ""){
@@ -81,13 +94,10 @@ class Home extends MY_Controller{
         $data['section'] = $kategori;
         if($kategori == "celana"){
             $data['bg'] = base_url('assets/images/Celana/Celana-BG.png');
-            
         }else if($kategori == "kemeja"){
             $data['bg'] = base_url('assets/images/Kemeja/Kemeja-BG.png');
         }else if($kategori == "jas"){
             $data['bg'] = base_url('assets/images/Jas/Jas-BG.png');
-        }else if($kategori == "celana"){
-            $data['bg'] = base_url('assets/images/Celana/Celana-BG.png');
         }else{
             $data['bg'] = base_url('assets/images/Celana/Celana-BG.png');
         }
