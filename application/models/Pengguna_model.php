@@ -35,4 +35,9 @@ class Pengguna_model extends MY_Model
         return $this->cart->getData()->result_array();
     }
 
+    function getDataByEmail($email){
+        $this->getWhere('email',$email);
+        return $this->getData()->row();
+    }
+
 }

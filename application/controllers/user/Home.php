@@ -149,13 +149,15 @@ class Home extends MY_Controller{
         } else {
             if ($this->input->post('kirim')) {
                 $email = $this->input->post('email');
-                $pass = $this->input->post('pass');
+                $pass = $this->input->post('password');
                 $where = array(
                     'email'=>$email
                 );
                 $cek = $this->user->login($where)->row();
                 if ($cek != null) {
-                    if($cek->status == true){
+                    if ($cek->status == true) {
+                        // die(json_encode($pass));
+                        // die(json_encode($this->bcrypt->check_password($pass, $cek->password)));
                         if ($this->bcrypt->check_password($pass, $cek->password)) {
                         //  if ($cek->password == $pass) {
                             $datas = array(
@@ -539,17 +541,6 @@ class Home extends MY_Controller{
         // die(json_encode($this->session->userdata('user_data')));
     }
 
-    // public function test(){
-    //     $email = "zaenur.rochman98@gmail.com";
-    //     $code = base64_encode($email);
-    //     if ($this->send_verification($email, $code)) {
-    //         $this->session->set_flashdata("pesan", "Anda berhasil registrasi, silahkan cek email anda untuk memverifikasi akun");
-    //     } else {
-    //         $this->session->set_flashdata("pesan", "ada masalah ");
-    //     }
-    //     echo json_encode($this->session->flashdata('pesan'));
-    // }
-
     private function send_verification($email, $code)
     {
         $config = array(
@@ -588,12 +579,112 @@ class Home extends MY_Controller{
 
 		return $this->email->send();
     }
+
+    private function send_forgetPass($email, $code)
+    {
+        $config = array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'mail.chameleoncloth.co.id',
+            'smtp_port' => '465',
+            'smtp_user' => 'admin@chameleoncloth.co.id',
+            'smtp_pass' => '${Admin123}', // informasi rahasia ini jangan di gunakan sembarangan
+            'smtp_crypto' => 'ssl',
+            'mailtype' => 'html',
+            'charset' => 'iso-8859-1',
+            'wordwrap' => TRUE
+        );
+
+        $message =     "
+                  <html>
+                  <head>
+                      <title>Reset Password Akun</title>
+                  </head>
+                  <body>
+                      <h2>.</h2>
+                      <p>Akun anda:</p>
+                      <p>Email: " . $email . "</p>
+                      <p>Silahkan klik link berikut untuk mereset password akun anda.</p>
+                      <h4><a href='" . base_url() . "user/home/lupa_password?code=" . $code . "'>Reset Password Akun Saya</a></h4>
+                  </body>
+                  </html>
+                  ";
+
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from($config['smtp_user']);
+        $this->email->to($email);
+        $this->email->subject('Reset Password Akun');
+        $this->email->message($message);
+
+        return $this->email->send();
+    }
+
     public function konfirmasi()
     {
         $this->load->view('public/konfirmasi-pembayaran');
     }
 
+    public function lupa_password()
+    {
+        if ($this->userIsLoggedIn()) {
+            redirect('user/home');
+        } else {
+            $code = $this->input->get('code');
+            if ($code) {
+                if ($this->input->post('kirim')) {
+                    $nPass = $this->input->post('newPassword');
+                    $cPass = $this->input->post('confPassword');
+                    if ($nPass == $cPass) {
+                        $data = $this->user->getDataByEmail(base64_decode($code));
+                        if ($data) {
+
+                            $user = array(
+                                "password" => $this->bcrypt->hash_password($nPass),
+                                "updated_at" => date("Y-m-d H:i:s")
+                            );
+                            // die(json_encode($this->bcrypt->check_password($nPass,$data->password)));
+                            $query = $this->user->updateData($user, $data->id_pengguna);
+                            // die(json_encode($query));
+                            if ($query) {
+                                $this->session->set_flashdata("pesan", "Password berhasil diperbarui, Silahkan coba login.");
+                                redirect('login');
+                            } else {
+                                $this->session->set_flashdata("pesan", "Ada masalah coba lagi nanti!.");
+                                $this->load->view('public/form-lupa-password');
+                            }
+                        } else {
+                            $this->session->set_flashdata("pesan", "Kode reset password tidak valid!.");
+                            $this->load->view('public/form-lupa-password');
+                        }
+                    } else {
+                        $this->session->set_flashdata("pesan", "Password yang anda masukkan tidak sama!.");
+                        $this->load->view('public/form-lupa-password');
+                    }
+                } else {
+                    $data['code'] = $code;
+                    $this->load->view('public/form-lupa-password', $data);
+                }
+            } else {
+                if ($this->input->post('kirim')) {
+                    $email = $this->input->post('email');
+                    $data = $this->user->getDataByEmail($email);
+                    if ($data != null) {
+                        if ($this->send_forgetPass($email, $data->token)) {
+                            $this->session->set_flashdata("pesan", "Silahkan cek email anda untuk reset password.");
+                            $this->load->view('public/lupa-password');
+                        } else {
+                            $this->session->set_flashdata("pesan", $this->email->print_debugger(array('headers')));
+                            $this->load->view('public/lupa-password');
+                        }
+                    } else {
+                        $this->session->set_flashdata("pesan", "Email yang anda masukkan tidak terdaftar ");
+                        //sudah ada
+                        $this->load->view('public/lupa-password');
+                    }
+                } else {
+                    $this->load->view('public/lupa-password');
+                }
+            }
+        }
+    }
 }
-
-
-?>

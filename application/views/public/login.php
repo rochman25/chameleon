@@ -31,7 +31,7 @@ $this->load->view('public/m_heading');
             <input type="email" name="email">
             <h2>Password</h2>
             <input type="password" name="password">
-            <a class="forget-pass" href="#">Lupa Password ?</a>
+            <a class="forget-pass" href="<?=base_url()?>user/home/lupa_password">Lupa Password ?</a>
             <input type="submit" name="kirim" value="Masuk">
         </form>
     </div>
