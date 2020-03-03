@@ -36,14 +36,17 @@ class Home extends MY_Controller{
     }
     public function search(){
         $cari = $this->input->post('search');
-        $data['cari'] = $this->produk->search($cari,"produk");
+        $data['produk'] = $this->produk->search($cari,"produk")->result_array();
+       // die(json_encode($data));
         $thumbnail = array();
-        if($data['cari']->num_rows() >=1 ){
-        foreach ($data['produk']->result_array() as $row) {
+        if($data['produk'] ){
+        foreach ($data['produk'] as $row) {
             $foto = explode(',', $row['thumbnail_produk']);
             $thumbnail[$row['id_produk']] = $foto[0];
         }
     }
+        $data['bg'] = base_url('assets/images/Kemeja/Kemeja-BG.png');
+        $data['section'] = "Hasil pencarian,".$cari;
         $data['thumbnail'] = $thumbnail;
         $this->load->view('public/product',$data);
     }

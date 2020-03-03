@@ -43,8 +43,8 @@ class Produk_model extends MY_Model
     public function search($cari,$table)
 	{
 
-		$data = $this->db->query("SELECT * from $table where nama_produk like '%$cari%' ");
-		return $data->result();
+		$data = $this->db->query("SELECT * from $table  inner join kategori ON kategori.id_kategori=$table.id_kategori where nama_produk like '%$cari%'");
+		return $data;
 	}
 
 }

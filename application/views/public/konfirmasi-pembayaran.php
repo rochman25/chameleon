@@ -16,8 +16,26 @@ $this->load->view('public/cart');
 			<div class="container">
 				<section>
                 <form action="" method="post">
-                    <div class="title">Catatan untuk Chameleon cloth (optional)</div>
-                    <textarea name="catatan" class="notes"></textarea>
+                <div class="row">
+                                <div class="col-lg-12 col-md-12 col-xs-12">
+                                    <h2>Atas Nama</h2>
+                                    <input type="password" placeholder="text" name="password" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-xs-12">
+                                    <h2></h2>
+                                    <input type="password" placeholder="text" name="password_confirmation" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-xs-12">
+                                    <h2>Catatan </h2>
+                                    <textarea name="catatan" class="notes"></textarea>
+                                </div>
+                            </div>
+                 
                     <input type="submit" name="kirim" value="BELI">
                 </form>
 				</section>
