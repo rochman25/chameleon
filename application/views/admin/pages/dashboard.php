@@ -17,7 +17,7 @@
             <div class="main-content">
                 <section class="section">
                     <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="col-lg-5 col-md-5 col-sm-12">
                             <div class="card card-statistic-2">
                                 <div class="card-stats">
                                     <div class="card-stats-title">Statistik Transaksi
@@ -76,7 +76,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="col-lg-3 col-md-3 col-sm-12">
                             <div class="card card-statistic-2">
                                 <div class="card-chart">
                                     <canvas id="sales-chart" height="80"></canvas>
