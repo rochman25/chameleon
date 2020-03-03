@@ -42,7 +42,7 @@ class Order extends MY_Controller
                     "status_transaksi" => "pending",
                     "waktu_transaksi" => date("Y-m-d H:i:s"),
                     // "waktu_expired" => date("Y-m-d H:i:s"),
-                    "id_pengguna" => $data['profil']->id_pengguna,
+                    "id_pengguna" => $this->session->userdata['user_data']['id'],
                     "id_alamat" => $data['profil']->id_alamat,
                     "total_harga" => $total_bayar,
                     "total_ongkir" => $total_ongkir
