@@ -10,6 +10,9 @@ class Detailcart_model extends MY_Model
     }
 
 
-
+    function tambahDetailCart($data){
+        $this->db->set('id_detail_item_cart','UUID()',false);
+        return $this->insert($data);
+    }
 
 }

@@ -15,17 +15,18 @@ $this->load->view('public/m_heading');
 	<div class="new-login-register">
         <div class="new-register none">
             <h1>Daftar</h1>
-            <p>Sudah punya akun Men’s Republic <strong>Masuk</strong></p>
+            <p>Sudah punya akun Chameleon Cloth <strong>Masuk</strong></p>
             <form action="<?= base_url()?>daftar" method="post">
                 <h2>Email</h2>
-                    <input type="email" name="email">
+                    <input type="email" name="email" value="">
                     <input type="submit" value="Daftar">
             </form>
         </div>
         <div class="new-login">
             <h1>Masuk</h1>
         <p>Belum punya akun Men’s Republic <strong>Daftar</strong></p>
-        <form action="" method="post">
+        <p style="color: red"><b><?= $this->session->flashdata('pesan') ?></b></p>
+        <form action="<?= base_url()?>login" method="post">
             <h2>Email</h2>
             <input type="email" name="email">
             <h2>Password</h2>
@@ -34,14 +35,7 @@ $this->load->view('public/m_heading');
             <input type="submit" name="kirim" value="Masuk">
         </form>
     </div>
-
 </div>
 	</section>
-
-	
-
-	<?php 
-
-$this->load->view('public/footer');
-?>
+	<?php $this->load->view('public/footer'); ?>
 	

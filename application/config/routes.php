@@ -51,13 +51,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'Welcome';
 
-$route['login'] = 'user/Home/login';
-$route['daftar'] = 'user/Home/register';
-$route['keluar'] = 'user/Home/logout';
+$route['login']                 = 'user/Home/login';
+$route['daftar']                = 'user/Home/register';
+$route['keluar']                = 'user/Home/logout';
+$route['profil']                = 'user/Home/profil';
+$route['panduan/pemesanan']     = 'user/Home/panduan_pemesanan';
+$route['panduan/retur']         = 'user/Home/panduan_return';
+$route['panduan/ukuran']        = 'user/Home/panduan_ukuran';
+$route['promo']                 = 'user/Home/promo';
+$route['pembayaran']                 = 'user/Home/konfirmasi';
+$route['search']                 = 'user/Home/search';
 
-$route['produk'] = 'user/Home/produk';
+$route['produk']        = 'user/Home/produk';
 $route['produk/(:any)'] = 'user/Home/produk/$1';
-$route['detail'] = 'user/Home/produk_detail/';
+$route['detail']        = 'user/Home/produk_detail/';
+$route['verifikasi']    = 'user/home/verifikasi';
+$route['order']         = 'user/order/index';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

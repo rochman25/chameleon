@@ -7,7 +7,7 @@
         </ul>
     </form>
     <ul class="navbar-nav navbar-right">
-        <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
+        <!-- <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
                 <div class="dropdown-header">Messages
                     <div class="float-right">
@@ -21,50 +21,9 @@
                             <div class="is-online"></div>
                         </div>
                         <div class="dropdown-item-desc">
-                            <b>Kusnaedi</b>
-                            <p>Hello, Bro!</p>
+                            <b>System</b>
+                            <p>Belum ada pesan masuk!</p>
                             <div class="time">10 Hours Ago</div>
-                        </div>
-                    </a>
-                    <a href="#" class="dropdown-item dropdown-item-unread">
-                        <div class="dropdown-item-avatar">
-                            <img alt="image" src="<?= base_url() ?>assets/admin/img/avatar/avatar-2.png" class="rounded-circle">
-                        </div>
-                        <div class="dropdown-item-desc">
-                            <b>Dedik Sugiharto</b>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                            <div class="time">12 Hours Ago</div>
-                        </div>
-                    </a>
-                    <a href="#" class="dropdown-item dropdown-item-unread">
-                        <div class="dropdown-item-avatar">
-                            <img alt="image" src="<?= base_url() ?>assets/admin/img/avatar/avatar-3.png" class="rounded-circle">
-                            <div class="is-online"></div>
-                        </div>
-                        <div class="dropdown-item-desc">
-                            <b>Agung Ardiansyah</b>
-                            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            <div class="time">12 Hours Ago</div>
-                        </div>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <div class="dropdown-item-avatar">
-                            <img alt="image" src="<?= base_url() ?>assets/admin/img/avatar/avatar-4.png" class="rounded-circle">
-                        </div>
-                        <div class="dropdown-item-desc">
-                            <b>Ardian Rahardiansyah</b>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit ess</p>
-                            <div class="time">16 Hours Ago</div>
-                        </div>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <div class="dropdown-item-avatar">
-                            <img alt="image" src="<?= base_url() ?>assets/admin/img/avatar/avatar-5.png" class="rounded-circle">
-                        </div>
-                        <div class="dropdown-item-desc">
-                            <b>Alfa Zulkarnain</b>
-                            <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
-                            <div class="time">Yesterday</div>
                         </div>
                     </a>
                 </div>
@@ -86,35 +45,8 @@
                             <i class="fas fa-code"></i>
                         </div>
                         <div class="dropdown-item-desc">
-                            Template update is available now!
+                            Belum ada notifikasi!
                             <div class="time text-primary">2 Min Ago</div>
-                        </div>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <div class="dropdown-item-icon bg-info text-white">
-                            <i class="far fa-user"></i>
-                        </div>
-                        <div class="dropdown-item-desc">
-                            <b>You</b> and <b>Dedik Sugiharto</b> are now friends
-                            <div class="time">10 Hours Ago</div>
-                        </div>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <div class="dropdown-item-icon bg-success text-white">
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <div class="dropdown-item-desc">
-                            <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>
-                            <div class="time">12 Hours Ago</div>
-                        </div>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <div class="dropdown-item-icon bg-danger text-white">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="dropdown-item-desc">
-                            Low disk space. Let's clean it!
-                            <div class="time">17 Hours Ago</div>
                         </div>
                     </a>
                     <a href="#" class="dropdown-item">
@@ -122,7 +54,7 @@
                             <i class="fas fa-bell"></i>
                         </div>
                         <div class="dropdown-item-desc">
-                            Welcome to Stisla template!
+                            Selamat datang di Chameleon Cloth Admin!
                             <div class="time">Yesterday</div>
                         </div>
                     </a>
@@ -131,7 +63,7 @@
                     <a href="#">View All <i class="fas fa-chevron-right"></i></a>
                 </div>
             </div>
-        </li>
+        </li> -->
         <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                 <img alt="image" src="<?= base_url() ?>assets/admin/img/avatar/avatar-1.png" class="rounded-circle mr-1">
                 <div class="d-sm-none d-lg-inline-block">Hi, <?= $this->session->userdata['admin_data']['username'] ?></div>
@@ -165,6 +97,9 @@
             <li class="nav-item active">
                 <a href="<?= base_url() ?>admin/home" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
             </li>
+            <li class="nav-item">
+                <a href="<?= base_url() ?>admin/toko" class="nav-link"><i class="fas fa-store"></i><span>Profile Toko</span></a>
+            </li>
             <li class="menu-header">Produk</li>
             <li class="nav-item">
                 <a href="<?= base_url() ?>admin/kategori" class="nav-link"><i class="fas fa-tags"></i><span>Kategori</span></a>
@@ -173,12 +108,12 @@
                 <a href="<?= base_url() ?>admin/produk" class="nav-link"><i class="fas fa-boxes"></i><span>Produk</span></a>
             </li>
             <li class="menu-header">Transaksi</li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="<?= base_url() ?>admin/transaksi/pembayaran" class="nav-link"><i class="fas fa-shopping-bag"></i><span>Pembayaran</span></a>
             </li>
             <li class="nav-item">
                 <a href="<?= base_url() ?>admin/transaksi/pengiriman" class="nav-link"><i class="fas fa-paper-plane"></i><span>Pengiriman</span></a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a href="<?= base_url() ?>admin/transaksi" class="nav-link"><i class="fas fa-shopping-cart"></i><span>Transaksi</span></a>
             </li>
@@ -196,7 +131,7 @@
             <?php } ?>
             <li class="menu-header">Report</li>
             <li class="nav-item">
-                <a href="#" class="nav-link"><i class="fas fa-file"></i><span>Laporan Penjualan</span></a>
+                <a href="<?=base_url()?>admin/transaksi/laporan" class="nav-link"><i class="fas fa-file"></i><span>Laporan Penjualan</span></a>
             </li>
         </ul>
     </aside>

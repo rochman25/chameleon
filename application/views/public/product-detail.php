@@ -15,35 +15,66 @@ $this->load->view('public/cart');
 <section id="content">
     <div id="product" data-product-nama="<?= $produk->nama_produk;?>" data-product-id="<?= $produk->id_produk;?>">
         <div class="container">
-            <div class="row">  
+            <div class="row"> 
+             <!--  -->
                 <div class="col-lg-5 col-md-5 gallery-container" data-image-count="7">
-                    <div class="image-gallery">
+                    <div id="containergallery" class="image-gallery">
                         <img id="elevate-zoom" class="img-responsive" src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[0]; ?>" 
                         data-zoom-image="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[0]; ?>"/>
+                    </div>
+                    <div id="containervideo" class="image-gallery">
+                    <iframe src="https://drive.google.com/file/d/1avvSzpe5BjHDAtkVmxD2oGSB7oxakz4g/preview" 
+                    style="border:0;height:400px;width:400px">
+                
+                    </iframe>
                     </div>
                     <div class="image-thumbnail owl-carousel clearfix">
                         <?php foreach($thumbnail as $p){?>
                         <div class="image-thumbnail--list">
                             <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>" data-zoom-image="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>"/>
                         </div>
-                        
                         <?php }?>
+                       
                     </div>
+                    <input onclick="toggleVideo();" type="button" value="VIDEO"/>
                 </div>
-                <div class="image-gallery-mobile owl-carousel">
+
+                <!--  -->
+               
+                <div id="containermgallery" class="image-gallery-mobile owl-carousel">
+                
                 <?php foreach($thumbnail as $p){?>
                     <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>" />
                 <?php }?>
+                
                 </div>
+               
+                <!--  -->
+                <div id="containermvideo" class="image-gallery-mobile owl-carousel">
+                    <iframe src="https://drive.google.com/file/d/1avvSzpe5BjHDAtkVmxD2oGSB7oxakz4g/preview" 
+                    style="border:0;height:400px;width:100%;align-content: center;margin-left:50px;">
+                
+                    </iframe>
+                
+                </div>
+                <div class="image-gallery-mobile owl-carousel">
+            
+                    <input onclick="toggleMVideo();" type="button" value="VIDEO"/>
+                </div>
+                
+                <!--  -->
                 <div class="col-lg-7 col-md-7 col-xs-12">
+               
+
                     <div class="product-ribbon clearfix">
                     </div>
                     <div class="product-info">
                         <h1><?= $produk->nama_produk;?></h1>
                         <h2>    
-                            <div class="price_before"> Rp <?= $produk->harga_produk;?> </div>
+                            <!-- <div class="price_before"> Rp <?= $produk->harga_produk;?> </div> -->
                             <div class="price_after">
                                 <span class="value">Rp <?= $produk->harga_produk;?></span>
+                                <!-- <span id="stok" class="value">Stok <?= $produk->stok_produk;?></span> -->
                                 <!-- <span class="time">Tinggal 7 hari lagi</span> -->
                             </div>
                         </h2>
@@ -51,43 +82,33 @@ $this->load->view('public/cart');
                         <span>Ukuran :</span>
                         <div id="size" class="size-product">
                             <ul class="clearfix">
-                                    <li data-value="S" data-productdetailid="38840" class="size active ">
-                                        <span data-size="39" data-stock="2">S</span>
+                                <?php foreach($size as $s){
+                                    ?>
+                                       <li id="S" style="color:black !important;" class="size ">
+                                        <span ><?= $s; ?></span>
                                     </li>
-                                    <li data-value="M" data-productdetailid="38841" class="size  ">
-                                        <span data-size="40" data-stock="1">M</span>
-                                    </li>
-                                    <li data-value="X" data-productdetailid="38842" class="size  ">
-                                        <span data-size="41" data-stock="3">X</span>
-                                    </li>
-                                    <li data-value="XL" data-productdetailid="38843" class="size  ">
-                                        <span data-size="42" data-stock="11">XL</span>
-                                    </li>
-                                    <div class="label-size">
-                                        <i class="svg-icon svg_icon__pdp_check"></i>
-                                        <span class="text-label"></span>
-                                    </div>
+                                    <?php
+                                }?>
+                                   
                             </ul>
                         </div>
                         <br>
                         <span>Jumlah :</span>
                         <div id="size" class="size-product">
                             <ul class="clearfix">
-                                    <li data-value="1" data-productdetailid="38840" class="size active ">
-                                        <span data-size="39" data-stock="2">-</span>
+                                    <li onclick="ubahjml(2);"  class="size active ">
+                                        <span>-</span>
                                     </li>
-                                    <li data-value="4" data-productdetailid="38843" class="size  ">
-                                        <span data-size="42" data-stock="11">1</span>
+                                    <li class="size  ">
+                                        <span style="color:black;" id="value">1</span>
                                     </li>
-                                    <li data-value="1" data-productdetailid="38840" class="size active ">
-                                        <span data-size="39" data-stock="2">+</span>
+                                    <li onclick="ubahjml(1);" class=" size active ">
+                                        <span>+</span>
                                     </li>
-                                    <div class="label-size">
-                                        <i class="svg-icon svg_icon__pdp_check"></i>
-                                        <span class="text-label"></span>
-                                    </div>
+                                   
                             </ul>
                         </div>
+                       
                         <div class="button-action">
                             <?php 
                             if(isset($this->session->userdata['user_data'])){
@@ -113,7 +134,7 @@ $this->load->view('public/cart');
                         
                         <div class="product-order">
                             <div class="list clearfix">
-                                <a href="https://www.mensrepublic.id/other/layanan/panduan-pemesanan">
+                                <a href="#">
                                     <div class="image">
                                         <i class="svg-icon svg_icon__pdp_cart "></i>
                                     </div>
@@ -123,7 +144,7 @@ $this->load->view('public/cart');
                                 </a>
                             </div>
                             <div class="list clearfix">
-                                <a href="https://www.mensrepublic.id/other/layanan/panduan-perawatan">
+                                <a href="#">
                                     <div class="image">
                                         <i class="svg-icon svg_icon__pdp_shoes "></i>
                                     </div>
@@ -133,7 +154,7 @@ $this->load->view('public/cart');
                                 </a>
                             </div>
                             <div class="list clearfix">
-                                <a href="https://www.mensrepublic.id/other/layanan/panduan-ukuran">
+                                <a href="#">
                                     <div class="image">
                                         <i class="svg-icon svg_icon__pdp_ruler "></i>
                                     </div>
@@ -145,7 +166,7 @@ $this->load->view('public/cart');
                         </div>
                         <ul class="nav nav-tabs">
                             <li class="active" data-target="product-deskripsi">
-                                <a href="javascript:;">Deskripsi</a></li>
+                                <a style="color:white;background-color:none;" href="javascript:;">Deskripsi</a></li>
                             <!-- <li data-target="review"><a href="javascript:;">Rating dan Ulasan ( 5/5 )</a></li> -->
                         </ul>
                         <div class="tab-content">
@@ -175,9 +196,141 @@ $this->load->view('public/footer');
     });
 </script>
 <script type="text/javascript">
+    var base_url = '<?= base_url()?>';
+    var def_jml = 1;
+    var def_Size = "S";
+    var stok = '<?= $produk->stok_produk;?>';
+    
+
+    var containervideo = document.getElementById('containervideo');
+    var containergallery = document.getElementById('containergallery');
+    var containermvideo = document.getElementById('containermvideo');
+    var containermgallery = document.getElementById('containermgallery');
+    containervideo.style.display="none";
+    containermvideo.style.display = "none";
+    var ishide = true;
+    var ismhide = true;
+    function toggleVideo(){
+        if(ishide){
+            containervideo.style.display ="none";
+            containergallery.style.display = "block";
+            
+            
+            ishide= false;
+        }else{
+            containervideo.style.display = "block";
+            containergallery.style.display  ="none";
+           
+            ishide= true;
+        }
+    }
+    function toggleMVideo(){
+        if(ismhide){
+          
+            containermvideo.style.display ="none";
+            containermgallery.style.display = "block";
+            
+            ismhide= false;
+        }else{
+          
+            containermvideo.style.display = "block";
+            containermgallery.style.display  ="none";
+            ismhide= true;
+        }
+    }
+
+    function changeSizeS(){
+        var S = document.getElementById('S');
+        var M = document.getElementById('M');
+        var L = document.getElementById('L');
+        var XL = document.getElementById('XL');
+
+        S.classList.add('active');
+        M.classList.remove('active');
+        L.classList.remove('active');
+        XL.classList.remove('active');
+        def_Size = "S";
+    }
+    function changeSizeM(){
+        var S = document.getElementById('S');
+        var M = document.getElementById('M');
+        var L = document.getElementById('L');
+        var XL = document.getElementById('XL');
+    
+        S.classList.remove('active');
+        M.classList.add('active');
+        L.classList.remove('active');
+        XL.classList.remove('active');
+        def_Size = "M";
+    }
+    function changeSizeL(){
+        var S = document.getElementById('S');
+        var M = document.getElementById('M');
+        var L = document.getElementById('L');
+        var XL = document.getElementById('XL');
+        S.classList.remove('active');
+        M.classList.remove('active');
+        L.classList.add('active');
+        XL.classList.remove('active');
+        def_Size = "L";
+    }
+    function changeSizeXL(){
+        var S = document.getElementById('S');
+        var M = document.getElementById('M');
+        var L = document.getElementById('L');
+        var XL = document.getElementById('XL');
+        XL.classList.add('active');
+        S.classList.remove('active');
+        M.classList.remove('active');
+        L.classList.remove('active');
+        XL.classList.add('active');
+        def_Size = "XL";
+    }
+    function deleteitem(state){
+        $.ajax({
+                url: base_url + "user/Home/hapus_item",
+                type: "POST",
+                data: {
+                   id_item : state
+                }
+            }).done(function (t) {
+                var res = JSON.parse(t);
+                console.log(res);
+                 if (true == res.success) {
+                    location.reload()
+                         
+
+                 } 
+                 
+
+            }).fail(function (t) {
+                console.log(t)
+                //   location.reload()
+            })
+    }
+    // /var size_view = 
+    function ubahjml(state){
+        console.log(state);
+        if(state == 1){
+            if(def_jml < stok){
+                def_jml++
+            }else{
+                
+            }
+        }else{
+            if(def_jml <= 1){
+                def_jml = 1;
+            }else{
+                def_jml--;
+            }
+        }
+        document.getElementById('value').innerHTML = def_jml;
+    }
+
 $(document).ready(function () {
-    var base_url = '<?= base_url()?>'
-            $(".addToCart").on("click", function () {
+    console.log(stok);
+
+    $(".addToCart").on("click", function () {
            
             var id_prod = $("#product").data("product-id");
             var nama_barang = $("#product").data("product-nama");
@@ -185,10 +338,19 @@ $(document).ready(function () {
                 url: base_url + "user/Home/add_cart",
                 type: "POST",
                 data: {
-                    id_pengguna: '<?= $this->session->userdata['user_data']['id']?>',
-                    id_produk: id_prod,
-                    qty : 1,
-                    nama_barang : nama_barang
+                    id_cart : '<?php if (!$id_cart == null || !$id_cart == ""){
+			echo $id_cart->id_cart; }else{echo "";}?>',
+                    id_pengguna: '<?php if(empty($this->session->userdata['user_data']['id'])){
+                        echo "";
+                    }else{
+                        echo $this->session->userdata['user_data']['id'];
+                    }?>',
+                    id_produk: '<?= $produk->id_produk;?>',
+                    qty : def_jml,
+                    img:'<?= $thumbnail[0]; ?>',
+                    nama_barang : nama_barang,
+                  
+                   size : def_Size,
                 }
             }).done(function (t) {
                 var res = JSON.parse(t);
@@ -205,7 +367,7 @@ $(document).ready(function () {
 
             }).fail(function (t) {
                 console.log(t)
-                   location.reload()
+                //   location.reload()
             })
         })
     })
@@ -218,72 +380,8 @@ $(document).ready(function () {
         });
 	}
 
-	function generateSize(index, product_id) {
-		$.ajax({
-			method: 'GET',
-			url: '/product/detail/'+product_id,
-			success: function(data) {
-				val = '';
-				size_lists = data.results.product.productdetails;
 
-				if($('#size-box-'+index).length) {
-					$('#size-box-'+index).empty();
-				}
-				for(i = 0; i < size_lists.length; i++) {
-					if(i == 0) {
-						is_active = 'active';
-						val = size_lists[i].stock;
-					}
-					else is_active = '';
-					coret = (size_lists[i].stock == 0) ? 'line-through' : 'none';
 
-					$('#size-box-'+index).append(
-							'<li data-value="'+ size_lists[i].size.id +'" class="size '+ is_active +'" onClick="setSize(event)">'
-						+ 	 '<span style="text-decoration:'+ coret +'" data-size="'+ size_lists[i].size.measure +'" data-stock="'+ size_lists[i].stock +'">'+ size_lists[i].size.measure +' </span>'
-						+ '</li>'
-					);
-				}
-
-				// Badge sisa stock
-				if(val >= 1 && val <= 3) {
-                    $('.size-box-'+index).css('display','inline-block');
-					$('.size-box-'+index).text(val + ' stok tersisa');
-				}
-				else {
-                    $('.size-box-'+index).css('display','none');
-					$('.size-box-'+index).text('');
-				}
-			}
-		});
-	}
-
-	function setSize(event) {
-		var val = '';
-		var badge_name = '';
-		if(event.target.nodeName == 'SPAN') {
-			node = '#' + event.target.parentNode.parentNode.id + ' li';
-			$(node).removeClass('active');
-			$(event.target).parent('li').addClass('active');
-			val = $(event.target).attr('data-stock');
-			badge_name = '.'+event.target.parentNode.parentNode.id;
-		}
-		else if(event.target.nodeName == "LI") {
-			node = '#' + event.target.parentNode.id + ' li';
-			$(node).removeClass('active');
-			$(event.target).addClass('active');
-			val = $(event.target).children('span').attr('data-stock');
-			badge_name = '.'+event.target.parentNode.id;
-		}
-
-		if(val >= 1 && val <= 3) {
-            $(badge_name).css('display','inline-block');
-			$(badge_name).text(val + ' stok tersisa');
-		}
-		else {
-            $(badge_name).css('display','none');
-			$(badge_name).text('');
-		}
-	}
 
     $(document).ready(function() {
 

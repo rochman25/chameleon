@@ -44,7 +44,7 @@
                                     <div class="header-collection">
                                         <a href="<?= base_url()?>produk/celana">
                                             <div class="gradient"></div>
-                                            <img src="<?= base_url()?>assets/images/Celana/P5.png" alt="">
+                                            <img src="<?= base_url() ?>assets/images/Celana/Celana-BG.png" alt="Sepatu">
                                             <h2>Celana</h2>
                                         </a>
                                     </div>
@@ -56,7 +56,7 @@
                                     <div class="header-collection">
                                         <a href="<?= base_url()?>produk/jas">
                                             <div class="gradient"></div>
-                                            <img src="<?= base_url()?>assets/images/Jas/11.png" alt="">
+                                            <img src="<?= base_url() ?>assets/images/Jas/Jas-BG.png" alt="Tas">
                                             <h2>Jas</h2>
                                         </a>
                                     </div>
@@ -68,7 +68,7 @@
                                     <div class="header-collection">
                                         <a href="<?= base_url()?>produk/kemeja">
                                             <div class="gradient"></div>
-                                            <img src="<?= base_url()?>assets/images/Kemeja/LRM_EXPORT_5.jpeg" alt="">
+                                            <img src="<?= base_url() ?>assets/images/Kemeja/Kemeja-BG.png" alt="Apparel">
                                             <h2>Kemeja</h2>
                                         </a>
                                     </div>
@@ -80,7 +80,7 @@
                     </div>
                 </li>
 
-                <li><a href="https://www.mensrepublic.id/order/payment/confirmation"><span>konfirmasi pembayaran</span></a></li>
+                <li><a href="https://api.whatsapp.com/send?phone=6283116200500"><span>konfirmasi pembayaran</span></a></li>
               
             </ul>
             <a href="<?= base_url()?>keluar" class="logout">

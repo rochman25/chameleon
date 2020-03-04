@@ -18,11 +18,11 @@ $this->load->view('public/cart');
 ?>
 <section id="content">
 	<div class="category-page">
-        <div class="header" style="background-image:url(https://www.mensrepublic.id/assets/images/uploads/category/sepatu-1571885735-pV0DzYBjF3hy.jpg)">
+        <div class="header" style="background-image:url(<?= $bg;?>)">
             <div class="container">
                 <div class="bottom_absolute">
                     <h1>  </h1>
-                    <h2>Sepatu</h2>
+                    <h2><?= $section;?></h2>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@ $this->load->view('public/cart');
                     <div class="left-side-wrapper">
                         <div class="filtering">
                             <div class="sorting">
-                                <div class="labels">Urutkan</div>
+                                <div style="color:white;" class="labels">Urutkan</div>
                                 <div>
                                     <select id="order" onchange="location = this.value" data-sort="" data-order="">
                                         <option value="?sort=published_at&order=">Terbaru</option>
@@ -41,15 +41,15 @@ $this->load->view('public/cart');
                                     </select>
                                 </div>
                             </div>
-                            <div class="size">
-                                <h2>Ukuran</h2>
+                            <!-- <div class="size">
+                                <h2 style="color:white;" >Ukuran</h2>
                                 <ul class="size_wrapper">
                                     <li data-id="1" class="size_1">S</li>
                                     <li data-id="2" class="size_2">M</li>
                                     <li data-id="3" class="size_3">X</li>
                                     <li data-id="4" class="size_4">XL</li>
                                 </ul>
-                            </div>
+                            </div> -->
                             <div class="color">
                                 <!-- <h2>Warna</h2> -->
                                 <!-- <ul class="color_wrapper">

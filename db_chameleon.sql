@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 08 Feb 2020 pada 20.06
+-- Generation Time: 27 Feb 2020 pada 11.59
 -- Versi Server: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -46,7 +46,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id_admin`, `username`, `email`, `password`, `no_hp`, `alamat`, `role`, `status`, `created_at`, `updated_at`) VALUES
-('02a4e573-4251-11ea-be05-646e69921e02', 'Zaenur', 'zaenur.rochman98@gmail.com', 'admin123', '081578988248', '<p>loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet <br></p>', '1', 1, '2020-01-29 05:37:00', '2020-02-08 18:43:18'),
+('02a4e573-4251-11ea-be05-646e69921e02', 'Zaenur', 'zaenur.rochman98@gmail.com', '$2a$08$bEPdM62lbsaHTay.WvvZFOLvUVcwM/G8TFfH6fP3qMacurWx2gHCi', '081578988248', '<p>loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet loren ipsum dolor sit amet <br></p>', '1', 1, '2020-01-29 05:37:00', '2020-02-27 09:39:39'),
 ('93f1d773-44cc-11ea-865b-646e69921e02', 'Rochman', 'zaenur.rochaman98@outlook.com', '$2a$08$AXEZ09qa9t9w5m6SAYoVSeSrC9MGeQyIyZcV4.pSRPKdMkEoJDv6O', '', '', '0', 0, '2020-02-01 09:26:43', '2020-02-01 09:28:26');
 
 -- --------------------------------------------------------
@@ -62,9 +62,21 @@ CREATE TABLE `alamat_pengguna` (
   `alamat_1` text NOT NULL,
   `alamat_2` text NOT NULL,
   `no_telp` varchar(13) NOT NULL,
+  `provinsi_id` int(11) NOT NULL,
+  `provinsi` varchar(30) NOT NULL,
+  `kabupaten_id` int(11) NOT NULL,
+  `kabupaten` varchar(50) NOT NULL,
   `kota` varchar(100) NOT NULL,
   `kode_pos` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `alamat_pengguna`
+--
+
+INSERT INTO `alamat_pengguna` (`id_alamat`, `id_pengguna`, `nama_lengkap`, `alamat_1`, `alamat_2`, `no_telp`, `provinsi_id`, `provinsi`, `kabupaten_id`, `kabupaten`, `kota`, `kode_pos`) VALUES
+('15941fdb-5134-11ea-8760-646e69921e02', 'd43f81f5-4f47-11ea-97e7-646e69921e02', 'Zaenurrochman', 'Jl. Pramuka RT 07/ RW 02', 'Desa Kalisari, Kecamatan Cilongok', '0895606494448', 21, 'Jawa Tengah', 5, 'Banyumas', 'Purwokerto', '53162'),
+('41741929-4b46-11ea-b70a-646e69921e02', 'f4d9ee60-4b45-11ea-b70a-646e69921e02', 'Zaenur Rochman', 'Jln Pramuka', 'Kalisari RT 07 / RW 02', '081578988248', 21, 'Jawa Tengah', 5, 'Banyumas', 'Purwokerto', '53162');
 
 -- --------------------------------------------------------
 
@@ -79,6 +91,13 @@ CREATE TABLE `cart_item` (
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `cart_item`
+--
+
+INSERT INTO `cart_item` (`id_cart`, `id_pengguna`, `created_at`, `updated_at`) VALUES
+('Invoice-202002171726-001', 'd43f81f5-4f47-11ea-97e7-646e69921e02', '2020-02-17 17:26:43', '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -86,10 +105,19 @@ CREATE TABLE `cart_item` (
 --
 
 CREATE TABLE `detail_cart_item` (
+  `id_detail_item_cart` varchar(36) NOT NULL,
   `id_cart` varchar(36) NOT NULL,
   `id_produk` varchar(36) NOT NULL,
-  `quantity` int(3) NOT NULL
+  `quantity` int(3) NOT NULL,
+  `size` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `detail_cart_item`
+--
+
+INSERT INTO `detail_cart_item` (`id_detail_item_cart`, `id_cart`, `id_produk`, `quantity`, `size`) VALUES
+('30f9892c-5179-11ea-b905-646e69921e02', 'Invoice-202002171726-001', 'aacc3967-4d1a-11ea-b59a-646e69921e02', 1, '');
 
 -- --------------------------------------------------------
 
@@ -103,8 +131,20 @@ CREATE TABLE `detail_transaksi` (
   `id_produk` varchar(36) NOT NULL,
   `jumlah_produk` int(3) NOT NULL,
   `total` float NOT NULL,
-  `discount` float NOT NULL
+  `discount` float NOT NULL,
+  `ukuran` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `detail_transaksi`
+--
+
+INSERT INTO `detail_transaksi` (`id_transaksi`, `kode_transaksi`, `id_produk`, `jumlah_produk`, `total`, `discount`, `ukuran`) VALUES
+('12457352-4b46-11ea-b70a-646e69921e02', 'TK-2609022020000-001', '9a6d55e7-4d10-11ea-b59a-646e69921e02', 2, 9999, 0, ''),
+('12457352-4b46-11ea-b70a-646e69921e02', 'TK-2609022020000-001', '6779dcbf-4d1f-11ea-b59a-646e69921e02', 3, 99999, 0, ''),
+('d61f7e7e-5159-11ea-8760-646e69921e02', 'TK-26202002171448-004', '6779dcbf-4d1f-11ea-b59a-646e69921e02', 2, 2426240, 0, 'M'),
+('d61f7e7e-5159-11ea-8760-646e69921e02', 'TK-26202002171448-004', 'aacc3967-4d1a-11ea-b59a-646e69921e02', 1, 19983, 0, 'L'),
+('9a510d53-5181-11ea-b905-646e69921e02', 'TK-26202002171932-005', 'aacc3967-4d1a-11ea-b59a-646e69921e02', 1, 19983, 0, '');
 
 -- --------------------------------------------------------
 
@@ -116,6 +156,7 @@ CREATE TABLE `kategori` (
   `id_kategori` varchar(36) NOT NULL,
   `nama_kategori` varchar(50) NOT NULL,
   `deskripsi_kategori` text NOT NULL,
+  `thumbnail_kategori` varchar(50) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -124,8 +165,8 @@ CREATE TABLE `kategori` (
 -- Dumping data untuk tabel `kategori`
 --
 
-INSERT INTO `kategori` (`id_kategori`, `nama_kategori`, `deskripsi_kategori`, `created_at`, `updated_at`) VALUES
-('5ec5076b-44d4-11ea-865b-646e69921e02', 'testing', 'asdadasdadasdasdasdas', '2020-02-01 10:28:32', '0000-00-00 00:00:00');
+INSERT INTO `kategori` (`id_kategori`, `nama_kategori`, `deskripsi_kategori`, `thumbnail_kategori`, `created_at`, `updated_at`) VALUES
+('5ec5076b-44d4-11ea-865b-646e69921e02', 'Celana', 'asdadasdadasdasdasdas asdasdasd', 'Celana.png', '2020-02-24 20:45:19', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -144,6 +185,15 @@ CREATE TABLE `pengguna` (
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `pengguna`
+--
+
+INSERT INTO `pengguna` (`id_pengguna`, `username`, `email`, `password`, `token`, `status`, `created_at`, `updated_at`) VALUES
+('8a98927e-4f46-11ea-97e7-646e69921e02', 'zaenurrochman', 'zaenur.rochman98@outlook.com', '$2a$08$kMgj2ltMxo037wmgyDxWUO/Xoy.ly0TL7qz2tMphvLgMgRcgRMK3S', 'emFlbnVyLnJvY2htYW45OEBvdXRsb29rLmNvbQ==', 1, '2020-02-14 17:24:57', '2020-02-18 15:39:48'),
+('d43f81f5-4f47-11ea-97e7-646e69921e02', 'zaenurrochman', 'zaenur.rochman98@gmail.com', '$2a$08$dyL4/LEdHllRXSgUYu2HMuzukeIOYxqqHEB1MX09dNSYIvoGQMXwy', 'emFlbnVyLnJvY2htYW45OEBnbWFpbC5jb20=', 1, '2020-02-14 17:34:11', '2020-02-27 09:55:59'),
+('f4d9ee60-4b45-11ea-b70a-646e69921e02', 'zaenur', 'zaenur.rochman@outlook.com', 'user1234', '', 1, '2020-02-09 00:00:00', '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -161,9 +211,19 @@ CREATE TABLE `produk` (
   `warna_produk` varchar(30) NOT NULL,
   `size_produk` varchar(10) NOT NULL,
   `thumbnail_produk` text NOT NULL,
+  `video_link` text NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `produk`
+--
+
+INSERT INTO `produk` (`id_produk`, `kode_produk`, `nama_produk`, `deskripsi_produk`, `stok_produk`, `harga_produk`, `id_kategori`, `warna_produk`, `size_produk`, `thumbnail_produk`, `video_link`, `created_at`, `updated_at`) VALUES
+('6779dcbf-4d1f-11ea-b59a-646e69921e02', 'CC-6-202002120538-005', 'Celana', '<p>lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet <br></p>', 7, 1213120, '5ec5076b-44d4-11ea-865b-646e69921e02', '', 'L,XL,M', 'CC-6-202002120538-005_3.PNG,CC-6-202002120538-005_1.png,CC-6-202002120538-005_2.png,CC-6-202002120537-005_0.png', '', '2020-02-11 23:39:46', '2020-02-12 15:14:55'),
+('9a6d55e7-4d10-11ea-b59a-646e69921e02', 'CC-4-202002120349-003', 'Baju', '<p>lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet <br></p>', 24, 1000000, '5ec5076b-44d4-11ea-865b-646e69921e02', '', 'L,XL,M', 'CC-4-202002120349-003_2.png,CC-4-202002120349-003_1.png', '', '2020-02-11 21:53:49', '2020-02-27 01:42:18'),
+('aacc3967-4d1a-11ea-b59a-646e69921e02', 'CC-6-202002120505-004', 'Celana bukan celana', '<p>lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet </p>', 8, 19983, '5ec5076b-44d4-11ea-865b-646e69921e02', '', 'L,XL,M', 'CC-6-202002120505-004_3.png,CC-4-202002120349-003_2.jpg,CC-4-202002120349-003_0.png,CC-4-202002120349-003_1.png', '', '2020-02-11 23:05:51', '2020-02-12 15:13:28');
 
 -- --------------------------------------------------------
 
@@ -176,8 +236,16 @@ CREATE TABLE `profile_toko` (
   `nama_toko` varchar(30) NOT NULL,
   `deskripsi_toko` text NOT NULL,
   `no_telp` varchar(15) NOT NULL,
-  `email` varchar(150) NOT NULL
+  `email` varchar(150) NOT NULL,
+  `hashtag` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `profile_toko`
+--
+
+INSERT INTO `profile_toko` (`id_toko`, `nama_toko`, `deskripsi_toko`, `no_telp`, `email`, `hashtag`) VALUES
+('17ef33f7-5264-11ea-88f8-646e69921e02', 'Chameleon Cloth', '<p>lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet </p>', '081578988248', 'cc@cc.com', '');
 
 -- --------------------------------------------------------
 
@@ -196,8 +264,19 @@ CREATE TABLE `transaksi` (
   `total_ongkir` float NOT NULL,
   `status_transaksi` varchar(20) NOT NULL,
   `bukti_transfer` varchar(40) NOT NULL,
-  `no_resi` varchar(20) NOT NULL
+  `no_resi` varchar(20) NOT NULL,
+  `kurir` varchar(15) NOT NULL,
+  `catatan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `transaksi`
+--
+
+INSERT INTO `transaksi` (`id_transaksi`, `kode_transaksi`, `id_pengguna`, `id_alamat`, `waktu_transaksi`, `waktu_expired`, `total_harga`, `total_ongkir`, `status_transaksi`, `bukti_transfer`, `no_resi`, `kurir`, `catatan`) VALUES
+('12457352-4b46-11ea-b70a-646e69921e02', 'TK-2609022020000-001', 'f4d9ee60-4b45-11ea-b70a-646e69921e02', '41741929-4b46-11ea-b70a-646e69921e02', '2020-02-09 00:00:00', '2020-02-10 00:00:00', 300000, 10000, 'validasi', '', '', '', ''),
+('9a510d53-5181-11ea-b905-646e69921e02', 'TK-26202002171932-005', 'd43f81f5-4f47-11ea-97e7-646e69921e02', '15941fdb-5134-11ea-8760-646e69921e02', '2020-02-17 19:32:46', '0000-00-00 00:00:00', 29983, 10000, 'validasi', '', '', 'tiki', 'lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet '),
+('d61f7e7e-5159-11ea-8760-646e69921e02', 'TK-26202002171448-004', 'd43f81f5-4f47-11ea-97e7-646e69921e02', '15941fdb-5134-11ea-8760-646e69921e02', '2020-02-17 14:48:07', '0000-00-00 00:00:00', 0, 0, 'validasi', '', '', 'jne', '');
 
 --
 -- Indexes for dumped tables
@@ -227,6 +306,7 @@ ALTER TABLE `cart_item`
 -- Indexes for table `detail_cart_item`
 --
 ALTER TABLE `detail_cart_item`
+  ADD PRIMARY KEY (`id_detail_item_cart`),
   ADD KEY `fk_detail_cart` (`id_cart`),
   ADD KEY `fk_produk_detail_cart` (`id_produk`);
 

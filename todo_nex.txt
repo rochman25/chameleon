@@ -1,0 +1,64 @@
+Admin Produk
+  - Link Video Produk (gdrive)
+
+Halaman Admin
+  - ubah warna (agak hitam)
+
+Produk
+  - iFrame (video by link)
+  - 1kg (berat / produk)
+  - 
+
+Transaksi
+  - data table	
+  - Konfirmasi Pembayaran (user)
+  	- kode transaksi (user)
+    	- upload foto bukti pembayaran (user)
+	- status transaksi (tambah validasi)
+  - Konfirmasi Pembayaran (admin)
+        - check bukti pembayaran
+        - change status transaksi (validasi, proses , kirim)
+
+
+Pengguna (admin)
+  - detail akun
+  - lupa password
+
+
+warna (darkGrey, green) y
+
+Koleksi
+  - assets update
+
+laporan penjualan 
+  - no, kode_transaksi, nama_lengkap, no_telp, alamat_lengkap
+
+email_verifikasi : admin@chameleoncloth.co.id
+email_contact    : cs@chameleoncloth.co.id
+
+ongkir : 
+	- JNE (REG) 
+	- POS (Paket Kilat Khusus)
+
+
+String : 
+    - Hajar Men (Order)
+    - Beli (Check Out)
+    - Hajar Men (Daftar)  == halaman utama
+
+Halaman Utama 
+    - Watermark dihapus
+    - ubah tombol daftar
+    - add button chat (list admin contact)
+
+footer
+    - logo copyright copyright Chameleon Cloth 2020
+
+profil user
+    - list transaksi
+    - detail user (nama,alamat,telp)
+    - action konfirmasi pembayaran(add form upload )
+
+
+
+Search bar (pencarian berdasarkan nama produk)

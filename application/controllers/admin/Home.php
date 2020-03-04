@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Home extends MY_Controller
 {
@@ -7,6 +7,7 @@ class Home extends MY_Controller
     {
         parent::__construct();
         $this->load->model('Admin_model', 'admin');
+        $this->load->model('Transaksi_model','transaksi');
         $this->load->library('bcrypt');
         $this->load->library('form_validation');
     }
@@ -14,7 +15,55 @@ class Home extends MY_Controller
     public function index()
     {
         if ($this->adminIsLoggedIn()) {
-            $this->load->view('admin/pages/dashboard');
+            $month = [];
+            $i = 1;
+            $index=0;
+            $transaksi = $this->transaksi->getDetailTransaksi();
+            $stat = $this->transaksi->getStatistik();
+            $statistik = ["proses" => 0,"validasi" => 0,"pending" => 0,"kirim" => 0,"selesai" => 0];
+            $penjualan = 0;
+            $produk = 0;
+            foreach($transaksi as $row){
+                if($row['status_transaksi'] == "pending"){
+                    $statistik['pending'] = $statistik['pending'] + count($row['status_transaksi']);
+                }else if($row['status_transaksi'] == "kirim"){
+                    $statistik['kirim'] =  $statistik['kirim'] + count($row['status_transaksi']);
+                }else if($row['status_transaksi'] == "selesai"){
+                    $statistik['selesai'] = $statistik['selesai'] + count($row['status_transaksi']);
+                }else if($row['status_transaksi'] == "validasi"){
+                    $statistik['validasi'] = $statistik['validasi'] + count($row['status_transaksi']);
+                }else if($row['status_transaksi'] == "proses"){
+                    $statistik['proses'] = $statistik['proses'] + count($row['status_transaksi']);
+                }
+                $penjualan = $penjualan + ($row['total_harga'] + $row['total_ongkir']);
+                $produk = $produk + $row['jumlah_produk'];
+            }
+            $jml = 0;
+            for($a=0; $a<12; $a++){
+                foreach($stat as $row){
+                    if((int) sprintf("%02s",substr(date("m", strtotime($row['waktu_transaksi'])),-1)) == $i){
+                        $jml += ($row['total_harga'] + $row['total_ongkir']);
+                        $month[$index] = $jml;
+                    }else{
+                        $month[$index] = 0;
+                    }
+                }
+                $index++;
+                $i++;
+            }
+            // die();
+            $stat_penjualan = $month;
+            // $stat_penjualan = [3200, 1800, 4305, 3022, 6310, 5120, 1200, 2000, 1000, 6154, 2000, 6154];
+            $statistik['total'] = count($transaksi);
+            $data = [
+                "transaksi" => $transaksi,
+                "statistik" => $statistik,
+                "penjualan" => $penjualan,
+                "produk"    => $produk,
+                "statistik_penjualan" => $stat_penjualan
+            ];
+            // die(json_encode($stat_penjualan));
+            $this->load->view('admin/pages/dashboard',$data);
         } else {
             redirect('admin/home/login');
         }
@@ -108,7 +157,6 @@ class Home extends MY_Controller
         if ($this->adminIsLoggedIn()) {
             redirect('admin/home');
         } else {
-            
             if ($this->input->post('kirim')) {
                 // die();
                 $email = $this->input->post('email');
@@ -118,7 +166,7 @@ class Home extends MY_Controller
                 // die(json_encode($cek));
                 if ($cek != null) {
                     if ($this->bcrypt->check_password($pass, $cek->password)) {
-                    //  if ($cek->password == $pass) {
+                    // if ($cek->password == $pass) {
                         $datas = array(
                             "updated_at" => date("Y-m-d H:i:s")
                         );

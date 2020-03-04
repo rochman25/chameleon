@@ -40,5 +40,11 @@ class Produk_model extends MY_Model
         $this->getWhere('kode_produk',$id);
         return $this->update($data);
     }
+    public function search($cari,$table)
+	{
+
+		$data = $this->db->query("SELECT * from $table  inner join kategori ON kategori.id_kategori=$table.id_kategori where nama_produk like '%$cari%'");
+		return $data;
+	}
 
 }

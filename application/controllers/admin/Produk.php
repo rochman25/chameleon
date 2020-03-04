@@ -44,6 +44,7 @@ class Produk extends MY_Controller
                 $harga_p = $this->input->post('harga_p');
                 $kat_p = $this->input->post('kat_p');
                 $size_p = $this->input->post('size_p');
+                $link = $this->input->post('link');
                 $namaFile = "";
                 // $thumbnail = $_FILES['file']['name'];
                 if ($this->session->userdata('produk_data') != null) {
@@ -64,6 +65,7 @@ class Produk extends MY_Controller
                     "id_kategori" => $kat_p,
                     "size_produk" => $size_p,
                     "thumbnail_produk" => $namaFile,
+                    "video_link" => $link,
                     "created_at" => date("Y-m-d H:i:s")
                 );
                 // die(json_encode($data));
@@ -102,6 +104,7 @@ class Produk extends MY_Controller
                 $harga_p = $this->input->post('harga_p');
                 $kat_p = $this->input->post('kat_p');
                 $size_p = $this->input->post('size_p');
+                $link = $this->input->post('link');
 
                 if($this->session->userdata('produk_data') != null){
                     $thumbnail = implode(",", $this->session->userdata['produk_data']['thumbnail']);
@@ -113,6 +116,7 @@ class Produk extends MY_Controller
                         "id_kategori" => $kat_p,
                         "thumbnail_produk" => $thumbnail,
                         "size_produk" => $size_p,
+                        "video_link" => $link,
                         "updated_at" => date("Y-m-d H:i:s")
                     );
                     $this->session->unset_userdata('produk_data');
@@ -124,6 +128,7 @@ class Produk extends MY_Controller
                         "harga_produk" => $harga_p,
                         "id_kategori" => $kat_p,
                         "size_produk" => $size_p,
+                        "video_link" => $link,
                         "updated_at" => date("Y-m-d H:i:s")
                     );
                 }
@@ -146,6 +151,36 @@ class Produk extends MY_Controller
                 $this->load->view('admin/pages/produk/form_produk',$data);
             }
         }else{
+            redirect('admin/home/login');
+        }
+    }
+
+    public function stok()
+    {
+        if ($this->adminIsLoggedIn()) {
+            if ($this->input->post('kirim')) {
+                $id = $this->input->post('id');
+                $stok = $this->input->post('stok');
+
+                $data = array(
+                    "stok_produk" => $stok
+                );
+                // die(json_encode($data));
+                if ($this->produk->updateData($data, $id)) {
+                    $this->session->set_flashdata(
+                        'pesan',
+                        '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil diubah</div>'
+                    );
+                    redirect('admin/produk');
+                } else {
+                    $this->session->set_flashdata(
+                        'pesan',
+                        '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
+                    );
+                    redirect('admin/produk');
+                }
+            }
+        } else {
             redirect('admin/home/login');
         }
     }
@@ -228,6 +263,31 @@ class Produk extends MY_Controller
             }
         } else {
             redirect('admin/home/login');
+        }
+    }
+
+    public function deleteFile(){
+        $id = $this->input->post('id');
+        $nama = $this->input->post('nama');
+        $tp = [];
+        $data = $this->produk->getById($id);
+        $thumbnail = explode(',',$data->thumbnail_produk);
+        foreach($thumbnail as $row){
+            if($nama != $row){
+                $tp[] = $row;
+            }else{
+                unlink("assets/uploads/thumbnail_produk/" . $row);
+            }
+        }
+        $thumbnail = implode(",", $tp);
+        $data = array(
+            "thumbnail_produk" => $thumbnail
+        );
+        $query = $this->produk->updateData($data,$id);
+        if($query){
+            echo json_encode(['message' => "success"]);
+        }else{
+            echo json_encode(['message' => "error"]);
         }
     }
 

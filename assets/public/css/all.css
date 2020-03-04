@@ -1080,7 +1080,7 @@ body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	line-height: 1.42857143;
-	color: #333;
+	color: #ffff;
 	background-color: #fff;
 }
 button,
@@ -4123,7 +4123,6 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav-tabs > li.active > a:hover {
 	color: #555;
 	cursor: default;
-	background-color: #fff;
 	border: 1px solid #ddd;
 	border-bottom-color: transparent;
 }
@@ -12636,7 +12635,7 @@ button.close {
 	margin: 0 auto;
 }
 #content {
-	background-color: #ededee;
+	background-color: #020202; /*#ededee;*/
 	margin: 0;
 }
 .alert {
@@ -12658,7 +12657,7 @@ select {
 input[type="button"],
 input[type="submit"] {
 	color: #fff;
-	background-color: #b74d24;
+	background-color: #03cc00;
 	margin-top: 20px;
 	border: 0;
 }
@@ -12667,8 +12666,8 @@ button {
 }
 input[type="text"],
 select {
-	color: #000;
-	background-color: #fff;
+	color: #fff;
+	background-color: white;
 }
 .modal-body form h2 {
 	font-size: 14px;
