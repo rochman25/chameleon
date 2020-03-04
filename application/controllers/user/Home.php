@@ -34,6 +34,22 @@ class Home extends MY_Controller{
          //   die(json_encode($data));
         $this->load->view('public/home',$data);
     }
+    public function search(){
+        $cari = $this->input->post('search');
+        $data['produk'] = $this->produk->search($cari,"produk")->result_array();
+       // die(json_encode($data));
+        $thumbnail = array();
+        if($data['produk'] ){
+        foreach ($data['produk'] as $row) {
+            $foto = explode(',', $row['thumbnail_produk']);
+            $thumbnail[$row['id_produk']] = $foto[0];
+        }
+    }
+        $data['bg'] = base_url('assets/images/Kemeja/Kemeja-BG.png');
+        $data['section'] = "Hasil pencarian,".$cari;
+        $data['thumbnail'] = $thumbnail;
+        $this->load->view('public/product',$data);
+    }
     public function produk($kategori = ""){
      
         if($kategori == ""){
@@ -81,13 +97,10 @@ class Home extends MY_Controller{
         $data['section'] = $kategori;
         if($kategori == "celana"){
             $data['bg'] = base_url('assets/images/Celana/Celana-BG.png');
-            
         }else if($kategori == "kemeja"){
             $data['bg'] = base_url('assets/images/Kemeja/Kemeja-BG.png');
         }else if($kategori == "jas"){
             $data['bg'] = base_url('assets/images/Jas/Jas-BG.png');
-        }else if($kategori == "celana"){
-            $data['bg'] = base_url('assets/images/Celana/Celana-BG.png');
         }else{
             $data['bg'] = base_url('assets/images/Celana/Celana-BG.png');
         }
@@ -102,16 +115,22 @@ class Home extends MY_Controller{
         $id_produk = $this->input->get('produk');
       
         $thumbnail = array();
+        $ukuran = array();
             $data['produk'] = $this->produk->getWhere("id_produk", $id_produk);
             $data['produk'] = $this->produk->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
             $data['produk'] = $this->produk->getData()->row();
     
                 $foto = explode(',', $data['produk']->thumbnail_produk);
+                $size = explode(',',$data['produk']->size_produk);
                 foreach($foto as $f){
                     $thumbnail[] = $f;
                 }
+                foreach($size as $u){
+                    $ukuran[] = $u;
+                }
    
             $data['thumbnail'] = $thumbnail;
+            $data['size'] = $ukuran;
             if ($this->userIsLoggedIn()) {
                 $data['id_cart'] = $this->cart->getWhere("id_pengguna",$this->session->userdata['user_data']['id']);
                 $data['id_cart'] = $this->cart->getData()->row();

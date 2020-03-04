@@ -47,7 +47,12 @@ $(document).ready(function () {
             var t = $(this).attr("data-target");
             $(".product-info .tab-content>div").hide(),
                 $(".product-info .tab-content ." + t + " ").show()
-        }), $(".wishlist").on("click", function () {
+        }),
+        $(".size-product ul li").on("click", function () {
+            $(".size-product ul li").removeClass("active"),
+                $(this).addClass("active");
+        }),
+        $(".wishlist").on("click", function () {
             $(this).hasClass("active") ? $.ajax({
                 url: window.location.origin + "/wishlist/remove/",
                 type: "POST", data: {

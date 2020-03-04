@@ -83,7 +83,7 @@
 	                    </a>
 	                </div>
 	                <div class="search">
-	                    <form action="#" method="get">
+	                    <form action="<?= base_url()?>search" method="get">
 	                        <button type="submit"><i class="svg_icon__header_search svg-icon"></i></button>
 	                        <input type="text" name="search" class="autocomplete" placeholder="Masukan Kata Kunci">
 	                    </form>
