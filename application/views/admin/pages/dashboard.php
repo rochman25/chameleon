@@ -28,6 +28,8 @@
                                             <div class="card-stats-item-label">Pending</div>
                                         </div>
                                         <div class="card-stats-item">
+<<<<<<< HEAD
+=======
                                             <div class="card-stats-item-count"><?= $statistik['validasi'] ?></div>
                                             <div class="card-stats-item-label">Validasi</div>
                                         </div>
@@ -36,6 +38,7 @@
                                             <div class="card-stats-item-label">Proses</div>
                                         </div>
                                         <div class="card-stats-item">
+>>>>>>> f641e3f56620d12ee73035d81510aac9787620cc
                                             <div class="card-stats-item-count"><?= $statistik['kirim'] ?></div>
                                             <div class="card-stats-item-label">Kirim</div>
                                         </div>
