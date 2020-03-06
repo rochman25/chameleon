@@ -73,7 +73,7 @@ $this->load->view('public/cart');
                     <?php } ?>
                     <div class="title">Pilih Pengiriman:</div>
                     <div class="kurir">
-                        <select name="kurir" id="kurir" required>
+                        <select style="color:black" name="kurir" id="kurir" required>
                             <option value="">Pilih Kurir</option>
                             <option value="jne">JNE</option>
                             <option value="pos">POS Indonesia</option>
@@ -82,7 +82,7 @@ $this->load->view('public/cart');
                     </div>
                     <br>
                     <div class="title">Catatan untuk Chameleon cloth (optional)</div>
-                    <textarea name="catatan" class="notes"></textarea>
+                    <textarea style="color:black" name="catatan" class="notes"></textarea>
                     <div class="order-summary">
                         <h1>Ringkasan Belanja</h1>
                         <hr>
