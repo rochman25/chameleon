@@ -175,10 +175,11 @@ class Home extends MY_Controller{
                 $cek = $this->user->login($where)->row();
                 if ($cek != null) {
                     if ($cek->status == true) {
-                        // die(json_encode($pass));
+                      //   die(json_encode($this->bcrypt->hash_password($pass)));
+                         
                         // die(json_encode($this->bcrypt->check_password($pass, $cek->password)));
-                        if ($this->bcrypt->check_password($pass, $cek->password)) {
-                        //  if ($cek->password == $pass) {
+                   //     if ($this->bcrypt->check_password($pass, $cek->password)) {
+                          if ($cek->password == $pass) {
                             $datas = array(
                                 "updated_at" => date("Y-m-d H:i:s")
                             );
@@ -195,7 +196,7 @@ class Home extends MY_Controller{
                         } else {
                             $this->session->set_flashdata(
                                 'pesan',
-                                '<div class="alert alert-danger mr-auto">Password salah</div>'
+                                '<div class="alert alert-danger mr-auto">Password atau Username salah</div>'
                             );
                             $this->load->view('public/login');
                         }
@@ -531,6 +532,12 @@ class Home extends MY_Controller{
         $data['alamat'] = $this->alamat->getWhere("id_pengguna", $idp);
         $data['alamat'] = $this->alamat->getData()->result();
     //    die(json_encode($data['transaksi']));
+    if ($this->userIsLoggedIn()) {
+        $data['id_cart'] = $this->cart->getWhere("id_pengguna",$this->session->userdata['user_data']['id']);
+        $data['id_cart'] = $this->cart->getData()->row();
+    }else{
+        $data['id_cart'] = "";
+        }
         $this->load->view('public/profil',$data);
         }else{
             redirect(base_url('login'));

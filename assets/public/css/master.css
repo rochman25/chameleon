@@ -711,7 +711,7 @@ header.desktop .mainheader > ul > li > a {
 }
 header.desktop .mainheader > ul > li span {
 	border-radius: 4px;
-	background-color: #03cc00;
+	background-color: #3bb175;
 	padding: 7px 10px;
 }
 /* 
@@ -719,7 +719,7 @@ header.desktop .mainheader > ul > li span {
 */
 .home_button {
 	border-radius: 4px;
-	background-color: #03cc00;
+	background-color: #3bb175;
 	padding: 10px 20px;
 	text-decoration: none;
 	color: #ffff;
@@ -1201,7 +1201,7 @@ header.mobile .menu-lvl1 > ul > li > a > i {
 }
 header.mobile .menu-lvl1 > ul > li > a span {
 	border-radius: 4px;
-	background-color: #b74d24;
+	background-color: #3bb175;
 	padding: 7px 10px;
 	color: #fff;
 }
@@ -1583,7 +1583,7 @@ header.mobile .menu-lvl1 .logout i {
 	color: #fff;
 	width: 100%;
 	height: 46px;
-	background-color: #03cc00;
+	background-color: #3bb175;
 	text-align: center;
 	text-transform: uppercase;
 }
