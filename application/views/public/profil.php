@@ -76,7 +76,12 @@ $this->load->view('public/cart');
                                 <td><?=$no++?></td>
                                 <td><?=$row['kode_transaksi']?></td>
                                 <td><?=$row['status_transaksi']?></td>
-                                <td><a href="<?= base_url()?>pembayaran" class="btn btn-success">Konfirmasi</a></td>
+                                <td>
+                                <form action="<?= base_url()?>pembayaran" method="POST">
+                                    <input type="hidden" name="idtransaksi" value="<?=$row['id_transaksi']?>">
+                                    <input class="btn btn-success"  type="submit" value="Konfirmasi">
+                                </form>
+                                </td>
                             </tr>
                             <?php } ?>
                         </table>

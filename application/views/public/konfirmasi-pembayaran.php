@@ -24,16 +24,22 @@ $this->load->view('public/cart');
                     <h1>Detail Transaksi</h1>
                     <table style="color:black;" class="table table-hover">
                         <tr>
-                            <th>No</th>
                             <th>Kode Transaksi</th>
-                            <th>Status</th>
-                            <th>Aksi</th>
+                            <th>Harga</th>
+                            <th>Ongkir</th>
                         </tr>
-                       
+                        <tr>
+                            <td><?= $data->kode_transaksi;?></td>
+                            <td>Rp <?= $data->total_harga;?></td>
+                            <td>Rp <?= $data->total_ongkir;?></td>
+                        <tr>
                     </table>
-                    <form action="<?= base_url()?>prosespembayaran" method="POST">
-                        <input type="hidden" name="idtransaksi" value=""/>
-                        <input type="file" name="bukti"/>
+                    <form action="<?= base_url()?>prosespembayaran" enctype="multipart/form-data" method="POST">
+                        <input type="hidden" name="idtransaksi" value="<?= $data->id_transaksi;?>"/>
+                        <label style="color:black !important;" for="myfile">Bukti pembayaran</label>
+                        <input style="color:black !important;" type='file' name='bukti' accept='image/*' />
+
+                        <input type="submit" value="simpan">
                     </form>
                 </div>
             </div>

@@ -647,33 +647,52 @@ class Home extends MY_Controller{
 
     public function konfirmasi()
     {
-        $this->load->view('public/konfirmasi-pembayaran');
+        if (!$this->userIsLoggedIn()) {
+            redirect(base_url());
+        } else {
+        $id = $this->input->post('idtransaksi');
+
+        $data['data'] = $this->transaksi->getWhere("id_transaksi", $id);
+        $data['data'] = $this->transaksi->getData()->row();
+       //die(json_encode($data));
+        $this->load->view('public/konfirmasi-pembayaran',$data);
+        }
     }
     public function konfirmasi_proses()
     {
-        if ($this->userIsLoggedIn()) {
+        if (!$this->userIsLoggedIn()) {
             redirect(base_url());
         } else {
-            if ($this->input->post("idtransaksi")) {
+     
                 $id = $this->input->post("idtransaksi");
                 $config['upload_path']          = './assets/uploads/transaksi';
-		        $config['allowed_types']        = 'gif|jpg|png';
-		        //$config['max_size']             = 100;
-		        $config['max_width']            = 1024;
-		       // $config['max_height']           = 768;
+		        $config['allowed_types']        = 'gif|jpg|png|jpeg';
+		        $config['max_size']             = 1024;
+
  
 		        $this->load->library('upload', $config);
  
 		        if ( ! $this->upload->do_upload('bukti')){
-			        $error = array('error' => $this->upload->display_errors());
-			       // $this->load->view('v_upload', $error);
+                    $error = array('error' => $this->upload->display_errors());
+                    
 		        }else{
-			        $data = array('upload_data' => $this->upload->data());
-			      //  $this->load->view('v_upload_sukses', $data);
+                    $data= $this->upload->data("file_name");
+              
+                   $data = array(
+                       "bukti_transfer" => $data
+                   );
+                    $update = $this->transaksi->update($data);
+                    $update = $this->transaksi->getWhere("id_transaksi", $id);
+                    if($update){
+                        redirect("profil");
+                    }else{
+                        redirect("profil");
+                    }
 		        }
-            }
+        
         }
     }
+
 
     public function lupa_password()
     {
