@@ -656,20 +656,20 @@ class Home extends MY_Controller{
         } else {
             if ($this->input->post("idtransaksi")) {
                 $id = $this->input->post("idtransaksi");
-                $config['upload_path']          = './gambar/';
+                $config['upload_path']          = './assets/uploads/transaksi';
 		        $config['allowed_types']        = 'gif|jpg|png';
-		        $config['max_size']             = 100;
+		        //$config['max_size']             = 100;
 		        $config['max_width']            = 1024;
-		        $config['max_height']           = 768;
+		       // $config['max_height']           = 768;
  
 		        $this->load->library('upload', $config);
  
-		        if ( ! $this->upload->do_upload('berkas')){
+		        if ( ! $this->upload->do_upload('bukti')){
 			        $error = array('error' => $this->upload->display_errors());
-			        $this->load->view('v_upload', $error);
+			       // $this->load->view('v_upload', $error);
 		        }else{
 			        $data = array('upload_data' => $this->upload->data());
-			        $this->load->view('v_upload_sukses', $data);
+			      //  $this->load->view('v_upload_sukses', $data);
 		        }
             }
         }

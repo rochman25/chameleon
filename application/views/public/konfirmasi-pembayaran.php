@@ -15,48 +15,13 @@ $this->load->view('public/cart');
 <div class="dashboard-user">
     <div class="background-layout"></div>
     <div class="container">
-        <h1>MY PROFILE</h1>
+        <h1>Pembayaran</h1>
         <div class="left-right">
 
-            <div class="left-side">
-                <i class="svg-icon svg_icon__dashboard_pencil" onclick="window.location.href = '<?= base_url() ?>profil';">
-                </i>
-                <br>
-                <!-- <img src="https://www.mensrepublic.id/assets/images/dashboard/default-avatar.png" alt=""> -->
-                <h1><?= $profil->username; ?></h1>
-                <!-- <span>Joined 13 Februari 2020</span> -->
-                <hr>
-                <ul class="info-profile">
-                    <li> <i class="svg-icon svg_icon__dashboard_mail"></i> <span><a href="#" class="__cf_email__" data-cfemail="1876776e71767c79766d6a7e2920587f75797174367b7775"><?= $profil->email; ?></a> </span> </li>
-                    <!-- <li> <i class="svg-icon svg_icon__dashboard_gift"></i> <span>16 Sepember 1998 </span>  </li> -->
-                    <!-- <li> <i class="svg-icon svg_icon__dashboard_phone"></i> <span>081226809435 </span>  </li> -->
-                    <?php if ($alamat) {
-                        foreach ($alamat as $a) {
-                    ?>
-                            <li class="alamat"> <i class="svg-icon svg_icon__dashboard_pin"></i>
-                                <span>
-                                    <?=$a->alamat_1?>
-                                    <?=$a->alamat_2?>
-                                    <?=$a->kabupaten?>
-                                    <?=$a->kode_pos?>
-                                    <!-- Jawa Tengah -->
-                                </span>
-                            </li>
-                    <?php
-                        }
-                    } ?>
-                    <!-- <li><i class="svg-icon svg_icon__dashboard_phone"></i> <span><?=$alamat[0]->no_telp?></span></li> -->
-
-                </ul>
-                <button class="expand">
-                    <i class="svg-icon svg_icon__dashboard_chevron"></i>
-                </button>
-                <a href="<?= base_url() ?>logout" class="logout">
-                    <i class="svg-icon svg_icon__dashboard_logout"></i> <span>logout</span> </a>
-            </div>
+            
             <div class="right-side">
                 <div class="list-transaction page">
-                    <h1>Daftar Transaksi</h1>
+                    <h1>Detail Transaksi</h1>
                     <table style="color:black;" class="table table-hover">
                         <tr>
                             <th>No</th>
@@ -64,17 +29,12 @@ $this->load->view('public/cart');
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
-                        <?php 
-                        $no=1;
-                        foreach($transaksi as $row){ ?>
-                        <tr>
-                            <td><?=$no++?></td>
-                            <td><?=$row['kode_transaksi']?></td>
-                            <td><?=$row['status_transaksi']?></td>
-                            <td><a href="<?= base_url()?>pembayaran" class="btn btn-success">Konfirmasi</a></td>
-                        </tr>
-                        <?php } ?>
+                       
                     </table>
+                    <form action="<?= base_url()?>prosespembayaran" method="POST">
+                        <input type="hidden" name="idtransaksi" value=""/>
+                        <input type="file" name="bukti"/>
+                    </form>
                 </div>
             </div>
         </div>

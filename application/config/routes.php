@@ -60,6 +60,7 @@ $route['panduan/retur']         = 'user/Home/panduan_return';
 $route['panduan/ukuran']        = 'user/Home/panduan_ukuran';
 $route['promo']                 = 'user/Home/promo';
 $route['pembayaran']            = 'user/Home/konfirmasi';
+$route['prosesppembayaran']            = 'user/Home/konfirmasi_proses';
 $route['search']                = 'user/Home/search';
 
 $route['produk']        = 'user/Home/produk';
