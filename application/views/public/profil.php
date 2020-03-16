@@ -22,7 +22,7 @@ $this->load->view('public/cart');
         <div class="container">
             <h1>MY PROFILE</h1>
             <div class="left-right">
-
+            <?= $this->session->flashdata('pesan') ?>
                 <div class="left-side">
                     <i class="svg-icon svg_icon__dashboard_pencil" onclick="window.location.href = '<?= base_url() ?>profil';">
                     </i>

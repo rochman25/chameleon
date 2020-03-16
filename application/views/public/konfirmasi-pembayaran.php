@@ -17,7 +17,7 @@ $this->load->view('public/cart');
     <div class="container">
         <h1>Pembayaran</h1>
         <div class="left-right">
-
+        <?= $this->session->flashdata('pesan') ?>
             
             <div class="right-side">
                 <div class="list-transaction page">

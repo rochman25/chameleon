@@ -673,10 +673,14 @@ class Home extends MY_Controller{
 		        $this->load->library('upload', $config);
  
 		        if ( ! $this->upload->do_upload('bukti')){
-                    $error = array('error' => $this->upload->display_errors());
+                    $this->session->set_flashdata(
+                        'pesan',
+                        '<div class="alert alert-danger mr-auto">Password atau Username salah</div>'
+                    );
+                    // $error = array('error' => $this->upload->display_errors());
                     
 		        }else{
-                    $data= $this->upload->data("file_name");
+                $data= $this->upload->data("file_name");
               
                    $data = array(
                        "bukti_transfer" => $data
@@ -684,8 +688,16 @@ class Home extends MY_Controller{
                     $update = $this->transaksi->update($data);
                     $update = $this->transaksi->getWhere("id_transaksi", $id);
                     if($update){
+                        $this->session->set_flashdata(
+                            'pesan',
+                            '<div class="alert alert-success mr-auto">Password atau Username salah</div>'
+                        );
                         redirect("profil");
                     }else{
+                        $this->session->set_flashdata(
+                            'pesan',
+                            '<div class="alert alert-danger mr-auto">Password atau Username salah</div>'
+                        );
                         redirect("profil");
                     }
 		        }
