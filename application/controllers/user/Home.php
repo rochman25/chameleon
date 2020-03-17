@@ -176,7 +176,7 @@ class Home extends MY_Controller{
                 if ($cek != null) {
                     if ($cek->status == true) {
                       //   die(json_encode($this->bcrypt->hash_password($pass)));
-                         
+                    //    die(json_encode(array("datacek"=>$cek,"datapass"=>$this->bcrypt->hash_password($pass))));
                         // die(json_encode($this->bcrypt->check_password($pass, $cek->password)));
                         if ($this->bcrypt->check_password($pass, $cek->password)) {
                         //  if ($cek->password == $pass) {
@@ -434,7 +434,7 @@ class Home extends MY_Controller{
         } else {
             if ($this->input->post('kirim')) {
                 $email = $this->input->post('email');
-                $pass = $this->input->post('pass');
+                $pass = $this->input->post('password');
                 $uname = $this->input->post('username');
 
                 $cek = $this->user->getWhere('email',$email);
