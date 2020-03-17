@@ -578,12 +578,17 @@ class Home extends MY_Controller
                     "kecamatan" => $kecamatan_id[1],
                     "kabupaten_id" => $kabupaten_id[0],
                     "kabupaten" => $kabupaten_id[1],
-                    "kode_pos" => $kode_pos
+                    "kode_pos" => $kode_pos,
+                    "id_pengguna" => $idp
                 );
 
-                $update_alamat = $this->alamat->updateData($data_alamat, $idA);
+                if($idA == null){
+                    $query = $this->alamat->insert($data_alamat, $idA);
+                }else{
+                    $query = $this->alamat->updateData($data_alamat, $idA);
+                }
                 // die(json_encode($update_alamat));
-                if ($update_alamat) {
+                if ($query) {
                     $this->session->set_flashdata("pesan", "Data berhasil diperbarui ");
                     redirect(base_url('ubah_profile'));
                 } else {
@@ -591,6 +596,7 @@ class Home extends MY_Controller
                     redirect(base_url('ubah_profile'));
                 }
             } else {
+                // die(json_encode($data));
                 $this->load->view('public/ubah_profile', $data);
             }
             // die(json_encode($data));
