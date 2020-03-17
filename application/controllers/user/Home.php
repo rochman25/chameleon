@@ -137,7 +137,7 @@ class Home extends MY_Controller{
             }else{
             $data['id_cart'] = "";
             }
-           // die(json_encode($data));
+        //    / die(json_encode($data));
         $this->load->view('public/product-detail',$data);
     }
     public function hapus_item(){

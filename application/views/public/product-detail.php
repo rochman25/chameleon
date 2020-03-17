@@ -294,7 +294,7 @@ $this->load->view('public/footer');
             if(def_jml < stok){
                 def_jml++
             }else{
-                def_jml = stok;
+              //  def_jml = stok;
             }
         }else{
             if(def_jml <= 1){
