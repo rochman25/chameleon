@@ -548,10 +548,11 @@ class Home extends MY_Controller
     {
         if ($this->userIsLoggedIn()) {
             $idp = $this->session->userdata['user_data']['id'];
-            $data['profil'] = $this->user->getWhere("id_pengguna", $idp);
+            $data['profil'] = $this->user->getJoin("alamat_pengguna", "alamat_pengguna.id_pengguna=pengguna.id_pengguna", "left");
+            $data['profil'] = $this->user->getWhere("pengguna.id_pengguna", $idp);
             $data['profil'] = $this->user->getData()->row();
-            $data['alamat'] = $this->alamat->getWhere("id_pengguna", $idp);
-            $data['alamat'] = $this->alamat->getData()->result();
+            // $data['alamat'] = $this->alamat->getWhere("id_pengguna", "a");
+            // $data['alamat'] = $this->alamat->getData()->row();
             $provinsi = json_decode($this->get_provinsi());
             $data['id_cart'] = $this->cart->getWhere("id_pengguna", $this->session->userdata['user_data']['id']);
             $data['id_cart'] = $this->cart->getData()->row();

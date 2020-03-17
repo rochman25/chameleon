@@ -35,23 +35,23 @@ $this->load->view('public/cart');
                         <li> <i class="svg-icon svg_icon__dashboard_mail"></i> <span><a href="#" class="__cf_email__" data-cfemail="1876776e71767c79766d6a7e2920587f75797174367b7775"><?= $profil->email; ?></a> </span> </li>
                         <!-- <li> <i class="svg-icon svg_icon__dashboard_gift"></i> <span>16 Sepember 1998 </span>  </li> -->
                         <!-- <li> <i class="svg-icon svg_icon__dashboard_phone"></i> <span>081226809435 </span>  </li> -->
-                        <?php if ($alamat) {
-                            foreach ($alamat as $a) {
+                        <?php if ($profil) {
+                            // foreach ($profil as $profil) {
                         ?>
                                 <li class="alamat"> <i class="svg-icon svg_icon__dashboard_pin"></i>
                                     <span>
-                                        <?= $a->alamat_1 ?>
-                                        <?= $a->alamat_2 ?>
-                                        <?="Kecamatan ".$a->kecamatan?>
-                                        <?="Kabupaten ".$a->kabupaten?>
-                                        <?= $a->kode_pos ?>
+                                        <?= $profil->alamat_1 ?>
+                                        <?= $profil->alamat_2 ?>
+                                        <?="Kecamatan ".$profil->kecamatan?>
+                                        <?="Kabupaten ".$profil->kabupaten?>
+                                        <?= $profil->kode_pos ?>
                                         <!-- Jawa Tengah -->
                                     </span>
                                 </li>
                         <?php
-                            }
+                            // }
                         } ?>
-                        <!-- <li><i class="svg-icon svg_icon__dashboard_phone"></i> <span><?= $alamat[0]->no_telp ?></span></li> -->
+                        <!-- <li><i class="svg-icon svg_icon__dashboard_phone"></i> <span><?= $profil->no_telp ?></span></li> -->
 
                     </ul>
                     <button class="expand">
@@ -73,7 +73,7 @@ $this->load->view('public/cart');
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="title">Nama Lengkap</div>
-                                        <input type="text" name="nama_lengkap" value="<?= $alamat[0]->nama_lengkap ?>">
+                                        <input type="text" name="nama_lengkap" value="<?= $profil->nama_lengkap ?>">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -83,28 +83,28 @@ $this->load->view('public/cart');
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="title">No Telphone</div>
-                                        <input type="text" name="no_telp" value="<?= $alamat[0]->no_telp ?>">
+                                        <input type="text" name="no_telp" value="<?= $profil->no_telp ?>">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="title">Alamat 1</div>
-                                        <input type="text" name="alamat_1" value="<?= $alamat[0]->alamat_1 ?>">
+                                        <input type="text" name="alamat_1" value="<?= $profil->alamat_1 ?>">
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="title">Alamat 2</div>
-                                        <input type="text" name="alamat_2" value="<?= $alamat[0]->alamat_2 ?>">
+                                        <input type="text" name="alamat_2" value="<?= $profil->alamat_2 ?>">
                                     </div>
-                                    <input type="hidden" value="<?=$alamat[0]->id_alamat?>" name="id_alamat">
+                                    <input type="hidden" value="<?=$profil->id_alamat?>" name="id_alamat">
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="title">Provinsi</div>
                                         <select style="color:black" name="provinsi_id" id="provinsi_id">
-                                            <?php if ($alamat[0]->provinsi_id == "") { ?>
+                                            <?php if ($profil->provinsi_id == "") { ?>
                                                 <option value="">Pilih Provinsi</option>
                                             <?php } else { ?>
-                                                <option value="<?= $alamat[0]->provinsi_id . "," . $alamat[0]->provinsi ?>"><?= $alamat[0]->provinsi ?></option>
+                                                <option value="<?= $profil->provinsi_id . "," . $profil->provinsi ?>"><?= $profil->provinsi ?></option>
                                             <?php } ?>
                                             <?php
                                             foreach ($list_provinsi as $row) { ?>
@@ -116,10 +116,10 @@ $this->load->view('public/cart');
                                         <div class="title">Kabupaten</div>
                                         <div class="loader" id="loader_kabupaten"></div>
                                         <select style="color:black" name="kabupaten_id" id="kabupaten_id">
-                                            <?php if ($alamat[0]->kabupaten_id == "") { ?>
+                                            <?php if ($profil->kabupaten_id == "") { ?>
                                                 <option value="">Pilih Kabupaten</option>
                                             <?php } else { ?>
-                                                <option value="<?= $alamat[0]->kabupaten_id . "," . $alamat[0]->kabupaten ?>"><?= $alamat[0]->kabupaten ?></option>
+                                                <option value="<?= $profil->kabupaten_id . "," . $profil->kabupaten ?>"><?= $profil->kabupaten ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -129,16 +129,16 @@ $this->load->view('public/cart');
                                         <div class="title">Kecamatan</div>
                                         <div class="loader" id="loader_kecamatan"></div>
                                         <select style="color:black" name="kecamatan_id" id="kecamatan_id">
-                                            <?php if ($alamat[0]->kecamatan_id == "") { ?>
+                                            <?php if ($profil->kecamatan_id == "") { ?>
                                                 <option value="">Pilih Kecamatan</option>
                                             <?php } else { ?>
-                                                <option value="<?= $alamat[0]->kecamatan_id . "," . $alamat[0]->kecamatan ?>"><?= $alamat[0]->kecamatan ?></option>
+                                                <option value="<?= $profil->kecamatan_id . "," . $profil->kecamatan ?>"><?= $profil->kecamatan ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="title">Kode Pos</div>
-                                        <input type="text" name="kode_pos" value="<?=$alamat[0]->kode_pos?>">
+                                        <input type="text" name="kode_pos" value="<?=$profil->kode_pos?>">
                                     </div>
                                 </div>
                                 <div class="row">
