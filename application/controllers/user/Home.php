@@ -177,9 +177,9 @@ class Home extends MY_Controller{
                     if ($cek->status == true) {
                       //   die(json_encode($this->bcrypt->hash_password($pass)));
                          
-                        // die(json_encode($this->bcrypt->check_password($pass, $cek->password)));
-                   //     if ($this->bcrypt->check_password($pass, $cek->password)) {
-                          if ($cek->password == $pass) {
+                         die(json_encode($this->bcrypt->check_password($pass, $cek->password)));
+                        if ($this->bcrypt->check_password($pass, $cek->password)){
+                        //  if ($cek->password == $pass) {
                             $datas = array(
                                 "updated_at" => date("Y-m-d H:i:s")
                             );
@@ -581,9 +581,8 @@ class Home extends MY_Controller{
             'wordwrap' => TRUE
         );
 
-		$message =     "
-                  <html>
-                  <head>
+		$message =     "<html>
+                  <head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
                       <title>Verifikasi Akun anda</title>
                   </head>
                   <body>
