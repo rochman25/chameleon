@@ -33,6 +33,7 @@
 </div>
 
 <script type="text/javascript">
+var base_url = '<?= base_url()?>';
 	$(document).ready(function () {
 		
 		//var id_cart =   $("#cart").data("cart-id");
@@ -74,4 +75,27 @@
             })
 		
     })
+
+	function deleteitem(state){
+        $.ajax({
+                url: base_url + "user/Home/hapus_item",
+                type: "POST",
+                data: {
+                   id_item : state
+                }
+            }).done(function (t) {
+                var res = JSON.parse(t);
+                console.log(res);
+                 if (true == res.success) {
+                    location.reload()
+                         
+
+                 } 
+                 
+
+            }).fail(function (t) {
+                console.log(t)
+                //   location.reload()
+            })
+    }
 </script>

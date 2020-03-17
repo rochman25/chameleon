@@ -79,6 +79,7 @@ class Order extends MY_Controller
 
             } else {
                 // die(json_encode($data));
+                $data['id_cart'] = "";
                 $this->load->view('public/transaksi', $data);
             }
         }else{
