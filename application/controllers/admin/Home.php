@@ -62,7 +62,7 @@ class Home extends MY_Controller
                 "produk"    => $produk,
                 "statistik_penjualan" => $stat_penjualan
             ];
-            // die(json_encode($stat_penjualan));
+            // die(json_encode($data));
             $this->load->view('admin/pages/dashboard',$data);
         } else {
             redirect('admin/home/login');

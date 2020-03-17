@@ -515,30 +515,41 @@ class Home extends MY_Controller{
 		}
     }
 
-    public function profil(){
+    public function profil()
+    {
+        if ($this->userIsLoggedIn()) {
+            $idp = $this->session->userdata['user_data']['id'];
+            $data['profil'] = $this->user->getWhere("id_pengguna", $idp);
+            $data['profil'] = $this->user->getData()->row();
+
+            $data['transaksi'] = $this->transaksi->order_by("transaksi.id_transaksi", "ASC");
+            $data['transaksi'] = $this->transaksi->getJoin("detail_transaksi", "detail_transaksi.id_transaksi=transaksi.id_transaksi", "inner");
+            // $data['transaksi'] = $this->transaksi->getJoin("produk", "produk.id_produk=detail_transaksi.id_produk", "inner");
+            $data['transaksi'] = $this->transaksi->getJoin("pengguna", "pengguna.id_pengguna=transaksi.id_pengguna", "inner");
+            $data['transaksi'] = $this->transaksi->getJoin("alamat_pengguna", "alamat_pengguna.id_alamat=transaksi.id_alamat", "inner");
+            $data['transaksi'] = $this->transaksi->getWhere("transaksi.id_pengguna", $idp);
+            $data['transaksi'] = $this->transaksi->getData()->result_array();
+
+            $data['alamat'] = $this->alamat->getWhere("id_pengguna", $idp);
+            $data['alamat'] = $this->alamat->getData()->result();
+            //    die(json_encode($data['transaksi']));
+            $data['id_cart'] = $this->cart->getWhere("id_pengguna",$this->session->userdata['user_data']['id']);
+            $data['id_cart'] = $this->cart->getData()->row();
+	    $this->load->view('public/profil',$data);
+    	}else{
+	    redirect(base_url('login'));	
+	}
+    }
+
+    public function ubah_profile(){
         if($this->userIsLoggedIn()){
-        $idp =$this->session->userdata['user_data']['id'];
-        $data['profil'] = $this->user->getWhere("id_pengguna", $idp);
-        $data['profil'] = $this->user->getData()->row();
-
-        $data['transaksi'] = $this->transaksi->order_by("transaksi.id_transaksi", "ASC");
-        $data['transaksi'] = $this->transaksi->getJoin("detail_transaksi", "detail_transaksi.id_transaksi=transaksi.id_transaksi", "inner");
-        // $data['transaksi'] = $this->transaksi->getJoin("produk", "produk.id_produk=detail_transaksi.id_produk", "inner");
-        $data['transaksi'] = $this->transaksi->getJoin("pengguna", "pengguna.id_pengguna=transaksi.id_pengguna", "inner");
-        $data['transaksi'] = $this->transaksi->getJoin("alamat_pengguna", "alamat_pengguna.id_alamat=transaksi.id_alamat", "inner");
-        $data['transaksi'] = $this->transaksi->getWhere("transaksi.id_pengguna", $idp);
-        $data['transaksi'] = $this->transaksi->getData()->result_array();
-
-        $data['alamat'] = $this->alamat->getWhere("id_pengguna", $idp);
-        $data['alamat'] = $this->alamat->getData()->result();
-    //    die(json_encode($data['transaksi']));
-    if ($this->userIsLoggedIn()) {
-        $data['id_cart'] = $this->cart->getWhere("id_pengguna",$this->session->userdata['user_data']['id']);
-        $data['id_cart'] = $this->cart->getData()->row();
-    }else{
-        $data['id_cart'] = "";
-        }
-        $this->load->view('public/profil',$data);
+            $idp = $this->session->userdata['user_data']['id'];
+            $data['profil'] = $this->user->getWhere("id_pengguna", $idp);
+            $data['profil'] = $this->user->getData()->row();
+            $data['alamat'] = $this->alamat->getWhere("id_pengguna", $idp);
+            $data['alamat'] = $this->alamat->getData()->result();
+            // die(json_encode($data));
+            $this->load->view('public/ubah_profile',$data);
         }else{
             redirect(base_url('login'));
         }
