@@ -24,7 +24,7 @@ $this->load->view('public/cart');
             <div class="left-right">
             <?= $this->session->flashdata('pesan') ?>
                 <div class="left-side">
-                    <i class="svg-icon svg_icon__dashboard_pencil" onclick="window.location.href = '<?= base_url() ?>profil';">
+                    <i class="svg-icon svg_icon__dashboard_pencil" onclick="window.location.href = '<?= base_url('ubah_profile') ?>';">
                     </i>
                     <br>
                     <!-- <img src="https://www.mensrepublic.id/assets/images/dashboard/default-avatar.png" alt=""> -->
@@ -42,7 +42,8 @@ $this->load->view('public/cart');
                                     <span>
                                         <?=$a->alamat_1?>
                                         <?=$a->alamat_2?>
-                                        <?=$a->kabupaten?>
+                                        <?="Kecamatan ".$a->kecamatan?>
+                                        <?="Kabupaten ".$a->kabupaten?>
                                         <?=$a->kode_pos?>
                                         <!-- Jawa Tengah -->
                                     </span>

@@ -1,8 +1,10 @@
 <?php 
 
-class Home extends MY_Controller{
+class Home extends MY_Controller
+{
 
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
         $this->load->model('Produk_model', 'produk');
         $this->load->model('Pengguna_model', 'user');
@@ -15,7 +17,8 @@ class Home extends MY_Controller{
         $this->load->library('form_validation');
     }
 
-    public function index(){
+    public function index()
+    {
         $thumbnail = array();
             $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
             $data['produk'] = $this->produk->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
@@ -541,16 +544,56 @@ class Home extends MY_Controller{
 	}
     }
 
-    public function ubah_profile(){
-        if($this->userIsLoggedIn()){
+    public function ubah_profile()
+    {
+        if ($this->userIsLoggedIn()) {
             $idp = $this->session->userdata['user_data']['id'];
             $data['profil'] = $this->user->getWhere("id_pengguna", $idp);
             $data['profil'] = $this->user->getData()->row();
             $data['alamat'] = $this->alamat->getWhere("id_pengguna", $idp);
             $data['alamat'] = $this->alamat->getData()->result();
+            $provinsi = json_decode($this->get_provinsi());
+            $data['id_cart'] = $this->cart->getWhere("id_pengguna", $this->session->userdata['user_data']['id']);
+            $data['id_cart'] = $this->cart->getData()->row();
+            $data['list_provinsi'] = $provinsi->rajaongkir->results;
+            if ($this->input->post('kirim')) {
+                $nama_lengkap = $this->input->post('nama_lengkap');
+                $no_telp = $this->input->post('no_telp');
+                $alamat_1 = $this->input->post('alamat_1');
+                $alamat_2 = $this->input->post('alamat_2');
+                $provinsi_id = explode(",", $this->input->post('provinsi_id'));
+                $kecamatan_id = explode(",", $this->input->post('kecamatan_id'));
+                $kabupaten_id = explode(",", $this->input->post('kabupaten_id'));
+                $idA = $this->input->post('id_alamat');
+                $kode_pos = $this->input->post('kode_pos');
+                $data_alamat = array(
+                    "nama_lengkap" => $nama_lengkap,
+                    "no_telp" => $no_telp,
+                    "alamat_1" => $alamat_1,
+                    "alamat_2" => $alamat_2,
+                    "provinsi_id" => $provinsi_id[0],
+                    "provinsi" => $provinsi_id[1],
+                    "kecamatan_id" => $kecamatan_id[0],
+                    "kecamatan" => $kecamatan_id[1],
+                    "kabupaten_id" => $kabupaten_id[0],
+                    "kabupaten" => $kabupaten_id[1],
+                    "kode_pos" => $kode_pos
+                );
+
+                $update_alamat = $this->alamat->updateData($data_alamat, $idA);
+                // die(json_encode($update_alamat));
+                if ($update_alamat) {
+                    $this->session->set_flashdata("pesan", "Data berhasil diperbarui ");
+                    redirect(base_url('ubah_profile'));
+                } else {
+                    $this->session->set_flashdata("pesan", "Data gagal diperbarui ");
+                    redirect(base_url('ubah_profile'));
+                }
+            } else {
+                $this->load->view('public/ubah_profile', $data);
+            }
             // die(json_encode($data));
-            $this->load->view('public/ubah_profile',$data);
-        }else{
+        } else {
             redirect(base_url('login'));
         }
     }

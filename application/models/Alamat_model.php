@@ -9,4 +9,12 @@ class Alamat_model extends MY_Model
         parent::__construct();
         
     }
+
+    function updateData($data,$id){
+        $this->getWhere('id_alamat',$id);
+        return $this->update($data);
+    }
+
+
+
 }

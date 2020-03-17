@@ -10,14 +10,36 @@
     <meta property="fb:pages" content="" />
     <meta name="google-site-verification" content="YRtB-WBotW8z2AMh6hLyCgAjgQRundXTa1bC2AdzPxQ" />
 	<meta name="msapplication-TileColor" content="#ffffff">
-	<meta name="msapplication-TileImage" content="<?= base_url()?>assets/images/chameleon_cloth_logo_black.png">
+	<meta name="msapplication-TileImage" content="<?= base_url() ?>assets/images/chameleon_cloth_logo_black.png">
 	<meta name="theme-color" content="#ffffff">
-	
-	<link rel="shortcut icon" href="<?= base_url()?>assets/images/chameleon_cloth_logo_black.png" />
-	<link rel="stylesheet"  href="<?= base_url()?>assets/public/css/fontawesome-all.css" >
-	<link rel="stylesheet"  href="<?= base_url()?>assets/public/css/jqueryuimin.css" >
-	<link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/public/css/all.css">
-	<link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/public/css/master.css?id=9e0f65abec8cb3ae96f8">		
+
+	<link rel="shortcut icon" href="<?= base_url() ?>assets/images/chameleon_cloth_logo_black.png" />
+	<link rel="stylesheet" href="<?= base_url() ?>assets/public/css/fontawesome-all.css">
+	<link rel="stylesheet" href="<?= base_url() ?>assets/public/css/jqueryuimin.css">
+	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/public/css/all.css">
+	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/public/css/master.css?id=9e0f65abec8cb3ae96f8">
+	<style>
+		.loader {
+			border: 16px solid #f3f3f3;
+			/* Light grey */
+			border-top: 16px solid #3498db;
+			/* Blue */
+			border-radius: 50%;
+			width: 60px;
+			height: 60px;
+			animation: spin 2s linear infinite;
+		}
+
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+	</style>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 <script src="<?= base_url()?>assets/public/js/all.js"></script>
 <script src="<?= base_url()?>assets/public/js/cart.js"></script>

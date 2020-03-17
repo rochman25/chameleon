@@ -22,7 +22,6 @@ class MY_Controller extends CI_Controller
 
     function adminIsLoggedIn()
     {
-        
         if (isset($this->session->userdata['admin_data']['status']) && $this->session->userdata['admin_data']['status'] == true) {
             return true;
         } else {
@@ -84,6 +83,38 @@ class MY_Controller extends CI_Controller
             echo "cURL Error #:" . $err;
         } else {
             echo $response;
+        }
+    }
+
+    protected $key = "a4703df3e7f4419f9d966b391ed13314";
+
+
+    public function get_provinsi()
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://pro.rajaongkir.com/api/province",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 60,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "key: $this->key"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            return "cURL Error #:" . $err;
+        } else {
+            return $response;
         }
     }
 }
