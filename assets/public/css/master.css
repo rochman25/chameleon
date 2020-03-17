@@ -366,7 +366,7 @@
 	display: block;
 	width: 100%;
 	height: 100%;
-	background-color: #03cc00;
+	background-color: #3bb175;
 	font-size: 12px;
 	font-weight: 600;
 	font-style: normal;
@@ -383,7 +383,7 @@
 	height: 100%;
 	top: 6px;
 	left: 6px;
-	border: 1px solid #03cc00;
+	border: 1px solid #3bb175;
 	background-color: transparent;
 }
 @media only screen and (min-width: 992px) {
@@ -1011,7 +1011,7 @@ header.desktop .mainheader .header-right .icon-right i {
 	position: relative;
 }
 header.desktop .mainheader .header-right .icon-right i span {
-	background-color: #03cc00;
+	background-color:#3bb175;
 	height: 16px;
 	padding: 0 6px;
 	position: absolute;
@@ -1972,7 +1972,7 @@ footer.footer .copyright {
 	background-color: #fff;
 }
 #product .product-info #ukuran ul li.active {
-	background-color: #03cc00;
+	background-color: #3bb175;
 	/* color: #fff; */
 }
 #product .product-info #ukuran ul li.empty {
@@ -4291,7 +4291,7 @@ footer.footer .copyright {
 	float: right;
 	width: 170px;
 	height: 42px;
-	background: #03cc00;
+	background: #3bb175;
 	border-radius: 4px;
 	color: #fff;
 	font-size: 12px;
@@ -5532,7 +5532,7 @@ footer.footer .copyright {
 	font-weight: 600;
 	font-size: 12px;
 	line-height: normal;
-	color: #03cc00;
+	color: #3bb175;
 }
 .new-login > form h2 {
 	font-size: 12px;
@@ -5561,11 +5561,11 @@ footer.footer .copyright {
 	font-size: 12px;
 	line-height: normal;
 	text-transform: capitalize;
-	color: #03cc00;
+	color: #3bb175;
 	text-decoration: none;
 }
 .new-login > form input[type="submit"] {
-	background: #03cc00;
+	background: #3bb175;
 	border-radius: 4px;
 	height: 42px;
 	line-height: 42px;
@@ -5654,7 +5654,7 @@ footer.footer .copyright {
 	font-weight: 600;
 	font-size: 12px;
 	line-height: normal;
-	color: #03cc00;
+	color: #3bb175;
 }
 .new-register > form h2 {
 	font-size: 12px;
@@ -5678,7 +5678,7 @@ footer.footer .copyright {
 	margin-bottom: 12px;
 }
 .new-register > form input[type="submit"] {
-	background: #03cc00;
+	background: #3bb175;
 	border-radius: 4px;
 	height: 42px;
 	line-height: 42px;

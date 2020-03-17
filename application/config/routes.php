@@ -55,6 +55,7 @@ $route['login']                 = 'user/Home/login';
 $route['daftar']                = 'user/Home/register';
 $route['keluar']                = 'user/Home/logout';
 $route['profil']                = 'user/Home/profil';
+$route['ubah_profile']          = 'user/home/ubah_profile';
 $route['panduan/pemesanan']     = 'user/Home/panduan_pemesanan';
 $route['panduan/retur']         = 'user/Home/panduan_return';
 $route['panduan/ukuran']        = 'user/Home/panduan_ukuran';
