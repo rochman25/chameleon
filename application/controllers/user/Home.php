@@ -178,8 +178,8 @@ class Home extends MY_Controller{
                       //   die(json_encode($this->bcrypt->hash_password($pass)));
                          
                         // die(json_encode($this->bcrypt->check_password($pass, $cek->password)));
-                   //     if ($this->bcrypt->check_password($pass, $cek->password)) {
-                          if ($cek->password == $pass) {
+                        if ($this->bcrypt->check_password($pass, $cek->password)) {
+                        //  if ($cek->password == $pass) {
                             $datas = array(
                                 "updated_at" => date("Y-m-d H:i:s")
                             );
