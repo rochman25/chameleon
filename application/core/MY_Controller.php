@@ -22,6 +22,7 @@ class MY_Controller extends CI_Controller
 
     function adminIsLoggedIn()
     {
+        
         if (isset($this->session->userdata['admin_data']['status']) && $this->session->userdata['admin_data']['status'] == true) {
             return true;
         } else {
