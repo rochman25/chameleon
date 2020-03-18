@@ -80,7 +80,7 @@
                     </div>
                 </li>
 
-                <li><a href="https://api.whatsapp.com/send?phone=6283116200500"><span>konfirmasi pembayaran</span></a></li>
+                <li><a href="<?= base_url()?>profil"><span>konfirmasi pembayaran</span></a></li>
               
             </ul>
             <a href="<?= base_url()?>keluar" class="logout">
