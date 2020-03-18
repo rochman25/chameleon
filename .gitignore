@@ -10,6 +10,7 @@ user_guide_src/cilexer/build/*
 user_guide_src/cilexer/dist/*
 user_guide_src/cilexer/pycilexer.egg-info/*
 application/config/*
+application/config/database.php
 index.php
 
 #codeigniter 3
