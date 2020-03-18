@@ -10,9 +10,11 @@ class Pengguna_model extends MY_Model
         $this->load->model('Cart_model','cart');
         
     }
+
     function set_data($field,$tipe){
         return $this->db->set($field,$tipe,FALSE);
     }
+
     function updateData($data,$id){
         $this->getWhere('id_pengguna',$id);
         return $this->update($data);

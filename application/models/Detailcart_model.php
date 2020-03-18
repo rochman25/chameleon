@@ -15,4 +15,8 @@ class Detailcart_model extends MY_Model
         return $this->insert($data);
     }
 
+    function deleteDetailCart($id){
+        return $this->delete("id_cart",$id);
+    }
+
 }

@@ -110,9 +110,9 @@ class Rajaongkir extends MY_Controller
         $kec = $_GET['subdistrict'];
         $cour = $_GET['courier'];
         $barang=$_GET['barang'];
-        $weight = 0;
+        $weight = 1000;
         if($barang > 1){
-            $weight += $barang * $weight;
+            $weight = $barang * $weight;
         }else{
             $weight = 1000;
         }

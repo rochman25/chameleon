@@ -144,6 +144,7 @@ $this->load->view('public/footer');
                     barang: total_barang,
                 },
                 success: function(data) {
+                    console.log(data);
                     // swal('Success!', data.rajaongkir.results[0].costs[0].cost[0].value, data.status);
                     var ongkir = 0;
                     if (courier == 'jne') {

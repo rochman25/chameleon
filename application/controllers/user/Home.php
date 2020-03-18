@@ -327,9 +327,16 @@ class Home extends MY_Controller
                 "quantity" => $qty,
                 "size" => $size
             );
-            $simpan = $this->cart->insert($data);
+            $cek = $this->cart->cekCart();
+            if($cek != null){
+                $simpan = true;
+                $data_item['id_cart'] = $cek->id_cart;
+            }else{
+                $simpan = $this->cart->insert($data);
+            }
+
             if($simpan){
-                $simpan_item = $this->cart_item->insert($data_item);
+                $simpan_item = $this->cart_item->tambahDetailCart($data_item);
                 if($simpan_item){
                     $session_cart = array(
                         "current_cart" => $idc,

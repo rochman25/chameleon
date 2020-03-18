@@ -9,6 +9,11 @@ class Cart_model extends MY_Model
         parent::__construct();
     }
 
+    function cekCart(){
+        $this->getWhere('id_pengguna',$this->session->userdata['user_data']['id']);
+        return $this->getData()->row();
+    }
+
     function tambah_cart($data){
         $this->db->set('id_cart','UUID()',false);
         return $this->insert($data);

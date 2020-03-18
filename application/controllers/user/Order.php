@@ -8,6 +8,8 @@ class Order extends MY_Controller
         parent::__construct();
         $this->load->model('Pengguna_model', 'user');
         $this->load->model('Transaksi_model', 'transaksi');
+        $this->load->model('Cart_model', 'cart');
+        $this->load->model('Detailcart_model', 'cart_item');
     }
 
     public function index()
@@ -44,6 +46,8 @@ class Order extends MY_Controller
                     "total_ongkir" => $total_ongkir
                 );
                 if ($this->transaksi->tambahData($data_t)) {
+                    $cart = $this->cart->cekCart();
+                    $this->cart_item->deleteDetailCart($cart->id_cart);
                     $data_detail = [];
                     $id_transaksi = $this->transaksi->getIdTransaksi($this->session->userdata('kode_transaksi'));
                     foreach ($data['cart'] as $row) {
@@ -59,6 +63,7 @@ class Order extends MY_Controller
                     }
 
                     if ($this->transaksi->tambahDetail($data_detail)) {
+
                         $this->session->unset_userdata('kode_transaksi');
                         $this->session->set_flashdata('pesan', "Transaksi anda berhasil, mohon ditunggu 1*24 Jam untuk diproses oleh admin");
                         redirect('user/home/profil');
@@ -76,7 +81,7 @@ class Order extends MY_Controller
                 $data['id_cart'] = "";
                 $this->load->view('public/transaksi', $data);
             }
-        }else{
+        } else {
             redirect('login');
         }
     }
