@@ -84,7 +84,7 @@ $this->load->view('public/cart');
                             <ul class="clearfix">
                                 <?php foreach($size as $s){
                                     ?>
-                                       <li id="S" style="color:black !important;" class="size ">
+                                       <li onclick="setUkuran('<?= $s;?>');" id="S" style="color:black !important;" class="size ">
                                         <span ><?= $s; ?></span>
                                     </li>
                                     <?php
@@ -200,6 +200,7 @@ $this->load->view('public/footer');
     var def_jml = 1;
     var def_Size = "S";
     var stok = '<?= $produk->stok_produk;?>';
+    var harga = '<?= $produk->harga_produk?>';
     
 
     var containervideo = document.getElementById('containervideo');
@@ -287,6 +288,11 @@ $this->load->view('public/footer');
         def_Size = "XL";
     }
 
+    function setUkuran(ukuran){
+        def_Size = ukuran;
+
+    }    
+
     // /var size_view = 
     function ubahjml(state){
         console.log(state);
@@ -328,7 +334,7 @@ $(document).ready(function () {
                     qty : def_jml,
                     img:'<?= $thumbnail[0]; ?>',
                     nama_barang : nama_barang,
-                  
+                    harga : def_jml * harga,
                    size : def_Size,
                 }
             }).done(function (t) {

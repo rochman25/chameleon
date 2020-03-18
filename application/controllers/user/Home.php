@@ -229,7 +229,7 @@ class Home extends MY_Controller
                 "status"=> "unsuccess",
                 "success"=>false,
                 "id_cart" => "",
-                "message" => "Kam belum masuk",
+                "message" => "Kamu belum masuk",
                 "element" => '',
             ));
         } else {
@@ -266,7 +266,7 @@ class Home extends MY_Controller
               
                             <div class="real">Rp '.$d->harga_produk.'</div>
                                 <div class="content-detail">
-                                    Jumlah : <strong class="cart-quantity">'.$d->quantity.' </strong> 
+                                    Jumlah : <strong class="cart-quantity">'.$d->quantity.'/ Ukuran :'.$d->size.'</strong> 
                                 
                                 </div>
                         </div>
@@ -312,6 +312,7 @@ class Home extends MY_Controller
          $id_produk = $this->input->post('id_produk');
          $qty = $this->input->post('qty');
          $size = $this->input->post('size');
+         $harga = $this->input->post('harga');
          $nama_barang = $this->input->post('nama_barang');
         if($idc== "" || empty($idc) || $idc == null){
             $idc = $this->cart->generateKode();
@@ -323,7 +324,8 @@ class Home extends MY_Controller
             $data_item = array(
                 "id_cart" => $idc,
                 "id_produk" => $id_produk,
-                "quantity" => $qty
+                "quantity" => $qty,
+                "size" => $size
             );
             $simpan = $this->cart->insert($data);
             if($simpan){
@@ -343,13 +345,9 @@ class Home extends MY_Controller
                         <img src="#">
                         <div class="content">
                             <div class="name">'.$nama_barang.'</div>
-                            <div class="discount">
-                                <span class="price-old">Rp 429,000</span> &nbsp;
-                                <span style="color:red">-30%</span>
-                            </div>
-                            <div class="real">Rp 300,000</div>
+                            <div class="real">Rp '.$harga.'</div>
                                 <div class="content-detail">
-                                    Jumlah : <strong class="cart-quantity">'.$qty.' </strong> 
+                                    Jumlah : <strong class="cart-quantity">'.$qty.'/Ukuran : '.$ukuran.' </strong> 
                                 </div>
                         </div>
                     </a>
@@ -382,11 +380,14 @@ class Home extends MY_Controller
                 $id_produk = $this->input->post('id_produk');
                 $qty = $this->input->post('qty');
                 $img = $this->input->post('img');
+                $size = $this->input->post('size');
+                $harga = $this->input->post('harga');
                 $nama_barang = $this->input->post('nama_barang');
                 $data_item = array(
                     "id_cart" => $idc,
                     "id_produk" => $id_produk,
-                    "quantity" => $qty
+                    "quantity" => $qty,
+                    "size" => $size
                 );
 
                 $simpan_item = $this->cart_item->tambahDetailCart($data_item);
@@ -405,13 +406,10 @@ class Home extends MY_Controller
         			<img src="'.base_url().'assets/uploads/thumbnail_produk/'.$img.'">
         			<div class="content">
             			<div class="name">'.$nama_barang.'</div>
-                        <div class="discount">
-                    		<span class="price-old">Rp 429,000</span> &nbsp;
-                    		<span style="color:red">-30%</span>
-                		</div>
-            			<div class="real">Rp 300,000</div>
+                    
+            			<div class="real">Rp '.$harga.'</div>
                             <div class="content-detail">
-                    			Jumlah : <strong class="cart-quantity">'.$qty.' </strong> /
+                    			Jumlah : <strong class="cart-quantity">'.$qty.' / Ukuran : '.$size.'</strong> 
                 			</div>
         			</div>
     			</a>

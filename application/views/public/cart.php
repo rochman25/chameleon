@@ -27,7 +27,10 @@
 				<span id="totalharga" class="total_sum">Rp 0</span>
 				<div class="clearfix"></div>
 			</div>
-			<a class="confirm" href="<?= base_url()?>order">hajar men</a>
+			<form action="<?= base_url()?>order" method="POST">
+				<input type="submit" class="confirm"/>
+			</form>
+			<a class="confirm" href="">hajar men</a>
 		</div>
 	</div>
 </div>
