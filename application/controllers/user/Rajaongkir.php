@@ -1,7 +1,7 @@
 <?php
 
 
-class RajaOngkir extends MY_Controller
+class Rajaongkir extends MY_Controller
 {
 
     public function __construct()
