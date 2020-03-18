@@ -28,6 +28,7 @@
 				<div class="clearfix"></div>
 			</div>
 			<form action="<?= base_url()?>order" method="POST">
+				<input type="hidden" value=""/>
 				<input type="submit" class="confirm"/>
 			</form>
 			<a class="confirm" href="">hajar men</a>

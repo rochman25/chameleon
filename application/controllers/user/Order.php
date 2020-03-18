@@ -8,8 +8,6 @@ class Order extends MY_Controller
         parent::__construct();
         $this->load->model('Pengguna_model', 'user');
         $this->load->model('Transaksi_model', 'transaksi');
-        $this->load->model('Cart_model', 'cart');
-        $this->load->model('Detailcart_model', 'detailcart');
     }
 
     public function index()
@@ -61,7 +59,6 @@ class Order extends MY_Controller
                     }
 
                     if ($this->transaksi->tambahDetail($data_detail)) {
-                        $this->cart->delete();
                         $this->session->unset_userdata('kode_transaksi');
                         $this->session->set_flashdata('pesan', "Transaksi anda berhasil, mohon ditunggu 1*24 Jam untuk diproses oleh admin");
                         redirect('user/home/profil');
