@@ -7,7 +7,7 @@
 	            </a>
 	            <ul>
 
-	                <li><a href="<?= base_url() ?>panduan/pemesanan"">Panduan Pemesanan</a></li>
+	                <li><a href="<?= base_url() ?>panduan/pemesanan">Panduan Pemesanan</a></li>
             <li><a href=" <?= base_url() ?>panduan/ukuran">Panduan Ukuran</a> </li> <li><a href="<?= base_url() ?>panduan/retur">Panduan Retur</a></li>
 	            </ul>
 	        </div>
@@ -61,7 +61,7 @@
 	                    </div>
 	                </li>
 	                <li>
-	                    <a href="https://api.whatsapp.com/send?phone=6283116200500">
+	                    <a href="<?= base_url()?>profil">
 	                        <span>konfirmasi pembayaran</span>
 	                    </a>
 	                </li>
