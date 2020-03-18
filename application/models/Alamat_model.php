@@ -15,6 +15,11 @@ class Alamat_model extends MY_Model
         return $this->update($data);
     }
 
+    function insertData($data){
+        $this->db->set('id_alamat','UUID()',false);
+        return $this->db->insert($data);
+    }
+
 
 
 }

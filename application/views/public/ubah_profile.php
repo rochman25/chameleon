@@ -95,7 +95,7 @@ $this->load->view('public/cart');
                                         <div class="title">Alamat 2</div>
                                         <input type="text" name="alamat_2" value="<?= $profil->alamat_2 ?>">
                                     </div>
-                                    <input type="text" value="<?=$profil->id_alamat?>" name="id_alamat">
+                                    <input type="hidden" value="<?=$profil->id_alamat?>" name="id_alamat">
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6">

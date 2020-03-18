@@ -587,8 +587,8 @@ class Home extends MY_Controller
                     "id_pengguna" => $idp
                 );
 
-                if($idA == null){
-                    $query = $this->alamat->insert($data_alamat, $idA);
+                if($idA == ""){
+                    $query = $this->alamat->insertData($data_alamat);
                 }else{
                     $query = $this->alamat->updateData($data_alamat, $idA);
                 }
