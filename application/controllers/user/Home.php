@@ -20,22 +20,23 @@ class Home extends MY_Controller
     public function index()
     {
         $thumbnail = array();
-            $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
-            $data['produk'] = $this->produk->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
-            $data['produk'] = $this->produk->getData()->result_array();
-            foreach ($data['produk'] as $row) {
-                $foto = explode(',', $row['thumbnail_produk']);
-                $thumbnail[$row['id_produk']] = $foto[0];
-            }
-            $data['thumbnail'] = $thumbnail;
-            if ($this->userIsLoggedIn()) {
-                $data['id_cart'] = $this->cart->getWhere("id_pengguna",$this->session->userdata['user_data']['id']);
-                $data['id_cart'] = $this->cart->getData()->row();
-            }else{
-                $data['id_cart'] = "";
-                }
-         //   die(json_encode($data));
-        $this->load->view('public/home',$data);
+        $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
+        $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
+        $data['produk'] = $this->produk->getWhere('produk.stok_produk > ','0');
+        $data['produk'] = $this->produk->getData()->result_array();
+        foreach ($data['produk'] as $row) {
+            $foto = explode(',', $row['thumbnail_produk']);
+            $thumbnail[$row['id_produk']] = $foto[0];
+        }
+        $data['thumbnail'] = $thumbnail;
+        if ($this->userIsLoggedIn()) {
+            $data['id_cart'] = $this->cart->getWhere("id_pengguna", $this->session->userdata['user_data']['id']);
+            $data['id_cart'] = $this->cart->getData()->row();
+        } else {
+            $data['id_cart'] = "";
+        }
+        //   die(json_encode($data));
+        $this->load->view('public/home', $data);
     }
     public function search(){
         $cari = $this->input->post('search');
