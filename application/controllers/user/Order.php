@@ -65,7 +65,7 @@ class Order extends MY_Controller
                     if ($this->transaksi->tambahDetail($data_detail)) {
 
                         $this->session->unset_userdata('kode_transaksi');
-                        $this->session->set_flashdata('pesan', "Transaksi anda berhasil, mohon ditunggu 1*24 Jam untuk diproses oleh admin");
+                        $this->session->set_flashdata('pesan', "Transaksi anda berhasil, silahkan transfer ke rekening kami, untuk detail dapat dilihat dengan klik button konfirmasi berikut.");
                         redirect('user/home/profil');
                     } else {
                         die(json_encode(array("error" => "ada masalah lagi")));

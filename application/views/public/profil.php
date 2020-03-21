@@ -39,18 +39,18 @@ $this->load->view('public/cart');
                         ?>
                                 <li class="alamat"> <i class="svg-icon svg_icon__dashboard_pin"></i>
                                     <span>
-                                        <?=$a->alamat_1?>
-                                        <?=$a->alamat_2?>
-                                        <?="Kecamatan ".$a->kecamatan?>
-                                        <?="Kabupaten ".$a->kabupaten?>
-                                        <?=$a->kode_pos?>
+                                        <?= $a->alamat_1 ?>
+                                        <?= $a->alamat_2 ?>
+                                        <?= "Kecamatan " . $a->kecamatan ?>
+                                        <?= "Kabupaten " . $a->kabupaten ?>
+                                        <?= $a->kode_pos ?>
                                         <!-- Jawa Tengah -->
                                     </span>
                                 </li>
                         <?php
                             }
                         } ?>
-                        <!-- <li><i class="svg-icon svg_icon__dashboard_phone"></i> <span><?=$alamat[0]->no_telp?></span></li> -->
+                        <!-- <li><i class="svg-icon svg_icon__dashboard_phone"></i> <span><?= $alamat[0]->no_telp ?></span></li> -->
 
                     </ul>
                     <button class="expand">

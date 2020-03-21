@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title>Chameleon Cloth</title>
 	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
@@ -7,8 +8,8 @@
 	<meta name="title" content="Chaeleon | #Cloth">
 	<meta name="description" content="Chameleons">
 	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800|Open+Sans|Work+Sans" rel="stylesheet">
-    <meta property="fb:pages" content="" />
-    <meta name="google-site-verification" content="YRtB-WBotW8z2AMh6hLyCgAjgQRundXTa1bC2AdzPxQ" />
+	<meta property="fb:pages" content="" />
+	<meta name="google-site-verification" content="YRtB-WBotW8z2AMh6hLyCgAjgQRundXTa1bC2AdzPxQ" />
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="<?= base_url() ?>assets/images/chameleon_cloth_logo_black.png">
 	<meta name="theme-color" content="#ffffff">
@@ -41,9 +42,9 @@
 		}
 	</style>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-<script src="<?= base_url()?>assets/public/js/all.js"></script>
-<script src="<?= base_url()?>assets/public/js/cart.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="<?= base_url() ?>assets/public/js/all.js"></script>
+	<script src="<?= base_url() ?>assets/public/js/cart.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- Facebook Pixel Code -->
 	<noscript>
 		<!-- <img height="1" width="1" style="display:none"
@@ -52,5 +53,6 @@
 	</noscript>
 	<!-- DO NOT MODIFY -->
 	<!-- End Facebook Pixel Code -->
-	</head>
+</head>
+
 <body>
