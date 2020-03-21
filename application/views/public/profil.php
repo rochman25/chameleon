@@ -22,7 +22,6 @@ $this->load->view('public/cart');
         <div class="container">
             <h1>MY PROFILE</h1>
             <div class="left-right">
-            <?= $this->session->flashdata('pesan') ?>
                 <div class="left-side">
                     <i class="svg-icon svg_icon__dashboard_pencil" onclick="window.location.href = '<?= base_url('ubah_profile') ?>';">
                     </i>
@@ -63,6 +62,16 @@ $this->load->view('public/cart');
                 <div class="right-side">
                     <div class="list-transaction page">
                         <h1>Daftar Transaksi</h1>
+                        <?php if ($this->session->flashdata('pesan')) { ?>
+                            <div style="margin-top:5px; margin-bottom:5px" class="alert alert-success alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <p style="color:black">
+                                    <b><?= $this->session->flashdata('pesan') ?></b>
+                                </p>
+                            </div>
+                        <?php } ?>
                         <table style="color:black;" class="table table-hover">
                             <tr>
                                 <th>No</th>
@@ -70,20 +79,24 @@ $this->load->view('public/cart');
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
-                            <?php 
-                            $no=1;
-                            foreach($transaksi as $row){ ?>
-                            <tr>
-                                <td><?=$no++?></td>
-                                <td><?=$row['kode_transaksi']?></td>
-                                <td><?=$row['status_transaksi']?></td>
-                                <td>
-                                <form action="<?= base_url()?>pembayaran" method="POST">
-                                    <input type="hidden" name="idtransaksi" value="<?=$row['id_transaksi']?>">
-                                    <input class="btn btn-success"  type="submit" value="Konfirmasi">
-                                </form>
-                                </td>
-                            </tr>
+                            <?php
+                            $no = 1;
+                            foreach ($transaksi as $row) { ?>
+                                <tr>
+                                    <td><?= $no++ ?></td>
+                                    <td><?= $row['kode_transaksi'] ?></td>
+                                    <td><?= $row['status_transaksi'] ?></td>
+                                    <td>
+                                        <?php if($row['bukti_transfer'] == null){ ?>
+                                        <form action="<?= base_url() ?>pembayaran" method="POST">
+                                            <input type="hidden" name="idtransaksi" value="<?= $row['id_transaksi'] ?>">
+                                            <input class="btn btn-success" type="submit" value="Konfirmasi">
+                                        </form>
+                                        <?php }else{ 
+                                            echo '<span class="badge badge-success">Menunggu validasi admin</span>';
+                                        } ?>
+                                    </td>
+                                </tr>
                             <?php } ?>
                         </table>
                     </div>

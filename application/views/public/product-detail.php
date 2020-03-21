@@ -114,7 +114,7 @@ $this->load->view('public/cart');
                             if(isset($this->session->userdata['user_data'])){
                             ?>
                                 <button class="addToCart">
-                                    <i class="svg-icon svg_icon__pdp_cart"></i>hajar men
+                                    <i class="svg-icon svg_icon__pdp_cart"></i> Order
                                 </button>
                                
                             <?php
@@ -124,7 +124,7 @@ $this->load->view('public/cart');
                                 <a href="<?= base_url();?>login" 
                                 style="padding:15px;"
                                 class="addToCart">
-                                    <i class="svg-icon svg_icon__pdp_cart"></i>hajar men
+                                    <i class="svg-icon svg_icon__pdp_cart"></i>Beli
                             </a>
                                 
                             <?php

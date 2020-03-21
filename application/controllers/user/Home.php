@@ -57,16 +57,17 @@ class Home extends MY_Controller
      
         if($kategori == ""){
             $thumbnail = array();
-                $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
-                $data['produk'] = $this->produk->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
-                $data['produk'] = $this->produk->getData()->result_array();
-                foreach ($data['produk'] as $row) {
-                    $foto = explode(',', $row['thumbnail_produk']);
-                    $thumbnail[$row['id_produk']] = $foto[0];
-                }
-                $data['thumbnail'] = $thumbnail;
-        }else{
-            $datakategori =  $this->kategori->getWhere('nama_kategori',$kategori);
+            $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
+            $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
+            $data['produk'] = $this->produk->getWhere("produk.stok >","0");
+            $data['produk'] = $this->produk->getData()->result_array();
+            foreach ($data['produk'] as $row) {
+                $foto = explode(',', $row['thumbnail_produk']);
+                $thumbnail[$row['id_produk']] = $foto[0];
+            }
+            $data['thumbnail'] = $thumbnail;
+        } else {
+            $datakategori =  $this->kategori->getWhere('nama_kategori', $kategori);
             $datakategori = $this->kategori->getData()->row();
          //   die(json_encode($kategori));
             if($datakategori == "" || empty($datakategori) || $datakategori == null){
@@ -78,8 +79,9 @@ class Home extends MY_Controller
             }else{
                 $thumbnail = array();
                 $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
-                $data['produk'] = $this->produk->getWhere('produk.id_kategori',$datakategori->id_kategori);
-                $data['produk'] = $this->produk->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
+                $data['produk'] = $this->produk->getWhere('produk.id_kategori', $datakategori->id_kategori);
+                $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
+                $data['produk'] = $this->produk->getWhere("produk.stok_produk >","0");
                 $data['produk'] = $this->produk->getData()->result_array();
                 foreach ($data['produk'] as $row) {
                     $foto = explode(',', $row['thumbnail_produk']);
@@ -302,7 +304,7 @@ class Home extends MY_Controller
                 "status"=> "unsuccess",
                 "success"=>false,
                 "id_cart" => "",
-                "message" => "Kam belum masuk",
+                "message" => "Kamu belum masuk",
                 "element" => '',
             ));
         } else {
@@ -354,7 +356,7 @@ class Home extends MY_Controller
                             <div class="name">'.$nama_barang.'</div>
                             <div class="real">Rp '.$harga.'</div>
                                 <div class="content-detail">
-                                    Jumlah : <strong class="cart-quantity">'.$qty.'/Ukuran : '.$ukuran.' </strong> 
+                                    Jumlah : <strong class="cart-quantity">'.$qty.'/Ukuran : '.$size.' </strong> 
                                 </div>
                         </div>
                     </a>
@@ -531,11 +533,12 @@ class Home extends MY_Controller
             $data['profil'] = $this->user->getData()->row();
 
             $data['transaksi'] = $this->transaksi->order_by("transaksi.id_transaksi", "ASC");
-            $data['transaksi'] = $this->transaksi->getJoin("detail_transaksi", "detail_transaksi.id_transaksi=transaksi.id_transaksi", "inner");
+            $data['transaksi'] = $this->transaksi->getJoin("detail_transaksi", "detail_transaksi.id_transaksi=transaksi.id_transaksi", "left");
             // $data['transaksi'] = $this->transaksi->getJoin("produk", "produk.id_produk=detail_transaksi.id_produk", "inner");
             $data['transaksi'] = $this->transaksi->getJoin("pengguna", "pengguna.id_pengguna=transaksi.id_pengguna", "inner");
-            $data['transaksi'] = $this->transaksi->getJoin("alamat_pengguna", "alamat_pengguna.id_alamat=transaksi.id_alamat", "inner");
+            $data['transaksi'] = $this->transaksi->getJoin("alamat_pengguna", "alamat_pengguna.id_alamat=transaksi.id_alamat", "left");
             $data['transaksi'] = $this->transaksi->getWhere("transaksi.id_pengguna", $idp);
+            // $data['transaksi'] = $this->transaksi->getWhere("transaksi.bukti_transfer =","");
             $data['transaksi'] = $this->transaksi->getData()->result_array();
 
             $data['alamat'] = $this->alamat->getWhere("id_pengguna", $idp);
@@ -729,45 +732,45 @@ class Home extends MY_Controller
         if (!$this->userIsLoggedIn()) {
             redirect(base_url());
         } else {
-     
-                $id = $this->input->post("idtransaksi");
-                $config['upload_path']          = './assets/uploads/transaksi';
-		        $config['allowed_types']        = 'gif|jpg|png|jpeg';
-		        $config['max_size']             = 1024;
 
- 
-		        $this->load->library('upload', $config);
- 
-		        if ( ! $this->upload->do_upload('bukti')){
+            $id = $this->input->post("idtransaksi");
+            $config['upload_path']          = 'assets/uploads/transaksi';
+            $config['allowed_types']        = 'gif|jpg|png|jpeg';
+            $config['max_size']             = 1024;
+
+
+            $this->load->library('upload', $config);
+
+            if (!$this->upload->do_upload('bukti')) {
+                // $this->session->set_flashdata(
+                //     'pesan',
+                //     '<div class="alert alert-danger mr-auto">Password atau Username salah</div>'
+                // );
+                echo $this->upload->display_errors();
+                // $error = array('error' => $this->upload->display_errors());
+
+            } else {
+                $data = $this->upload->data("file_name");
+
+                $data = array(
+                    "bukti_transfer" => $data
+                );
+                $update = $this->transaksi->updateData($data,$id);
+                // $update = $this->transaksi->getWhere("id_transaksi", $id);
+                if ($update) {
                     $this->session->set_flashdata(
                         'pesan',
-                        '<div class="alert alert-danger mr-auto">Password atau Username salah</div>'
+                        'Selamat bukti transaksi anda sudah terkirim, silahkan menunggu untuk validasi oleh admin 1*24 Jam'
                     );
-                    // $error = array('error' => $this->upload->display_errors());
-                    
-		        }else{
-                $data= $this->upload->data("file_name");
-              
-                   $data = array(
-                       "bukti_transfer" => $data
-                   );
-                    $update = $this->transaksi->update($data);
-                    $update = $this->transaksi->getWhere("id_transaksi", $id);
-                    if($update){
-                        $this->session->set_flashdata(
-                            'pesan',
-                            '<div class="alert alert-success mr-auto">Password atau Username salah</div>'
-                        );
-                        redirect("profil");
-                    }else{
-                        $this->session->set_flashdata(
-                            'pesan',
-                            '<div class="alert alert-danger mr-auto">Password atau Username salah</div>'
-                        );
-                        redirect("profil");
-                    }
-		        }
-        
+                    redirect("profil");
+                } else {
+                    $this->session->set_flashdata(
+                        'pesan',
+                        'ada masalah di server silahkan coba beberapa saat lagi.'
+                    );
+                    redirect("profil");
+                }
+            }
         }
     }
 
