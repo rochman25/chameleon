@@ -64,7 +64,7 @@
                                                             <th scope="row"><?= $no++ ?></th>
                                                             <td id="kode_t" data-id="<?= $row['id_transaksi'] ?>"><a href="<?= base_url() ?>admin/transaksi/detail?id=<?= $row['id_transaksi'] ?>"><?= $row['kode_transaksi'] ?></a></td>
                                                             <td><?= $row['username'] ?></td>
-                                                            <td><?= $row['waktu_transaksi'] ?></td>
+                                                            <td><?= date("d-M-Y H:i:s",strtotime($row['waktu_transaksi'])) ?></td>
                                                             <td>
                                                                 <?php if ($row['status_transaksi'] == 'pending') {
                                                                     echo "<span class='badge badge-warning'>" . $row['status_transaksi'] . "</span>";
