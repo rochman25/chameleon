@@ -69,15 +69,17 @@ $this->load->view('public/cart');
                     <div class="right-side-wrapper">
                         <div class="all-product-card">
                         <?php if($produk != null){
-                             foreach($produk as $row){?>
+                             foreach($produk as $row){
+                                 $harga = $row['harga_produk'];
+                                 ?>
                             <div class="product-card-wrapper">
                                     <a href="<?= base_url();?>detail?produk=<?= $row['id_produk'];?>">
                                         <div class="product-category">
                                             <img src="" style="width:300px;height:300px;" alt="" data-src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>">
                                             <h2 class="title"><?= $row['nama_produk'];?></h2>
                                             <div class="price-wrapper">
-                                                <!-- <div class="discount">-30%</div> -->
-                                                <div class="price">Rp <?= $row['harga_produk'];?></div>
+                                            
+                                                <div class="price">Rp  <?php echo number_format($harga,0);?></div>
                                                  <!-- <div class="price-before" style="text-decoration : line-through">Rp 429,000</div> -->
                                             </div>
 

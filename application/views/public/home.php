@@ -41,16 +41,17 @@ $this->load->view('public/cart');
             <h1>Laku Banget Nih Men</h1>
                 <div class="container">
                
-                    <?php foreach($produk as $p){?>
+                    <?php foreach($produk as $p){
+                        $harga = $p['harga_produk'];
+                        ?>
                     <div class="product-hotcard">
                         <a href="<?= base_url()?>detail?produk=<?= $p['id_produk']?>">
                             <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$p['id_produk']] ?>" alt="">
                                 <h1><?= $p['nama_produk'];?></h1>
-                                    <!-- <div class="price-before">Rp 429,000</div> -->
-                                    <div class="price-after">Rp.<?= $p['harga_produk'];?></div>
+                                
+                                    <div class="price-after">Rp.<?= number_format($harga,0);?></div>
                                     <div class="rating-wrapper">
-                                        <!-- <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$p['id_produk']] ?>" alt=""> -->
-                                        <!-- <span>Stok : <?= $p['stok_produk'];?></span> -->
+                                    
                                     </div>
                         </a>
                     </div>

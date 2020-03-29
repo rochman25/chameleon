@@ -73,7 +73,7 @@ $this->load->view('public/cart');
                         <h2>    
                             <!-- <div class="price_before"> Rp <?= $produk->harga_produk;?> </div> -->
                             <div class="price_after">
-                                <span class="value">Rp <?= $produk->harga_produk;?></span>
+                                <span class="value">Rp <?= number_format($produk->harga_produk,0); ?></span>
                                 <!-- <span id="stok" class="value">Stok <?= $produk->stok_produk;?></span> -->
                                 <!-- <span class="time">Tinggal 7 hari lagi</span> -->
                             </div>
