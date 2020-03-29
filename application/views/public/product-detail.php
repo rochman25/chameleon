@@ -82,7 +82,7 @@ $this->load->view('public/cart');
                         <span>Ukuran :</span>
                         <div id="size" class="size-product">
                             <ul class="clearfix">
-                                <?php echo json_encode($size); foreach($size as $s){
+                                <?php foreach($size as $s){
                                     ?>
                                        <li onclick="setUkuran('<?= $s;?>');" id="S" style="color:black !important;" class="size ">
                                         <span ><?= $s; ?></span>
