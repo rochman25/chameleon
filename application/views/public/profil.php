@@ -96,7 +96,7 @@ $this->load->view('public/cart');
                                             if($row['status_transaksi'] != 'kirim'){
                                                 echo '<span class="badge badge-success">Menunggu validasi admin</span>';
                                             }else{
-                                                echo '<span class="badge badge-success">'.$row['no_resi'].'</span>';
+                                                echo '<b>No Resi : </b><span class="badge badge-success">'.$row['no_resi'].'</span>';
                                             }
                                         } ?>
                                     </td>
