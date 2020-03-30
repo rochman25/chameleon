@@ -64,7 +64,7 @@
     </div>
 
     <div class="container copyright">
-        Copyright 2020 &copy; <a href="chameleoncloth.co.id">chameleoncloth.co.id</a>
+        Copyright 2020 &copy; <a href="<?=base_url();?>">chameleoncloth.co.id</a>
     </div>
 </footer>
 
