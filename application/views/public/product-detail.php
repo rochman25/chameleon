@@ -133,7 +133,7 @@ $this->load->view('public/cart');
                         </div>
                         
                         <div class="product-order">
-                            <div class="list clearfix">
+                            <!-- <div class="list clearfix">
                                 <a href="#">
                                     <div class="image">
                                         <i class="svg-icon svg_icon__pdp_cart "></i>
@@ -162,7 +162,7 @@ $this->load->view('public/cart');
                                         Panduan Ukuran									
                                     </div>
                                 </a>
-                            </div>
+                            </div> -->
                         </div>
                         <ul class="nav nav-tabs">
                             <li class="active" data-target="product-deskripsi">
