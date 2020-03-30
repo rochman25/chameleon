@@ -15,14 +15,14 @@
                 <li><a href="#">Kontak &amp; Alamat</a></li>
                 <li>Alamat: 
                     <ul>
-                        <li>CHAMLEON CLOTH, Jl. Patimuan - Kedungreja, Cinyawang, Rt.02/03, Kec.Patimuan - Cilacap 53264</li>
+                        <li><a href="">CHAMLEON CLOTH, Jl. Patimuan - Kedungreja, Cinyawang, Rt.02/03, Kec.Patimuan - Cilacap 53264</a></li>
                     </ul>
                 </li>
                 <li>
-                    Nomor : 083116200500
+                    <a href="">Nomor : 083116200500</a>
                 </li>
                 <li>
-                    Email : cs@chameleoncloth.co.id
+                    <a href="">Email : cs@chameleoncloth.co.id</a>
                 </li>
             </ul>
         </div>
