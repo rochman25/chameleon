@@ -82,7 +82,7 @@
                                                             </td>
                                                             <td>
                                                                 <?php if ($row['bukti_transfer'] != null) { ?>
-                                                                    <a href="<?= base_url() ?>assets/uploads/bukti_transfer/<?=$row['bukti_transfer']?>" target="_blank"><span class='badge badge-primary'>Lihat Bukti</span></a>
+                                                                    <a href="<?= base_url() ?>assets/uploads/transaksi/<?=$row['bukti_transfer']?>" target="_blank"><span class='badge badge-primary'>Lihat Bukti</span></a>
                                                                 <?php } else { ?>
                                                                     <span class='badge badge-danger'>Belum ada</span>
                                                                 <?php } ?>
