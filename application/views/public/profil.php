@@ -94,11 +94,11 @@ $this->load->view('public/cart');
                                         </form>
                                         <?php }else{
                                             if($row['status_transaksi'] == 'proses'){
-                                                echo '<span class="badge badge-success">Menunggu validasi admin</span>';
+                                                echo '<span class="badge badge-success">Pesanan sedang diproses</span>';
                                             }else if($row['status_transaksi'] == 'validasi'){
                                                 echo '<span class="badge badge-success">Pesanan anda sudah divalidasi</span>';
                                             }else{
-                                                echo '<b>No Resi : </b><span class="badge badge-success">'.$row['no_resi'].'</span>';
+                                                echo '<b>No Resi : </b><span class="badge badge-success">'.$row['no_resi'].' ('.$row['kurir'].') </span>';
                                             }
                                         } ?>
                                     </td>
