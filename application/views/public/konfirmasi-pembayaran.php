@@ -22,8 +22,11 @@ $this->load->view('public/cart');
                     <div style="margin:10px">
                         <h3 style="color:black !important;">Info Pembayaran</h3>
                         <p style="color:black !important;">Pembayaran dapat dikirim ke nomor rekening berikut: </p>
-                        <p style="color:black !important;"><b>XXXXXXXXXXXX</b> - BANK</p>
-                        <p style="color:black !important;">A/N xxxxxxxx</p>
+                        <p style="color:black !important;"><b>677901015573536</b> - BRI</p>
+                        <p style="color:black !important;">A/N Naufal Hunaif</p>
+                        <p style="color:black !important;">atau melalui nomor rekening berikut: </p>
+                        <p style="color:black !important;"><b>1800004486124</b> - Mandiri</p>
+                        <p style="color:black !important;">A/N Naufal Hunaif</p>
                         <p style="color:black !important;">Sebesar <b>Rp.<?=number_format($data->total_harga + $data->total_ongkir,0,",",".")?></b></p>
                     </div>
                 </div>
