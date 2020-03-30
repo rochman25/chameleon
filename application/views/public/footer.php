@@ -13,22 +13,23 @@
             <h1>Tentang Kami</h1>
             <ul>
                 <li><a href="#">Kontak &amp; Alamat</a></li>
-                <li><a href="">Alamat:</a>
+                <li><a href=""></a>
                     <ul>
-                        <li><a href="">CHAMLEON CLOTH, Jl. Patimuan - Kedungreja, Cinyawang, Rt.02/03, Kec.Patimuan - Cilacap 53264</a></li>
+                        <li><a href="">CHAMLEON CLOTH
+                            <br/>Jl. Patimuan - Kedungreja, Cinyawang, Rt.02/03, Kec.Patimuan - Cilacap 53264</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="">Kontak:</a>
+                    <a href=""></a>
                     <ul>
+                        <li>
+                            <a href="">LINE ID : chameleoncloth</a>
+                        </li>
                         <li>
                             <a href="">Nomor : 083116200500</a>
                         </li>
                         <li>
                             <a href="">Email : cs@chameleoncloth.co.id</a>
-                        </li>
-                        <li>
-                            <a href="">LINE ID : chameleoncloth</a>
                         </li>
                     </ul>
                 </li>
