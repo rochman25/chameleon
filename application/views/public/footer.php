@@ -45,7 +45,7 @@
     </div>
 
     <div class="container copyright">
-        Made by Chameleon Cloth 2020    
+        Copyright 2020 &copy; <a href="chameleoncloth.co.id">chameleoncloth.co.id</a>     
     </div>
 </footer>
 
