@@ -92,8 +92,12 @@ $this->load->view('public/cart');
                                             <input type="hidden" name="idtransaksi" value="<?= $row['id_transaksi'] ?>">
                                             <input class="btn btn-success" type="submit" value="Konfirmasi">
                                         </form>
-                                        <?php }else{ 
-                                            echo '<span class="badge badge-success">Menunggu validasi admin</span>';
+                                        <?php }else{
+                                            if($row['status_transaksi'] != 'kirim'){
+                                                echo '<span class="badge badge-success">Menunggu validasi admin</span>';
+                                            }else{
+                                                echo '<span class="badge badge-success">'.$row['no_resi'].'</span>';
+                                            }
                                         } ?>
                                     </td>
                                 </tr>
