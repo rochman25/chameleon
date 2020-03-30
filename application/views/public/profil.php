@@ -98,7 +98,7 @@ $this->load->view('public/cart');
                                             }else if($row['status_transaksi'] == 'validasi'){
                                                 echo '<span class="badge badge-success">Pesanan anda sudah divalidasi</span>';
                                             }else{
-                                                echo '<b>No Resi : </b><span class="badge badge-success">'.$row['no_resi'].'</span> ('.$row['kurir'].')';
+                                                echo '<b>No Resi : </b><span class="badge badge-success">'.$row['no_resi'].'</span> <b>('.strtoupper($row['kurir']).')</b>';
                                             }
                                         } ?>
                                     </td>
