@@ -93,7 +93,7 @@ $this->load->view('public/cart');
                                             <input class="btn btn-success" type="submit" value="Konfirmasi">
                                         </form>
                                         <?php }else{
-                                            if($row['status_transaksi'] != 'proses'){
+                                            if($row['status_transaksi'] == 'proses'){
                                                 echo '<span class="badge badge-success">Menunggu validasi admin</span>';
                                             }else if($row['status_transaksi'] == 'validasi'){
                                                 echo '<span class="badge badge-success">Pesanan anda sudah divalidasi</span>';
