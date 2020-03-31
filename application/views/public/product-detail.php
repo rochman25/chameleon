@@ -23,7 +23,7 @@ $this->load->view('public/cart');
                         data-zoom-image="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[0]; ?>"/>
                     </div>
                     <div id="containervideo" class="image-gallery">
-                    <iframe src="https://drive.google.com/file/d/1avvSzpe5BjHDAtkVmxD2oGSB7oxakz4g/preview" 
+                    <iframe src="<?= $produk->video_link;?>" 
                     style="border:0;height:400px;width:400px">
                 
                     </iframe>
@@ -51,7 +51,7 @@ $this->load->view('public/cart');
                
                 <!--  -->
                 <div id="containermvideo" class="image-gallery-mobile owl-carousel">
-                    <iframe src="https://drive.google.com/file/d/1avvSzpe5BjHDAtkVmxD2oGSB7oxakz4g/preview" 
+                    <iframe src="<?= $produk->video_link;?>" 
                     style="border:0;height:400px;width:100%;align-content: center;margin-left:50px;">
                 
                     </iframe>

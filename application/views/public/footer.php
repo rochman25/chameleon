@@ -15,7 +15,7 @@
                 <li><a href="#">Kontak &amp; Alamat</a></li>
                 <li><a href=""></a>
                     <ul>
-                        <li><a href="">CHAMLEON CLOTH
+                        <li><a href="">CHAMELEON CLOTH
                             <br/>Jl. Patimuan - Kedungreja, Cinyawang, Rt.02/03, Kec.Patimuan - Cilacap 53264</a></li>
                     </ul>
                 </li>
@@ -38,8 +38,8 @@
         <div class="footer-list">
             <h1>Layanan</h1>
             <ul>
-                <li><a href="<?= base_url() ?>panduan/pemesanan"">Panduan Pemesanan</a></li>
-                <li><a href=" <?= base_url() ?>panduan/ukuran"">Panduan Ukuran</a> </li> <li><a href="<?= base_url() ?>panduan/retur"">Panduan Retur</a></li>
+                <li><a href="<?= base_url() ?>panduan/pemesanan">Panduan Pemesanan</a></li>
+                <li><a href=" <?= base_url() ?>panduan/ukuran">Panduan Ukuran</a> </li> <li><a href="<?= base_url() ?>panduan/retur"">Panduan Retur</a></li>
             </ul>
         </div>
         <div class=" pull-right-footer">
