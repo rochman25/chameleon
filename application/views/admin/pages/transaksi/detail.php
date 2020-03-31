@@ -45,7 +45,8 @@
                                                     <?= $transaksi[0]->nama_lengkap ?><br>
                                                     <?= $transaksi[0]->alamat_1 ?><br>
                                                     <?= $transaksi[0]->alamat_2 ?><br>
-                                                    <?= $transaksi[0]->kota ?>, <?= $transaksi[0]->kode_pos ?>
+                                                    Kecamatan <?= $transaksi[0]->kecamatan ?>, Kabupaten <?= $transaksi[0]->kabupaten ?>
+                                                    ,Provinsi <?=$transaksi[0]->provinsi ?> <?= $transaksi[0]->kode_pos ?>
                                                 </address>
                                             </div>
                                             <div class="col-md-6 text-md-right">
@@ -80,6 +81,7 @@
                                                     <tr>
                                                         <th data-width="40" style="width: 40px;">#</th>
                                                         <th>Nama</th>
+                                                        <th>Ukuran</th>
                                                         <th class="text-center">Harga</th>
                                                         <th class="text-center">Jumlah</th>
                                                         <th class="text-right">Total</th>
@@ -90,6 +92,7 @@
                                                         <tr>
                                                             <td><?=$no++;?></td>
                                                             <td><?=$val->nama_produk?></td>
+                                                            <td><?=$val->ukuran?></td>
                                                             <td class="text-center">Rp.<?=number_format($val->harga_produk,2)?></td>
                                                             <td class="text-center"><?=$val->jumlah_produk?></td>
                                                             <td class="text-right">Rp.<?=number_format($val->jumlah_produk * $val->harga_produk,2)?></td>
