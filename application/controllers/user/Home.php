@@ -736,7 +736,8 @@ class Home extends MY_Controller
 
             $id = $this->input->post("idtransaksi");
             
-            $getIdTransaksi = $this->transaksi->get_transaksiById($id);
+            $getIdTransaksi = $this->transaksi->getWhere('id_transaksi',$id);
+	    $getIdTransaksi = $this->transaksi->getData()->row();
 
             $config['upload_path']          = 'assets/uploads/transaksi';
             $config['allowed_types']        = 'gif|jpg|png|jpeg';
