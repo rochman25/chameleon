@@ -317,7 +317,7 @@ $(document).ready(function () {
 
     $(".addToCart").on("click", function () {
            
-            if(def_Size == ""){
+            if(def_Size != ""){
             var id_prod = $("#product").data("product-id");
             var nama_barang = $("#product").data("product-nama");
             $.ajax({
