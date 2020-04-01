@@ -42,7 +42,7 @@ $this->load->view('public/cart');
                             </tr>
                             <tr>
                                 <td><?= $data->kode_transaksi; ?></td>
-                                <td>Rp <?= $data->total_harga; ?></td>
+                                <td>Rp <?= $data->total_harga-$data->total_ongkir; ?></td>
                                 <td>Rp <?= $data->total_ongkir; ?></td>
                             <tr>
                         </table>
