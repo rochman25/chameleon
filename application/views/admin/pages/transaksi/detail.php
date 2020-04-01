@@ -114,7 +114,7 @@
                                                 </div>
                                                 <div class="invoice-detail-item">
                                                     <div class="invoice-detail-name">Ongkir</div>
-                                                    <div class="invoice-detail-value">Rp.<?=number_format($val->total_ongkir,2)?></div>
+                                                    <div class="invoice-detail-value">Rp.<?=number_format($val->total_ongkir,2)?> (<?=strtoupper($val->kurir)?>)</div>
                                                 </div>
                                                 <hr class="mt-2 mb-2">
                                                 <div class="invoice-detail-item">
