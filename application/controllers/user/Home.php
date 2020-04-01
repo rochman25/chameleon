@@ -735,9 +735,13 @@ class Home extends MY_Controller
         } else {
 
             $id = $this->input->post("idtransaksi");
+            
+            $getIdTransaksi = $this->transaksi->get_transaksiById($id);
+
             $config['upload_path']          = 'assets/uploads/transaksi';
             $config['allowed_types']        = 'gif|jpg|png|jpeg';
             $config['max_size']             = 1024;
+            $config['file_name']            = $getIdTransaksi->kode_transaksi; 
 
 
             $this->load->library('upload', $config);
