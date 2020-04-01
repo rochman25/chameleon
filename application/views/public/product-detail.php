@@ -198,7 +198,7 @@ $this->load->view('public/footer');
 <script type="text/javascript">
     var base_url = '<?= base_url()?>';
     var def_jml = 1;
-    var def_Size = "S";
+    var def_Size = "";
     var stok = '<?= $produk->stok_produk;?>';
     var harga = '<?= $produk->harga_produk?>';
     
@@ -317,6 +317,7 @@ $(document).ready(function () {
 
     $(".addToCart").on("click", function () {
            
+            if(def_Size == ""){
             var id_prod = $("#product").data("product-id");
             var nama_barang = $("#product").data("product-nama");
             $.ajax({
@@ -354,6 +355,9 @@ $(document).ready(function () {
                 console.log(t)
                 //   location.reload()
             })
+            }else{
+                alert("Silahkan Piilih Ukuran Terlebih Dahulu!")
+            }
         })
     })
 </script>
