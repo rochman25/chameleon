@@ -88,6 +88,7 @@
                                                     </tr>
                                                     <?php 
                                                     $no = 1;
+                                                    $totalHarga = 0;
                                                     foreach ($transaksi as $row => $val) { ?>
                                                         <tr>
                                                             <td><?=$no++;?></td>
@@ -97,7 +98,9 @@
                                                             <td class="text-center"><?=$val->jumlah_produk?></td>
                                                             <td class="text-right">Rp.<?=number_format($val->jumlah_produk * $val->harga_produk,2)?></td>
                                                         </tr>
-                                                    <?php } ?>
+                                                    <?php 
+                                                    $totalHarga += $val->harga_produk;
+                                                } ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -107,7 +110,7 @@
                                             <div class="col-lg-4 text-right">
                                                 <div class="invoice-detail-item">
                                                     <div class="invoice-detail-name">Subtotal</div>
-                                                    <div class="invoice-detail-value">Rp.<?=number_format($val->total_harga,2)?></div>
+                                                    <div class="invoice-detail-value">Rp.<?=number_format($totalHarga,2)?></div>
                                                 </div>
                                                 <div class="invoice-detail-item">
                                                     <div class="invoice-detail-name">Ongkir</div>
@@ -116,7 +119,7 @@
                                                 <hr class="mt-2 mb-2">
                                                 <div class="invoice-detail-item">
                                                     <div class="invoice-detail-name">Total</div>
-                                                    <div class="invoice-detail-value invoice-detail-value-lg">Rp.<?=number_format($val->total_harga + $val->total_ongkir,2)?></div>
+                                                    <div class="invoice-detail-value invoice-detail-value-lg">Rp.<?=number_format($val->total_harga,2)?></div>
                                                 </div>
                                             </div>
                                         </div>
