@@ -28,7 +28,7 @@ $this->load->view('public/cart');
                         <p style="color:black !important;"><b>Mandiri</b></p>
                         <p style="color:black !important;"><b> - 1800004486124</b> An <b>Naufal Hunaif</b></p>
                         <p style="color:black !important;"></p>
-                        <p style="color:black !important;">Sebesar <b>Rp.<?=number_format($data->total_harga + $data->total_ongkir,0,",",".")?></b></p>
+                        <p style="color:black !important;">Sebesar <b>Rp.<?=number_format($data->total_harga,0,",",".")?></b></p>
                     </div>
                 </div>
                 <div class="right-side">
@@ -42,7 +42,7 @@ $this->load->view('public/cart');
                             </tr>
                             <tr>
                                 <td><?= $data->kode_transaksi; ?></td>
-                                <td>Rp <?= $data->total_harga; ?></td>
+                                <td>Rp <?= $data->total_harga-$data->total_ongkir; ?></td>
                                 <td>Rp <?= $data->total_ongkir; ?></td>
                             <tr>
                         </table>
