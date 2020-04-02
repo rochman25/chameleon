@@ -104,9 +104,9 @@ $this->load->view('public/cart');
                             <span><strong class="summary-all-value"></strong><b>Rp</b> <b id="total-bayar"><?= $total ?></b> </span>
                         </div>
                     </div>
-                    <input type="hidden" id="kecamatan_id" value="<?= $profil->kecamatan_id ?>">
-                    <input type="hidden" id="total_ongkir" name="total_ongkir">
-                    <input type="hidden" id="total_bayar" name="total_bayar">
+                    <input type="hidden" id="kecamatan_id" value="<?= $profil->kecamatan_id ?>" required>
+                    <input type="hidden" id="total_ongkir" name="total_ongkir" required>
+                    <input type="hidden" id="total_bayar" name="total_bayar" required>
                     <input type="submit" name="kirim" value="BELI">
                 </form>
             </div>
