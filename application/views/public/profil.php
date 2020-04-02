@@ -87,20 +87,25 @@ $this->load->view('public/cart');
                                     <td><?= $row['kode_transaksi'] ?></td>
                                     <td><?= $row['status_transaksi'] ?></td>
                                     <td>
-                                        <?php if($row['bukti_transfer'] == null){ ?>
-                                        <form action="<?= base_url() ?>pembayaran" method="POST">
-                                            <input type="hidden" name="idtransaksi" value="<?= $row['id_transaksi'] ?>">
-                                            <input class="btn btn-success" type="submit" value="Konfirmasi">
-                                        </form>
-                                        <?php }else{
-                                            if($row['status_transaksi'] == 'proses'){
-                                                echo '<span class="badge badge-success">Pesanan sedang diproses</span>';
-                                            }else if($row['status_transaksi'] == 'validasi'){
-                                                echo '<span class="badge badge-success">Pesanan anda sudah divalidasi</span>';
-                                            }else{
-                                                echo '<b>No Resi : </b><span class="badge badge-success">'.$row['no_resi'].'</span> <b>('.strtoupper($row['kurir']).')</b>';
-                                            }
-                                        } ?>
+                                        <?php if ($row['status_transaksi'] == 'batal') {
+                                            echo '<span class="badge badge-danger">Pesanan anda dibatalkan.</span>';
+                                        ?>
+                                        <?php } else { ?>
+                                            <?php if ($row['bukti_transfer'] == null) { ?>
+                                                <form action="<?= base_url() ?>pembayaran" method="POST">
+                                                    <input type="hidden" name="idtransaksi" value="<?= $row['id_transaksi'] ?>">
+                                                    <input class="btn btn-success" type="submit" value="Konfirmasi">
+                                                </form>
+                                            <?php } else {
+                                                if ($row['status_transaksi'] == 'proses') {
+                                                    echo '<span class="badge badge-success">Pesanan sedang diproses</span>';
+                                                } else if ($row['status_transaksi'] == 'validasi') {
+                                                    echo '<span class="badge badge-success">Pesanan anda sudah divalidasi</span>';
+                                                } else {
+                                                    echo '<b>No Resi : </b><span class="badge badge-success">' . $row['no_resi'] . '</span> <b>(' . strtoupper($row['kurir']) . ')</b>';
+                                                }
+                                            } ?>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                             <?php } ?>
