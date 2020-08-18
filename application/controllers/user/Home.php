@@ -461,7 +461,7 @@ class Home extends MY_Controller
                         "email"=>$email,
                         "username" => $uname,
                         "password" => $this->bcrypt->hash_password($pass),
-                        "status" => 0,
+                        "status" => 1,
                         "token" => base64_encode($email),
                         "created_at"=> date("Y-m-d H:i:s"),
                     );
@@ -469,11 +469,11 @@ class Home extends MY_Controller
                     $register = $this->user->insert( $data);
                     // die(json_encode($register));
                     if ($register) {
-                        if($this->send_verification($email,base64_encode($email))){
-                            $this->session->set_flashdata("pesan","Anda berhasil registrasi, silahkan cek email anda untuk memverifikasi akun");   
-                        }else{
-                            $this->session->set_flashdata("pesan","ada masalah ");
-                        }
+                        // if($this->send_verification($email,base64_encode($email))){
+                            $this->session->set_flashdata("pesan","Anda berhasil registrasi, silahkan login untuk melanjutkan.");   
+                        // }else{
+                            // $this->session->set_flashdata("pesan","ada masalah ");
+                        // }
                         $this->load->view('public/login');
                     }else{
                         $this->load->view('public/login');

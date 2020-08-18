@@ -18,7 +18,7 @@ $this->load->view('public/m_heading');
             <p>Sudah punya akun Chameleon Cloth <strong>Masuk</strong></p>
             <form action="<?= base_url()?>daftar" method="post">
                 <h2>Email</h2>
-                    <input type="email" name="email" value="">
+                    <input type="email" style="color:black" name="email" value="">
                     <input type="submit" value="Daftar">
             </form>
         </div>
