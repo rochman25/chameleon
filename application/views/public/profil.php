@@ -56,8 +56,8 @@ $this->load->view('public/cart');
                     <button class="expand">
                         <i class="svg-icon svg_icon__dashboard_chevron"></i>
                     </button>
-                    <a href="<?= base_url() ?>logout" class="logout">
-                        <i class="svg-icon svg_icon__dashboard_logout"></i> <span>logout</span> </a>
+                    <!-- <a href="<?= base_url() ?>keluar" class="logout">
+                        <i class="svg-icon svg_icon__dashboard_logout"></i> <span>logout</span> </a> -->
                 </div>
                 <div class="right-side">
                     <div class="list-transaction page">

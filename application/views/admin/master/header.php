@@ -87,10 +87,10 @@
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index.html">Chameleon Cloth</a>
+            <a href="<?=base_url('admin/home')?>">Chameleon Cloth</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">CC</a>
+            <a href="<?=base_url('admin/home')?>">CC</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>

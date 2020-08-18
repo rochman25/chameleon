@@ -25,15 +25,15 @@ class Home extends MY_Controller
             $produk = 0;
             foreach($transaksi as $row){
                 if($row['status_transaksi'] == "pending"){
-                    $statistik['pending'] = $statistik['pending'] + count($row['status_transaksi']);
+                    $statistik['pending'] = $statistik['pending'] + count(array($row['status_transaksi']));
                 }else if($row['status_transaksi'] == "kirim"){
-                    $statistik['kirim'] =  $statistik['kirim'] + count($row['status_transaksi']);
+                    $statistik['kirim'] =  $statistik['kirim'] + count(array($row['status_transaksi']));
                 }else if($row['status_transaksi'] == "selesai"){
-                    $statistik['selesai'] = $statistik['selesai'] + count($row['status_transaksi']);
+                    $statistik['selesai'] = $statistik['selesai'] + count(array($row['status_transaksi']));
                 }else if($row['status_transaksi'] == "validasi"){
-                    $statistik['validasi'] = $statistik['validasi'] + count($row['status_transaksi']);
+                    $statistik['validasi'] = $statistik['validasi'] + count(array($row['status_transaksi']));
                 }else if($row['status_transaksi'] == "proses"){
-                    $statistik['proses'] = $statistik['proses'] + count($row['status_transaksi']);
+                    $statistik['proses'] = $statistik['proses'] + count(array($row['status_transaksi']));
                 }
                 $penjualan = $penjualan + ($row['total_harga'] + $row['total_ongkir']);
                 $produk = $produk + $row['jumlah_produk'];

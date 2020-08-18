@@ -122,12 +122,14 @@
 <?php $this->load->view('admin/assets/javascript'); ?>
 <!-- Page Specific JS File -->
 <script type="text/javascript">
-    $('.daterange-cus').daterangepicker({
-        locale: {
-            format: 'YYYY/MM/DD'
-        },
-        drops: 'up',
-        opens: 'right'
+    $(document).ready(function() {
+        $('.daterange-cus').daterangepicker({
+            locale: {
+                format: 'YYYY/MM/DD'
+            },
+            drops: 'up',
+            opens: 'right'
+        });
     });
 </script>
 <!-- <script src="<?= base_url() ?>assets/admin/js/page/forms-advanced-forms.js"></script> -->
