@@ -92,7 +92,7 @@ $this->load->view('public/cart');
                                     <div class="title">Kode Pos</div>
                                     <input type="text" style="color:black" name="kode_pos" value="<?= $profil->kode_pos ?>">
                                 </div>
-                                <input type="hidden" value="<?=$profil->id_alamat?>" name="id_alamat">
+                                <input type="hidden" value="<?= $profil->id_alamat ?>" name="id_alamat">
                                 <!-- <ul>
                             <li><?= $profil->alamat_1 ?></li>
                             <li><?= $profil->alamat_2 ?>, Kabupaten <?= $profil->kabupaten ?></li>
@@ -316,6 +316,54 @@ $this->load->view('public/footer');
                     console.log(errorThrown);
                 }
             })
+        });
+        $('#kecamatan_id').on('change', function() {
+            var courier = $("#kurir").val();
+            if (courier != "") {
+                var destination = $(this).val();
+                var mode = "GET";
+                var total = <?php echo $total ?>;
+                var total_ongkir = 0;
+                var total_barang = <?php echo count($cart) ?>;
+                // alert('woy');
+                $('#loader').show();
+                $('#order').hide();
+                $.ajax({
+                    type: 'GET',
+                    url: "<?php echo site_url() ?>" + "user/rajaongkir/hitung_ongkir",
+                    dataType: 'JSON',
+                    data: {
+                        courier: courier,
+                        subdistrict: destination,
+                        barang: total_barang,
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        // swal('Success!', data.rajaongkir.results[0].costs[0].cost[0].value, data.status);
+                        var ongkir = 0;
+                        if (courier == 'jne') {
+                            ongkir = data.rajaongkir.results[0].costs[1].cost[0].value
+                        } else {
+                            ongkir = data.rajaongkir.results[0].costs[0].cost[0].value
+                        }
+                        total_ongkir = total_ongkir + ongkir
+                        total = total + total_ongkir
+                        $('#total_ongkir').val(total_ongkir);
+                        $('#total_bayar').val(total);
+                        $('#ongkos-kirim').text(total_ongkir);
+                        $('#total-bayar').text(total);
+                        // $('#ongkos-kirim').val(total_ongkir);
+                        // $('#total').text("Rp " + total.toLocaleString("en"));
+                        console.log(data);
+                        $('#loader').hide();
+                        $('#order').show();
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert(errorThrown);
+                        console.log(errorThrown);
+                    }
+                })
+            }
         });
     });
 </script>
