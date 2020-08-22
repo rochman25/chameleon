@@ -44,6 +44,7 @@
 		.product-deskripsi p{
 			/* max-width: 75ch; */
 			word-wrap: break-word;
+			line-height: 1;
 			/* max-width: calc(30em * 0.5); */
 			/* text-overflow: ellipsis; */
 			/* will make [...] at the end */

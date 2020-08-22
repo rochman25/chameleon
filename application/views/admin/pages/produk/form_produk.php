@@ -226,7 +226,7 @@
             });
             // $('#summernote').summernote('lineHeight', 10);
             $('#summernote').summernote({
-                lineHeights: ['0.5','1.0','1.5','2.0'],
+                lineHeights: ['1'],
                 toolbar: [
                     // [groupName, [list of button]]
                     // ['style', [ 'italic', 'underline', 'clear']],
