@@ -277,6 +277,7 @@ $this->load->view('public/footer');
                 dataType: 'JSON',
                 data: {},
                 success: function(data) {
+                    $('#kabupaten_id').empty().append('<option value="" selected>Pilih Kabupaten</option>');
                     $.each(data.rajaongkir.results, function(key, value) {
                         $('#kabupaten_id').append('<option value="' + value.city_id + ',' + value.city_name + '">' + value.city_name + '</option>')
                     });
@@ -302,6 +303,7 @@ $this->load->view('public/footer');
                 dataType: 'JSON',
                 data: {},
                 success: function(data) {
+                    $('#kecamatan_id').empty().append('<option value="" selected>Pilih Kecamatan</option>');
                     $.each(data.rajaongkir.results, function(key, value) {
                         $('#kecamatan_id').append('<option value="' + value.subdistrict_id + ',' + value.subdistrict_name + '">' + value.subdistrict_name + '</option>')
                     });

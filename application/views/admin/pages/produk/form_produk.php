@@ -9,6 +9,16 @@
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/admin/node_modules/dropzone/dist/min/dropzone.min.css">
     <?php $this->load->view('admin/assets/stylesheets') ?>
+
+    <!-- include summernote css/js -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js" defer></script>
+    <style>
+        .note-editable p{
+            line-height: 1;
+        }
+    </style>
 </head>
 
 <body>
@@ -87,9 +97,9 @@
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <label for="desc_p">Deskripsi Produk</label>
-                                                        <textarea class="summernote" name="desc_p" id="desc_p"><?php if (isset($produk)) {
-                                                                                                                    echo $produk->deskripsi_produk;
-                                                                                                                } ?></textarea>
+                                                        <textarea id="summernote" style="height:300px" name="desc_p" id="desc_p"><?php if (isset($produk)) {
+                                                                                                                                        echo $produk->deskripsi_produk;
+                                                                                                                                    } ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -133,6 +143,8 @@
     <?php $this->load->view('admin/assets/javascript') ?>
     <!-- JS Libraies -->
     <script src="<?= base_url() ?>assets/admin/node_modules/dropzone/dist/min/dropzone.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> -->
+    <!-- <script src="<?= base_url() ?>assets/admin/node_modules/summernote/dist/summernote-bs4.js"></script> -->
     <!-- Page Specific JS File -->
     <script type="text/javascript">
         var nama = "default"
@@ -153,7 +165,7 @@
             }
         };
 
-        if(getUrlParameter('id')){
+        if (getUrlParameter('id')) {
             kode_p = getUrlParameter('id');
         }
 
@@ -186,7 +198,10 @@
             request = $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url('admin/produk/deleteFile') ?>',
-                data: {"id":getUrlParameter('id'),"nama":a.name},
+                data: {
+                    "id": getUrlParameter('id'),
+                    "nama": a.name
+                },
                 dataType: 'html'
             });
             request.done(function(response, data, jqXHR) {
@@ -208,16 +223,26 @@
                     foto_upload.options.addedfile.call(foto_upload, mockFile);
                     foto_upload.options.thumbnail.call(foto_upload, mockFile, "<?= base_url() ?>assets/uploads/thumbnail_produk/" + value);
                 })
-            })
+            });
+            // $('#summernote').summernote('lineHeight', 10);
+            $('#summernote').summernote({
+                lineHeights: ['0.5','1.0','1.5','2.0'],
+                toolbar: [
+                    // [groupName, [list of button]]
+                    // ['style', [ 'italic', 'underline', 'clear']],
+                    // ['font', ['strikethrough']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']]
+                ]
+            });
             // }
         })
         // })
         // let nama = $("#nama_p").val()
     </script>
-    <script type="text/javascript">
-    </script>
     <!-- <script src="<?= base_url() ?>assets/admin/js/page/components-multiple-upload.js"></script> -->
-    <script src="<?= base_url() ?>assets/admin/node_modules/summernote/dist/summernote-bs4.js"></script>
 </body>
 
 </html>

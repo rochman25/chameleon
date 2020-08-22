@@ -40,6 +40,20 @@
 				transform: rotate(360deg);
 			}
 		}
+
+		.product-deskripsi p{
+			/* max-width: 75ch; */
+			word-wrap: break-word;
+			/* max-width: calc(30em * 0.5); */
+			/* text-overflow: ellipsis; */
+			/* will make [...] at the end */
+			/* width: 370px; */
+			/* change to your preferences */
+			/* white-space: nowrap; */
+			/* paragraph to one line */
+			/* overflow: hidden; */
+			/* older browsers */
+		}
 	</style>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 	<script src="<?= base_url() ?>assets/public/js/all.js"></script>

@@ -9,7 +9,7 @@
   <!-- CSS Libraries -->
   <link rel="stylesheet" href="<?=base_url()?>assets/admin/node_modules/bootstrap-daterangepicker/daterangepicker.css">
   <link rel="stylesheet" href="<?=base_url()?>assets/admin/node_modules/jqvmap/dist/jqvmap.min.css">
-  <link rel="stylesheet" href="<?=base_url()?>assets/admin/node_modules/summernote/dist/summernote-bs4.css">
+  <!-- <link rel="stylesheet" href="<?=base_url()?>assets/admin/node_modules/summernote/dist/summernote-bs4.css"> -->
   <link rel="stylesheet" href="<?=base_url()?>assets/admin/node_modules/owl.carousel/dist/assets/owl.carousel.min.css">
   <link rel="stylesheet" href="<?=base_url()?>assets/admin/node_modules/owl.carousel/dist/assets/owl.theme.default.min.css">
   <!-- Template CSS -->
