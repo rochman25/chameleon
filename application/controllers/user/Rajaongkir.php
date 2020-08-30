@@ -110,11 +110,14 @@ class Rajaongkir extends MY_Controller
         $kec = $_GET['subdistrict'];
         $cour = $_GET['courier'];
         $barang=$_GET['barang'];
-        $weight = 1000;
-        if($barang > 1){
-            $weight = $barang * $weight;
-        }else{
-            $weight = 1000;
+        $weight = $_GET['weight'];
+        // if($barang > 1){
+        //     $weight = $barang * $weight;
+        // }else{
+        //     $weight = 1000;
+        // }
+        if($weight > 1200){
+            $weight = 2000;
         }
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://pro.rajaongkir.com/api/cost",

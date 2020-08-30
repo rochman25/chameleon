@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Home extends MY_Controller
 {
@@ -22,7 +22,7 @@ class Home extends MY_Controller
         $thumbnail = array();
         $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
         $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
-        $data['produk'] = $this->produk->getWhere('produk.stok_produk > ','0');
+        $data['produk'] = $this->produk->getWhere('produk.stok_produk > ', '0');
         $data['produk'] = $this->produk->getData()->result_array();
         foreach ($data['produk'] as $row) {
             $foto = explode(',', $row['thumbnail_produk']);
@@ -38,29 +38,31 @@ class Home extends MY_Controller
         //   die(json_encode($data));
         $this->load->view('public/home', $data);
     }
-    public function search(){
+    public function search()
+    {
         $cari = $this->input->post('search');
-        $data['produk'] = $this->produk->search($cari,"produk")->result_array();
-       // die(json_encode($data));
+        $data['produk'] = $this->produk->search($cari, "produk")->result_array();
+        // die(json_encode($data));
         $thumbnail = array();
-        if($data['produk'] ){
-        foreach ($data['produk'] as $row) {
-            $foto = explode(',', $row['thumbnail_produk']);
-            $thumbnail[$row['id_produk']] = $foto[0];
+        if ($data['produk']) {
+            foreach ($data['produk'] as $row) {
+                $foto = explode(',', $row['thumbnail_produk']);
+                $thumbnail[$row['id_produk']] = $foto[0];
+            }
         }
-    }
         $data['bg'] = base_url('assets/images/Kemeja/Kemeja-BG.png');
-        $data['section'] = "Hasil pencarian,".$cari;
+        $data['section'] = "Hasil pencarian," . $cari;
         $data['thumbnail'] = $thumbnail;
-        $this->load->view('public/product',$data);
+        $this->load->view('public/product', $data);
     }
-    public function produk($kategori = ""){
-     
-        if($kategori == ""){
+    public function produk($kategori = "")
+    {
+
+        if ($kategori == "") {
             $thumbnail = array();
             $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
             $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
-            $data['produk'] = $this->produk->getWhere("produk.stok >","0");
+            $data['produk'] = $this->produk->getWhere("produk.stok >", "0");
             $data['produk'] = $this->produk->getData()->result_array();
             foreach ($data['produk'] as $row) {
                 $foto = explode(',', $row['thumbnail_produk']);
@@ -70,19 +72,18 @@ class Home extends MY_Controller
         } else {
             $datakategori =  $this->kategori->getWhere('nama_kategori', $kategori);
             $datakategori = $this->kategori->getData()->row();
-         //   die(json_encode($kategori));
-            if($datakategori == "" || empty($datakategori) || $datakategori == null){
+            //   die(json_encode($kategori));
+            if ($datakategori == "" || empty($datakategori) || $datakategori == null) {
                 $thumbnail = array();
 
                 $data['produk'] = null;
                 $data['thumbnail'] = null;
-
-            }else{
+            } else {
                 $thumbnail = array();
                 $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
                 $data['produk'] = $this->produk->getWhere('produk.id_kategori', $datakategori->id_kategori);
                 $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
-                $data['produk'] = $this->produk->getWhere("produk.stok_produk >","0");
+                $data['produk'] = $this->produk->getWhere("produk.stok_produk >", "0");
                 $data['produk'] = $this->produk->getData()->result_array();
                 foreach ($data['produk'] as $row) {
                     $foto = explode(',', $row['thumbnail_produk']);
@@ -90,85 +91,85 @@ class Home extends MY_Controller
                 }
                 $data['thumbnail'] = $thumbnail;
             }
-
-            
         }
         $data['thumbnail'] = $thumbnail;
         if ($this->userIsLoggedIn()) {
-            $data['id_cart'] = $this->cart->getWhere("id_pengguna",$this->session->userdata['user_data']['id']);
+            $data['id_cart'] = $this->cart->getWhere("id_pengguna", $this->session->userdata['user_data']['id']);
             $data['id_cart'] = $this->cart->getData()->row();
-        }else{
+        } else {
             $data['id_cart'] = "";
         }
         $data['section'] = $kategori;
-        if($kategori == "celana"){
+        if ($kategori == "celana") {
             $data['bg'] = base_url('assets/images/Celana/Celana-BG.png');
-        }else if($kategori == "kemeja"){
+        } else if ($kategori == "kemeja") {
             $data['bg'] = base_url('assets/images/Kemeja/Kemeja-BG.png');
-        }else if($kategori == "jas"){
+        } else if ($kategori == "jas") {
             $data['bg'] = base_url('assets/images/Jas/Jas-BG.png');
-        }else{
+        } else {
             $data['bg'] = base_url('assets/images/Celana/Celana-BG.png');
         }
-        $this->load->view('public/product',$data);
+        $this->load->view('public/product', $data);
     }
     public function promo()
     {
         $this->load->view('public/product-promo');
     }
-    public function produk_detail(){
+    public function produk_detail()
+    {
         //die(json_encode($this->session->userdata("c72e6711-4ea1-11ea-9a04-e03f4931b17e")));
         $id_produk = $this->input->get('produk');
-      
+
         $thumbnail = array();
         $ukuran = array();
-            $data['produk'] = $this->produk->getWhere("id_produk", $id_produk);
-            $data['produk'] = $this->produk->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
-            $data['produk'] = $this->produk->getData()->row();
-    
-                $foto = explode(',', $data['produk']->thumbnail_produk);
-                $size = explode(',',$data['produk']->size_produk);
-                foreach($foto as $f){
-                    $thumbnail[] = $f;
-                }
-                foreach($size as $u){
-                    $ukuran[] = $u;
-                }
-   
-            $data['thumbnail'] = $thumbnail;
-            $data['size'] = $ukuran;
-            if ($this->userIsLoggedIn()) {
-                $data['id_cart'] = $this->cart->getWhere("id_pengguna",$this->session->userdata['user_data']['id']);
-                $data['id_cart'] = $this->cart->getData()->row();
-            }else{
+        $data['produk'] = $this->produk->getWhere("id_produk", $id_produk);
+        $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
+        $data['produk'] = $this->produk->getData()->row();
+
+        $foto = explode(',', $data['produk']->thumbnail_produk);
+        $size = explode(',', $data['produk']->size_produk);
+        foreach ($foto as $f) {
+            $thumbnail[] = $f;
+        }
+        foreach ($size as $u) {
+            $ukuran[] = $u;
+        }
+
+        $data['thumbnail'] = $thumbnail;
+        $data['size'] = $ukuran;
+        if ($this->userIsLoggedIn()) {
+            $data['id_cart'] = $this->cart->getWhere("id_pengguna", $this->session->userdata['user_data']['id']);
+            $data['id_cart'] = $this->cart->getData()->row();
+        } else {
             $data['id_cart'] = "";
-            }
+        }
         //    / die(json_encode($data));
-        $this->load->view('public/product-detail',$data);
+        $this->load->view('public/product-detail', $data);
     }
-    public function hapus_item(){
+    public function hapus_item()
+    {
         $id_item = $this->input->post('id_item');
-        $hapus = $this->cart_item->delete("id_detail_item_cart",$id_item);
-        if($hapus){
+        $hapus = $this->cart_item->delete("id_detail_item_cart", $id_item);
+        if ($hapus) {
             echo json_encode(array(
-                "status"=> "success",
-                "success"=>true,
+                "status" => "success",
+                "success" => true,
                 "id_item" => $id_item,
                 "message" => "Berhasil",
                 "element" => '',
-            ));    
-           
-        }else{
+            ));
+        } else {
             echo json_encode(array(
-                "status"=> "unsuccess",
-                "success"=>false,
+                "status" => "unsuccess",
+                "success" => false,
                 "id_item" => $id_item,
                 "message" => "gagal",
                 "element" => '',
-            ));    
+            ));
+        }
     }
-    }
-    public function login(){
+    public function login()
+    {
         if ($this->userIsLoggedIn()) {
             redirect(base_url());
         } else {
@@ -176,16 +177,16 @@ class Home extends MY_Controller
                 $email = $this->input->post('email');
                 $pass = $this->input->post('password');
                 $where = array(
-                    'email'=>$email
+                    'email' => $email
                 );
                 $cek = $this->user->login($where)->row();
                 if ($cek != null) {
                     if ($cek->status == true) {
-                      //   die(json_encode($this->bcrypt->hash_password($pass)));
-                    //    die(json_encode(array("datacek"=>$cek,"datapass"=>$this->bcrypt->hash_password($pass))));
+                        //   die(json_encode($this->bcrypt->hash_password($pass)));
+                        //    die(json_encode(array("datacek"=>$cek,"datapass"=>$this->bcrypt->hash_password($pass))));
                         // die(json_encode($this->bcrypt->check_password($pass, $cek->password)));
                         if ($this->bcrypt->check_password($pass, $cek->password)) {
-                        //  if ($cek->password == $pass) {
+                            //  if ($cek->password == $pass) {
                             $datas = array(
                                 "updated_at" => date("Y-m-d H:i:s")
                             );
@@ -206,7 +207,7 @@ class Home extends MY_Controller
                             );
                             $this->load->view('public/login');
                         }
-                    }else{
+                    } else {
                         $this->session->set_flashdata(
                             'pesan',
                             '<div class="alert alert-danger mr-auto">Akun belum diverifikasi silahkan cek email untuk verfikasi akun.</div>'
@@ -220,144 +221,146 @@ class Home extends MY_Controller
                     );
                     $this->load->view('public/login');
                 }
-            }else{
+            } else {
                 $this->load->view('public/login');
             }
         }
-       
     }
-    public function get_cart(){
+    public function get_cart()
+    {
         if (!$this->userIsLoggedIn()) {
             echo json_encode(array(
-                "status"=> "unsuccess",
-                "success"=>false,
+                "status" => "unsuccess",
+                "success" => false,
                 "id_cart" => "",
                 "message" => "Kamu belum masuk",
                 "element" => '',
             ));
         } else {
-            
+
             $datafull = array();
             $thumbnail = array();
             $harga = 0;
             $datacart = $this->cart_item->order_by("id_detail_item_cart", "ASC");
-            $datacart = $this->cart_item->getJoin("cart_item","cart_item.id_cart=detail_cart_item.id_cart","inner");
-            $datacart = $this->cart_item->getJoin("produk","produk.id_produk=detail_cart_item.id_produk","inner");
-            $datacart = $this->cart_item->getJoin("kategori","kategori.id_kategori=produk.id_kategori","inner");
-            $datacart = $this->cart_item->getWhere("cart_item.id_cart",$this->input->get('id'));
+            $datacart = $this->cart_item->getJoin("cart_item", "cart_item.id_cart=detail_cart_item.id_cart", "inner");
+            $datacart = $this->cart_item->getJoin("produk", "produk.id_produk=detail_cart_item.id_produk", "inner");
+            $datacart = $this->cart_item->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
+            $datacart = $this->cart_item->getWhere("cart_item.id_cart", $this->input->get('id'));
             $datacart = $this->cart_item->getData()->result();
-            foreach($datacart as $d){
+            foreach ($datacart as $d) {
                 $foto = explode(',', $d->thumbnail_produk);
-                foreach($foto as $f){
+                foreach ($foto as $f) {
                     $thumbnail[] = $f;
                 }
-               
+
                 $harga = $harga + $d->harga_produk;
                 $d = array(
                     "id_cart" => $d->id_cart,
                     "id_item" => $d->id_detail_item_cart,
-                    "nama_produk"=>$d->nama_produk,
-                    "qty"=>$d->quantity,
-                    "harga"=>$d->harga_produk,
-                    "kategori"=>$d->nama_kategori,
+                    "nama_produk" => $d->nama_produk,
+                    "berat_produk" => $d->berat_produk,
+                    "qty" => $d->quantity,
+                    "harga" => $d->harga_produk,
+                    "kategori" => $d->nama_kategori,
                     "thumb" => $thumbnail,
                     "element" => '<div class="cart-list" >
                     <a href="#">
-                        <img src="'.base_url().'assets/uploads/thumbnail_produk/'.$thumbnail[0].'">
+                        <img src="' . base_url() . 'assets/uploads/thumbnail_produk/' . $thumbnail[0] . '">
                         <div class="content">
-                            <div class="name">'.$d->nama_produk.'</div>
+                            <div class="name">' . $d->nama_produk . '</div>
               
-                            <div class="real">Rp '.$d->harga_produk.'</div>
+                            <div class="real">Rp ' . $d->harga_produk . '</div>
                                 <div class="content-detail">
-                                    Jumlah : <strong class="cart-quantity">'.$d->quantity.'/ Ukuran :'.$d->size.'</strong> 
+                                    Jumlah : <strong class="cart-quantity">' . $d->quantity . '/ Ukuran :' . $d->size . '</strong> 
                                 
                                 </div>
                         </div>
                     </a>
-                    <a class="delete-cart" onclick="deleteitem(' . "'". $d->id_detail_item_cart . "'".');" >
+                    <a class="delete-cart" onclick="deleteitem(' . "'" . $d->id_detail_item_cart . "'" . ');" >
                         <i class="svg_icon__header_garbage svg-icon"></i>
                     </a>
                 </div>'
                 );
-                 array_push($datafull,$d);
-                 $thumbnail = [];
+                array_push($datafull, $d);
+                $thumbnail = [];
             }
-            
-            echo json_encode(array("data"=>$datafull,"total"=>$harga));
+
+            echo json_encode(array("data" => $datafull, "total" => $harga));
         }
     }
-    public function update_cart(){
+    public function update_cart()
+    {
         if (!$this->userIsLoggedIn()) {
             echo json_encode(array(
-                "status"=> "unsuccess",
-                "success"=>false,
+                "status" => "unsuccess",
+                "success" => false,
                 "id_cart" => "",
                 "message" => "Kamu belum masuk",
                 "element" => '',
             ));
         } else {
-            
         }
     }
-    public function add_cart(){
+    public function add_cart()
+    {
         if (!$this->userIsLoggedIn()) {
             echo json_encode(array(
-                "status"=> "unsuccess",
-                "success"=>false,
+                "status" => "unsuccess",
+                "success" => false,
                 "id_cart" => "",
                 "message" => "Kamu belum masuk",
                 "element" => '',
             ));
         } else {
             $idc = $this->input->post('id_cart');
-        //$this->input->post('id_cart');
-         $idp = $this->input->post('id_pengguna');
-         $id_produk = $this->input->post('id_produk');
-         $qty = $this->input->post('qty');
-         $size = $this->input->post('size');
-         $harga = $this->input->post('harga');
-         $nama_barang = $this->input->post('nama_barang');
-        if($idc== "" || empty($idc) || $idc == null){
-            $idc = $this->cart->generateKode();
-            $data = array(
-                "id_cart" => $idc,
-                "id_pengguna" => $idp,
-                "created_at" => date("Y-m-d H:i:s"),
-            );
-            $data_item = array(
-                "id_cart" => $idc,
-                "id_produk" => $id_produk,
-                "quantity" => $qty,
-                "size" => $size
-            );
-            $cek = $this->cart->cekCart();
-            if($cek != null){
-                $simpan = true;
-                $data_item['id_cart'] = $cek->id_cart;
-            }else{
-                $simpan = $this->cart->insert($data);
-            }
-
-            if($simpan){
-                $simpan_item = $this->cart_item->tambahDetailCart($data_item);
-                if($simpan_item){
-                    $session_cart = array(
-                        "current_cart" => $idc,
-                        "created_at" => date("Y-m-d H:i:s")
-                    );
-                    $this->session->set_userdata($idp, $session_cart);
-                echo json_encode(array(
-                    "status"=> "success",
-                    "success"=>true,
+            //$this->input->post('id_cart');
+            $idp = $this->input->post('id_pengguna');
+            $id_produk = $this->input->post('id_produk');
+            $qty = $this->input->post('qty');
+            $size = $this->input->post('size');
+            $harga = $this->input->post('harga');
+            $nama_barang = $this->input->post('nama_barang');
+            if ($idc == "" || empty($idc) || $idc == null) {
+                $idc = $this->cart->generateKode();
+                $data = array(
                     "id_cart" => $idc,
-                    "element" => '<div class="cart-list" id="cart_list_39223">
+                    "id_pengguna" => $idp,
+                    "created_at" => date("Y-m-d H:i:s"),
+                );
+                $data_item = array(
+                    "id_cart" => $idc,
+                    "id_produk" => $id_produk,
+                    "quantity" => $qty,
+                    "size" => $size
+                );
+                $cek = $this->cart->cekCart();
+                if ($cek != null) {
+                    $simpan = true;
+                    $data_item['id_cart'] = $cek->id_cart;
+                } else {
+                    $simpan = $this->cart->insert($data);
+                }
+
+                if ($simpan) {
+                    $simpan_item = $this->cart_item->tambahDetailCart($data_item);
+                    if ($simpan_item) {
+                        $session_cart = array(
+                            "current_cart" => $idc,
+                            "created_at" => date("Y-m-d H:i:s")
+                        );
+                        $this->session->set_userdata($idp, $session_cart);
+                        echo json_encode(array(
+                            "status" => "success",
+                            "success" => true,
+                            "id_cart" => $idc,
+                            "element" => '<div class="cart-list" id="cart_list_39223">
                     <a href="#">
                         <img src="#">
                         <div class="content">
-                            <div class="name">'.$nama_barang.'</div>
-                            <div class="real">Rp '.$harga.'</div>
+                            <div class="name">' . $nama_barang . '</div>
+                            <div class="real">Rp ' . $harga . '</div>
                                 <div class="content-detail">
-                                    Jumlah : <strong class="cart-quantity">'.$qty.'/Ukuran : '.$size.' </strong> 
+                                    Jumlah : <strong class="cart-quantity">' . $qty . '/Ukuran : ' . $size . ' </strong> 
                                 </div>
                         </div>
                     </a>
@@ -413,13 +416,13 @@ class Home extends MY_Controller
                         "id_cart" => $idc,
                         "element" => '<div class="cart-list" ">
     			<a href="#">
-        			<img src="'.base_url().'assets/uploads/thumbnail_produk/'.$img.'">
+        			<img src="' . base_url() . 'assets/uploads/thumbnail_produk/' . $img . '">
         			<div class="content">
-            			<div class="name">'.$nama_barang.'</div>
+            			<div class="name">' . $nama_barang . '</div>
                     
-            			<div class="real">Rp '.$harga.'</div>
+            			<div class="real">Rp ' . $harga . '</div>
                             <div class="content-detail">
-                    			Jumlah : <strong class="cart-quantity">'.$qty.' / Ukuran : '.$size.'</strong> 
+                    			Jumlah : <strong class="cart-quantity">' . $qty . ' / Ukuran : ' . $size . '</strong> 
                 			</div>
         			</div>
     			</a>
@@ -427,19 +430,21 @@ class Home extends MY_Controller
         			<i class="svg_icon__header_garbage svg-icon"></i>
     			</a>
 			</div>',
-            ));
-            }else{
-                echo json_encode(array(
-                    "status"=> "unsuccess",
-                "success"=>false,
-                "id_cart" => "",
-                "message" => "berhasil diinput tapi gagall input item",
-                "element" => '',));
+                    ));
+                } else {
+                    echo json_encode(array(
+                        "status" => "unsuccess",
+                        "success" => false,
+                        "id_cart" => "",
+                        "message" => "berhasil diinput tapi gagall input item",
+                        "element" => '',
+                    ));
+                }
             }
-    }
         }
     }
-    public function register(){
+    public function register()
+    {
         if ($this->userIsLoggedIn()) {
             redirect(base_url());
         } else {
@@ -448,82 +453,82 @@ class Home extends MY_Controller
                 $pass = $this->input->post('password');
                 $uname = $this->input->post('username');
 
-                $cek = $this->user->getWhere('email',$email);
+                $cek = $this->user->getWhere('email', $email);
                 $cek = $this->user->getData()->row();
-              //  die(json_encode($cek));
+                //  die(json_encode($cek));
                 if ($cek != null) {
-                    $this->session->set_flashdata("pesan","Email yang anda masukkan sudah terdaftar ");
+                    $this->session->set_flashdata("pesan", "Email yang anda masukkan sudah terdaftar ");
                     //sudah ada
                     $this->load->view('public/register');
                     // die(json_encode("ada"));
                 } else {
                     $data = array(
-                        "email"=>$email,
+                        "email" => $email,
                         "username" => $uname,
                         "password" => $this->bcrypt->hash_password($pass),
                         "status" => 1,
                         "token" => base64_encode($email),
-                        "created_at"=> date("Y-m-d H:i:s"),
+                        "created_at" => date("Y-m-d H:i:s"),
                     );
                     $register = $this->user->set_data('id_pengguna', 'UUID()');
-                    $register = $this->user->insert( $data);
+                    $register = $this->user->insert($data);
                     // die(json_encode($register));
                     if ($register) {
                         // if($this->send_verification($email,base64_encode($email))){
-                            $this->session->set_flashdata("pesan","Anda berhasil registrasi, silahkan login untuk melanjutkan.");   
+                        $this->session->set_flashdata("pesan", "Anda berhasil registrasi, silahkan login untuk melanjutkan.");
                         // }else{
-                            // $this->session->set_flashdata("pesan","ada masalah ");
+                        // $this->session->set_flashdata("pesan","ada masalah ");
                         // }
                         $this->load->view('public/login');
-                    }else{
+                    } else {
                         $this->load->view('public/login');
                     }
-                    
                 }
-            }else if($this->input->post('email')){
+            } else if ($this->input->post('email')) {
                 $email = $this->input->post('email');
-                $cek = $this->user->getWhere('email',$email);
+                $cek = $this->user->getWhere('email', $email);
                 $cek = $this->user->getData()->row();
                 $data['email'] = "";
-                if(empty($email)){
+                if (empty($email)) {
                     $data['email'] = "";
-                }else{
+                } else {
                     $data['email'] = $email;
                 }
-               
+
                 if ($cek != null) {
-                    $this->session->set_flashdata("pesan","Email yang anda masukkan sudah terdaftar ");
+                    $this->session->set_flashdata("pesan", "Email yang anda masukkan sudah terdaftar ");
                     //sudah ada
                     $this->load->view('public/login');
                     // die(json_encode("ada"));
-                }else{
-                    $this->load->view('public/register',$data);
+                } else {
+                    $this->load->view('public/register', $data);
                 }
                 // die(json_encode($data));
-            }else{
+            } else {
                 $data['email'] = "";
-                $this->load->view('public/login',$data);
+                $this->load->view('public/login', $data);
             }
         }
     }
 
-    public function verifikasi(){
+    public function verifikasi()
+    {
         $code = $this->input->get('code');
         // die(json_encode(base64_decode($code)));
         $cek = $this->user->getWhere('email', base64_decode($code));
-		$cek = $this->user->getData('user')->row();
-		if ($cek != null) {
-			$data = array(
-				"status" => true
+        $cek = $this->user->getData('user')->row();
+        if ($cek != null) {
+            $data = array(
+                "status" => true
             );
-            if($this->user->updateData($data,$cek->id_pengguna)){
-                echo "Selamat akun anda sudah aktif!. Silahkan klik <a href='".base_url('login')."'>login</a>";
-            }else{
+            if ($this->user->updateData($data, $cek->id_pengguna)) {
+                echo "Selamat akun anda sudah aktif!. Silahkan klik <a href='" . base_url('login') . "'>login</a>";
+            } else {
                 echo "ada masalah";
             }
-		} else {
+        } else {
             echo "verifikasi kode ilegal.";
-		}
+        }
     }
 
     public function profil()
@@ -545,12 +550,12 @@ class Home extends MY_Controller
             $data['alamat'] = $this->alamat->getWhere("id_pengguna", $idp);
             $data['alamat'] = $this->alamat->getData()->result();
             //    die(json_encode($data['transaksi']));
-            $data['id_cart'] = $this->cart->getWhere("id_pengguna",$this->session->userdata['user_data']['id']);
+            $data['id_cart'] = $this->cart->getWhere("id_pengguna", $this->session->userdata['user_data']['id']);
             $data['id_cart'] = $this->cart->getData()->row();
-	    $this->load->view('public/profil',$data);
-    	}else{
-	    redirect(base_url('login'));	
-	}
+            $this->load->view('public/profil', $data);
+        } else {
+            redirect(base_url('login'));
+        }
     }
 
     public function ubah_profile()
@@ -591,9 +596,9 @@ class Home extends MY_Controller
                     "id_pengguna" => $idp
                 );
 
-                if($idA == ""){
+                if ($idA == "") {
                     $query = $this->alamat->insertData($data_alamat);
-                }else{
+                } else {
                     $query = $this->alamat->updateData($data_alamat, $idA);
                 }
                 // die(json_encode($update_alamat));
@@ -613,22 +618,26 @@ class Home extends MY_Controller
             redirect(base_url('login'));
         }
     }
-    public function panduan_ukuran(){
+    public function panduan_ukuran()
+    {
         //
         $this->load->view('public/panduan_ukuran');
     }
-    public function panduan_return(){
+    public function panduan_return()
+    {
         //
         $this->load->view('public/panduan_return');
     }
-    public function panduan_pemesanan(){
+    public function panduan_pemesanan()
+    {
         //
         $this->load->view('public/panduan_pemesanan');
     }
-    public function logout(){
-        if($this->userIsLoggedIn()){
+    public function logout()
+    {
+        if ($this->userIsLoggedIn()) {
             $this->session->unset_userdata('user_data');
-           redirect(base_url('login'),'refresh');
+            redirect(base_url('login'), 'refresh');
             //redirect('/user_view/user_login', 'refresh');
             exit();
         } else {
@@ -651,7 +660,7 @@ class Home extends MY_Controller
             'wordwrap' => TRUE
         );
 
-		$message =     "
+        $message =     "
                   <html>
                   <head>
                       <title>Verifikasi Akun anda</title>
@@ -666,14 +675,14 @@ class Home extends MY_Controller
                   </html>
                   ";
 
-		$this->load->library('email', $config);
-		$this->email->set_newline("\r\n");
-		$this->email->from($config['smtp_user']);
-		$this->email->to($email);
-		$this->email->subject('Verifikasi akun');
-		$this->email->message($message);
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from($config['smtp_user']);
+        $this->email->to($email);
+        $this->email->subject('Verifikasi akun');
+        $this->email->message($message);
 
-		return $this->email->send();
+        return $this->email->send();
     }
 
     private function send_forgetPass($email, $code)
@@ -720,14 +729,15 @@ class Home extends MY_Controller
         if (!$this->userIsLoggedIn()) {
             redirect(base_url());
         } else {
-        $id = $this->input->post('idtransaksi');
+            $id = $this->input->post('idtransaksi');
 
-        $data['data'] = $this->transaksi->getWhere("id_transaksi", $id);
-        $data['data'] = $this->transaksi->getData()->row();
-       //die(json_encode($data));
-        $this->load->view('public/konfirmasi-pembayaran',$data);
+            $data['data'] = $this->transaksi->getWhere("id_transaksi", $id);
+            $data['data'] = $this->transaksi->getData()->row();
+            //die(json_encode($data));
+            $this->load->view('public/konfirmasi-pembayaran', $data);
         }
     }
+
     public function konfirmasi_proses()
     {
         if (!$this->userIsLoggedIn()) {
@@ -735,14 +745,14 @@ class Home extends MY_Controller
         } else {
 
             $id = $this->input->post("idtransaksi");
-            
-            $getIdTransaksi = $this->transaksi->getWhere('id_transaksi',$id);
-	    $getIdTransaksi = $this->transaksi->getData()->row();
+
+            $getIdTransaksi = $this->transaksi->getWhere('id_transaksi', $id);
+            $getIdTransaksi = $this->transaksi->getData()->row();
 
             $config['upload_path']          = 'assets/uploads/transaksi';
             $config['allowed_types']        = 'gif|jpg|png|jpeg';
             $config['max_size']             = 1024;
-            $config['file_name']            = $getIdTransaksi->kode_transaksi; 
+            $config['file_name']            = $getIdTransaksi->kode_transaksi;
 
 
             $this->load->library('upload', $config);
@@ -761,7 +771,7 @@ class Home extends MY_Controller
                 $data = array(
                     "bukti_transfer" => $data
                 );
-                $update = $this->transaksi->updateData($data,$id);
+                $update = $this->transaksi->updateData($data, $id);
                 // $update = $this->transaksi->getWhere("id_transaksi", $id);
                 if ($update) {
                     $this->session->set_flashdata(

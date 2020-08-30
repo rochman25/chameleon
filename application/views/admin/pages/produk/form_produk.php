@@ -73,22 +73,28 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="row">
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-3">
                                                         <label for="size_p">Ukuran Produk</label>
                                                         <input type="text" name="size_p" id="size_p" placeholder="Masukkan ukuran produk" value="<?php if (isset($produk)) {
                                                                                                                                                         echo $produk->size_produk;
                                                                                                                                                     } ?>" class="form-control">
                                                     </div>
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-3">
                                                         <label for="stok_p">Stok Produk</label>
                                                         <input type="number" name="stok_p" id="stok_p" placeholder="Masukkan stok produk" value="<?php if (isset($produk)) {
                                                                                                                                                         echo $produk->stok_produk;
                                                                                                                                                     } ?>" class="form-control">
                                                     </div>
-                                                    <div class="col-lg-4">
+                                                    <div class="col-lg-3">
                                                         <label for="harga_p">Harga Produk</label>
                                                         <input type="number" name="harga_p" id="harga_p" placeholder="Masukkan harga produk" value="<?php if (isset($produk)) {
                                                                                                                                                         echo $produk->harga_produk;
+                                                                                                                                                    } ?>" class="form-control">
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <label for="berat_p">Berat Produk (dalam gram)</label>
+                                                        <input type="number" name="berat_p" id="berat_p" placeholder="Masukkan berat produk" value="<?php if (isset($produk)) {
+                                                                                                                                                        echo $produk->berat_produk;
                                                                                                                                                     } ?>" class="form-control">
                                                     </div>
                                                 </div>

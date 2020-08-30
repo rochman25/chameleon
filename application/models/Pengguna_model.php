@@ -30,7 +30,7 @@ class Pengguna_model extends MY_Model
 
     function getCart(){
         $id = $this->session->userdata['user_data']['id'];
-        $this->cart->select("produk.nama_produk,produk.id_produk,cart_item.id_cart,detail_cart_item.quantity,detail_cart_item.size,produk.thumbnail_produk,produk.harga_produk");
+        $this->cart->select("produk.nama_produk,produk.id_produk,cart_item.id_cart,detail_cart_item.quantity,detail_cart_item.size,produk.thumbnail_produk,produk.harga_produk,produk.berat_produk");
         $this->cart->getWhere("cart_item.id_pengguna",$id);
         $this->cart->getJoin("detail_cart_item","detail_cart_item.id_cart = cart_item.id_cart","inner");
         $this->cart->getJoin("produk","detail_cart_item.id_produk = produk.id_produk","inner");

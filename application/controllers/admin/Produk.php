@@ -42,6 +42,7 @@ class Produk extends MY_Controller
                 $desc_p = $this->input->post('desc_p');
                 $stok_p = $this->input->post('stok_p');
                 $harga_p = $this->input->post('harga_p');
+                $berat_p = $this->input->post('berat_p');
                 $kat_p = $this->input->post('kat_p');
                 $size_p = $this->input->post('size_p');
                 $link = $this->input->post('link');
@@ -64,6 +65,7 @@ class Produk extends MY_Controller
                     "harga_produk" => $harga_p,
                     "id_kategori" => $kat_p,
                     "size_produk" => $size_p,
+                    "berat_produk" => $berat_p,
                     "thumbnail_produk" => $namaFile,
                     "video_link" => $link,
                     "created_at" => date("Y-m-d H:i:s")
@@ -102,6 +104,7 @@ class Produk extends MY_Controller
                 $desc_p = $this->input->post('desc_p');
                 $stok_p = $this->input->post('stok_p');
                 $harga_p = $this->input->post('harga_p');
+                $berat_p = $this->input->post('berat_p');
                 $kat_p = $this->input->post('kat_p');
                 $size_p = $this->input->post('size_p');
                 $link = $this->input->post('link');
@@ -114,6 +117,7 @@ class Produk extends MY_Controller
                         "stok_produk" => $stok_p,
                         "harga_produk" => $harga_p,
                         "id_kategori" => $kat_p,
+                        "berat_produk" => $berat_p,
                         "thumbnail_produk" => $thumbnail,
                         "size_produk" => $size_p,
                         "video_link" => $link,
@@ -127,6 +131,7 @@ class Produk extends MY_Controller
                         "stok_produk" => $stok_p,
                         "harga_produk" => $harga_p,
                         "id_kategori" => $kat_p,
+                        "berat_produk" => $berat_p,
                         "size_produk" => $size_p,
                         "video_link" => $link,
                         "updated_at" => date("Y-m-d H:i:s")

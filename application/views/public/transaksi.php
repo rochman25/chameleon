@@ -190,6 +190,7 @@ $this->load->view('public/footer');
             var total = <?php echo $total ?>;
             var total_ongkir = 0;
             var total_barang = <?php echo count($cart) ?>;
+            var total_weight = <?php echo $total_berat ?>;
             // alert('woy');
             $('#loader').show();
             $('#order').hide();
@@ -201,6 +202,7 @@ $this->load->view('public/footer');
                     courier: courier,
                     subdistrict: destination,
                     barang: total_barang,
+                    weight: total_weight
                 },
                 success: function(data) {
                     console.log(data);
@@ -325,6 +327,7 @@ $this->load->view('public/footer');
                 var total = <?php echo $total ?>;
                 var total_ongkir = 0;
                 var total_barang = <?php echo count($cart) ?>;
+                var total_weight = <?php echo $total_berat ?>;
                 // alert('woy');
                 $('#loader').show();
                 $('#order').hide();
@@ -336,6 +339,7 @@ $this->load->view('public/footer');
                         courier: courier,
                         subdistrict: destination,
                         barang: total_barang,
+                        weight: total_weight
                     },
                     success: function(data) {
                         console.log(data);

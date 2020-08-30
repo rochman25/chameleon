@@ -26,12 +26,15 @@ class Order extends MY_Controller
             $data['cart'] = $this->user->getCart();
             $thumbnail = array();
             $total_harga = 0;
+            $total_berat = 0;
             foreach ($data['cart'] as $row) {
                 $foto = explode(',', $row['thumbnail_produk']);
                 $thumbnail[$row['id_produk']] = $foto[0];
                 $total_harga += $row['harga_produk'] * $row['quantity'];
+                $total_berat += $row['berat_produk'];
             }
             $data['total'] = $total_harga;
+            $data['total_berat'] = $total_berat;
             $data['thumbnail'] = $thumbnail;
             if ($this->input->post('kirim')) {
                 $nama_lengkap = $this->input->post('nama_lengkap');
@@ -71,8 +74,6 @@ class Order extends MY_Controller
                     $query = $this->alamat->updateData($data_alamat, $idA);
                 }
                 
-
-
                 $total_ongkir = $this->input->post('total_ongkir');
                 $total_bayar = $this->input->post('total_bayar');
                 $kurir = $this->input->post('kurir');
