@@ -6,12 +6,9 @@ class Rajaongkir extends MY_Controller
 
     public function __construct()
     {
-        function __construct()
-        {
-            parent::__construct();
-            $this->load->model('Pengguna_model', 'user');
-            $this->load->model('Transaksi_model', 'transaksi');
-        }
+        parent::__construct();
+        $this->load->model('Pengguna_model', 'user');
+        $this->load->model('Transaksi_model', 'transaksi');
     }
 
     protected $key = "a4703df3e7f4419f9d966b391ed13314";
@@ -109,14 +106,14 @@ class Rajaongkir extends MY_Controller
         $curl = curl_init();
         $kec = $_GET['subdistrict'];
         $cour = $_GET['courier'];
-        $barang=$_GET['barang'];
+        $barang = $_GET['barang'];
         $weight = $_GET['weight'];
         // if($barang > 1){
         //     $weight = $barang * $weight;
         // }else{
         //     $weight = 1000;
         // }
-        if($weight > 1200){
+        if ($weight > 1200) {
             $weight = 2000;
         }
         curl_setopt_array($curl, array(
