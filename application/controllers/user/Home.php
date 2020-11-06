@@ -544,6 +544,7 @@ class Home extends MY_Controller
             $data['transaksi'] = $this->transaksi->getJoin("pengguna", "pengguna.id_pengguna=transaksi.id_pengguna", "inner");
             $data['transaksi'] = $this->transaksi->getJoin("alamat_pengguna", "alamat_pengguna.id_alamat=transaksi.id_alamat", "left");
             $data['transaksi'] = $this->transaksi->getWhere("transaksi.id_pengguna", $idp);
+            $data['transaksi'] = $this->transaksi->limit(10);
             // $data['transaksi'] = $this->transaksi->getWhere("transaksi.bukti_transfer =","");
             $data['transaksi'] = $this->transaksi->getData()->result_array();
 

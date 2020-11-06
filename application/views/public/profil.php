@@ -21,13 +21,23 @@ $this->load->view('public/cart');
         <div class="background-layout"></div>
         <div class="container">
             <h1>MY PROFILE</h1>
+            <h1>Daftar Transaksi</h1>
+            <?php if ($this->session->flashdata('pesan')) { ?>
+                <div style="margin-top:5px; margin-bottom:5px" class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <p style="color:black">
+                        <b><?= $this->session->flashdata('pesan') ?></b>
+                    </p>
+                </div>
+            <?php } ?>
             <div class="left-right">
                 <div class="left-side">
                     <i class="svg-icon svg_icon__dashboard_pencil" onclick="window.location.href = '<?= base_url('ubah_profile') ?>';">
                     </i>
-                    <br>
                     <!-- <img src="https://www.mensrepublic.id/assets/images/dashboard/default-avatar.png" alt=""> -->
-                    <h1><?= $profil->username; ?></h1>
+                    <h1 style="margin-top:20px"><?= $profil->username; ?></h1>
                     <!-- <span>Joined 13 Februari 2020</span> -->
                     <hr>
                     <ul class="info-profile">
@@ -60,19 +70,27 @@ $this->load->view('public/cart');
                         <i class="svg-icon svg_icon__dashboard_logout"></i> <span>logout</span> </a> -->
                 </div>
                 <div class="right-side">
-                    <div class="list-transaction page">
-                        <h1>Daftar Transaksi</h1>
-                        <?php if ($this->session->flashdata('pesan')) { ?>
-                            <div style="margin-top:5px; margin-bottom:5px" class="alert alert-success alert-dismissible" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <p style="color:black">
-                                    <b><?= $this->session->flashdata('pesan') ?></b>
-                                </p>
+                    <!-- <div class="list-transaction page"> -->
+                    <?php
+                    $no = 1;
+                    foreach ($transaksi as $row) { ?>
+                        <div class="card">
+                            <div class="card-row">
+                                <b><?= $no++ . ". "; ?></b>
+                                <b style="text-decoration: underline;"><?= $row['kode_transaksi'] ?></b>
+                                <span style="float: right;font-weight:bold ;">Check</span>
                             </div>
-                        <?php } ?>
-                        <table style="color:black;" class="table table-hover">
+                            <?php if ($row['status_transaksi'] == 'kirim') { ?>
+                                <div class="card-row">
+                                    <hr style="margin: 0px;">
+                                    <b>&#8203; &#8203; &#8203;</b>
+                                    <p><b>Status : </b><b style="color: #00ff00;"><?= $row['status_transaksi'] ?></b></p>
+                                    <p><b>No Resi : </b><b><?= !empty($row['no_resi']) ? $row['no_resi' ] : "No resi belum dimasukkan." ?></b></p>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    <?php } ?>
+                    <!-- <table style="color:black;" class="table table-hover">
                             <tr>
                                 <th>No</th>
                                 <th>Kode Transaksi</th>
@@ -109,11 +127,11 @@ $this->load->view('public/cart');
                                     </td>
                                 </tr>
                             <?php } ?>
-                        </table>
-                    </div>
+                        </table> -->
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <!-- modal review -->
