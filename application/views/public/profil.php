@@ -20,8 +20,6 @@ $this->load->view('public/cart');
     <div class="dashboard-user">
         <div class="background-layout"></div>
         <div class="container">
-            <h1>MY PROFILE</h1>
-            <h1>Daftar Transaksi</h1>
             <?php if ($this->session->flashdata('pesan')) { ?>
                 <div style="margin-top:5px; margin-bottom:5px" class="alert alert-success alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -34,58 +32,83 @@ $this->load->view('public/cart');
             <?php } ?>
             <div class="left-right">
                 <div class="left-side">
-                    <i class="svg-icon svg_icon__dashboard_pencil" onclick="window.location.href = '<?= base_url('ubah_profile') ?>';">
-                    </i>
-                    <!-- <img src="https://www.mensrepublic.id/assets/images/dashboard/default-avatar.png" alt=""> -->
-                    <h1 style="margin-top:20px"><?= $profil->username; ?></h1>
-                    <!-- <span>Joined 13 Februari 2020</span> -->
-                    <hr>
-                    <ul class="info-profile">
-                        <li> <i class="svg-icon svg_icon__dashboard_mail"></i> <span><a href="#" class="__cf_email__" data-cfemail="1876776e71767c79766d6a7e2920587f75797174367b7775"><?= $profil->email; ?></a> </span> </li>
-                        <!-- <li> <i class="svg-icon svg_icon__dashboard_gift"></i> <span>16 Sepember 1998 </span>  </li> -->
-                        <!-- <li> <i class="svg-icon svg_icon__dashboard_phone"></i> <span>081226809435 </span>  </li> -->
-                        <?php if ($alamat) {
-                            foreach ($alamat as $a) {
-                        ?>
-                                <li class="alamat"> <i class="svg-icon svg_icon__dashboard_pin"></i>
-                                    <span>
-                                        <?= $a->alamat_1 ?>
-                                        <?= $a->alamat_2 ?>
-                                        <?= "Kecamatan " . $a->kecamatan ?>
-                                        <?= "Kabupaten " . $a->kabupaten ?>
-                                        <?= $a->kode_pos ?>
-                                        <!-- Jawa Tengah -->
-                                    </span>
-                                </li>
-                        <?php
-                            }
-                        } ?>
-                        <!-- <li><i class="svg-icon svg_icon__dashboard_phone"></i> <span><?= $alamat[0]->no_telp ?></span></li> -->
+                    <h1 style="font-size: 18px; text-align: center;">Account</h1>
+                    <div class="card">
+                        <div class="card-row">
+                            <!-- <img src="https://www.mensrepublic.id/assets/images/dashboard/default-avatar.png" alt=""> -->
+                            <h1 style="margin-top:20px"><?= $profil->username; ?> <i class="fa fa-edit" onclick="window.location.href = '<?= base_url('ubah_profile') ?>';">
+                                </i></h1>
+                            <!-- <span>Joined 13 Februari 2020</span> -->
+                            <hr>
+                            <ul class="info-profile">
+                                <li> <i class="fa fa-envelope"></i> <span><a href="#" class="__cf_email__" data-cfemail="1876776e71767c79766d6a7e2920587f75797174367b7775"><?= $profil->email; ?></a> </span> </li>
+                                <!-- <li> <i class="svg-icon svg_icon__dashboard_gift"></i> <span>16 Sepember 1998 </span>  </li> -->
+                                <!-- <li> <i class="svg-icon svg_icon__dashboard_phone"></i> <span>081226809435 </span>  </li> -->
+                                <?php if ($alamat) {
+                                    foreach ($alamat as $a) {
+                                ?>
+                                        <li class="alamat"> <i class="svg-icon svg_icon__dashboard_pin"></i>
+                                            <span>
+                                                <?= $a->alamat_1 ?>
+                                                <?= $a->alamat_2 ?>
+                                                <?= "Kecamatan " . $a->kecamatan ?>
+                                                <?= "Kabupaten " . $a->kabupaten ?>
+                                                <?= $a->kode_pos ?>
+                                                <!-- Jawa Tengah -->
+                                            </span>
+                                        </li>
+                                <?php
+                                    }
+                                } ?>
+                                <!-- <li><i class="svg-icon svg_icon__dashboard_phone"></i> <span><?= $alamat[0]->no_telp ?></span></li> -->
 
-                    </ul>
-                    <button class="expand">
-                        <i class="svg-icon svg_icon__dashboard_chevron"></i>
-                    </button>
+                            </ul>
+                            <button class="expand">
+                                <i class="svg-icon svg_icon__dashboard_chevron"></i>
+                            </button>
+                        </div>
+                    </div>
                     <!-- <a href="<?= base_url() ?>keluar" class="logout">
                         <i class="svg-icon svg_icon__dashboard_logout"></i> <span>logout</span> </a> -->
                 </div>
                 <div class="right-side">
+                    <h1 style="font-size: 18px; text-align: center;">Orders</h1>
                     <!-- <div class="list-transaction page"> -->
                     <?php
                     $no = 1;
                     foreach ($transaksi as $row) { ?>
                         <div class="card">
                             <div class="card-row">
-                                <b><?= $no++ . ". "; ?></b>
-                                <b style="text-decoration: underline;"><?= $row['kode_transaksi'] ?></b>
-                                <span style="float: right;font-weight:bold ;">Check</span>
+                                <div class="row" style="margin-right: 0px;margin-left: 0px;">
+                                    <div class="column">
+                                        <b><?= $no++ . ". "; ?></b>
+                                        <b style="text-decoration: underline;"><?= $row['kode_transaksi'] ?></b>
+                                    </div>
+                                    <div class="column">
+                                        <div class="row" style="margin-right: 0; margin-left: 0px;">
+                                            <div class="column"></div>
+                                            <div class="column" style="float: right;">
+                                                <?php if ($row['bukti_transfer'] == null) { ?>
+                                                    <!-- <span style="float: right;"> -->
+                                                    <form action="<?= base_url() ?>pembayaran" method="POST">
+                                                        <input type="hidden" name="idtransaksi" value="<?= $row['id_transaksi'] ?>">
+                                                        <input class="btn-sm btn-success" style="margin-top:0px;" type="submit" value="Konfirmasi">
+                                                    </form>
+                                                    <!-- </span> -->
+                                                <?php } else { ?>
+                                                    <p style="text-align:right; font-weight:bold ;">Check</p>
+                                                <?php } ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <?php if ($row['status_transaksi'] == 'kirim') { ?>
                                 <div class="card-row">
                                     <hr style="margin: 0px;">
                                     <b>&#8203; &#8203; &#8203;</b>
                                     <p><b>Status : </b><b style="color: #00ff00;"><?= $row['status_transaksi'] ?></b></p>
-                                    <p><b>No Resi : </b><b><?= !empty($row['no_resi']) ? $row['no_resi' ] : "No resi belum dimasukkan." ?></b></p>
+                                    <p><b>No Resi : </b><b><?= !empty($row['no_resi']) ? $row['no_resi'] : "No resi belum dimasukkan." ?></b></p>
                                 </div>
                             <?php } ?>
                         </div>
