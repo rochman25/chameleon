@@ -42,12 +42,14 @@ class Produk extends MY_Controller
                 $desc_p = $this->input->post('desc_p');
                 $stok_p = $this->input->post('stok_p');
                 $harga_p = $this->input->post('harga_p');
+                $label_p = $this->input->post('label_p');
                 $berat_p = $this->input->post('berat_p');
                 $diskon_p = $this->input->post('diskon_p');
                 $kat_p = $this->input->post('kat_p');
                 $size_p = $this->input->post('size_p');
                 $link = $this->input->post('link');
                 $namaFile = "";
+                $label_p = implode(",", $label_p);
                 // $thumbnail = $_FILES['file']['name'];
                 if ($this->session->userdata('produk_data') != null) {
                     $kode_p = $this->session->userdata['produk_data']['kode'];
@@ -66,6 +68,7 @@ class Produk extends MY_Controller
                     "harga_produk" => $harga_p,
                     "id_kategori" => $kat_p,
                     "size_produk" => $size_p,
+                    "label_produk" => $label_p,
                     "berat_produk" => $berat_p,
                     "diskon_produk" => $diskon_p,
                     "thumbnail_produk" => $namaFile,
