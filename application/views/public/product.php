@@ -1,28 +1,27 @@
-
-<?php 
+<?php
 $this->load->view('public/header');
 $this->load->view('public/heading');
 ?>
 <div class="overlay-desktop"></div>
 
 <!-- header mobile -->
-<?php 
+<?php
 
 $this->load->view('public/m_heading');
 ?>
-	<!-- CART -->
+<!-- CART -->
 
-<?php 
+<?php
 
 $this->load->view('public/cart');
 ?>
 <section id="content">
-	<div class="category-page">
-        <div class="header" style="background-image:url(<?= $bg;?>)">
+    <div class="category-page">
+        <div class="header" style="background-image:url(<?= $bg; ?>)">
             <div class="container">
                 <div class="bottom_absolute">
-                    <h1>  </h1>
-                    <h2><?= $section;?></h2>
+                    <h1> </h1>
+                    <h2><?= $section; ?></h2>
                 </div>
             </div>
         </div>
@@ -68,38 +67,78 @@ $this->load->view('public/cart');
                     </div>
                     <div class="right-side-wrapper">
                         <div class="all-product-card">
-                        <?php if($produk != null){
-                             foreach($produk as $row){
-                                 $harga = $row['harga_produk'];
-                                 ?>
-                            <div class="product-card-wrapper">
-                                    <a href="<?= base_url();?>detail?produk=<?= $row['id_produk'];?>">
-                                        <div class="product-category">
-                                            <img src="" style="width:300px;height:300px;" alt="" data-src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>">
-                                            <h2 class="title"><?= $row['nama_produk'];?></h2>
-                                            <div class="price-wrapper">
-                                            
-                                                <div class="price">Rp  <?php echo number_format($harga,0);?></div>
-                                                 <!-- <div class="price-before" style="text-decoration : line-through">Rp 429,000</div> -->
-                                            </div>
+                            <?php if ($produk != null) {
+                                foreach ($produk as $row) {
+                                    $harga = $row['harga_produk'];
+                            ?>
+                                    <div class="product-card-wrapper" style="padding-bottom: 60%;">
+                                        <a href="<?= base_url(); ?>detail?produk=<?= $row['id_produk']; ?>">
+                                            <div class="product-category">
+                                                <img src="" style="width:300px;height:300px;" alt="" data-src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>">
+                                                <div class="row" style="margin-right: 0;margin-left: 0px;margin-bottom:10px; margin-top:0px">
+                                                    <?php if ($row['label_produk'] != null) { ?>
+                                                        <div class="column" style="width: 70%;">
+                                                        <?php } else { ?>
+                                                            <div class="column" style="width: 100%;">
+                                                            <?php } ?>
+                                                            <h2 style="font-size: 20px;font-weight: bold; height:auto; margin-top: 0px;"><?= $row['nama_produk']; ?></h2>
+                                                            <div class="row" style="margin-right: 0;margin-left: 0px;margin-bottom:10px;">
+                                                                <?php if ($row['diskon_produk'] != 0) { ?>
+                                                                    <div class="column" style="width: auto;">
+                                                                        <div class="price-before" style="text-decoration : line-through; color:#767171;margin-right:5px">Rp <?php echo number_format($harga, 0); ?></div>
+                                                                    </div>
+                                                                    <div class="column" style="width: auto;">
+                                                                        <div class="price-after" style="font-size: 16px; color:#ff3a3a;"><b> Rp <?= number_format($row['harga_produk'] - (($row['diskon_produk'] / 100) * $row['harga_produk']), 0); ?></b></div>
+                                                                    </div>
+                                                                <?php } else { ?>
+                                                                    <div class="column" style="width: auto;">
+                                                                        <div class="price-after" style="font-size: 16px; color:#ff3a3a;"> Rp <?php echo number_format($harga, 0); ?>
+                                                                        </div>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                            </div>
+                                                            <?php if ($row['label_produk'] != null) { ?>
+                                                                <div class="column" style="float: right;width: 30%;">
+                                                                    <?php $label_p = explode(",", $row['label_produk']);
+                                                                    foreach ($label_p as $key_l => $val_l) {
+                                                                    ?>
+                                                                        <div class="badge_label_<?php echo $val_l ?>">
+                                                                            <p><?= strtoupper($val_l) ?></p>
+                                                                        </div>
+                                                                    <?php } ?>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                        <!-- <h2 style="font-size: 20px;font-weight: bold;"><?= $row['nama_produk']; ?></h2>
+                                                        <div class="price-wrapper">
+                                                            <div class="row" style="margin-right: 0;margin-left: 0px;">
+                                                                <div class="column" style="width: auto;">
+                                                                    <div class="price-before" style="text-decoration : line-through; color:#767171;margin-right:5px">Rp 429,000</div>
+                                                                </div>
+                                                                <div class="column" style="width: auto;">
+                                                                    <div class="price"> Rp <?php echo number_format($harga, 0); ?></div>
+                                                                </div>
+                                                            </div>
+                                                        </div> -->
 
-                                            <div class="rating-wrapper">
-                                                <!-- <img src="https://www.mensrepublic.id/assets/images/category/rating/star-5.png" alt=""> -->
-                                                <span><?= $row['nama_kategori'];?></span>
-                                            </div>
-                                            <div class="rest-day">
-                                            Stok <?= $row['stok_produk'];?>
-                                            </div>                                            
-                                            <div class="new-po">
-                                            </div>
-                                        </div>
-                                    </a>
-                            </div>
-                        <?php }
-                        }else{
-                            echo "<p>Tidak ditemukan</p>";
-                        } ?>
-        
+                                                        <div class="rating-wrapper" style="color: white;">
+                                                            <!-- <img src="https://www.mensrepublic.id/assets/images/category/rating/star-5.png" alt=""> -->
+                                                            <span style="color: white;"><?= $row['nama_kategori']; ?></span>
+                                                        </div>
+                                                        <div class="rest-day" style="color: white;">
+                                                            Stok <?= $row['stok_produk']; ?>
+                                                        </div>
+                                                        <div class="new-po">
+                                                        </div>
+                                                </div>
+                                        </a>
+                                    </div>
+                            <?php }
+                            } else {
+                                echo "<p>Tidak ditemukan</p>";
+                            } ?>
+
                         </div>
                     </div>
 
@@ -108,9 +147,8 @@ $this->load->view('public/cart');
         </div>
 
     </div>
-	</section>
-    <?php 
+</section>
+<?php
 
 $this->load->view('public/footer');
 ?>
-	

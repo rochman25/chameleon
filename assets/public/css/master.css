@@ -6580,6 +6580,57 @@ footer.footer .copyright {
 	clear: both;
 }
 
+.badge_label_diskon {
+	background-color: rgb(250, 0, 0);
+	width: auto;
+	/* float: right; */
+	/* border: 15px solid green; */
+	padding: 5px;
+	margin: 2px;
+}
+
+.badge_label_diskon p {
+	text-align: center;
+	color: white;
+	font-size: 10px;
+	font-weight: bold;
+	margin: 0;
+}
+
+.badge_label_premium {
+	background-color: rgb(252, 144, 4);
+	width: auto;
+	/* float: right; */
+	/* border: 15px solid green; */
+	padding: 5px;
+	margin: 2px;
+}
+
+.badge_label_premium p {
+	text-align: center;
+	color: white;
+	font-size: 10px;
+	font-weight: bold;
+	margin: 0;
+}
+
+.badge_label_limited {
+	background-color: rgb(5, 5, 5);
+	width: auto;
+	/* float: right; */
+	border: 1px solid rgb(252, 144, 4);
+	padding: 5px;
+	margin: 2px;
+}
+
+.badge_label_limited p {
+	text-align: center;
+	color: white;
+	font-size: 10px;
+	font-weight: bold;
+	margin: 0;
+}
+
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
 	.column {

@@ -1,37 +1,36 @@
-
-<?php 
+<?php
 $this->load->view('public/header');
 $this->load->view('public/heading');
 ?>
 <div class="overlay-desktop"></div>
 <!-- header mobile -->
-<?php 
+<?php
 $this->load->view('public/m_heading');
 ?>
 <!-- CART -->
-<?php 
+<?php
 $this->load->view('public/cart');
 ?>
 <section id="content">
-	<div class="homepage">
+    <div class="homepage">
         <section class="banner">
             <div class="owl-carousel owl-theme">
-                <!-- <a href="<?= base_url()?>promo" -->
+                <!-- <a href="<?= base_url() ?>promo" -->
                 <a>
                     <div class="banner-card">
-                        <img src="<?= base_url()?>assets/images/bg_all/formal.jpeg">
+                        <img src="<?= base_url() ?>assets/images/bg_all/formal.jpeg">
                     </div>
                 </a>
-                <!-- <a href="<?= base_url()?>promo"> -->
+                <!-- <a href="<?= base_url() ?>promo"> -->
                 <a>
                     <div class="banner-card">
-                        <img src="<?= base_url()?>assets/images/bg_all/moff.jpeg">
+                        <img src="<?= base_url() ?>assets/images/bg_all/moff.jpeg">
                     </div>
                 </a>
-                <!-- <a href="<?= base_url()?>promo"> -->
+                <!-- <a href="<?= base_url() ?>promo"> -->
                 <a>
                     <div class="banner-card">
-                        <img src="<?= base_url()?>assets/images/bg_all/paket-lengkap.jpeg">
+                        <img src="<?= base_url() ?>assets/images/bg_all/paket-lengkap.jpeg">
                     </div>
                 </a>
 
@@ -39,82 +38,112 @@ $this->load->view('public/cart');
         </section>
         <section class="hot-product">
             <h1>Laku Banget Nih Men</h1>
-                <div class="container">
-               
-                    <?php foreach($produk as $p){
-                        $harga = $p['harga_produk'];
-                        ?>
-                    <div class="product-hotcard">
-                        <a href="<?= base_url()?>detail?produk=<?= $p['id_produk']?>">
+            <div class="container">
+                <?php foreach ($produk as $p) {
+                    $harga = $p['harga_produk'];
+                ?>
+                    <div class="product-hotcard" style="padding-bottom: 0;">
+                        <a href="<?= base_url() ?>detail?produk=<?= $p['id_produk'] ?>" style="position: inherit;">
                             <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$p['id_produk']] ?>" alt="">
-                                <h1><?= $p['nama_produk'];?></h1>
-                                
-                                    <div class="price-after">Rp.<?= number_format($harga,0);?></div>
-                                    <div class="rating-wrapper">
-                                    
+                            <div class="row" style="margin-right: 0;margin-left: 0px;margin-bottom:10px">
+                                <?php if($p['label_produk'] != null){ ?>
+                                    <div class="column" style="width: 70%;">
+                                <?php }else{ ?>
+                                    <div class="column" style="width: 100%;">
+                                <?php } ?>
+                                    <h1 style="font-size: 20px;font-weight: bold;"><?= $p['nama_produk']; ?></h1>
+                                    <div class="row" style="margin-right: 0;margin-left: 0px;margin-bottom:10px">
+                                        <?php if ($p['diskon_produk'] != 0) { ?>
+                                            <div class="column" style="width: auto;">
+                                                <div class="price-before" style="text-decoration : line-through; color:#767171;margin-right:5px">Rp <?php echo number_format($harga, 0); ?></div>
+                                            </div>
+                                            <div class="column" style="width: auto;">
+                                                <div class="price-after" style="font-size: 12px; color:#ff3a3a;"><b> Rp <?= number_format($p['harga_produk'] - (($p['diskon_produk'] / 100) * $p['harga_produk']), 0); ?></b></div>
+                                            </div>
+                                        <?php } else { ?>
+                                            <div class="column" style="width: auto;">
+                                                <div class="price-after" style="font-size: 12px; color:#ff3a3a;"> Rp <?php echo number_format($harga, 0); ?>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
                                     </div>
+                                </div>
+                                <?php if ($p['label_produk'] != null) { ?>
+                                    <div class="column" style="float: right;width: 30%;">
+                                        <?php $label_p = explode(",", $p['label_produk']);
+                                        foreach ($label_p as $key_l => $val_l) {
+                                        ?>
+                                            <div class="badge_label_<?php echo $val_l ?>">
+                                                <p><?= strtoupper($val_l) ?></p>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                            <!-- <div class="price-before" style="text-decoration : line-through">Rp 429,000</div> -->
+                            <!-- <div class="price-after">Rp.<?= number_format($harga, 0); ?></div> -->
                         </a>
                     </div>
-                    <?php }?>
-                </div>
+                <?php } ?>
+            </div>
         </section>
         <!-- <section class="six-banner">
-            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/jas'" style="cursor: pointer;">
+            <div class="banner-container" onclick="window.location.href='<?= base_url(); ?>produk/jas'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                 </div>
-                <img src="<?= base_url()?>assets/images/Jas/1.png" alt="">
+                <img src="<?= base_url() ?>assets/images/Jas/1.png" alt="">
             </div>
-            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/jas'" style="cursor: pointer;">
+            <div class="banner-container" onclick="window.location.href='<?= base_url(); ?>produk/jas'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                 </div>
-                <img src="<?= base_url()?>assets/images/Jas/Jas-BG.png" alt="">
+                <img src="<?= base_url() ?>assets/images/Jas/Jas-BG.png" alt="">
             </div>
-            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/jas'" style="cursor: pointer;">
+            <div class="banner-container" onclick="window.location.href='<?= base_url(); ?>produk/jas'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                    
                 </div>
-                <img src="<?= base_url()?>assets/images/Jas/9.png" alt="">
+                <img src="<?= base_url() ?>assets/images/Jas/9.png" alt="">
             </div>
-            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/celana'" style="cursor: pointer;">
+            <div class="banner-container" onclick="window.location.href='<?= base_url(); ?>produk/celana'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                     
                 </div>
-                <img src="<?= base_url()?>assets/images/Celana/P1.png" alt="">
+                <img src="<?= base_url() ?>assets/images/Celana/P1.png" alt="">
             </div>
-            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/celana'" style="cursor: pointer;">
+            <div class="banner-container" onclick="window.location.href='<?= base_url(); ?>produk/celana'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                  
                 </div>
-                <img src="<?= base_url()?>assets/images/bg_all/comingsoon.png" alt="">
+                <img src="<?= base_url() ?>assets/images/bg_all/comingsoon.png" alt="">
             </div>
-            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/celana'" style="cursor: pointer;">
+            <div class="banner-container" onclick="window.location.href='<?= base_url(); ?>produk/celana'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                 </div>
-                <img src="<?= base_url()?>assets/images/Celana/P3.png" alt="">
+                <img src="<?= base_url() ?>assets/images/Celana/P3.png" alt="">
             </div>
-            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/kemeja'" style="cursor: pointer;">
+            <div class="banner-container" onclick="window.location.href='<?= base_url(); ?>produk/kemeja'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                 </div>
-                <img src="<?= base_url()?>assets/images/Kemeja/LRM_EXPORT_4.jpeg" alt="">
+                <img src="<?= base_url() ?>assets/images/Kemeja/LRM_EXPORT_4.jpeg" alt="">
             </div>
-            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/kemeja'" style="cursor: pointer;">
+            <div class="banner-container" onclick="window.location.href='<?= base_url(); ?>produk/kemeja'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                 </div>
-                <img src="<?= base_url()?>assets/images/Kemeja/Kemeja-BG.png" alt="">
+                <img src="<?= base_url() ?>assets/images/Kemeja/Kemeja-BG.png" alt="">
             </div>
-            <div class="banner-container" onclick="window.location.href='<?= base_url();?>produk/kemeja'" style="cursor: pointer;">
+            <div class="banner-container" onclick="window.location.href='<?= base_url(); ?>produk/kemeja'" style="cursor: pointer;">
             <div class="border"></div>
                 <div class="content">
                 </div>
-                <img src="<?= base_url()?>assets/images/Kemeja/LRM_EXPORT_6.jpeg" alt="">
+                <img src="<?= base_url() ?>assets/images/Kemeja/LRM_EXPORT_6.jpeg" alt="">
             </div>
         </section> -->
         <!-- <section class="promo">
@@ -128,23 +157,23 @@ $this->load->view('public/cart');
                 </a>
             </div>
         </section> -->
-        <section class="signup" >
+        <section class="signup">
             <i class="svg-icon svg_icon__home_envelope"></i>
             <h1>Daftar Dengan Email</h1>
             <h2>Jadi yang pertama untuk mendapatkan produk terbaru dan penawaran dari Chameleon</h2>
-            <a href="<?= base_url()?>login" class="home_button">
-           
-                    GABUNG SEKARANG
-             
+            <a href="<?= base_url() ?>login" class="home_button">
+
+                GABUNG SEKARANG
+
                 <!-- <div class="signup-button">hajar men</div> -->
                 <!-- <div class="signup-border"></div> -->
             </a>
         </section>
-        <?php //$this->load->view('public/home-ig'); ?>
+        <?php //$this->load->view('public/home-ig'); 
+        ?>
 
     </div>
 </section>
-<?php 
+<?php
 $this->load->view('public/footer');
 ?>
-	

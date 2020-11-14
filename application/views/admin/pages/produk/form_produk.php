@@ -15,7 +15,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js" defer></script>
     <style>
-        .note-editable p{
+        .note-editable p {
             line-height: 1;
         }
     </style>
@@ -85,18 +85,41 @@
                                                                                                                                                         echo $produk->stok_produk;
                                                                                                                                                     } ?>" class="form-control">
                                                     </div>
-                                                    <div class="col-lg-3">
+                                                    <div class="col-lg-2">
                                                         <label for="harga_p">Harga Produk</label>
                                                         <input type="number" name="harga_p" id="harga_p" placeholder="Masukkan harga produk" value="<?php if (isset($produk)) {
                                                                                                                                                         echo $produk->harga_produk;
                                                                                                                                                     } ?>" class="form-control">
                                                     </div>
-                                                    <div class="col-lg-3">
-                                                        <label for="berat_p">Berat Produk (dalam gram)</label>
+                                                    <div class="col-lg-2">
+                                                        <label for="harga_p">Diskon Produk %</label>
+                                                        <input type="number" name="diskon_p" id="diskon_p" placeholder="Masukkan diskon produk" value="<?php if (isset($produk)) {
+                                                                                                                                                            echo $produk->diskon_produk;
+                                                                                                                                                        } ?>" class="form-control">
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <label for="berat_p">Berat Produk (gram)</label>
                                                         <input type="number" name="berat_p" id="berat_p" placeholder="Masukkan berat produk" value="<?php if (isset($produk)) {
                                                                                                                                                         echo $produk->berat_produk;
                                                                                                                                                     } ?>" class="form-control">
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">Label Produk</label>
+                                                <div class="selectgroup selectgroup-pills">
+                                                    <label class="selectgroup-item">
+                                                        <input type="checkbox" name="label_p[]" value="diskon" class="selectgroup-input" <?php if(isset($produk) && strpos($produk->label_produk,'diskon') !== false){ echo "checked"; } ?>>
+                                                        <span class="selectgroup-button">DISKON</span>
+                                                    </label>
+                                                    <label class="selectgroup-item">
+                                                        <input type="checkbox" name="label_p[]" value="premium" class="selectgroup-input" <?php if(isset($produk) && strpos($produk->label_produk,'premium') !== false){ echo "checked"; } ?>>
+                                                        <span class="selectgroup-button">PREMIUM</span>
+                                                    </label>
+                                                    <label class="selectgroup-item">
+                                                        <input type="checkbox" name="label_p[]" value="limited" class="selectgroup-input" <?php if(isset($produk) && strpos($produk->label_produk,'limited') !== false){ echo "checked"; } ?>>
+                                                        <span class="selectgroup-button">LIMITED</span>
+                                                    </label>
                                                 </div>
                                             </div>
                                             <div class="form-group">

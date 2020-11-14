@@ -1,137 +1,180 @@
-
-<?php 
+<?php
 $this->load->view('public/header');
 $this->load->view('public/heading');
 ?>
 <div class="overlay-desktop"></div>
 <!-- header mobile -->
-<?php 
+<?php
 $this->load->view('public/m_heading');
 ?>
 <!-- CART -->
-<?php 
+<?php
 $this->load->view('public/cart');
 ?>
 <section id="content">
-    <div id="product" data-product-nama="<?= $produk->nama_produk;?>" data-product-id="<?= $produk->id_produk;?>">
+    <div id="product" data-product-nama="<?= $produk->nama_produk; ?>" data-product-id="<?= $produk->id_produk; ?>">
         <div class="container">
-            <div class="row"> 
-             <!--  -->
+            <div class="row">
+                <!--  -->
                 <div class="col-lg-5 col-md-5 gallery-container" data-image-count="7">
                     <div id="containergallery" class="image-gallery">
-                        <img id="elevate-zoom" class="img-responsive" src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[0]; ?>" 
-                        data-zoom-image="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[0]; ?>"/>
+                        <img id="elevate-zoom" class="img-responsive" src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[0]; ?>" data-zoom-image="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[0]; ?>" />
                     </div>
                     <div id="containervideo" class="image-gallery">
-                    <iframe src="<?= $produk->video_link;?>" 
-                    style="border:0;height:400px;width:400px">
-                
-                    </iframe>
+                        <iframe src="<?= $produk->video_link; ?>" style="border:0;height:400px;width:400px">
+
+                        </iframe>
                     </div>
                     <div class="image-thumbnail owl-carousel clearfix">
-                        <?php foreach($thumbnail as $p){?>
-                        <div class="image-thumbnail--list">
-                            <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>" data-zoom-image="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>"/>
-                        </div>
-                        <?php }?>
-                       
+                        <?php foreach ($thumbnail as $p) { ?>
+                            <div class="image-thumbnail--list">
+                                <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>" data-zoom-image="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>" />
+                            </div>
+                        <?php } ?>
+
                     </div>
-                    <input onclick="toggleVideo();" type="button" value="VIDEO"/>
+                    <input onclick="toggleVideo();" type="button" value="VIDEO" />
                 </div>
 
                 <!--  -->
-               
+
                 <div id="containermgallery" class="image-gallery-mobile owl-carousel">
-                
-                <?php foreach($thumbnail as $p){?>
-                    <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>" />
-                <?php }?>
-                
+
+                    <?php foreach ($thumbnail as $p) { ?>
+                        <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>" />
+                    <?php } ?>
+
                 </div>
-               
+
                 <!--  -->
                 <div id="containermvideo" class="image-gallery-mobile owl-carousel">
-                    <iframe src="<?= $produk->video_link;?>" 
-                    style="border:0;height:400px;width:100%;align-content: center;margin-left:50px;">
-                
+                    <iframe src="<?= $produk->video_link; ?>" style="border:0;height:400px;width:100%;align-content: center;margin-left:50px;">
+
                     </iframe>
-                
+
                 </div>
                 <div class="image-gallery-mobile owl-carousel">
-            
-                    <input onclick="toggleMVideo();" type="button" value="VIDEO"/>
+
+                    <input onclick="toggleMVideo();" type="button" value="VIDEO" />
                 </div>
-                
+
                 <!--  -->
                 <div class="col-lg-7 col-md-7 col-xs-12">
-               
+
 
                     <div class="product-ribbon clearfix">
                     </div>
                     <div class="product-info">
-                        <h1><?= $produk->nama_produk;?></h1>
-                        <h2>    
-                            <!-- <div class="price_before"> Rp <?= $produk->harga_produk;?> </div> -->
-                            <div class="price_after">
-                                <span class="value">Rp <?= number_format($produk->harga_produk,0); ?></span>
-                                <!-- <span id="stok" class="value">Stok <?= $produk->stok_produk;?></span> -->
-                                <!-- <span class="time">Tinggal 7 hari lagi</span> -->
+                        <div class="row">
+                            <div class="column" style="width: 50%;">
+                                <h1 style="margin-top:0px;"><?= $produk->nama_produk; ?></h1>
+                                <h2 style="font-size: 0;line-height: none;">
+                                    <div class="row" style="margin-right: 0;margin-left: 0px;">
+                                        <?php if ($produk->diskon_produk != 0) { ?>
+                                            <div class="column" style="width: auto; margin-right:10px">
+                                                <div class="price_before" style="font-size: 20px;color:#767171"> Rp <?= number_format($produk->harga_produk, 0); ?></div>
+                                            </div>
+                                            <div class="column" style="width: auto;">
+                                                <div class="price_after">
+                                                    <p class="value" style="font-size: 20px; margin-top: 0;">Rp <?= number_format($produk->harga_produk - (($produk->diskon_produk / 100) * $produk->harga_produk), 0); ?></p>
+                                                    <!-- <span class="value" style="font-size: 16px; margin-top: 0;">Rp <?= number_format($produk->harga_produk - (($produk->diskon_produk / 100) * $produk->harga_produk), 0); ?></span> -->
+                                                </div>
+                                            </div>
+                                        <?php } else { ?>
+                                            <div class="column">
+                                                <div class="price_after">
+                                                    <span class="value">Rp <?= number_format($produk->harga_produk, 0); ?></span>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                        <div class="column" style="width: auto;">
+                                            <div class="button-action" style="display: none;margin-top:0">
+                                                <?php
+                                                if (isset($this->session->userdata['user_data'])) {
+                                                ?>
+                                                    <button class="addToCart">
+                                                        <i class="svg-icon svg_icon__pdp_cart"></i> Order
+                                                    </button>
+                                                <?php
+                                                } else {
+                                                ?>
+                                                    <a href="<?= base_url(); ?>login" style="padding:15px;" class="addToCart">
+                                                        <i class="svg-icon svg_icon__pdp_cart"></i>Beli
+                                                    </a>
+                                                <?php
+                                                } ?>
+                                                <span class="out-of-stock" style="display:none">HABIS MEN</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h2>
                             </div>
-                        </h2>
+                            <div class="column" style="width: 50%;">
+
+                                <div class="column" style="float: right;width: 30%;">
+                                    <?php $label_p = explode(",", $produk->label_produk);
+                                    foreach ($label_p as $key_l => $val_l) {
+                                    ?>
+                                        <div class="badge_label_<?php echo $val_l ?>">
+                                            <p style="margin-top:0px; font-size:large; font-weight:bold"><?= strtoupper($val_l) ?></p>
+                                        </div>
+                                    <?php } ?>
+                                    <a href="#" data-toggle="modal" data-target="#sizeModal" style="color: red; font-weight: bold; text-decoration: underline; margin-top:10px">*Size Chart</a>
+                                </div>
+                            </div>
+                        </div>
                         <br>
                         <span>Ukuran :</span>
                         <div id="size" class="size-product">
                             <ul class="clearfix">
-                                <?php foreach($size as $s){
-                                    ?>
-                                       <li onclick="setUkuran('<?= $s;?>');" id="S" style="color:black !important;" class="size ">
-                                        <span ><?= $s; ?></span>
+                                <?php foreach ($size as $s) {
+                                ?>
+                                    <li onclick="setUkuran('<?= $s; ?>');" id="S" style="color:black !important;" class="size ">
+                                        <span><?= $s; ?></span>
                                     </li>
-                                    <?php
-                                }?>
-                                   
+                                <?php
+                                } ?>
+
                             </ul>
                         </div>
                         <br>
                         <span>Jumlah :</span>
                         <div id="size" class="size-product">
                             <ul class="clearfix">
-                                    <li onclick="ubahjml(2);"  class="size active ">
-                                        <span>-</span>
-                                    </li>
-                                    <li class="size  ">
-                                        <span style="color:black;" id="value">1</span>
-                                    </li>
-                                    <li onclick="ubahjml(1);" class=" size active ">
-                                        <span>+</span>
-                                    </li>
-                                   
+                                <li onclick="ubahjml(2);" class="size active ">
+                                    <span>-</span>
+                                </li>
+                                <li class="size  ">
+                                    <span style="color:black;" id="value">1</span>
+                                </li>
+                                <li onclick="ubahjml(1);" class=" size active ">
+                                    <span>+</span>
+                                </li>
+
                             </ul>
                         </div>
-                       
+
                         <div class="button-action">
-                            <?php 
-                            if(isset($this->session->userdata['user_data'])){
+                            <?php
+                            if (isset($this->session->userdata['user_data'])) {
                             ?>
                                 <button class="addToCart">
                                     <i class="svg-icon svg_icon__pdp_cart"></i> Order
                                 </button>
-                               
+
                             <?php
-                            }else{ 
-                                
+                            } else {
+
                             ?>
-                                <a href="<?= base_url();?>login" 
-                                style="padding:15px;"
-                                class="addToCart">
+                                <a href="<?= base_url(); ?>login" style="padding:15px;" class="addToCart">
                                     <i class="svg-icon svg_icon__pdp_cart"></i>Beli
-                            </a>
-                                
+                                </a>
+
                             <?php
-                            }?>
-                             <span class="out-of-stock" style="display:none">HABIS MEN</span>
+                            } ?>
+                            <span class="out-of-stock" style="display:none">HABIS MEN</span>
                         </div>
-                        
+
                         <div class="product-order">
                             <!-- <div class="list clearfix">
                                 <a href="#">
@@ -171,13 +214,14 @@ $this->load->view('public/cart');
                         </ul>
                         <div class="tab-content">
                             <div class="product-deskripsi">
-                                <?php if(empty($produk->deskripsi_produk)){
+                                <?php if (empty($produk->deskripsi_produk)) {
                                     echo "<p>Belum ada deskripsi</p>";
-                                }else{
+                                } else {
                                     echo $produk->deskripsi_produk;
-                                }?>
+                                } ?>
                             </div>
-                        <div class="review">
+                            <div class="review">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -185,62 +229,83 @@ $this->load->view('public/cart');
         </div>
     </div>
 </section>
-<?php 
+<div class="modal fade" id="sizeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: black;">Size Chart</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <?php if ($produk->nama_kategori == "celana") { ?>
+                    <img src="<?= base_url() ?>assets/public/size_celana.jpg" width="100%">
+                <?php } else if($produk->nama_kategori == "Jas") { ?>
+                    <img src="<?= base_url() ?>assets/public/size_jas.jpg" width="100%">
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php
 $this->load->view('public/footer');
 ?>
 
 
 <script type="text/javascript">
-	$(window).on('load',function(){
-		$(".svg-container").fadeOut("slow");
+    $(window).on('load', function() {
+        $(".svg-container").fadeOut("slow");
     });
 </script>
 <script type="text/javascript">
-    var base_url = '<?= base_url()?>';
+    var base_url = '<?= base_url() ?>';
     var def_jml = 1;
     var def_Size = "";
-    var stok = '<?= $produk->stok_produk;?>';
-    var harga = '<?= $produk->harga_produk?>';
-    
+    var stok = '<?= $produk->stok_produk; ?>';
+    var harga = '<?= $produk->harga_produk ?>';
+
 
     var containervideo = document.getElementById('containervideo');
     var containergallery = document.getElementById('containergallery');
     var containermvideo = document.getElementById('containermvideo');
     var containermgallery = document.getElementById('containermgallery');
-    containervideo.style.display="none";
+    containervideo.style.display = "none";
     containermvideo.style.display = "none";
     var ishide = true;
     var ismhide = true;
-    function toggleVideo(){
-        if(ishide){
-            containervideo.style.display ="none";
+
+    function toggleVideo() {
+        if (ishide) {
+            containervideo.style.display = "none";
             containergallery.style.display = "block";
-            
-            
-            ishide= false;
-        }else{
+
+
+            ishide = false;
+        } else {
             containervideo.style.display = "block";
-            containergallery.style.display  ="none";
-           
-            ishide= true;
-        }
-    }
-    function toggleMVideo(){
-        if(ismhide){
-          
-            containermvideo.style.display ="none";
-            containermgallery.style.display = "block";
-            
-            ismhide= false;
-        }else{
-          
-            containermvideo.style.display = "block";
-            containermgallery.style.display  ="none";
-            ismhide= true;
+            containergallery.style.display = "none";
+
+            ishide = true;
         }
     }
 
-    function changeSizeS(){
+    function toggleMVideo() {
+        if (ismhide) {
+
+            containermvideo.style.display = "none";
+            containermgallery.style.display = "block";
+
+            ismhide = false;
+        } else {
+
+            containermvideo.style.display = "block";
+            containermgallery.style.display = "none";
+            ismhide = true;
+        }
+    }
+
+    function changeSizeS() {
         var S = document.getElementById('S');
         var M = document.getElementById('M');
         var L = document.getElementById('L');
@@ -252,19 +317,21 @@ $this->load->view('public/footer');
         XL.classList.remove('active');
         def_Size = "S";
     }
-    function changeSizeM(){
+
+    function changeSizeM() {
         var S = document.getElementById('S');
         var M = document.getElementById('M');
         var L = document.getElementById('L');
         var XL = document.getElementById('XL');
-    
+
         S.classList.remove('active');
         M.classList.add('active');
         L.classList.remove('active');
         XL.classList.remove('active');
         def_Size = "M";
     }
-    function changeSizeL(){
+
+    function changeSizeL() {
         var S = document.getElementById('S');
         var M = document.getElementById('M');
         var L = document.getElementById('L');
@@ -275,7 +342,8 @@ $this->load->view('public/footer');
         XL.classList.remove('active');
         def_Size = "L";
     }
-    function changeSizeXL(){
+
+    function changeSizeXL() {
         var S = document.getElementById('S');
         var M = document.getElementById('M');
         var L = document.getElementById('L');
@@ -288,179 +356,187 @@ $this->load->view('public/footer');
         def_Size = "XL";
     }
 
-    function setUkuran(ukuran){
+    function setUkuran(ukuran) {
         def_Size = ukuran;
 
-    }    
+    }
 
     // /var size_view = 
-    function ubahjml(state){
+    function ubahjml(state) {
         console.log(state);
-        if(state == 1){
-            if(def_jml < stok){
+        if (state == 1) {
+            if (def_jml < stok) {
                 def_jml++
-            }else{
-              //  def_jml = stok;
+            } else {
+                //  def_jml = stok;
             }
-        }else{
-            if(def_jml <= 1){
+        } else {
+            if (def_jml <= 1) {
                 def_jml = 1;
-            }else{
+            } else {
                 def_jml--;
             }
         }
         document.getElementById('value').innerHTML = def_jml;
     }
 
-$(document).ready(function () {
-    console.log(stok);
+    $(document).ready(function() {
+        console.log(stok);
 
-    $(".addToCart").on("click", function () {
-           
-            if(def_Size != ""){
-            var id_prod = $("#product").data("product-id");
-            var nama_barang = $("#product").data("product-nama");
-            $.ajax({
-                url: base_url + "user/Home/add_cart",
-                type: "POST",
-                data: {
-                    id_cart : '<?php if (!$id_cart == null || !$id_cart == ""){
-			echo $id_cart->id_cart; }else{echo "";}?>',
-                    id_pengguna: '<?php if(empty($this->session->userdata['user_data']['id'])){
-                        echo "";
-                    }else{
-                        echo $this->session->userdata['user_data']['id'];
-                    }?>',
-                    id_produk: '<?= $produk->id_produk;?>',
-                    qty : def_jml,
-                    img:'<?= $thumbnail[0]; ?>',
-                    nama_barang : nama_barang,
-                    harga : def_jml * harga,
-                   size : def_Size,
-                }
-            }).done(function (t) {
-                var res = JSON.parse(t);
-            
-                 if (true == res.success) {
-            
-                         $(".cart-wrapper").append(res.element);
-                         var i = parseInt($(".icon-cart").find(".notif").html());
-                         $(".menu-cart").addClass("open"),
-                         $(".overlay-desktop").addClass("active")
+        $(".addToCart").on("click", function() {
 
-                 } 
-                 
+            if (def_Size != "") {
+                var id_prod = $("#product").data("product-id");
+                var nama_barang = $("#product").data("product-nama");
+                $.ajax({
+                    url: base_url + "user/Home/add_cart",
+                    type: "POST",
+                    data: {
+                        id_cart: '<?php if (!$id_cart == null || !$id_cart == "") {
+                                        echo $id_cart->id_cart;
+                                    } else {
+                                        echo "";
+                                    } ?>',
+                        id_pengguna: '<?php if (empty($this->session->userdata['user_data']['id'])) {
+                                            echo "";
+                                        } else {
+                                            echo $this->session->userdata['user_data']['id'];
+                                        } ?>',
+                        id_produk: '<?= $produk->id_produk; ?>',
+                        qty: def_jml,
+                        img: '<?= $thumbnail[0]; ?>',
+                        nama_barang: nama_barang,
+                        harga: def_jml * harga,
+                        size: def_Size,
+                    }
+                }).done(function(t) {
+                    var res = JSON.parse(t);
 
-            }).fail(function (t) {
-                console.log(t)
-                //   location.reload()
-            })
-            }else{
+                    if (true == res.success) {
+
+                        $(".cart-wrapper").append(res.element);
+                        var i = parseInt($(".icon-cart").find(".notif").html());
+                        $(".menu-cart").addClass("open"),
+                            $(".overlay-desktop").addClass("active")
+
+                    }
+
+
+                }).fail(function(t) {
+                    console.log(t)
+                    //   location.reload()
+                })
+            } else {
                 alert("Silahkan Piilih Ukuran Terlebih Dahulu!")
             }
         })
     })
 </script>
 <script>
-	function callZoom(){
+    function callZoom() {
         $('#elevate-zoom').elevateZoom({
-            zoomType : "inner",
-            cursor : "crosshair"
+            zoomType: "inner",
+            cursor: "crosshair"
         });
-	}
+    }
 
 
 
 
     $(document).ready(function() {
 
-		callZoom();
+        callZoom();
 
-        $('.image-thumbnail .owl-item').on('click',function(){
+        $('.image-thumbnail .owl-item').on('click', function() {
 
-			$('.image-thumbnail--list').removeClass('active');
+            $('.image-thumbnail--list').removeClass('active');
             $(this).find('.image-thumbnail--list').addClass('active');
 
             var imgSrc = $(this).find('img').attr('src');
 
-			$('#elevate-zoom').attr('src',imgSrc);
-            $('#elevate-zoom').data('zoom-image',imgSrc);
+            $('#elevate-zoom').attr('src', imgSrc);
+            $('#elevate-zoom').data('zoom-image', imgSrc);
             $('#elevate-zoom').remove('.zoomContainer');
             $('#elevate-zoom').removeData('elevateZoom');
 
             callZoom();
-		});
+        });
 
-        if( $('.size-product li:first-child').hasClass('empty') ){
+        if ($('.size-product li:first-child').hasClass('empty')) {
             $('.addToCart').hide();
             $('.out-of-stock').show();
-        }
-        else{
+        } else {
             $('.addToCart').show();
             $('.out-of-stock').hide();
         }
 
-		$('.size').on('click', function() {
-			var val = $(this).children('span').attr('data-stock');
-			if(val == 0) {
-				$('.addToCart').css({'display': 'none'});
-                $('.out-of-stock').css({'display': 'inline-block'});
-				$('.label-size .text-label').text(val + ' stok tersisa');
+        $('.size').on('click', function() {
+            var val = $(this).children('span').attr('data-stock');
+            if (val == 0) {
+                $('.addToCart').css({
+                    'display': 'none'
+                });
+                $('.out-of-stock').css({
+                    'display': 'inline-block'
+                });
+                $('.label-size .text-label').text(val + ' stok tersisa');
                 $('.label-size').hide();
-			}
-			else {
-				if(val >= 1 && val <= 3) {
-                    $('.label-size').css('display','inline-block');
-					$('.label-size .text-label').text(val + ' stok tersisa');
-				}
-				else {
+            } else {
+                if (val >= 1 && val <= 3) {
+                    $('.label-size').css('display', 'inline-block');
+                    $('.label-size .text-label').text(val + ' stok tersisa');
+                } else {
                     $('.label-size').hide();
-					$('.label-size .text-label').text('');
-				}
-                $('.out-of-stock').css({'display': 'none'});
-				$('.addToCart').css({'display': 'inline-block'});
-			}
-		});
+                    $('.label-size .text-label').text('');
+                }
+                $('.out-of-stock').css({
+                    'display': 'none'
+                });
+                $('.addToCart').css({
+                    'display': 'inline-block'
+                });
+            }
+        });
 
-		$(".option-0").on("click", ".init", function() {
-			$(this).closest(".option-0").children('.child-0:not(.init)').toggle();
-			if ($(this).closest(".option-0").children('.child-0:not(.init)').is(":hidden")) {
-				$(this).closest(".option-0").removeClass("show-option");
-			} else {
-				$(this).closest(".option-0").addClass("show-option");
-			}
-		});
+        $(".option-0").on("click", ".init", function() {
+            $(this).closest(".option-0").children('.child-0:not(.init)').toggle();
+            if ($(this).closest(".option-0").children('.child-0:not(.init)').is(":hidden")) {
+                $(this).closest(".option-0").removeClass("show-option");
+            } else {
+                $(this).closest(".option-0").addClass("show-option");
+            }
+        });
 
-		var allOptions = $(".option-0").children('.child-0:not(.init)');
-		$(".option-0").on("click", ".child-0:not(.init)", function() {
-			allOptions.removeClass('selected');
-			$(this).addClass('selected');
-			$(".option-0").children('.init').html($(this).html());
-			allOptions.toggle();
-			$(this).closest(".option-0").removeClass("show-option");
+        var allOptions = $(".option-0").children('.child-0:not(.init)');
+        $(".option-0").on("click", ".child-0:not(.init)", function() {
+            allOptions.removeClass('selected');
+            $(this).addClass('selected');
+            $(".option-0").children('.init').html($(this).html());
+            allOptions.toggle();
+            $(this).closest(".option-0").removeClass("show-option");
 
-			generateSize(1, $(".option-0").find(".selected").data("value"));
-		});
+            generateSize(1, $(".option-0").find(".selected").data("value"));
+        });
 
-		$(".option-1").on("click", ".init", function() {
-			$(this).closest(".option-1").children('.child-1:not(.init)').toggle();
-			if ($(this).closest(".option-1").children('.child-1:not(.init)').is(":hidden")) {
-				$(this).closest(".option-1").removeClass("show-option");
-			} else {
-				$(this).closest(".option-1").addClass("show-option");
-			}
-		});
+        $(".option-1").on("click", ".init", function() {
+            $(this).closest(".option-1").children('.child-1:not(.init)').toggle();
+            if ($(this).closest(".option-1").children('.child-1:not(.init)').is(":hidden")) {
+                $(this).closest(".option-1").removeClass("show-option");
+            } else {
+                $(this).closest(".option-1").addClass("show-option");
+            }
+        });
 
-		var allOptions2 = $(".option-1").children('.child-1:not(.init)');
-		$(".option-1").on("click", ".child-1:not(.init)", function() {
-			allOptions2.removeClass('selected');
-			$(this).addClass('selected');
-			$(".option-1").children('.init').html($(this).html());
-			allOptions2.toggle();
-			$(this).closest(".option-1").removeClass("show-option");
+        var allOptions2 = $(".option-1").children('.child-1:not(.init)');
+        $(".option-1").on("click", ".child-1:not(.init)", function() {
+            allOptions2.removeClass('selected');
+            $(this).addClass('selected');
+            $(".option-1").children('.init').html($(this).html());
+            allOptions2.toggle();
+            $(this).closest(".option-1").removeClass("show-option");
 
-			generateSize(2, $(".option-1").find(".selected").data("value"));
-		});
+            generateSize(2, $(".option-1").find(".selected").data("value"));
+        });
 
         $(".option-2").on("click", ".init", function() {
             $(this).closest(".option-2").children('.child-2:not(.init)').toggle();
@@ -486,4 +562,5 @@ $(document).ready(function () {
     });
 </script>
 </body>
+
 </html>
