@@ -15,6 +15,22 @@ $this->load->view('public/m_heading');
 
 $this->load->view('public/cart');
 ?>
+
+<style>
+    .section {
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        /* note that we're transitioning max-height, not height! */
+        height: auto;
+        max-height: 600px;
+        /* still have to hard-code a value! */
+    }
+
+    .section.collapsed {
+        max-height: 0;
+    }
+</style>
+
 <section id="content">
 
     <div class="dashboard-user">
@@ -96,21 +112,34 @@ $this->load->view('public/cart');
                                                     </form>
                                                     <!-- </span> -->
                                                 <?php } else { ?>
-                                                    <p style="text-align:right; font-weight:bold ;">Check</p>
+                                                    <p style="text-align:right; font-weight:bold ;"><a href="#" class="btntoggle" data-id="<?= $row['kode_transaksi'] ?>">Check</a></p>
                                                 <?php } ?>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <?php if ($row['status_transaksi'] == 'kirim') { ?>
-                                <div class="card-row">
+                            <div class="card-row">
+                                <div class="collapsed" id="panel<?=$row['kode_transaksi']?>">
                                     <hr style="margin: 0px;">
                                     <b>&#8203; &#8203; &#8203;</b>
-                                    <p><b>Status : </b><b style="color: #00ff00;"><?= $row['status_transaksi'] ?></b></p>
-                                    <p><b>No Resi : </b><b><?= !empty($row['no_resi']) ? $row['no_resi'] : "No resi belum dimasukkan." ?></b></p>
+                                    <p><b>Status : </b>
+                                        <?php if ($row['status_transaksi'] == 'batal') {
+                                            echo '<span class="" style="color:red">Pesanan anda dibatalkan.</span>';
+                                        } else { ?>
+                                            <b style="color: #00ff00;"><?= ucfirst($row['status_transaksi']) ?>
+                                            </b>
+                                        <?php } ?>
+                                    </p>
+                                    <?php if ($row['status_transaksi'] == 'proses') {
+                                        echo '<span class="">Pesanan sedang diproses</span>';
+                                    } else if ($row['status_transaksi'] == 'validasi') {
+                                        echo '<span class="badge badge-success">Pesanan anda sudah divalidasi</span>';
+                                    } else if ($row['status_transaksi'] == "kirim") {
+                                        echo '<b>No Resi : ' . (!empty($row['no_resi']) ? $row['no_resi'] . " <b>(" . strtoupper($row['kurir']) . ")</b>" : "No resi belum dimasukkan.") . '</b>';
+                                    } ?>
                                 </div>
-                            <?php } ?>
+                            </div>
                         </div>
                     <?php } ?>
                     <!-- <table style="color:black;" class="table table-hover">
@@ -177,3 +206,24 @@ $this->load->view('public/cart');
 
 $this->load->view('public/footer');
 ?>
+
+<script type="text/javascript">
+    // $(document).ready(function() {
+    //     $('.btntoggle').on('click', function() {
+    //         alert('woi');
+    //     });
+    // });
+    $('.collapsed').toggle();
+    $(document).on('click', '.btntoggle', function(e) {
+        e.preventDefault();
+        var panel = $('#panel'+$(this).data('id'));
+        // console
+        panel.toggle('slow');
+        // var aid = $(this).data('id');
+        // alert(aid);
+
+    });
+    // document.querySelector('#btntoggle').addEventListener('click', function() {
+    //     document.querySelector('.section.collapsible').classList.toggle('collapsed');
+    // });
+</script>

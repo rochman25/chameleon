@@ -58,6 +58,11 @@ class MY_Model extends CI_Model{
         return $query;
     }
 
+    function distinctWithNoCol(){
+        $query = $this->db->distinct();
+        return $query;
+    }
+
     function insert($data)
     {
         $query = $this->db->insert($this->table, $data);

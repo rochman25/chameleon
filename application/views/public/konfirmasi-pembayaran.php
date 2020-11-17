@@ -43,10 +43,10 @@ $this->load->view('public/cart');
                                 </p>
                                 <p>
                                     <b>
-                                        BRI 677901015573536 A/N NAUFAUL HUNAIF
+                                        BRI 677901015573536 A/N NAUFAL HUNAIF
                                     </b><br>
                                     <b>
-                                        Mandiri 1800004486124 A/N NAUFAUL HUNAIF
+                                        Mandiri 1800004486124 A/N NAUFAL HUNAIF
                                     </b>
                                 </p>
                                 <!-- <h1>Detail Transaksi</h1> -->

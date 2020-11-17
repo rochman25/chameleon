@@ -538,11 +538,13 @@ class Home extends MY_Controller
             $data['profil'] = $this->user->getWhere("id_pengguna", $idp);
             $data['profil'] = $this->user->getData()->row();
 
-            $data['transaksi'] = $this->transaksi->order_by("transaksi.id_transaksi", "ASC");
-            $data['transaksi'] = $this->transaksi->getJoin("detail_transaksi", "detail_transaksi.id_transaksi=transaksi.id_transaksi", "left");
-            // $data['transaksi'] = $this->transaksi->getJoin("produk", "produk.id_produk=detail_transaksi.id_produk", "inner");
+            // $data['transaksi'] = $this->transaksi->select('*');
+            $data['transaksi'] = $this->transaksi->distinctWithNoCol();
+            $data['transaksi'] = $this->transaksi->order_by("transaksi.waktu_transaksi", "DESC");
             $data['transaksi'] = $this->transaksi->getJoin("pengguna", "pengguna.id_pengguna=transaksi.id_pengguna", "inner");
             $data['transaksi'] = $this->transaksi->getJoin("alamat_pengguna", "alamat_pengguna.id_alamat=transaksi.id_alamat", "left");
+            // $data['transaksi'] = $this->transaksi->getJoin("detail_transaksi", "detail_transaksi.id_transaksi=transaksi.id_transaksi", "left");
+            // $data['transaksi'] = $this->transaksi->getJoin("produk", "produk.id_produk=detail_transaksi.id_produk", "inner");
             $data['transaksi'] = $this->transaksi->getWhere("transaksi.id_pengguna", $idp);
             $data['transaksi'] = $this->transaksi->limit(10);
             // $data['transaksi'] = $this->transaksi->getWhere("transaksi.bukti_transfer =","");
