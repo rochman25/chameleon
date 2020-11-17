@@ -64,7 +64,7 @@ $this->load->view('public/cart');
                                 </table> -->
                                 <form action="<?= base_url() ?>prosespembayaran" enctype="multipart/form-data" method="POST">
                                     <input type="hidden" name="idtransaksi" value="<?= $data->id_transaksi; ?>" />
-                                    <label style="color:white !important;" for="myfile">Bukti pembayaran</label>
+                                    <label style="color:white !important;" for="myfile">Bukti pembayaran <b style="color: orange;">(extensi : jpg | jpeg | png / max size: 1MB)</b> </label>
                                     <input style="color:white !important;" type='file' name='bukti' accept='image/*' />
 
                                     <input type="submit" value="Konfirmasi Pembayaran">
