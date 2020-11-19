@@ -118,9 +118,12 @@ $this->load->view('public/cart');
                                 <img src="<?= base_url() ?>/assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>" alt="">
                                 <div class="product-info">
                                     <div class="title"><?= $row['nama_produk'] ?></div>
-                                    <!-- <div class="old-price">Rp <?= number_format($row['harga_produk']) ?></div> -->
-                                    <!-- <div class="old-price"></div> -->
-                                    <div class="price">Rp <?= number_format($row['harga_produk']) ?></div>
+                                    <?php if ($row['diskon_produk'] != 0) { ?>
+                                        <div class="old-price">RP <?= number_format($row['harga_produk']) ?></div>
+                                        <div class="price">Rp <?= number_format($row['harga_produk'] - (($row['diskon_produk'] / 100) * $row['harga_produk'])) ?></div>
+                                    <?php } else { ?>
+                                        <div class="price">Rp <?= number_format($row['harga_produk']) ?></div>
+                                    <?php } ?>
                                     <div class="qty-size">
                                         Jumlah : <strong class="cart_quantity"><?= $row['quantity'] ?></strong> /
                                         Ukuran : <strong><?= $row['size'] ?></strong>
@@ -154,12 +157,12 @@ $this->load->view('public/cart');
                         </div>
                         <div class="summary-belanja">
                             <span>Total Belanja</span>
-                            <span class="summary-belanja-value"><b>Rp <?= $total ?></b></span>
+                            <span class="summary-belanja-value"><b>Rp <?= number_format($total, 2) ?></b></span>
                         </div>
                         <hr>
                         <div class="summary-all">
                             <span>Total Bayar</span>
-                            <span><strong class="summary-all-value"></strong><b>Rp</b> <b id="total-bayar"><?= $total ?></b> </span>
+                            <span><strong class="summary-all-value"></strong><b>Rp</b> <b id="total-bayar"><?= number_format($total, 2) ?></b> </span>
                         </div>
                     </div>
                     <!-- <input type="hidden" id="kecamatan_id" value="<?= $profil->kecamatan_id ?>" required> -->
@@ -217,8 +220,8 @@ $this->load->view('public/footer');
                     total = total + total_ongkir
                     $('#total_ongkir').val(total_ongkir);
                     $('#total_bayar').val(total);
-                    $('#ongkos-kirim').text(total_ongkir);
-                    $('#total-bayar').text(total);
+                    $('#ongkos-kirim').text(number_format(total_ongkir,2,'.',','));
+                    $('#total-bayar').text(number_format(total,2,'.',','));
                     // $('#ongkos-kirim').val(total_ongkir);
                     // $('#total').text("Rp " + total.toLocaleString("en"));
                     console.log(data);
@@ -354,8 +357,8 @@ $this->load->view('public/footer');
                         total = total + total_ongkir
                         $('#total_ongkir').val(total_ongkir);
                         $('#total_bayar').val(total);
-                        $('#ongkos-kirim').text(total_ongkir);
-                        $('#total-bayar').text(total);
+                        $('#ongkos-kirim').text(number_format(total_ongkir,2,'.',','));
+                        $('#total-bayar').text(number_format(total,2,'.',','));
                         // $('#ongkos-kirim').val(total_ongkir);
                         // $('#total').text("Rp " + total.toLocaleString("en"));
                         console.log(data);
@@ -370,4 +373,28 @@ $this->load->view('public/footer');
             }
         });
     });
+
+    function number_format(number, decimals, dec_point, thousands_sep) {
+        // Strip all characters but numerical ones.
+        number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
+        var n = !isFinite(+number) ? 0 : +number,
+            prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+            sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+            dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+            s = '',
+            toFixedFix = function(n, prec) {
+                var k = Math.pow(10, prec);
+                return '' + Math.round(n * k) / k;
+            };
+        // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+        s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+        if (s[0].length > 3) {
+            s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+        }
+        if ((s[1] || '').length < prec) {
+            s[1] = s[1] || '';
+            s[1] += new Array(prec - s[1].length + 1).join('0');
+        }
+        return s.join(dec);
+    }
 </script>

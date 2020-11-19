@@ -252,15 +252,23 @@ class Home extends MY_Controller
                 foreach ($foto as $f) {
                     $thumbnail[] = $f;
                 }
+                if($d->diskon_produk != 0){
+                    $realHarga = $d->harga_produk - (($d->diskon_produk / 100) * $d->harga_produk);
+                }else{
+                    $realHarga = $d->harga_produk;
+                }
 
-                $harga = $harga + $d->harga_produk;
+                $harga = $harga + $realHarga;
+
+                $dHarga = $d->diskon_produk != 0 ? "<p style='text-decoration:line-through;font-size:10px'> Rp $d->harga_produk </p>" : "";
+
                 $d = array(
                     "id_cart" => $d->id_cart,
                     "id_item" => $d->id_detail_item_cart,
                     "nama_produk" => $d->nama_produk,
                     "berat_produk" => $d->berat_produk,
                     "qty" => $d->quantity,
-                    "harga" => $d->harga_produk,
+                    "harga" => $realHarga,
                     "kategori" => $d->nama_kategori,
                     "thumb" => $thumbnail,
                     "element" => '<div class="cart-list" >
@@ -268,8 +276,9 @@ class Home extends MY_Controller
                         <img src="' . base_url() . 'assets/uploads/thumbnail_produk/' . $thumbnail[0] . '">
                         <div class="content">
                             <div class="name">' . $d->nama_produk . '</div>
-              
-                            <div class="real">Rp ' . $d->harga_produk . '</div>
+                            <div class="real">' .
+                        $dHarga
+                        . 'Rp ' . number_format($realHarga, 2) . '</div>
                                 <div class="content-detail">
                                     Jumlah : <strong class="cart-quantity">' . $d->quantity . '/ Ukuran :' . $d->size . '</strong> 
                                 
@@ -320,6 +329,7 @@ class Home extends MY_Controller
             $size = $this->input->post('size');
             $harga = $this->input->post('harga');
             $nama_barang = $this->input->post('nama_barang');
+            $diskon = (!empty($this->input->post('diskon')) ? $this->input->post('diskon') : 0);
             if ($idc == "" || empty($idc) || $idc == null) {
                 $idc = $this->cart->generateKode();
                 $data = array(
@@ -343,6 +353,16 @@ class Home extends MY_Controller
 
                 if ($simpan) {
                     $simpan_item = $this->cart_item->tambahDetailCart($data_item);
+                    if($diskon != 0){
+                        $realHarga = $harga - (($diskon / 100) * $harga);
+                    }else{
+                        $realHarga = $harga;
+                    }
+
+                    // $harga = $harga + $realHarga;
+
+                    $dHarga = $diskon != 0 ? "<p style='text-decoration:line-through;font-size:10px'> Rp $harga </p>" : "";
+
                     if ($simpan_item) {
                         $session_cart = array(
                             "current_cart" => $idc,
@@ -358,7 +378,8 @@ class Home extends MY_Controller
                         <img src="#">
                         <div class="content">
                             <div class="name">' . $nama_barang . '</div>
-                            <div class="real">Rp ' . $harga . '</div>
+                            <div class="real">' . $dHarga
+                                . 'Rp ' . number_format($realHarga, 2) . '</div>
                                 <div class="content-detail">
                                     Jumlah : <strong class="cart-quantity">' . $qty . '/Ukuran : ' . $size . ' </strong> 
                                 </div>
@@ -395,6 +416,7 @@ class Home extends MY_Controller
                 $img = $this->input->post('img');
                 $size = $this->input->post('size');
                 $harga = $this->input->post('harga');
+                $diskon = (!empty($this->input->post('diskon')) ? $this->input->post('diskon') : 0);
                 $nama_barang = $this->input->post('nama_barang');
                 $data_item = array(
                     "id_cart" => $idc,
@@ -404,6 +426,16 @@ class Home extends MY_Controller
                 );
 
                 $simpan_item = $this->cart_item->tambahDetailCart($data_item);
+
+                if($diskon != 0){
+                    $realHarga = $harga - (($diskon / 100) * $harga);
+                }else{
+                    $realHarga = $harga;
+                }
+
+                // $harga = $harga + $realHarga;
+
+                $dHarga = $diskon != 0 ? "<p style='text-decoration:line-through;font-size:10px'> Rp $harga </p>" : "";
                 if ($simpan_item) {
                     $session_cart = array(
                         "current_cart" => $idc,
@@ -420,7 +452,8 @@ class Home extends MY_Controller
         			<div class="content">
             			<div class="name">' . $nama_barang . '</div>
                     
-            			<div class="real">Rp ' . $harga . '</div>
+                        <div class="real">' . $dHarga
+                            . 'Rp ' . number_format($realHarga, 2) . '</div>
                             <div class="content-detail">
                     			Jumlah : <strong class="cart-quantity">' . $qty . ' / Ukuran : ' . $size . '</strong> 
                 			</div>

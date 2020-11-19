@@ -28,9 +28,10 @@ class Order extends MY_Controller
             $total_harga = 0;
             $total_berat = 0;
             foreach ($data['cart'] as $row) {
+                $harga = $row['diskon_produk'] != 0 ? $row['harga_produk'] - (($row['diskon_produk'] / 100) * $row['harga_produk']) : $row['harga_produk'];
                 $foto = explode(',', $row['thumbnail_produk']);
                 $thumbnail[$row['id_produk']] = $foto[0];
-                $total_harga += $row['harga_produk'] * $row['quantity'];
+                $total_harga += $harga * $row['quantity'];
                 $total_berat += $row['berat_produk'];
             }
             $data['total'] = $total_harga;

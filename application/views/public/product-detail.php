@@ -241,7 +241,7 @@ $this->load->view('public/cart');
             <div class="modal-body">
                 <?php if ($produk->nama_kategori == "celana") { ?>
                     <img src="<?= base_url() ?>assets/public/size_celana.jpg" width="100%">
-                <?php } else if($produk->nama_kategori == "Jas") { ?>
+                <?php } else if ($produk->nama_kategori == "Jas") { ?>
                     <img src="<?= base_url() ?>assets/public/size_jas.jpg" width="100%">
                 <?php } ?>
             </div>
@@ -263,8 +263,9 @@ $this->load->view('public/footer');
     var def_jml = 1;
     var def_Size = "";
     var stok = '<?= $produk->stok_produk; ?>';
-    var harga = '<?= $produk->harga_produk ?>';
-
+    var harga = '<?= $produk->harga_produk ?>'
+    // var harga = '<?= $produk->diskon_produk != 0 ? $produk->harga_produk - (($produk->diskon_produk / 100) * $produk->harga_produk) : $produk->harga_produk ?>';
+    var diskon = '<?= $produk->diskon_produk ?>'
 
     var containervideo = document.getElementById('containervideo');
     var containergallery = document.getElementById('containergallery');
@@ -408,6 +409,7 @@ $this->load->view('public/footer');
                         nama_barang: nama_barang,
                         harga: def_jml * harga,
                         size: def_Size,
+                        diskon: diskon
                     }
                 }).done(function(t) {
                     var res = JSON.parse(t);

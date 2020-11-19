@@ -109,16 +109,34 @@
                                                 <label class="form-label">Label Produk</label>
                                                 <div class="selectgroup selectgroup-pills">
                                                     <label class="selectgroup-item">
-                                                        <input type="checkbox" name="label_p[]" value="diskon" class="selectgroup-input" <?php if(isset($produk) && strpos($produk->label_produk,'diskon') !== false){ echo "checked"; } ?>>
-                                                        <span class="selectgroup-button">DISKON</span>
+                                                        <input type="checkbox" name="label_p[]" value="new" class="selectgroup-input" <?php if (isset($produk) && strpos($produk->label_produk, 'new') !== false) {
+                                                                                                                                                echo "checked";
+                                                                                                                                            } ?>>
+                                                        <span class="selectgroup-button">NEW</span>
                                                     </label>
                                                     <label class="selectgroup-item">
-                                                        <input type="checkbox" name="label_p[]" value="premium" class="selectgroup-input" <?php if(isset($produk) && strpos($produk->label_produk,'premium') !== false){ echo "checked"; } ?>>
-                                                        <span class="selectgroup-button">PREMIUM</span>
+                                                        <input type="checkbox" name="label_p[]" value="diskon" class="selectgroup-input" <?php if (isset($produk) && strpos($produk->label_produk, 'diskon') !== false) {
+                                                                                                                                                echo "checked";
+                                                                                                                                            } ?>>
+                                                        <span class="selectgroup-button">DISCOUNT</span>
                                                     </label>
                                                     <label class="selectgroup-item">
-                                                        <input type="checkbox" name="label_p[]" value="limited" class="selectgroup-input" <?php if(isset($produk) && strpos($produk->label_produk,'limited') !== false){ echo "checked"; } ?>>
+                                                        <input type="checkbox" name="label_p[]" value="paling laris" class="selectgroup-input" <?php if (isset($produk) && strpos($produk->label_produk, 'paling laris') !== false) {
+                                                                                                                                                echo "checked";
+                                                                                                                                            } ?>>
+                                                        <span class="selectgroup-button">PALING LARIS</span>
+                                                    </label>
+                                                    <label class="selectgroup-item">
+                                                        <input type="checkbox" name="label_p[]" value="limited" class="selectgroup-input" <?php if (isset($produk) && strpos($produk->label_produk, 'limited') !== false) {
+                                                                                                                                                echo "checked";
+                                                                                                                                            } ?>>
                                                         <span class="selectgroup-button">LIMITED</span>
+                                                    </label>
+                                                    <label class="selectgroup-item">
+                                                        <input type="checkbox" name="label_p[]" value="premium" class="selectgroup-input" <?php if (isset($produk) && strpos($produk->label_produk, 'premium') !== false) {
+                                                                                                                                                echo "checked";
+                                                                                                                                            } ?>>
+                                                        <span class="selectgroup-button">PREMIUM</span>
                                                     </label>
                                                 </div>
                                             </div>
