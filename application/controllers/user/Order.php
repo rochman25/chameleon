@@ -23,6 +23,7 @@ class Order extends MY_Controller
             $data['profil'] = $this->user->getJoin("alamat_pengguna", "alamat_pengguna.id_pengguna=pengguna.id_pengguna", "left");
             $data['profil'] = $this->user->getWhere("pengguna.id_pengguna", $idp);
             $data['profil'] = $this->user->getData()->row();
+            $data['kategori'] = $this->kategori->getData()->result_array();
             $data['cart'] = $this->user->getCart();
             $thumbnail = array();
             $total_harga = 0;

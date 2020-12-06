@@ -38,27 +38,15 @@
                         <!-- <i class="svg-icon svg_icon__header_carret_right"></i> -->
                     </a>
                 </li>
+                <?php foreach($kategori as $key => $item){ ?>
                 <li>
-                    <a href="<?= base_url() ?>produk/celana">
+                    <a href="<?= base_url() ?>produk/<?= $item['nama_kategori'] ?>">
                         <!-- <div class="gradient"></div> -->
                         <!-- <img src="<?= base_url() ?>assets/images/Celana/Celana-BG.png" alt="Sepatu"> -->
-                        Celana
+                        <?= $item['nama_kategori'] ?>
                     </a>
                 </li>
-                <li>
-                    <a href="<?= base_url() ?>produk/jas">
-                        <!-- <div class="gradient"></div> -->
-                        <!-- <img src="<?= base_url() ?>assets/images/Celana/Celana-BG.png" alt="Sepatu"> -->
-                        Jas
-                    </a>
-                </li>
-                <li>
-                    <a href="<?= base_url() ?>produk/kemeja">
-                        <!-- <div class="gradient"></div> -->
-                        <!-- <img src="<?= base_url() ?>assets/images/Celana/Celana-BG.png" alt="Sepatu"> -->
-                        Kemeja
-                    </a>
-                </li>
+                <?php } ?>
                 <!-- <div class="menu-lvl2 menu-collection">
                         <div class="header">
                             koleksi <i class="svg-icon svg_icon__header_carret_left"></i>
@@ -101,7 +89,7 @@
                             </div>
                         </div>
                     </div> -->
-                </li>
+                <!-- </li> -->
 
                 <li><a href="<?= base_url() ?>profil"><span>konfirmasi pembayaran</span></a></li>
 

@@ -20,19 +20,21 @@
 	                    <a href="#">koleksi</a>
 	                    <div class="dropdown dropdown-collection">
 	                        <div class="dropdown-wrapper">
+								<?php foreach($kategori as $key => $item){ ?>
 	                            <div class="collections">
-	                                <div class="header">
-	                                    <a href="<?= base_url(); ?>produk/celana">
-	                                        <div class="gradient"></div>
-	                                        <img src="<?= base_url() ?>assets/images/Celana/Celana-BG.png" alt="Sepatu">
-	                                        <h2>Celana</h2>
+	                                <div class="">
+	                                    <a href="<?= base_url(); ?>produk/<?=$item['nama_kategori']?>">
+	                                        <!-- <div class="gradient"></div> -->
+	                                        <!-- <img src="<?= base_url() ?>assets/images/Celana/Celana-BG.png" alt="Sepatu"> -->
+	                                        <h2 style="font-size: 20px;"><?=$item['nama_kategori']?></h2>
 	                                    </a>
 	                                </div>
 	                                <ul>
 	                                </ul>
-	                            </div>
-	                            <div class="collections">
-	                                <div class="header">
+								</div>
+								<?php } ?>
+	                            <!-- <div class="collections">
+	                                <div class="">
 	                                    <a href="<?= base_url(); ?>produk/jas">
 	                                        <div class="gradient"></div>
 	                                        <img src="<?= base_url() ?>assets/images/Jas/Jas-BG.png" alt="Tas">
@@ -43,7 +45,7 @@
 	                                </ul>
 	                            </div>
 	                            <div class="collections">
-	                                <div class="header">
+	                                <div class="">
 	                                    <a href="<?= base_url(); ?>produk/kemeja">
 	                                        <div class="gradient"></div>
 	                                        <img src="<?= base_url() ?>assets/images/Kemeja/Kemeja-BG.png" alt="Apparel">
@@ -56,7 +58,7 @@
 	                            <div class="right-collection">
 	                                <ul>
 	                                </ul>
-	                            </div>
+	                            </div> -->
 	                        </div>
 	                    </div>
 	                </li>

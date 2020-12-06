@@ -112,5 +112,9 @@ class MY_Model extends CI_Model{
         return $this->db->get_where($this->table, $where);
     }
 
+    function getLike($title,$match,$wildcard = 'none'){
+        return $this->db->like($title,$match,$wildcard);
+    }
+
 
 }

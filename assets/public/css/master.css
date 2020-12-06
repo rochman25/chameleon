@@ -6631,6 +6631,42 @@ footer.footer .copyright {
 	margin: 0;
 }
 
+.badge_label_new {
+	background-color:  rgb(5, 5, 5);
+	width: auto;
+	/* float: right; */
+	/* border: 15px solid green; */
+	padding: 5px;
+	border: 1px solid blue;
+	margin: 2px;
+}
+
+.badge_label_new p {
+	text-align: center;
+	color: blue;
+	font-size: 10px;
+	font-weight: bold;
+	margin: 0;
+}
+
+.badge_label_paling_laris {
+	background-color:  rgb(5, 5, 5);
+	width: auto;
+	/* float: right; */
+	/* border: 15px solid green; */
+	padding: 5px;
+	border: 1px solid red;
+	margin: 2px;
+}
+
+.badge_label_paling_laris p {
+	text-align: center;
+	color: red;
+	font-size: 10px;
+	font-weight: bold;
+	margin: 0;
+}
+
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
 	.column {

@@ -100,6 +100,9 @@
             <li class="nav-item">
                 <a href="<?= base_url() ?>admin/toko" class="nav-link"><i class="fas fa-store"></i><span>Profile Toko</span></a>
             </li>
+            <li class="nav-item">
+                <a href="<?= base_url() ?>admin/banner" class="nav-link"><i class="fas fa-camera"></i>Banner</a>
+            </li>
             <li class="menu-header">Produk</li>
             <li class="nav-item">
                 <a href="<?= base_url() ?>admin/kategori" class="nav-link"><i class="fas fa-tags"></i><span>Kategori</span></a>

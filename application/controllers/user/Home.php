@@ -24,6 +24,7 @@ class Home extends MY_Controller
         $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
         $data['produk'] = $this->produk->getWhere('produk.stok_produk > ', '0');
         $data['produk'] = $this->produk->getData()->result_array();
+        $data['kategori'] = $this->kategori->getData()->result_array();
         foreach ($data['produk'] as $row) {
             $foto = explode(',', $row['thumbnail_produk']);
             $thumbnail[$row['id_produk']] = $foto[0];
@@ -64,13 +65,14 @@ class Home extends MY_Controller
             $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
             $data['produk'] = $this->produk->getWhere("produk.stok >", "0");
             $data['produk'] = $this->produk->getData()->result_array();
+            $data['kategori'] = $this->kategori->getData()->result_array();
             foreach ($data['produk'] as $row) {
                 $foto = explode(',', $row['thumbnail_produk']);
                 $thumbnail[$row['id_produk']] = $foto[0];
             }
             $data['thumbnail'] = $thumbnail;
         } else {
-            $datakategori =  $this->kategori->getWhere('nama_kategori', $kategori);
+            $datakategori =  $this->kategori->getLike('nama_kategori', $kategori);
             $datakategori = $this->kategori->getData()->row();
             //   die(json_encode($kategori));
             if ($datakategori == "" || empty($datakategori) || $datakategori == null) {
@@ -85,6 +87,7 @@ class Home extends MY_Controller
                 $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
                 $data['produk'] = $this->produk->getWhere("produk.stok_produk >", "0");
                 $data['produk'] = $this->produk->getData()->result_array();
+                $data['kategori'] = $this->kategori->getData()->result_array();
                 foreach ($data['produk'] as $row) {
                     $foto = explode(',', $row['thumbnail_produk']);
                     $thumbnail[$row['id_produk']] = $foto[0];
@@ -125,6 +128,7 @@ class Home extends MY_Controller
         $data['produk'] = $this->produk->getWhere("id_produk", $id_produk);
         $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
         $data['produk'] = $this->produk->getData()->row();
+        $data['kategori'] = $this->kategori->getData()->result_array();
 
         $foto = explode(',', $data['produk']->thumbnail_produk);
         $size = explode(',', $data['produk']->size_produk);
@@ -570,6 +574,7 @@ class Home extends MY_Controller
             $idp = $this->session->userdata['user_data']['id'];
             $data['profil'] = $this->user->getWhere("id_pengguna", $idp);
             $data['profil'] = $this->user->getData()->row();
+            $data['kategori'] = $this->kategori->getData()->result_array();
 
             // $data['transaksi'] = $this->transaksi->select('*');
             $data['transaksi'] = $this->transaksi->distinctWithNoCol();
@@ -601,6 +606,7 @@ class Home extends MY_Controller
             $data['profil'] = $this->user->getJoin("alamat_pengguna", "alamat_pengguna.id_pengguna=pengguna.id_pengguna", "left");
             $data['profil'] = $this->user->getWhere("pengguna.id_pengguna", $idp);
             $data['profil'] = $this->user->getData()->row();
+            $data['kategori'] = $this->kategori->getData()->result_array();
             // $data['alamat'] = $this->alamat->getWhere("id_pengguna", "a");
             // $data['alamat'] = $this->alamat->getData()->row();
             $provinsi = json_decode($this->get_provinsi());
@@ -769,6 +775,7 @@ class Home extends MY_Controller
 
             $data['data'] = $this->transaksi->getWhere("id_transaksi", $id);
             $data['data'] = $this->transaksi->getData()->row();
+            $data['kategori'] = $this->kategori->getData()->result_array();
             //die(json_encode($data));
             $this->load->view('public/konfirmasi-pembayaran', $data);
         }

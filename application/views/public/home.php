@@ -73,7 +73,7 @@ $this->load->view('public/cart');
                                         <?php $label_p = explode(",", $p['label_produk']);
                                         foreach ($label_p as $key_l => $val_l) {
                                         ?>
-                                            <div class="badge_label_<?php echo $val_l ?>">
+                                            <div class="badge_label_<?php echo str_replace(" ","_",$val_l) ?>">
                                                 <p style="font-size: 8px;"><?= strtoupper($val_l) ?></p>
                                             </div>
                                         <?php } ?>
