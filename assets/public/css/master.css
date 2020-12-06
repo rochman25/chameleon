@@ -1549,7 +1549,7 @@ header.mobile .menu-lvl1 .menu-promo ul>li>a {
 header.mobile .menu-lvl1 .logout {
 	color: rgba(0, 0, 0, 0.7);
 	display: block;
-	margin: 40px 10px;
+	margin: 5px 10px;
 }
 
 header.mobile .menu-lvl1 .logout i {

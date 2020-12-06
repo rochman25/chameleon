@@ -64,7 +64,7 @@ $this->load->view('public/cart');
 
                     <div class="product-ribbon clearfix">
                     </div>
-                    <div class="product-info">
+                    <div class="product-info" style="margin-left:10px">
                         <div class="row">
                             <div class="column" style="width: 50%;">
                                 <h1 style="margin-top:0px;"><?= $produk->nama_produk; ?></h1>
@@ -124,59 +124,60 @@ $this->load->view('public/cart');
                             </div>
                         </div>
                         <br>
-                        <span>Ukuran :</span>
-                        <div id="size" class="size-product">
-                            <ul class="clearfix">
-                                <?php foreach ($size as $s) {
-                                ?>
-                                    <li onclick="setUkuran('<?= $s; ?>');" id="S" style="color:black !important;" class="size ">
-                                        <span><?= $s; ?></span>
+                        <div class="row">
+                            <span>Ukuran :</span>
+                            <div id="size" class="size-product">
+                                <ul class="clearfix">
+                                    <?php foreach ($size as $s) {
+                                    ?>
+                                        <li onclick="setUkuran('<?= $s; ?>');" id="S" style="color:black !important;" class="size ">
+                                            <span><?= $s; ?></span>
+                                        </li>
+                                    <?php
+                                    } ?>
+
+                                </ul>
+                            </div>
+                            <br>
+                            <span>Jumlah :</span>
+                            <div id="size" class="size-product">
+                                <ul class="clearfix">
+                                    <li onclick="ubahjml(2);" class="size active ">
+                                        <span>-</span>
                                     </li>
+                                    <li class="size  ">
+                                        <span style="color:black;" id="value">1</span>
+                                    </li>
+                                    <li onclick="ubahjml(1);" class=" size active ">
+                                        <span>+</span>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <div class="button-action">
+                                <?php
+                                if (isset($this->session->userdata['user_data'])) {
+                                ?>
+                                    <button class="addToCart">
+                                        <i class="svg-icon svg_icon__pdp_cart"></i> Order
+                                    </button>
+
+                                <?php
+                                } else {
+
+                                ?>
+                                    <a href="<?= base_url(); ?>login" style="padding:15px;" class="addToCart">
+                                        <i class="svg-icon svg_icon__pdp_cart"></i>Beli
+                                    </a>
+
                                 <?php
                                 } ?>
+                                <span class="out-of-stock" style="display:none">HABIS MEN</span>
+                            </div>
 
-                            </ul>
-                        </div>
-                        <br>
-                        <span>Jumlah :</span>
-                        <div id="size" class="size-product">
-                            <ul class="clearfix">
-                                <li onclick="ubahjml(2);" class="size active ">
-                                    <span>-</span>
-                                </li>
-                                <li class="size  ">
-                                    <span style="color:black;" id="value">1</span>
-                                </li>
-                                <li onclick="ubahjml(1);" class=" size active ">
-                                    <span>+</span>
-                                </li>
-
-                            </ul>
-                        </div>
-
-                        <div class="button-action">
-                            <?php
-                            if (isset($this->session->userdata['user_data'])) {
-                            ?>
-                                <button class="addToCart">
-                                    <i class="svg-icon svg_icon__pdp_cart"></i> Order
-                                </button>
-
-                            <?php
-                            } else {
-
-                            ?>
-                                <a href="<?= base_url(); ?>login" style="padding:15px;" class="addToCart">
-                                    <i class="svg-icon svg_icon__pdp_cart"></i>Beli
-                                </a>
-
-                            <?php
-                            } ?>
-                            <span class="out-of-stock" style="display:none">HABIS MEN</span>
-                        </div>
-
-                        <div class="product-order">
-                            <!-- <div class="list clearfix">
+                            <div class="product-order">
+                                <!-- <div class="list clearfix">
                                 <a href="#">
                                     <div class="image">
                                         <i class="svg-icon svg_icon__pdp_cart "></i>
@@ -206,21 +207,22 @@ $this->load->view('public/cart');
                                     </div>
                                 </a>
                             </div> -->
-                        </div>
-                        <ul class="nav nav-tabs">
-                            <li class="active" data-target="product-deskripsi">
-                                <a style="color:white;background-color:none;" href="javascript:;">Deskripsi</a></li>
-                            <!-- <li data-target="review"><a href="javascript:;">Rating dan Ulasan ( 5/5 )</a></li> -->
-                        </ul>
-                        <div class="tab-content">
-                            <div class="product-deskripsi">
-                                <?php if (empty($produk->deskripsi_produk)) {
-                                    echo "<p>Belum ada deskripsi</p>";
-                                } else {
-                                    echo $produk->deskripsi_produk;
-                                } ?>
                             </div>
-                            <div class="review">
+                            <ul class="nav nav-tabs">
+                                <li class="active" data-target="product-deskripsi">
+                                    <a style="color:white;background-color:none;" href="javascript:;">Deskripsi</a></li>
+                                <!-- <li data-target="review"><a href="javascript:;">Rating dan Ulasan ( 5/5 )</a></li> -->
+                            </ul>
+                            <div class="tab-content">
+                                <div class="product-deskripsi">
+                                    <?php if (empty($produk->deskripsi_produk)) {
+                                        echo "<p>Belum ada deskripsi</p>";
+                                    } else {
+                                        echo $produk->deskripsi_produk;
+                                    } ?>
+                                </div>
+                                <div class="review">
+                                </div>
                             </div>
                         </div>
                     </div>

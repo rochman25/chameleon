@@ -71,28 +71,28 @@ $this->load->view('public/cart');
                                 foreach ($produk as $row) {
                                     $harga = $row['harga_produk'];
                             ?>
-                                    <div class="product-card-wrapper" style="padding-bottom: 60%;">
+                                    <div class="product-card-wrapper" style="padding-bottom: 30%;height:600px;">
                                         <a href="<?= base_url(); ?>detail?produk=<?= $row['id_produk']; ?>">
                                             <div class="product-category">
-                                                <img src="" style="width:300px;height:300px;" alt="" data-src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>">
+                                                <img src="" style="height:300px;" alt="" data-src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>">
                                                 <div class="row" style="margin-right: 0;margin-left: 0px;margin-bottom:10px; margin-top:0px">
                                                     <?php if ($row['label_produk'] != null) { ?>
                                                         <div class="column" style="width: 70%;">
                                                         <?php } else { ?>
                                                             <div class="column" style="width: 100%;">
                                                             <?php } ?>
-                                                            <h2 style="font-size: 20px;font-weight: bold; height:auto; margin-top: 0px;"><?= $row['nama_produk']; ?></h2>
+                                                            <h2 style="font-size: 15px;font-weight: bold; height:auto; margin-top: 0px;"><?= $row['nama_produk']; ?></h2>
                                                             <div class="row" style="margin-right: 0;margin-left: 0px;margin-bottom:10px;">
                                                                 <?php if ($row['diskon_produk'] != 0) { ?>
                                                                     <div class="column" style="width: auto;">
                                                                         <div class="price-before" style="text-decoration : line-through; color:#767171;margin-right:5px">Rp <?php echo number_format($harga, 0); ?></div>
                                                                     </div>
                                                                     <div class="column" style="width: auto;">
-                                                                        <div class="price-after" style="font-size: 16px; color:#ff3a3a;"><b> Rp <?= number_format($row['harga_produk'] - (($row['diskon_produk'] / 100) * $row['harga_produk']), 0); ?></b></div>
+                                                                        <div class="price-after" style="font-size: 12px; color:#ff3a3a;"><b> Rp <?= number_format($row['harga_produk'] - (($row['diskon_produk'] / 100) * $row['harga_produk']), 0); ?></b></div>
                                                                     </div>
                                                                 <?php } else { ?>
                                                                     <div class="column" style="width: auto;">
-                                                                        <div class="price-after" style="font-size: 16px; color:#ff3a3a;"> Rp <?php echo number_format($harga, 0); ?>
+                                                                        <div class="price-after" style="font-size: 12px; color:#ff3a3a;"> Rp <?php echo number_format($harga, 0); ?>
                                                                         </div>
                                                                     </div>
                                                                 <?php } ?>
