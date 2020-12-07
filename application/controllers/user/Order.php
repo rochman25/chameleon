@@ -10,6 +10,7 @@ class Order extends MY_Controller
         $this->load->model('Transaksi_model', 'transaksi');
         $this->load->model('Alamat_model', 'alamat');
         $this->load->model('Cart_model', 'cart');
+        $this->load->model('Kategori_model','kategori');
         $this->load->model('Detailcart_model', 'cart_item');
     }
 

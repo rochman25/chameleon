@@ -74,7 +74,7 @@ $this->load->view('public/cart');
                                     <div class="product-card-wrapper" style="padding-bottom: 30%;height:600px;">
                                         <a href="<?= base_url(); ?>detail?produk=<?= $row['id_produk']; ?>">
                                             <div class="product-category">
-                                                <img src="" style="height:300px;" alt="" data-src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>">
+                                                <img src="" style="height:auto;" alt="" data-src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>">
                                                 <div class="row" style="margin-right: 0;margin-left: 0px;margin-bottom:10px; margin-top:0px">
                                                     <?php if ($row['label_produk'] != null) { ?>
                                                         <div class="column" style="width: 70%;">
