@@ -16,24 +16,34 @@ $this->load->view('public/cart');
         <section class="banner">
             <div class="owl-carousel owl-theme">
                 <!-- <a href="<?= base_url() ?>promo" -->
-                <a>
-                    <div class="banner-card">
-                        <img src="<?= base_url() ?>assets/images/bg_all/formal.jpeg">
-                    </div>
-                </a>
-                <!-- <a href="<?= base_url() ?>promo"> -->
-                <a>
-                    <div class="banner-card">
-                        <img src="<?= base_url() ?>assets/images/bg_all/moff.jpeg">
-                    </div>
-                </a>
-                <!-- <a href="<?= base_url() ?>promo"> -->
-                <a>
-                    <div class="banner-card">
-                        <img src="<?= base_url() ?>assets/images/bg_all/paket-lengkap.jpeg">
-                    </div>
-                </a>
-
+                <?php
+                if (!empty($banner)) {
+                    foreach ($banner as $key => $item) { ?>
+                        <a href="<?= base_url('detail?produk=' . $item['produk_id']) ?>">
+                            <div class="banner-card">
+                                <img src="<?= base_url() ?>assets/images/bg_all/<?= $item['filename'] ?>">
+                            </div>
+                        </a>
+                    <?php }
+                } else { ?>
+                    <a>
+                        <div class="banner-card">
+                            <img src="<?= base_url() ?>assets/images/bg_all/formal.jpeg">
+                        </div>
+                    </a>
+                    <!-- <a href="<?= base_url() ?>promo"> -->
+                    <a>
+                        <div class="banner-card">
+                            <img src="<?= base_url() ?>assets/images/bg_all/moff.jpeg">
+                        </div>
+                    </a>
+                    <!-- <a href="<?= base_url() ?>promo"> -->
+                    <a>
+                        <div class="banner-card">
+                            <img src="<?= base_url() ?>assets/images/bg_all/paket-lengkap.jpeg">
+                        </div>
+                    </a>
+                <?php } ?>
             </div>
         </section>
         <section class="hot-product">
@@ -46,42 +56,42 @@ $this->load->view('public/cart');
                         <a href="<?= base_url() ?>detail?produk=<?= $p['id_produk'] ?>" style="position: inherit;">
                             <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$p['id_produk']] ?>" alt="">
                             <div class="row" style="margin-right: 0;margin-left: 0px;margin-bottom:10px">
-                                <?php if($p['label_produk'] != null){ ?>
-                                    <div class="column" style="width: 70%;">
-                                <?php }else{ ?>
-                                    <div class="column" style="width: 100%;">
-                                <?php } ?>
-                                    <p style="font-size: 13px; color:white; font-weight: bold;"><?= $p['nama_produk']; ?></p>
-                                    <div class="row" style="margin-right: 0;margin-left: 0px;margin-bottom:10px">
-                                        <?php if ($p['diskon_produk'] != 0) { ?>
-                                            <div class="column" style="width: auto;">
-                                                <div class="price-before" style="font-size:11px; text-decoration : line-through; color:#767171;margin-right:5px">Rp <?php echo number_format($harga, 0); ?></div>
-                                            </div>
-                                            <div class="column" style="width: auto;">
-                                                <div class="price-after" style="font-size: 11px; color:#ff3a3a;"> Rp <?= number_format($p['harga_produk'] - (($p['diskon_produk'] / 100) * $p['harga_produk']), 0); ?></div>
-                                            </div>
-                                        <?php } else { ?>
-                                            <div class="column" style="width: auto;">
-                                                <div class="price-after" style="font-size: 11px; color:#ff3a3a;"> Rp <?php echo number_format($harga, 0); ?>
-                                                </div>
-                                            </div>
-                                        <?php } ?>
-                                    </div>
-                                </div>
                                 <?php if ($p['label_produk'] != null) { ?>
-                                    <div class="column" style="float: right;width: 25%;">
-                                        <?php $label_p = explode(",", $p['label_produk']);
-                                        foreach ($label_p as $key_l => $val_l) {
-                                        ?>
-                                            <div class="badge_label_<?php echo str_replace(" ","_",$val_l) ?>">
-                                                <p style="font-size: 8px;"><?= strtoupper($val_l) ?></p>
+                                    <div class="column" style="width: 70%;">
+                                    <?php } else { ?>
+                                        <div class="column" style="width: 100%;">
+                                        <?php } ?>
+                                        <p style="font-size: 13px; color:white; font-weight: bold;"><?= $p['nama_produk']; ?></p>
+                                        <div class="row" style="margin-right: 0;margin-left: 0px;margin-bottom:10px">
+                                            <?php if ($p['diskon_produk'] != 0) { ?>
+                                                <div class="column" style="width: auto;">
+                                                    <div class="price-before" style="font-size:11px; text-decoration : line-through; color:#767171;margin-right:5px">Rp <?php echo number_format($harga, 0); ?></div>
+                                                </div>
+                                                <div class="column" style="width: auto;">
+                                                    <div class="price-after" style="font-size: 11px; color:#ff3a3a;"> Rp <?= number_format($p['harga_produk'] - (($p['diskon_produk'] / 100) * $p['harga_produk']), 0); ?></div>
+                                                </div>
+                                            <?php } else { ?>
+                                                <div class="column" style="width: auto;">
+                                                    <div class="price-after" style="font-size: 11px; color:#ff3a3a;"> Rp <?php echo number_format($harga, 0); ?>
+                                                    </div>
+                                                </div>
+                                            <?php } ?>
+                                        </div>
+                                        </div>
+                                        <?php if ($p['label_produk'] != null) { ?>
+                                            <div class="column" style="float: right;width: 25%;">
+                                                <?php $label_p = explode(",", $p['label_produk']);
+                                                foreach ($label_p as $key_l => $val_l) {
+                                                ?>
+                                                    <div class="badge_label_<?php echo str_replace(" ", "_", $val_l) ?>">
+                                                        <p style="font-size: 8px;"><?= strtoupper($val_l) ?></p>
+                                                    </div>
+                                                <?php } ?>
                                             </div>
                                         <?php } ?>
                                     </div>
-                                <?php } ?>
-                            </div>
-                            <!-- <div class="price-before" style="text-decoration : line-through">Rp 429,000</div> -->
-                            <!-- <div class="price-after">Rp.<?= number_format($harga, 0); ?></div> -->
+                                    <!-- <div class="price-before" style="text-decoration : line-through">Rp 429,000</div> -->
+                                    <!-- <div class="price-after">Rp.<?= number_format($harga, 0); ?></div> -->
                         </a>
                     </div>
                 <?php } ?>

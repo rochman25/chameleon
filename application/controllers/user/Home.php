@@ -8,6 +8,7 @@ class Home extends MY_Controller
         parent::__construct();
         $this->load->model('Produk_model', 'produk');
         $this->load->model('Pengguna_model', 'user');
+        $this->load->model('Banner_model','banner');
         $this->load->model('Kategori_model', 'kategori');
         $this->load->model('Cart_model', 'cart');
         $this->load->model('Alamat_model', 'alamat');
@@ -25,6 +26,9 @@ class Home extends MY_Controller
         $data['produk'] = $this->produk->getWhere('produk.stok_produk > ', '0');
         $data['produk'] = $this->produk->getData()->result_array();
         $data['kategori'] = $this->kategori->getData()->result_array();
+        $data['banner'] = $this->banner->order_by("order","ASC");  
+        $data['banner'] = $this->banner->getWhere("active","1");      
+        $data['banner'] = $this->banner->getData()->result_array();
         foreach ($data['produk'] as $row) {
             $foto = explode(',', $row['thumbnail_produk']);
             $thumbnail[$row['id_produk']] = $foto[0];

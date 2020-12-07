@@ -15,12 +15,12 @@ class Banner_model extends MY_Model
     }
 
     function getById($id){
-        $this->getWhere('id_kategori',$id);
+        $this->getWhere('id',$id);
         return $this->getData()->row();
     }
 
     function updateData($data,$id){
-        $this->getWhere('id_kategori',$id);
+        $this->getWhere('id',$id);
         return $this->update($data);
     }
 
