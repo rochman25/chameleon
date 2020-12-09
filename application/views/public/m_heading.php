@@ -10,7 +10,7 @@
                     <i class="svg_icon__header_hamburger svg-icon"></i>
                 </a>
             </div>
-            <div class="search">
+            <div class="search" style="margin-right: 50px;">
                 <form action="#" method="get">
                     <button type="submit"><i class="svg_icon__header_search svg-icon"></i></button>
                     <input type="text" name="search" class="autocomplete" placeholder="Masukan Kata Kunci">
@@ -20,7 +20,7 @@
                 <!-- <a href="<?= base_url() ?>profil" class="icon-wishlist"> -->
                 <!-- <i class="svg_icon__wishlist svg-icon"></i> -->
                 <!-- </a> -->
-                <a href="javascript:;" class="icon-cart" style="margin-right: 3rem;">
+                <a href="javascript:;" class="icon-cart" style="margin-right: 0.5rem;">
                     <i class="svg_icon__header_cart svg-icon"><span class="notif">0</span></i>
                 </a>
                 <!-- <a href="<?= base_url() ?>login"> -->

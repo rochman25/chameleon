@@ -104,7 +104,7 @@ $this->load->view('public/cart');
                                         <div class="row" style="margin-right: 0; margin-left: 0px;">
                                             <div class="column"></div>
                                             <div class="column" style="float: right;">
-                                                <?php if ($row['bukti_transfer'] == null) { ?>
+                                                <?php if ($row['bukti_transfer'] == null && $row['status_transaksi'] !== "batal" ) { ?>
                                                     <!-- <span style="float: right;"> -->
                                                     <form action="<?= base_url() ?>pembayaran" method="POST">
                                                         <input type="hidden" name="idtransaksi" value="<?= $row['id_transaksi'] ?>">
@@ -161,7 +161,7 @@ $this->load->view('public/cart');
                                             echo '<span class="badge badge-danger">Pesanan anda dibatalkan.</span>';
                                         ?>
                                         <?php } else { ?>
-                                            <?php if ($row['bukti_transfer'] == null) { ?>
+                                            <?php if ($row['bukti_transfer'] == null && $row['status_transaksi'] != "batal") { ?>
                                                 <form action="<?= base_url() ?>pembayaran" method="POST">
                                                     <input type="hidden" name="idtransaksi" value="<?= $row['id_transaksi'] ?>">
                                                     <input class="btn btn-success" type="submit" value="Konfirmasi">
