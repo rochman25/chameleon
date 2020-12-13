@@ -252,15 +252,15 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="row mt-3">
-                                                                        <div class="col-lg-4">
+                                                                        <div class="col-lg-6">
                                                                             <label for="harga_sub[]">Harga Sub Produk</label>
                                                                             <input type="number" name="harga_sub[]" id="harga_sub[]" placeholder="Masukkan harga sub produk" value="" class="form-control">
                                                                         </div>
-                                                                        <div class="col-lg-4">
+                                                                        <!-- <div class="col-lg-4">
                                                                             <label for="diskon_sub[]">Diskon Sub Produk %</label>
                                                                             <input type="number" name="diskon_sub[]" id="diskon_sub[]" placeholder="Masukkan diskon sub produk" value="" class="form-control">
-                                                                        </div>
-                                                                        <div class="col-lg-4">
+                                                                        </div> -->
+                                                                        <div class="col-lg-6">
                                                                             <label for="berat_sub[]">Berat Sub Produk (gram)</label>
                                                                             <input type="number" name="berat_sub[]" id="berat_sub[]" placeholder="Masukkan berat sub produk" value="" class="form-control">
                                                                         </div>

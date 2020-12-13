@@ -7,6 +7,7 @@ class Home extends MY_Controller
     {
         parent::__construct();
         $this->load->model('Produk_model', 'produk');
+        $this->load->model('SubProduk_model','subproduk');
         $this->load->model('Pengguna_model', 'user');
         $this->load->model('Banner_model','banner');
         $this->load->model('Kategori_model', 'kategori');
@@ -132,6 +133,7 @@ class Home extends MY_Controller
         $data['produk'] = $this->produk->getWhere("id_produk", $id_produk);
         $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
         $data['produk'] = $this->produk->getData()->row();
+        $data['subProduk'] = $this->subproduk->getByIdProduk($id_produk);
         $data['kategori'] = $this->kategori->getData()->result_array();
 
         $foto = explode(',', $data['produk']->thumbnail_produk);

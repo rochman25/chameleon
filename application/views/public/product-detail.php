@@ -130,7 +130,7 @@ $this->load->view('public/cart');
                                 <ul class="clearfix">
                                     <?php foreach ($size as $s) {
                                     ?>
-                                        <li onclick="setUkuran('<?= $s; ?>');" id="S" style="color:black !important;" class="size ">
+                                        <li onclick="setUkuran('<?= $s; ?>');" id="produk<?=$s?>" style="color:black !important;" class="size ">
                                             <span><?= $s; ?></span>
                                         </li>
                                     <?php
@@ -140,7 +140,7 @@ $this->load->view('public/cart');
                             </div>
                             <br>
                             <span>Jumlah :</span>
-                            <div id="size" class="size-product">
+                            <div id="ukuran" class="size-product">
                                 <ul class="clearfix">
                                     <li onclick="ubahjml(2);" class="size active ">
                                         <span>-</span>
@@ -177,36 +177,6 @@ $this->load->view('public/cart');
                             </div>
 
                             <div class="product-order">
-                                <!-- <div class="list clearfix">
-                                <a href="#">
-                                    <div class="image">
-                                        <i class="svg-icon svg_icon__pdp_cart "></i>
-                                    </div>
-                                    <div class="content">
-                                        Cara Pemesanan									
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="list clearfix">
-                                <a href="#">
-                                    <div class="image">
-                                        <i class="svg-icon svg_icon__pdp_shoes "></i>
-                                    </div>
-                                    <div class="content">
-                                        Cara Perawatan									
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="list clearfix">
-                                <a href="#">
-                                    <div class="image">
-                                        <i class="svg-icon svg_icon__pdp_ruler "></i>
-                                    </div>
-                                    <div class="content">
-                                        Panduan Ukuran									
-                                    </div>
-                                </a>
-                            </div> -->
                             </div>
                             <ul class="nav nav-tabs">
                                 <li class="active" data-target="product-deskripsi">
@@ -224,6 +194,62 @@ $this->load->view('public/cart');
                                 <div class="review">
                                 </div>
                             </div>
+                            <?php
+                            if (!empty($subProduk)) {
+                                foreach ($subProduk as $key => $item) { ?>
+                                    <div class="left-right">
+                                        <div class="right-side">
+                                            <div class="card" style="margin-right:10px">
+                                                <div class="card-row">
+                                                    <div class="row" style="margin-right: 0px;margin-left: 0px;">
+                                                        <div class="column">
+                                                            <input type="radio" id="sub<?= $key ?>"> <label for="sub<?= $key ?>" style="margin-left: 10px;"><b><?= $item['nama_sub'] ?></b></label>
+                                                        </div>
+                                                        <div class="column">
+                                                            <b><?= "+ Rp" . number_format($item['harga_sub'], 2) ?></b>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-right: 0px;margin-left: 0px;">
+                                                        <div class="column">
+                                                            <p><b>Ukuran</b></p>
+                                                            <div id="size" class="size-product">
+                                                                <ul class="clearfix" style="font-size: 10px;">
+                                                                    <?php
+                                                                    $size = explode(",", $item['size_sub']);
+                                                                    foreach ($size as $s) {
+                                                                    ?>
+                                                                        <li onclick="setUkuran('<?= $s; ?>','sub<?=$s;?>');" id="sub<?=$s?>" style="color:black !important;" class="size ">
+                                                                            <span><?= $s; ?></span>
+                                                                        </li>
+                                                                    <?php
+                                                                    } ?>
+
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="column">
+                                                            <p><b>Jumlah</b></p>
+                                                            <div id="ukuran" class="size-product">
+                                                                <ul class="clearfix" style="font-size: 10px;">
+                                                                    <li onclick="ubahjml2(2);" class="size active ">
+                                                                        <span>-</span>
+                                                                    </li>
+                                                                    <li class="size  ">
+                                                                        <span style="color:black;" id="value2">1</span>
+                                                                    </li>
+                                                                    <li onclick="ubahjml2(1);" class=" size active ">
+                                                                        <span>+</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            <?php }
+                            } ?>
                         </div>
                     </div>
                 </div>
@@ -263,7 +289,9 @@ $this->load->view('public/footer');
 <script type="text/javascript">
     var base_url = '<?= base_url() ?>';
     var def_jml = 1;
+    var def_jml2 = 1;
     var def_Size = "";
+    var def_Size2 = "";
     var stok = '<?= $produk->stok_produk; ?>';
     var harga = '<?= $produk->harga_produk ?>'
     // var harga = '<?= $produk->diskon_produk != 0 ? $produk->harga_produk - (($produk->diskon_produk / 100) * $produk->harga_produk) : $produk->harga_produk ?>';
@@ -359,9 +387,16 @@ $this->load->view('public/footer');
         def_Size = "XL";
     }
 
-    function setUkuran(ukuran) {
+    function setUkuran(ukuran,id) {
         def_Size = ukuran;
+        var id = document.getElementById(id)
+        id.classList.add('active');
+    }
 
+    function setUkuran(ukuran,id) {
+        def_Size2 = ukuran;
+        var id = document.getElementById(id)
+        id.classList.add('active');
     }
 
     // /var size_view = 
@@ -381,6 +416,24 @@ $this->load->view('public/footer');
             }
         }
         document.getElementById('value').innerHTML = def_jml;
+    }
+
+    function ubahjml2(state) {
+        console.log(state);
+        if (state == 1) {
+            if (def_jml2 < stok) {
+                def_jml2++
+            } else {
+                //  def_jml = stok;
+            }
+        } else {
+            if (def_jml2 <= 1) {
+                def_jml2 = 1;
+            } else {
+                def_jml2--;
+            }
+        }
+        document.getElementById('value2').innerHTML = def_jml2;
     }
 
     $(document).ready(function() {
@@ -443,9 +496,6 @@ $this->load->view('public/footer');
             cursor: "crosshair"
         });
     }
-
-
-
 
     $(document).ready(function() {
 
