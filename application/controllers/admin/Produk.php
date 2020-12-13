@@ -78,12 +78,49 @@ class Produk extends MY_Controller
                 );
                 // die(json_encode($data));
                 if ($this->produk->tambah_produk($data)) {
-                    $this->session->unset_userdata('produk_data');
-                    $this->session->set_flashdata(
-                        'pesan',
-                        '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil ditambahkan</div>'
-                    );
-                    redirect('admin/produk');
+
+
+                    $data_sub_insert = [];
+                    $dataproduk = $this->produk->getById($kode_p);
+                    $id_sub = $this->input->post('id_sub');
+                    $nama_sub = $this->input->post('nama_sub');
+                    $size_sub = $this->input->post('size_sub');
+                    $harga_sub = $this->input->post('harga_sub');
+                    $berat_sub = $this->input->post('berat_sub');
+                    $diskon_sub = $this->input->post('diskon_sub');
+                    $stok_sub = $this->input->post('stok_sub');
+                    foreach ($nama_sub as $key => $item) {
+                        $data_sub_insert[] =
+                            [
+                                "produk_id" => $dataproduk->id_produk,
+                                "nama_sub" => $item,
+                                "size_sub" => $size_sub[$key],
+                                "harga_sub" => $harga_sub[$key],
+                                "berat_sub" => $berat_sub[$key],
+                                "diskon_sub" => $diskon_sub[$key],
+                                "stok_sub" => $stok_sub[$key],
+                                "created_at" => date("Y-m-d H:i:s"),
+                                "updated_at" => date("Y-m-d H:i:s")
+                            ];
+                    }
+                    if (!empty($data_sub_insert)) {
+                        $subProduk = $this->subproduk->insert_multiple($data_sub_insert);
+                    }
+
+                    if ($subProduk) {
+                        $this->session->unset_userdata('produk_data');
+                        $this->session->set_flashdata(
+                            'pesan',
+                            '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil ditambahkan</div>'
+                        );
+                        redirect('admin/produk');
+                    } else {
+                        $this->session->set_flashdata(
+                            'pesan',
+                            '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
+                        );
+                        redirect('admin/produk');
+                    }
                 } else {
                     $this->session->set_flashdata(
                         'pesan',
@@ -157,38 +194,62 @@ class Produk extends MY_Controller
                 // die(json_encode($datas));
                 if ($this->produk->updateData($datas, $id)) {
                     //sub produk
-                    $data_sub = [];
+                    $data_sub_insert = [];
+                    $data_sub_update = [];
                     $id_sub = $this->input->post('id_sub');
                     $nama_sub = $this->input->post('nama_sub');
                     $size_sub = $this->input->post('size_sub');
                     $harga_sub = $this->input->post('harga_sub');
                     $berat_sub = $this->input->post('berat_sub');
                     $diskon_sub = $this->input->post('diskon_sub');
+                    $stok_sub = $this->input->post('stok_sub');
 
                     foreach ($nama_sub as $key => $item) {
-                        $data_sub[] = 
-                            [
-                                "produk_id" => $data['produk']->id_produk,
-                                "nama_sub" => $item,
-                                "size_sub" => $size_sub[$key],
-                                "harga_sub" => $harga_sub[$key],
-                                "berat_sub" => $berat_sub[$key],
-                                "diskon_sub" => $diskon_sub[$key],
-                                "created_at" => date("Y-m-d H:i:s"),
-                                "updated_at" => date("Y-m-d H:i:s")
-                            ]
-                        ;
+                        if ($id_sub[$key] != null) {
+                            $data_sub_update[] =
+                                [
+                                    "id" => $id_sub[$key],
+                                    "produk_id" => $data['produk']->id_produk,
+                                    "nama_sub" => $item,
+                                    "size_sub" => $size_sub[$key],
+                                    "harga_sub" => $harga_sub[$key],
+                                    "berat_sub" => $berat_sub[$key],
+                                    "diskon_sub" => $diskon_sub[$key],
+                                    "stok_sub" => $stok_sub[$key],
+                                    "created_at" => date("Y-m-d H:i:s"),
+                                    "updated_at" => date("Y-m-d H:i:s")
+                                ];
+                        } else {
+                            $data_sub_insert[] =
+                                [
+                                    "produk_id" => $data['produk']->id_produk,
+                                    "nama_sub" => $item,
+                                    "size_sub" => $size_sub[$key],
+                                    "harga_sub" => $harga_sub[$key],
+                                    "berat_sub" => $berat_sub[$key],
+                                    "diskon_sub" => $diskon_sub[$key],
+                                    "stok_sub" => $stok_sub[$key],
+                                    "created_at" => date("Y-m-d H:i:s"),
+                                    "updated_at" => date("Y-m-d H:i:s")
+                                ];
+                        }
                     }
                     // die(json_encode($data_sub));
+                    if (!empty($data_sub_update)) {
+                        $subProduk = $this->subproduk->update_multiple($data_sub_update, "id");
+                    }
 
-                    $subProduk = $this->subproduk->insert_multiple($data_sub);
-                    if($subProduk){
+                    if (!empty($data_sub_insert)) {
+                        $subProduk = $this->subproduk->insert_multiple($data_sub_insert);
+                    }
+
+                    if ($subProduk) {
                         $this->session->set_flashdata(
                             'pesan',
                             '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil diubah</div>'
                         );
                         redirect('admin/produk');
-                    }else{
+                    } else {
                         $this->session->set_flashdata(
                             'pesan',
                             '<div class="alert alert-danger mr-auto alert-dismissible">Data Gagal diubah</div>'
@@ -282,7 +343,7 @@ class Produk extends MY_Controller
                         } else {
                             $this->session->set_flashdata(
                                 'pesan',
-                                '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah error: ' . $this->upload->print_debugger() . '</div>'
+                                '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah error: ' . $this->upload->display_errors() . '</div>'
                             );
                             redirect('admin/produk');
                         }
@@ -343,6 +404,17 @@ class Produk extends MY_Controller
             echo json_encode(['message' => "success"]);
         } else {
             echo json_encode(['message' => "error"]);
+        }
+    }
+
+    public function deleteSubProduk()
+    {
+        $id = $this->input->post('id');
+        $query = $this->subproduk->delete("id", $id);
+        if ($query) {
+            echo json_encode(['status' => true, 'message' => "success"]);
+        } else {
+            echo json_encode(['status' => false, 'message' => "error"]);
         }
     }
 

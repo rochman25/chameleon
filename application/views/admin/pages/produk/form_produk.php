@@ -189,7 +189,7 @@
                                                                 foreach ($subProduk as $key => $item) {
                                                             ?>
                                                                     <div class="form-group" id="subProduk<?= $index ?>">
-                                                                        <input type="hidden" name="id_sub[]" value="<?= $item['id'] ?>" class="form-control">
+                                                                        <input type="hidden" id="id_sub<?= $index ?>" name="id_sub[]" value="<?= $item['id'] ?>" class="form-control">
                                                                         <div class="row" style="margin-top: 10px;">
                                                                             <div class="col-lg-6">
                                                                                 <label for="nama_sub[]">Nama Sub Produk</label>
@@ -224,7 +224,7 @@
                                                                         </div>
                                                                         <div class="row mt-5">
                                                                             <div class="col-lg-12">
-                                                                                <button type="button" id="btnDelSub<?= $index ?>" data-id="subProduk<?= $index ?>" class="btn btn-danger btn-sm btnHapusSub"> X Hapus Sub Produk </button>
+                                                                                <button type="button" id="btnDelSub<?= $index ?>" data-id="subProduk<?= $index ?>" data-idsub="<?= $item['id'] ?>" class="btn btn-danger btn-sm btnHapusSub"> X Hapus Sub Produk </button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -267,7 +267,7 @@
                                                                     </div>
                                                                     <div class="row mt-3">
                                                                         <div class="col-lg-12">
-                                                                            <button type="button" id="btnDelSub1" data-id="subProduk1" class="btn btn-danger btn-sm btnHapusSub"> X Hapus Sub Produk </button>
+                                                                            <button type="button" id="btnDelSub1" data-id="subProduk1" data-idsub="" class="btn btn-danger btn-sm btnHapusSub"> X Hapus Sub Produk </button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -364,7 +364,7 @@
         })
         $(document).ready(function() {
 
-            $('#btnDelSub1').hide()
+            // $('#btnDelSub1').hide()
             // if (getUrlParameter('id') != null) {
             // console.log("done")
             $.getJSON("<?= base_url() ?>admin/produk/getThumbnail/" + getUrlParameter('id'), function(data) {
@@ -412,7 +412,36 @@
 
             $(document).on('click', '.btnHapusSub', function() {
                 var id = "#" + $(this).data('id');
-                $(id).remove()
+                var idSub = $(this).data('idsub');
+                if (idSub !== "") {
+                    $.ajax({
+                        type: "POST",
+                        url: "<?= base_url('admin/produk/deleteSubProduk') ?>",
+                        dataType: "JSON",
+                        data: {
+                            id: idSub
+                        },
+                        success: function(data) {
+                            if (data.status == true) {
+                                if (id === "#subProduk1") {
+                                    $('#subProduk1').find(".form-control").val("")
+                                    $(this).data('idsub',"");
+                                } else {
+                                    $(id).remove()
+                                }
+                            } else {
+                                console.log(data.message);
+                            }
+                        }
+                    })
+                } else {
+                    if (id === "#subProduk1") {
+                        $('#subProduk1').find(".form-control").val("")
+                        $(this).data('idsub',"");
+                    } else {
+                        $(id).remove()
+                    }
+                }
             });
 
             // }
