@@ -9,6 +9,7 @@ class Produk extends MY_Controller
         parent::__construct();
         $this->load->model('Produk_model', 'produk');
         $this->load->model('Kategori_model', 'kategori');
+        $this->load->model('SubProduk_model', 'subproduk');
         $this->load->library('upload');
     }
 
@@ -90,10 +91,10 @@ class Produk extends MY_Controller
                     );
                     redirect('admin/produk');
                 }
-            }else{
-                $this->load->view('admin/pages/produk/form_produk',$data);
+            } else {
+                $this->load->view('admin/pages/produk/form_produk', $data);
             }
-        }else{
+        } else {
             redirect('admin/home/login');
         }
     }
@@ -102,8 +103,10 @@ class Produk extends MY_Controller
     {
         if ($this->adminIsLoggedIn()) {
             $id = $this->input->get('id');
+            // die(json_encode($this->input->post('nama_sub')));
             $data['kat_p'] = $this->kategori->getData()->result_array();
             $data['produk'] = $this->produk->getById($id);
+            $data['subProduk'] = $this->subproduk->getByIdProduk($data['produk']->id_produk);
             if ($this->input->post('kirim')) {
                 $nama_p = $this->input->post('nama_p');
                 $desc_p = $this->input->post('desc_p');
@@ -118,7 +121,7 @@ class Produk extends MY_Controller
 
                 $label_p = implode(",", $label_p);
 
-                if($this->session->userdata('produk_data') != null){
+                if ($this->session->userdata('produk_data') != null) {
                     $thumbnail = implode(",", $this->session->userdata['produk_data']['thumbnail']);
                     $datas = array(
                         "nama_produk" => $nama_p,
@@ -135,7 +138,7 @@ class Produk extends MY_Controller
                         "updated_at" => date("Y-m-d H:i:s")
                     );
                     $this->session->unset_userdata('produk_data');
-                }else{
+                } else {
                     $datas = array(
                         "nama_produk" => $nama_p,
                         "deskripsi_produk" => $desc_p,
@@ -150,25 +153,59 @@ class Produk extends MY_Controller
                         "updated_at" => date("Y-m-d H:i:s")
                     );
                 }
+
                 // die(json_encode($datas));
                 if ($this->produk->updateData($datas, $id)) {
-                    $this->session->set_flashdata(
-                        'pesan',
-                        '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil diubah</div>'
-                    );
-                    redirect('admin/produk');
-                }else{
+                    //sub produk
+                    $data_sub = [];
+                    $id_sub = $this->input->post('id_sub');
+                    $nama_sub = $this->input->post('nama_sub');
+                    $size_sub = $this->input->post('size_sub');
+                    $harga_sub = $this->input->post('harga_sub');
+                    $berat_sub = $this->input->post('berat_sub');
+                    $diskon_sub = $this->input->post('diskon_sub');
+
+                    foreach ($nama_sub as $key => $item) {
+                        $data_sub[] = 
+                            [
+                                "produk_id" => $data['produk']->id_produk,
+                                "nama_sub" => $item,
+                                "size_sub" => $size_sub[$key],
+                                "harga_sub" => $harga_sub[$key],
+                                "berat_sub" => $berat_sub[$key],
+                                "diskon_sub" => $diskon_sub[$key],
+                                "created_at" => date("Y-m-d H:i:s"),
+                                "updated_at" => date("Y-m-d H:i:s")
+                            ]
+                        ;
+                    }
+                    // die(json_encode($data_sub));
+
+                    $subProduk = $this->subproduk->insert_multiple($data_sub);
+                    if($subProduk){
+                        $this->session->set_flashdata(
+                            'pesan',
+                            '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil diubah</div>'
+                        );
+                        redirect('admin/produk');
+                    }else{
+                        $this->session->set_flashdata(
+                            'pesan',
+                            '<div class="alert alert-danger mr-auto alert-dismissible">Data Gagal diubah</div>'
+                        );
+                        redirect('admin/produk');
+                    }
+                } else {
                     $this->session->set_flashdata(
                         'pesan',
                         '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
                     );
                     redirect('admin/produk');
                 }
-
-            }else{
-                $this->load->view('admin/pages/produk/form_produk',$data);
+            } else {
+                $this->load->view('admin/pages/produk/form_produk', $data);
             }
-        }else{
+        } else {
             redirect('admin/home/login');
         }
     }
@@ -212,9 +249,9 @@ class Produk extends MY_Controller
                 $i = 0;
                 $index = 0;
                 $kode_p = $this->input->post('kode_p');
-                if($kode_p == ""){
-                    $kode_p = $this->produk->generateKode($this->input->post('file_name'));   
-                }else{
+                if ($kode_p == "") {
+                    $kode_p = $this->produk->generateKode($this->input->post('file_name'));
+                } else {
                     $data_f = $this->produk->getById($kode_p);
                     $foto = explode(',', $data_f->thumbnail_produk);
                 }
@@ -223,8 +260,8 @@ class Produk extends MY_Controller
                     foreach ($this->session->userdata['produk_data']['thumbnail'] as $row) {
                         $index++;
                     }
-                }else if($foto != null){
-                    foreach ($foto as $row){
+                } else if ($foto != null) {
+                    foreach ($foto as $row) {
                         $index++;
                     }
                 }
@@ -262,9 +299,9 @@ class Produk extends MY_Controller
                         "thumbnail" => $data,
                         "kode" => $kode_p
                     ));
-                } else if($foto != null){
-                    foreach($foto as $row){
-                        array_push($data,$row);
+                } else if ($foto != null) {
+                    foreach ($foto as $row) {
+                        array_push($data, $row);
                     }
                     $this->session->set_userdata('produk_data', array(
                         "thumbnail" => $data,
@@ -276,24 +313,24 @@ class Produk extends MY_Controller
                         "kode" => $kode_p
                     ));
                 }
-            }else{
-                
+            } else {
             }
         } else {
             redirect('admin/home/login');
         }
     }
 
-    public function deleteFile(){
+    public function deleteFile()
+    {
         $id = $this->input->post('id');
         $nama = $this->input->post('nama');
         $tp = [];
         $data = $this->produk->getById($id);
-        $thumbnail = explode(',',$data->thumbnail_produk);
-        foreach($thumbnail as $row){
-            if($nama != $row){
+        $thumbnail = explode(',', $data->thumbnail_produk);
+        foreach ($thumbnail as $row) {
+            if ($nama != $row) {
                 $tp[] = $row;
-            }else{
+            } else {
                 unlink("assets/uploads/thumbnail_produk/" . $row);
             }
         }
@@ -301,10 +338,10 @@ class Produk extends MY_Controller
         $data = array(
             "thumbnail_produk" => $thumbnail
         );
-        $query = $this->produk->updateData($data,$id);
-        if($query){
+        $query = $this->produk->updateData($data, $id);
+        if ($query) {
             echo json_encode(['message' => "success"]);
-        }else{
+        } else {
             echo json_encode(['message' => "error"]);
         }
     }
@@ -331,22 +368,21 @@ class Produk extends MY_Controller
     {
         if ($this->adminIsLoggedIn()) {
             $id = $this->input->post('id');
-            if($this->produk->delete("id_produk",$id)){
+            if ($this->produk->delete("id_produk", $id)) {
                 $this->session->set_flashdata(
                     'pesan',
                     '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil dihapus</div>'
                 );
                 redirect('admin/produk');
-            }else{
+            } else {
                 $this->session->set_flashdata(
                     'pesan',
                     '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
                 );
                 redirect('admin/produk');
             }
-        }else{
+        } else {
             redirect('admin/home/login');
         }
     }
-
 }

@@ -178,60 +178,101 @@
                                                     <h4>Sub Produk</h4>
                                                     <div class="card-header-action">
                                                         <button type="button" class="btn btn-sm btn-success" id="tambahSubProduk">+ Tambah Sub Produk</button>
-                                                        <a data-collapse="#mycard-collapse" class="btn btn-icon btn-info" href="#"><i class="fas fa-plus"></i></a>
+                                                        <a data-collapse="#mycard-collapse" class="btn btn-icon btn-info" href="#"><i class="fas fa-minus"></i></a>
                                                     </div>
                                                 </div>
-                                                <div class="collapse" id="mycard-collapse" style="">
+                                                <div class="collapse show" id="mycard-collapse" style="">
                                                     <div class="card-body">
-                                                        <div class="form-group" id="subProduk">
-                                                            <div class="row">
-                                                                <div class="col-lg-6">
-                                                                    <label for="nama_sub[]">Nama Sub Produk</label>
-                                                                    <input type="text" class="form-control" name="nama_sub[]" id="nama_sub[]" value="<?php if (isset($produk)) {
-                                                                                                                                                        echo $produk->nama_produk;
-                                                                                                                                                    } ?>" placeholder="Masukkan nama produk">
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="row">
+                                                        <div id="parentSub">
+                                                            <?php if (isset($subProduk) && !empty($subProduk)) {
+                                                                $index = 1;
+                                                                foreach ($subProduk as $key => $item) {
+                                                            ?>
+                                                                    <div class="form-group" id="subProduk<?= $index ?>">
+                                                                        <input type="hidden" name="id_sub[]" value="<?= $item['id'] ?>" class="form-control">
+                                                                        <div class="row" style="margin-top: 10px;">
+                                                                            <div class="col-lg-6">
+                                                                                <label for="nama_sub[]">Nama Sub Produk</label>
+                                                                                <input type="text" class="form-control" name="nama_sub[]" id="nama_sub[]" value="<?= $item['nama_sub'] ?>" placeholder="Masukkan nama sub produk">
+                                                                            </div>
+                                                                            <div class="col-lg-6">
+                                                                                <div class="row">
+                                                                                    <div class="col-lg-6">
+                                                                                        <label for="size_p">Ukuran Sub Produk</label>
+                                                                                        <input type="text" name="size_sub[]" id="size_sub[]" placeholder="Masukkan ukuran sub produk" value="<?= $item['size_sub'] ?>" class="form-control">
+                                                                                    </div>
+                                                                                    <div class="col-lg-6">
+                                                                                        <label for="stok_p">Stok Sub Produk</label>
+                                                                                        <input type="number" name="stok_sub[]" id="stok_sub[]" placeholder="Masukkan stok sub produk" value="<?= $item['stok_sub'] ?>" class="form-control">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-lg-4">
+                                                                                <label for="harga_sub[]">Harga Sub Produk</label>
+                                                                                <input type="number" name="harga_sub[]" id="harga_sub[]" placeholder="Masukkan harga sub produk" value="<?= $item['harga_sub'] ?>" class="form-control">
+                                                                            </div>
+                                                                            <div class="col-lg-4">
+                                                                                <label for="harga_sub[]">Diskon Sub Produk %</label>
+                                                                                <input type="number" name="diskon_sub[]" id="diskon_sub[]" placeholder="Masukkan diskon sub produk" value="<?= $item['diskon_sub'] ?>" class="form-control">
+                                                                            </div>
+                                                                            <div class="col-lg-4">
+                                                                                <label for="berat_sub[]">Berat Sub Produk (gram)</label>
+                                                                                <input type="number" name="berat_sub[]" id="berat_sub[]" placeholder="Masukkan berat sub produk" value="<?= $item['berat_sub'] ?>" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row mt-5">
+                                                                            <div class="col-lg-12">
+                                                                                <button type="button" id="btnDelSub<?= $index ?>" data-id="subProduk<?= $index ?>" class="btn btn-danger btn-sm btnHapusSub"> X Hapus Sub Produk </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                <?php
+                                                                    $index++;
+                                                                }
+                                                            } else { ?>
+                                                                <div class="form-group" id="subProduk1">
+                                                                    <div class="row mt-3">
                                                                         <div class="col-lg-6">
-                                                                            <label for="size_p">Ukuran Sub Produk</label>
-                                                                            <input type="text" name="size_sub[]" id="size_sub[]" placeholder="Masukkan ukuran produk" value="<?php if (isset($produk)) {
-                                                                                                                                                                            echo $produk->size_produk;
-                                                                                                                                                                        } ?>" class="form-control">
+                                                                            <label for="nama_sub[]">Nama Sub Produk</label>
+                                                                            <input type="text" class="form-control" name="nama_sub[]" id="nama_sub[]" value="" placeholder="Masukkan nama sub produk">
                                                                         </div>
                                                                         <div class="col-lg-6">
-                                                                            <label for="stok_p">Stok Sub Produk</label>
-                                                                            <input type="number" name="stok_sub[]" id="stok_sub[]" placeholder="Masukkan stok produk" value="<?php if (isset($produk)) {
-                                                                                                                                                                            echo $produk->stok_produk;
-                                                                                                                                                                        } ?>" class="form-control">
+                                                                            <div class="row">
+                                                                                <div class="col-lg-6">
+                                                                                    <label for="size_p">Ukuran Sub Produk</label>
+                                                                                    <input type="text" name="size_sub[]" id="size_sub[]" placeholder="Masukkan ukuran sub produk" value="" class="form-control">
+                                                                                </div>
+                                                                                <div class="col-lg-6">
+                                                                                    <label for="stok_p">Stok Sub Produk</label>
+                                                                                    <input type="number" name="stok_sub[]" id="stok_sub[]" placeholder="Masukkan stok sub produk" value="" class="form-control">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mt-3">
+                                                                        <div class="col-lg-4">
+                                                                            <label for="harga_sub[]">Harga Sub Produk</label>
+                                                                            <input type="number" name="harga_sub[]" id="harga_sub[]" placeholder="Masukkan harga sub produk" value="" class="form-control">
+                                                                        </div>
+                                                                        <div class="col-lg-4">
+                                                                            <label for="diskon_sub[]">Diskon Sub Produk %</label>
+                                                                            <input type="number" name="diskon_sub[]" id="diskon_sub[]" placeholder="Masukkan diskon sub produk" value="" class="form-control">
+                                                                        </div>
+                                                                        <div class="col-lg-4">
+                                                                            <label for="berat_sub[]">Berat Sub Produk (gram)</label>
+                                                                            <input type="number" name="berat_sub[]" id="berat_sub[]" placeholder="Masukkan berat sub produk" value="" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mt-3">
+                                                                        <div class="col-lg-12">
+                                                                            <button type="button" id="btnDelSub1" data-id="subProduk1" class="btn btn-danger btn-sm btnHapusSub"> X Hapus Sub Produk </button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-lg-4">
-                                                                    <label for="harga_sub[]">Harga Sub Produk</label>
-                                                                    <input type="number" name="harga_sub[]" id="harga_sub[]" placeholder="Masukkan harga produk" value="<?php if (isset($produk)) {
-                                                                                                                                                                    echo $produk->harga_produk;
-                                                                                                                                                                } ?>" class="form-control">
-                                                                </div>
-                                                                <div class="col-lg-4">
-                                                                    <label for="harga_sub[]">Diskon Sub Produk %</label>
-                                                                    <input type="number" name="diskon_sub[]" id="diskon_sub[]" placeholder="Masukkan diskon produk" value="<?php if (isset($produk)) {
-                                                                                                                                                                        echo $produk->diskon_produk;
-                                                                                                                                                                    } ?>" class="form-control">
-                                                                </div>
-                                                                <div class="col-lg-4">
-                                                                    <label for="berat_sub[]">Berat Sub Produk (gram)</label>
-                                                                    <input type="number" name="berat_sub[]" id="berat_sub[]" placeholder="Masukkan berat produk" value="<?php if (isset($produk)) {
-                                                                                                                                                                    echo $produk->berat_produk;
-                                                                                                                                                                } ?>" class="form-control">
-                                                                </div>
-                                                            </div>
+                                                            <?php } ?>
                                                         </div>
-                                                    </div>
-                                                    <div class="card-footer">
-                                                        Card Footer
                                                     </div>
                                                 </div>
                                             </div>
@@ -322,6 +363,8 @@
             // c.append("status", "remove")
         })
         $(document).ready(function() {
+
+            $('#btnDelSub1').hide()
             // if (getUrlParameter('id') != null) {
             // console.log("done")
             $.getJSON("<?= base_url() ?>admin/produk/getThumbnail/" + getUrlParameter('id'), function(data) {
@@ -347,6 +390,31 @@
                     ['height', ['height']]
                 ]
             });
+
+            $('#tambahSubProduk').on('click', function() {
+                var $div = $('div[id^="subProduk"]:last');
+
+                // Read the Number from that DIV's ID (i.e: 3 from "klon3")
+                // And increment that number by 1
+                var num = parseInt($div.prop("id").match(/\d+/g), 10) + 1;
+
+                // Clone it and assign the new ID (i.e: from num 4 to ID "klon4")
+                var $klon = $div.clone().prop('id', 'subProduk' + num);
+
+                $($klon).find('.btnHapusSub').attr("data-id", "subProduk" + num);
+                $($klon).find('.btnHapusSub').attr("id", "btnDelSub" + num);
+                $($klon).find('.form-control').val("")
+
+                // Finally insert $klon wherever you want
+                $div.after($klon);
+                $('#btnDelSub' + num).show()
+            });
+
+            $(document).on('click', '.btnHapusSub', function() {
+                var id = "#" + $(this).data('id');
+                $(id).remove()
+            });
+
             // }
         })
         // })

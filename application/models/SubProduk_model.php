@@ -16,7 +16,7 @@ class SubProduk_model extends MY_Model
 
     function getByIdProduk($id){
         $this->getWhere('produk_id',$id);
-        return $this->getData()->result();
+        return $this->getData()->result_array();
     }
 
     function updateData($data,$id){
