@@ -110,8 +110,8 @@
                                                 <div class="selectgroup selectgroup-pills">
                                                     <label class="selectgroup-item">
                                                         <input type="checkbox" name="label_p[]" value="new" class="selectgroup-input" <?php if (isset($produk) && strpos($produk->label_produk, 'new') !== false) {
-                                                                                                                                                echo "checked";
-                                                                                                                                            } ?>>
+                                                                                                                                            echo "checked";
+                                                                                                                                        } ?>>
                                                         <span class="selectgroup-button">NEW</span>
                                                     </label>
                                                     <label class="selectgroup-item">
@@ -122,8 +122,8 @@
                                                     </label>
                                                     <label class="selectgroup-item">
                                                         <input type="checkbox" name="label_p[]" value="paling laris" class="selectgroup-input" <?php if (isset($produk) && strpos($produk->label_produk, 'paling laris') !== false) {
-                                                                                                                                                echo "checked";
-                                                                                                                                            } ?>>
+                                                                                                                                                    echo "checked";
+                                                                                                                                                } ?>>
                                                         <span class="selectgroup-button">PALING LARIS</span>
                                                     </label>
                                                     <label class="selectgroup-item">
@@ -169,6 +169,69 @@
                                                                 <input name="file" type="file" multiple/>
                                                             </div> -->
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="card card-success">
+                                                <div class="card-header">
+                                                    <h4>Sub Produk</h4>
+                                                    <div class="card-header-action">
+                                                        <button type="button" class="btn btn-sm btn-success" id="tambahSubProduk">+ Tambah Sub Produk</button>
+                                                        <a data-collapse="#mycard-collapse" class="btn btn-icon btn-info" href="#"><i class="fas fa-plus"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="collapse" id="mycard-collapse" style="">
+                                                    <div class="card-body">
+                                                        <div class="form-group" id="subProduk">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <label for="nama_sub[]">Nama Sub Produk</label>
+                                                                    <input type="text" class="form-control" name="nama_sub[]" id="nama_sub[]" value="<?php if (isset($produk)) {
+                                                                                                                                                        echo $produk->nama_produk;
+                                                                                                                                                    } ?>" placeholder="Masukkan nama produk">
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-6">
+                                                                            <label for="size_p">Ukuran Sub Produk</label>
+                                                                            <input type="text" name="size_sub[]" id="size_sub[]" placeholder="Masukkan ukuran produk" value="<?php if (isset($produk)) {
+                                                                                                                                                                            echo $produk->size_produk;
+                                                                                                                                                                        } ?>" class="form-control">
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            <label for="stok_p">Stok Sub Produk</label>
+                                                                            <input type="number" name="stok_sub[]" id="stok_sub[]" placeholder="Masukkan stok produk" value="<?php if (isset($produk)) {
+                                                                                                                                                                            echo $produk->stok_produk;
+                                                                                                                                                                        } ?>" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-4">
+                                                                    <label for="harga_sub[]">Harga Sub Produk</label>
+                                                                    <input type="number" name="harga_sub[]" id="harga_sub[]" placeholder="Masukkan harga produk" value="<?php if (isset($produk)) {
+                                                                                                                                                                    echo $produk->harga_produk;
+                                                                                                                                                                } ?>" class="form-control">
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <label for="harga_sub[]">Diskon Sub Produk %</label>
+                                                                    <input type="number" name="diskon_sub[]" id="diskon_sub[]" placeholder="Masukkan diskon produk" value="<?php if (isset($produk)) {
+                                                                                                                                                                        echo $produk->diskon_produk;
+                                                                                                                                                                    } ?>" class="form-control">
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <label for="berat_sub[]">Berat Sub Produk (gram)</label>
+                                                                    <input type="number" name="berat_sub[]" id="berat_sub[]" placeholder="Masukkan berat produk" value="<?php if (isset($produk)) {
+                                                                                                                                                                    echo $produk->berat_produk;
+                                                                                                                                                                } ?>" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        Card Footer
                                                     </div>
                                                 </div>
                                             </div>
