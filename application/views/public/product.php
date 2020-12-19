@@ -71,7 +71,7 @@ $this->load->view('public/cart');
                                 foreach ($produk as $row) {
                                     $harga = $row['harga_produk'];
                             ?>
-                                    <div class="product-card-wrapper" style="padding-bottom: 30%;height:600px;">
+                                    <div class="product-card-wrapper" style="margin-bottom: 15%;height:auto;">
                                         <a href="<?= base_url(); ?>detail?produk=<?= $row['id_produk']; ?>">
                                             <div class="product-category">
                                                 <img src="" style="height:auto;" alt="" data-src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>">
@@ -122,13 +122,13 @@ $this->load->view('public/cart');
                                                             </div>
                                                         </div> -->
 
-                                                        <div class="rating-wrapper" style="color: white;">
-                                                            <!-- <img src="https://www.mensrepublic.id/assets/images/category/rating/star-5.png" alt=""> -->
+                                                        <!-- <div class="rating-wrapper" style="color: white;">
+                                                            <img src="https://www.mensrepublic.id/assets/images/category/rating/star-5.png" alt="">
                                                             <span style="color: white;"><?= $row['nama_kategori']; ?></span>
                                                         </div>
                                                         <div class="rest-day" style="color: white;">
                                                             Stok <?= $row['stok_produk']; ?>
-                                                        </div>
+                                                        </div> -->
                                                         <div class="new-po">
                                                         </div>
                                                 </div>

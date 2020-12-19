@@ -110,12 +110,15 @@ $this->load->view('public/cart');
                                 </h2>
                             </div>
                             <div class="column" style="width: 50%;">
-
-                                <div class="column" style="float: right;width: 30%;">
+                                <div class="column" style="float: right;width: 60%;margin-top:0px;margin-right:10%">
                                     <?php $label_p = explode(",", $produk->label_produk);
                                     foreach ($label_p as $key_l => $val_l) {
                                     ?>
-                                        <div class="badge_label_<?php echo $val_l ?>">
+                                        <div class="badge_label_<?php echo str_replace(" ","_",$val_l) ?>" 
+                                        <?php if($key_l != 0){ ?>
+                                        style="margin-top:10px"
+                                        <?php } ?>
+                                        >
                                             <p style="margin-top:0px; font-size:large; font-weight:bold"><?= strtoupper($val_l) ?></p>
                                         </div>
                                     <?php } ?>
@@ -218,7 +221,7 @@ $this->load->view('public/cart');
                                                                     $size = explode(",", $item['size_sub']);
                                                                     foreach ($size as $s) {
                                                                     ?>
-                                                                        <li onclick="setUkuran('<?= $s; ?>','sub<?=$s;?>');" id="sub<?=$s?>" style="color:black !important;" class="size ">
+                                                                        <li onclick="setUkuran('<?= $s; ?>');" id="sub<?=$s?>" style="color:black !important;" class="size ">
                                                                             <span><?= $s; ?></span>
                                                                         </li>
                                                                     <?php
@@ -393,10 +396,10 @@ $this->load->view('public/footer');
         id.classList.add('active');
     }
 
-    function setUkuran(ukuran,id) {
-        def_Size2 = ukuran;
-        var id = document.getElementById(id)
-        id.classList.add('active');
+    function setUkuran(ukuran) {
+        def_Size = ukuran;
+        // var id = document.getElementById(id)
+        // id.classList.add('active');
     }
 
     // /var size_view = 
