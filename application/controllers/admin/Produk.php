@@ -37,6 +37,7 @@ class Produk extends MY_Controller
     public function tambah()
     {
         if ($this->adminIsLoggedIn()) {
+            $diskon_percent = 0;
             $data['kat_p'] = $this->kategori->getData()->result_array();
             if ($this->input->post('kirim')) {
                 $nama_p = $this->input->post('nama_p');
@@ -60,6 +61,7 @@ class Produk extends MY_Controller
 
                 $namaFile = implode(",", $this->session->userdata['produk_data']['thumbnail']);
                 // die(json_encode())
+                $diskon_percent = 100 * ($harga_p - $diskon_p) / $harga_p;
                 $i = 0;
                 $data = array(
                     "kode_produk" => $kode_p,
@@ -71,7 +73,7 @@ class Produk extends MY_Controller
                     "size_produk" => $size_p,
                     "label_produk" => $label_p,
                     "berat_produk" => $berat_p,
-                    "diskon_produk" => $diskon_p,
+                    "diskon_produk" => $diskon_percent,
                     "thumbnail_produk" => $namaFile,
                     "video_link" => $link,
                     "created_at" => date("Y-m-d H:i:s")
@@ -140,6 +142,7 @@ class Produk extends MY_Controller
     {
         if ($this->adminIsLoggedIn()) {
             $id = $this->input->get('id');
+            $diskon_percent = 0;
             // die(json_encode($this->input->post('nama_sub')));
             $data['kat_p'] = $this->kategori->getData()->result_array();
             $data['produk'] = $this->produk->getById($id);
@@ -157,6 +160,7 @@ class Produk extends MY_Controller
                 $link = $this->input->post('link');
 
                 $label_p = implode(",", $label_p);
+                $diskon_percent = 100 * ($harga_p - $diskon_p) / $harga_p;
 
                 if ($this->session->userdata('produk_data') != null) {
                     $thumbnail = implode(",", $this->session->userdata['produk_data']['thumbnail']);
@@ -168,7 +172,7 @@ class Produk extends MY_Controller
                         "id_kategori" => $kat_p,
                         "berat_produk" => $berat_p,
                         "label_produk" => $label_p,
-                        "diskon_produk" => $diskon_p,
+                        "diskon_produk" => $diskon_percent,
                         "thumbnail_produk" => $thumbnail,
                         "size_produk" => $size_p,
                         "video_link" => $link,
@@ -182,13 +186,14 @@ class Produk extends MY_Controller
                         "stok_produk" => $stok_p,
                         "harga_produk" => $harga_p,
                         "id_kategori" => $kat_p,
-                        "diskon_produk" => $diskon_p,
+                        "diskon_produk" => $diskon_percent,
                         "label_produk" => $label_p,
                         "berat_produk" => $berat_p,
                         "size_produk" => $size_p,
                         "video_link" => $link,
                         "updated_at" => date("Y-m-d H:i:s")
                     );
+                    // die(json_encode($datas));
                 }
 
                 // die(json_encode($datas));

@@ -92,9 +92,9 @@
                                                                                                                                                     } ?>" class="form-control">
                                                     </div>
                                                     <div class="col-lg-2">
-                                                        <label for="harga_p">Diskon Produk %</label>
-                                                        <input type="number" name="diskon_p" id="diskon_p" placeholder="Masukkan diskon produk" value="<?php if (isset($produk)) {
-                                                                                                                                                            echo $produk->diskon_produk;
+                                                        <label for="harga_p">Harga Diskon Produk</label>
+                                                        <input type="number" min="0" name="diskon_p" id="diskon_p" placeholder="Masukkan harga diskon produk" value="<?php if (isset($produk)) {
+                                                                                                                                                            echo $produk->harga_produk - ($produk->diskon_produk/100 * $produk->harga_produk);
                                                                                                                                                         } ?>" class="form-control">
                                                     </div>
                                                     <div class="col-lg-2">
@@ -173,7 +173,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="card card-success">
+                                            <div class="card card-success" style="display:none">
                                                 <div class="card-header">
                                                     <h4>Sub Produk</h4>
                                                     <div class="card-header-action">
@@ -181,7 +181,7 @@
                                                         <a data-collapse="#mycard-collapse" class="btn btn-icon btn-info" href="#"><i class="fas fa-minus"></i></a>
                                                     </div>
                                                 </div>
-                                                <div class="collapse show" id="mycard-collapse" style="">
+                                                <div class="collapse show" id="mycard-collapse">
                                                     <div class="card-body">
                                                         <div id="parentSub">
                                                             <?php if (isset($subProduk) && !empty($subProduk)) {
