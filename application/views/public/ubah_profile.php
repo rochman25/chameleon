@@ -59,7 +59,7 @@ $this->load->view('public/cart');
                             </button>
                             <div class="row">
                                 <div class="column" style="width:100%; float: right;">
-                                    <a href="<?= base_url() ?>logout" class="logout">
+                                    <a href="<?= base_url() ?>keluar" class="logout">
                                         <i class="fa fa-sign-out"></i> logout </a>
                                 </div>
                             </div>
