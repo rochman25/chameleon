@@ -110,7 +110,7 @@ $this->load->view('public/cart');
                                 </h2>
                             </div>
                             <div class="column" style="width: 50%;">
-                                <div class="column" style="float: right;width: 60%;margin-top:0px;margin-right:10%">
+                                <div class="column" style="float: right;width: 60%;margin-top:0px;margin-right:10%;text-align: right;">
                                     <?php $label_p = explode(",", $produk->label_produk);
                                     foreach ($label_p as $key_l => $val_l) {
                                     ?>
@@ -122,7 +122,7 @@ $this->load->view('public/cart');
                                             <p style="margin-top:0px; font-size:large; font-weight:bold"><?= strtoupper($val_l) ?></p>
                                         </div>
                                     <?php } ?>
-                                    <a href="#" data-toggle="modal" data-target="#sizeModal" style="color: red; font-weight: bold; text-decoration: underline; margin-top:10px">*Size Chart</a>
+                                    <a href="#" data-toggle="modal" data-target="#sizeModal" style="color: red; font-weight: bold; text-decoration: underline;  margin-top:10px">*Size Chart</a>
                                 </div>
                             </div>
                         </div>
@@ -270,7 +270,7 @@ $this->load->view('public/cart');
                 </button>
             </div>
             <div class="modal-body">
-                <?php if ($produk->nama_kategori == "celana") { ?>
+                <?php if ($produk->nama_kategori == "Celana") { ?>
                     <img src="<?= base_url() ?>assets/public/size_celana.jpg" width="100%">
                 <?php } else if ($produk->nama_kategori == "Jas") { ?>
                     <img src="<?= base_url() ?>assets/public/size_jas.jpg" width="100%">
