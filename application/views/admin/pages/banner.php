@@ -176,7 +176,7 @@
                                             <label>Link Redirect</label>
                                             <div class="input-group">
                                                 <input type="hidden" class="form-control" name="id" id="id">
-                                                <input type="text" name="link_redirect" id="ubahLink" class="form-control">
+                                                <input type="text" name="link_redirect" id="ubahLink" class="form-control" required>
                                                 <!-- <select class="form-control" name="produk_id" id="ubahProduk">
                                                     <option value=""> -- Pilih Produk -- </option>
                                                     <?php foreach ($produk as $key => $item) { ?>

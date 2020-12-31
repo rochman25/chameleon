@@ -106,10 +106,10 @@ class Banner extends MY_Controller
                 }
             }else{
                 $data = array(
-                    "produk_id" => $produk,
+                    "produk_id" => "",
                     "order" => $order,
                     "active" => $active,
-                    "link_redirect" => base_url('detail?produk='.$produk),
+                    "link_redirect" => $link_redirect,
                     "updated_at" => date("Y-m-d H:i:s")
                 );
             }
