@@ -44,7 +44,7 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">No</th>
-                                                    <th scope="col">Produk</th>
+                                                    <!-- <th scope="col">Produk</th> -->
                                                     <th scope="col">Foto</th>
                                                     <th scope="col">Order</th>
                                                     <th scope="col">Status</th>
@@ -57,12 +57,12 @@
                                                 foreach ($banner as $row) { ?>
                                                     <tr>
                                                         <th scope="row"><?= $no++ ?></th>
-                                                        <td><?= $row['nama_produk'] ?></td>
+                                                        <!-- <td><?= $row['nama_produk'] ?></td> -->
                                                         <td><img style="margin:10px;" width="150px" src="<?= base_url() ?>assets/images/bg_all/<?= $row['filename'] ?>" alt="<?= $row['filename'] ?>"></td>
                                                         <td><?= $row['order'] ?></td>
                                                         <td><?= $row['active'] ?></td>
                                                         <td>
-                                                            <button id="btnUbah" class="btn btn-success" data-target="#ubahModal" data-toggle="modal" data-id="<?= $row['id'] ?>" data-produk="<?= $row['produk_id'] ?>" data-order="<?= $row['order'] ?>" data-status="<?= $row['active'] ?>">Ubah</button>
+                                                            <button id="btnUbah" class="btn btn-success" data-target="#ubahModal" data-toggle="modal" data-id="<?= $row['id'] ?>" data-produk="<?= $row['produk_id'] ?>" data-order="<?= $row['order'] ?>" data-link="<?=$row['link_redirect']?>" data-status="<?= $row['active'] ?>">Ubah</button>
                                                             <button id="btnHapus" class="btn btn-danger" data-target="#hapusModal" data-toggle="modal" data-id="<?= $row['id'] ?>" data-foto="<?= $row['filename'] ?>">Hapus</button>
                                                         </td>
                                                     </tr>
@@ -91,14 +91,15 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <label>Produk</label>
+                                            <label>Link Redirect</label>
                                             <div class="input-group">
-                                                <select class="form-control" name="produk_id">
+                                                <input type="text" name="link_redirect" class="form-control">
+                                                <!-- <select class="form-control" name="produk_id">
                                                     <option value=""> -- Pilih Produk -- </option>
                                                     <?php foreach ($produk as $key => $item) { ?>
                                                         <option value="<?= $item['id_produk'] ?>"><?= $item['nama_produk'] ?></option>
                                                     <?php } ?>
-                                                </select>
+                                                </select> -->
                                                 <!-- <input type="text" class="form-control" placeholder="Nama Kategori" name="nama" required> -->
                                             </div>
                                         </div>
@@ -172,15 +173,16 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <label>Produk</label>
+                                            <label>Link Redirect</label>
                                             <div class="input-group">
                                                 <input type="hidden" class="form-control" name="id" id="id">
-                                                <select class="form-control" name="produk_id" id="ubahProduk">
+                                                <input type="text" name="link_redirect" id="ubahLink" class="form-control">
+                                                <!-- <select class="form-control" name="produk_id" id="ubahProduk">
                                                     <option value=""> -- Pilih Produk -- </option>
                                                     <?php foreach ($produk as $key => $item) { ?>
                                                         <option value="<?= $item['id_produk'] ?>"><?= $item['nama_produk'] ?></option>
                                                     <?php } ?>
-                                                </select>
+                                                </select> -->
                                                 <!-- <input type="text" class="form-control" placeholder="Nama Kategori" name="nama" required> -->
                                             </div>
                                         </div>
@@ -284,14 +286,16 @@
             let id = $(this).data('id');
             let produk = $(this).data('produk');
             let order = $(this).data('order');
+            let link = $(this).data('link');
             let status = $(this).data('status');
             $('input[id="id"]').val(id);
             $('#ubahProduk').val(produk);
             $('#ubahUrutan').val(order);
-            if(status == "1"){
-                $('#ubahRadio1').attr('checked',true);
-            }else if(status == "0"){
-                $('#ubahRadio2').attr('checked',true);
+            $('#ubahLink').val(link);
+            if (status == "1") {
+                $('#ubahRadio1').attr('checked', true);
+            } else if (status == "0") {
+                $('#ubahRadio2').attr('checked', true);
             }
             // $('input[id="nama_kategori"]').val(nama);
             // $('#deskripsi_kategori').val(desc)

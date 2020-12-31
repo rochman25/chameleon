@@ -19,7 +19,7 @@ $this->load->view('public/cart');
                 <?php
                 if (!empty($banner)) {
                     foreach ($banner as $key => $item) { ?>
-                        <a href="<?= base_url('detail?produk=' . $item['produk_id']) ?>">
+                        <a href="<?= $item['link_redirect'] ?>">
                             <div class="banner-card">
                                 <img src="<?= base_url() ?>assets/images/bg_all/<?= $item['filename'] ?>">
                             </div>

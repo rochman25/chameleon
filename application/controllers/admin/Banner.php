@@ -26,19 +26,20 @@ class Banner extends MY_Controller
     {
         if ($this->adminIsLoggedIn()) {
             $produk = $this->input->post('produk_id');
+            $link_redirect = $this->input->post('link_redirect');
             $order = $this->input->post('order');
             $active = $this->input->post('active');
             if (!empty($_FILES['thumbnail']['name'])) {
                 $eks = substr(strrchr($_FILES['thumbnail']['name'], '.'), 1);
-                $thumbnail = str_replace(' ', '-', $produk) . "." . $eks;
+                $thumbnail = str_replace(' ', '_', $_FILES['thumbnail']['name']);
                 $this->uploadFotoBanner($thumbnail);
                 if ($this->upload->do_upload("thumbnail")) {
                     $data = array(
-                        "produk_id" => $produk,
+                        "produk_id" => "",
                         "order" => $order,
                         "active" => $active,
                         "filename" => $thumbnail,
-                        "link_redirect" => base_url('detail?produk='.$produk),
+                        "link_redirect" => $link_redirect,
                         "created_at" => date("Y-m-d H:i:s"),
                         "updated_at" => date("Y-m-d H:i:s")
                     );
@@ -73,6 +74,7 @@ class Banner extends MY_Controller
         if ($this->adminIsLoggedIn()) {
             $id = $this->input->post('id');
             $produk = $this->input->post('produk_id');
+            $link_redirect = $this->input->post('link_redirect');
             $order = $this->input->post('order');
             $active = $this->input->post('active');
             $banner = $this->banner->getById($id);
@@ -83,15 +85,15 @@ class Banner extends MY_Controller
                 }
 
                 $eks = substr(strrchr($_FILES['thumbnail']['name'], '.'), 1);
-                $thumbnail = str_replace(' ', '-', $produk) . "." . $eks;
+                $thumbnail = str_replace(' ', '-', $_FILES['thumbnail']['name']);
                 $this->uploadFotoBanner($thumbnail);
                 if ($this->upload->do_upload("thumbnail")) {
                     $data = array(
-                        "produk_id" => $produk,
+                        "produk_id" => "",
                         "order" => $order,
                         "active" => $active,
                         "filename" => $thumbnail,
-                        "link_redirect" => base_url('detail?produk='.$produk),
+                        "link_redirect" => $link_redirect,
                         "updated_at" => date("Y-m-d H:i:s")
                     );
                 }else{
