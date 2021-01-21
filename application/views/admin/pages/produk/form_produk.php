@@ -173,7 +173,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="card card-success" style="display:none">
+                                            <div class="card card-success">
                                                 <div class="card-header">
                                                     <h4>Sub Produk</h4>
                                                     <div class="card-header-action">

@@ -91,25 +91,27 @@ class Produk extends MY_Controller
                     $berat_sub = $this->input->post('berat_sub');
                     $diskon_sub = $this->input->post('diskon_sub');
                     $stok_sub = $this->input->post('stok_sub');
-                    // foreach ($nama_sub as $key => $item) {
-                    //     $data_sub_insert[] =
-                    //         [
-                    //             "produk_id" => $dataproduk->id_produk,
-                    //             "nama_sub" => $item,
-                    //             "size_sub" => $size_sub[$key],
-                    //             "harga_sub" => $harga_sub[$key],
-                    //             "berat_sub" => $berat_sub[$key],
-                    //             "diskon_sub" => $diskon_sub[$key],
-                    //             "stok_sub" => $stok_sub[$key],
-                    //             "created_at" => date("Y-m-d H:i:s"),
-                    //             "updated_at" => date("Y-m-d H:i:s")
-                    //         ];
-                    // }
-                    // if (!empty($data_sub_insert)) {
-                    //     $subProduk = $this->subproduk->insert_multiple($data_sub_insert);
-                    // }else{
-                        $subProduk = true;
-                    // }
+                    if (!empty($nama_sub)) {
+                        foreach ($nama_sub as $key => $item) {
+                            $data_sub_insert[] =
+                                [
+                                    "produk_id" => $dataproduk->id_produk,
+                                    "nama_sub" => $item,
+                                    "size_sub" => $size_sub[$key],
+                                    "harga_sub" => $harga_sub[$key],
+                                    "berat_sub" => $berat_sub[$key],
+                                    "diskon_sub" => $diskon_sub[$key],
+                                    "stok_sub" => $stok_sub[$key],
+                                    "created_at" => date("Y-m-d H:i:s"),
+                                    "updated_at" => date("Y-m-d H:i:s")
+                                ];
+                        }
+                        if (!empty($data_sub_insert)) {
+                            $subProduk = $this->subproduk->insert_multiple($data_sub_insert);
+                        } else {
+                            $subProduk = true;
+                        }
+                    }
 
                     if ($subProduk) {
                         $this->session->unset_userdata('produk_data');
@@ -210,46 +212,46 @@ class Produk extends MY_Controller
                     $berat_sub = $this->input->post('berat_sub');
                     $diskon_sub = $this->input->post('diskon_sub');
                     $stok_sub = $this->input->post('stok_sub');
-                    // if (!empty($nama_sub)) {
-                    //     foreach ($nama_sub as $key => $item) {
-                    //         if ($id_sub[$key] != null) {
-                    //             $data_sub_update[] =
-                    //                 [
-                    //                     "id" => $id_sub[$key],
-                    //                     "produk_id" => $data['produk']->id_produk,
-                    //                     "nama_sub" => $item,
-                    //                     "size_sub" => $size_sub[$key],
-                    //                     "harga_sub" => $harga_sub[$key],
-                    //                     "berat_sub" => $berat_sub[$key],
-                    //                     "diskon_sub" => $diskon_sub[$key],
-                    //                     "stok_sub" => $stok_sub[$key],
-                    //                     "created_at" => date("Y-m-d H:i:s"),
-                    //                     "updated_at" => date("Y-m-d H:i:s")
-                    //                 ];
-                    //         } else {
-                    //             $data_sub_insert[] =
-                    //                 [
-                    //                     "produk_id" => $data['produk']->id_produk,
-                    //                     "nama_sub" => $item,
-                    //                     "size_sub" => $size_sub[$key],
-                    //                     "harga_sub" => $harga_sub[$key],
-                    //                     "berat_sub" => $berat_sub[$key],
-                    //                     "diskon_sub" => $diskon_sub[$key],
-                    //                     "stok_sub" => $stok_sub[$key],
-                    //                     "created_at" => date("Y-m-d H:i:s"),
-                    //                     "updated_at" => date("Y-m-d H:i:s")
-                    //                 ];
-                    //         }
-                    //     }
-                    // }
-                    // // die(json_encode($data_sub));
-                    // if (!empty($data_sub_update)) {
-                    //     $subProduk = $this->subproduk->update_multiple($data_sub_update, "id");
-                    // }
+                    if (!empty($nama_sub)) {
+                        foreach ($nama_sub as $key => $item) {
+                            if ($id_sub[$key] != null) {
+                                $data_sub_update[] =
+                                    [
+                                        "id" => $id_sub[$key],
+                                        "produk_id" => $data['produk']->id_produk,
+                                        "nama_sub" => $item,
+                                        "size_sub" => $size_sub[$key],
+                                        "harga_sub" => $harga_sub[$key],
+                                        "berat_sub" => $berat_sub[$key],
+                                        "diskon_sub" => $diskon_sub[$key],
+                                        "stok_sub" => $stok_sub[$key],
+                                        "created_at" => date("Y-m-d H:i:s"),
+                                        "updated_at" => date("Y-m-d H:i:s")
+                                    ];
+                            } else {
+                                $data_sub_insert[] =
+                                    [
+                                        "produk_id" => $data['produk']->id_produk,
+                                        "nama_sub" => $item,
+                                        "size_sub" => $size_sub[$key],
+                                        "harga_sub" => $harga_sub[$key],
+                                        "berat_sub" => $berat_sub[$key],
+                                        "diskon_sub" => $diskon_sub[$key],
+                                        "stok_sub" => $stok_sub[$key],
+                                        "created_at" => date("Y-m-d H:i:s"),
+                                        "updated_at" => date("Y-m-d H:i:s")
+                                    ];
+                            }
+                        }
+                    }
+                    // die(json_encode($data_sub));
+                    if (!empty($data_sub_update)) {
+                        $subProduk = $this->subproduk->update_multiple($data_sub_update, "id");
+                    }
 
-                    // if (!empty($data_sub_insert)) {
-                    //     $subProduk = $this->subproduk->insert_multiple($data_sub_insert);
-                    // }
+                    if (!empty($data_sub_insert)) {
+                        $subProduk = $this->subproduk->insert_multiple($data_sub_insert);
+                    }
                     $subProduk = true;
                     if ($subProduk) {
                         $this->session->set_flashdata(

@@ -7,9 +7,9 @@ class Home extends MY_Controller
     {
         parent::__construct();
         $this->load->model('Produk_model', 'produk');
-        $this->load->model('SubProduk_model','subproduk');
+        $this->load->model('SubProduk_model', 'subproduk');
         $this->load->model('Pengguna_model', 'user');
-        $this->load->model('Banner_model','banner');
+        $this->load->model('Banner_model', 'banner');
         $this->load->model('Kategori_model', 'kategori');
         $this->load->model('Cart_model', 'cart');
         $this->load->model('Alamat_model', 'alamat');
@@ -27,8 +27,8 @@ class Home extends MY_Controller
         $data['produk'] = $this->produk->getWhere('produk.stok_produk > ', '0');
         $data['produk'] = $this->produk->getData()->result_array();
         $data['kategori'] = $this->kategori->getData()->result_array();
-        $data['banner'] = $this->banner->order_by("order","ASC");  
-        $data['banner'] = $this->banner->getWhere("active","1");      
+        $data['banner'] = $this->banner->order_by("order", "ASC");
+        $data['banner'] = $this->banner->getWhere("active", "1");
         $data['banner'] = $this->banner->getData()->result_array();
         foreach ($data['produk'] as $row) {
             $foto = explode(',', $row['thumbnail_produk']);
@@ -254,6 +254,7 @@ class Home extends MY_Controller
             $datacart = $this->cart_item->order_by("id_detail_item_cart", "ASC");
             $datacart = $this->cart_item->getJoin("cart_item", "cart_item.id_cart=detail_cart_item.id_cart", "inner");
             $datacart = $this->cart_item->getJoin("produk", "produk.id_produk=detail_cart_item.id_produk", "inner");
+            $datacart = $this->cart_item->getJoin("sub_produk", "sub_produk.id = detail_cart_item.id_sub_produk", "left");
             $datacart = $this->cart_item->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
             $datacart = $this->cart_item->getWhere("cart_item.id_cart", $this->input->get('id'));
             $datacart = $this->cart_item->getData()->result();
@@ -262,20 +263,36 @@ class Home extends MY_Controller
                 foreach ($foto as $f) {
                     $thumbnail[] = $f;
                 }
-                if($d->diskon_produk != 0){
-                    $realHarga = $d->harga_produk - (($d->diskon_produk / 100) * $d->harga_produk);
-                }else{
-                    $realHarga = $d->harga_produk;
+                if ($d->id_sub_produk != null) {
+                    $realHarga = $d->harga_sub;
+                } else {
+                    if ($d->diskon_produk != 0) {
+                        $realHarga = $d->harga_produk - (($d->diskon_produk / 100) * $d->harga_produk);
+                    } else {
+                        $realHarga = $d->harga_produk;
+                    }
                 }
 
                 $harga = $harga + $realHarga;
 
-                $dHarga = $d->diskon_produk != 0 ? "<p style='text-decoration:line-through;font-size:10px'> Rp $d->harga_produk </p>" : "";
+                if ($d->id_sub_produk == null) {
+                    $dsize = $d->size;
+                    $dHarga = $d->diskon_produk != 0 ? "<p style='text-decoration:line-through;font-size:10px'> Rp $d->harga_produk </p>" : "";
+                }else{
+                    $dHarga = "";
+                    $dsize = $d->size;
+                }
+
+                if ($d->id_sub_produk != null) {
+                    $nama_produk = $d->nama_sub;
+                } else {
+                    $nama_produk = $d->nama_produk;
+                }
 
                 $d = array(
                     "id_cart" => $d->id_cart,
                     "id_item" => $d->id_detail_item_cart,
-                    "nama_produk" => $d->nama_produk,
+                    "nama_produk" => $nama_produk,
                     "berat_produk" => $d->berat_produk,
                     "qty" => $d->quantity,
                     "harga" => $realHarga,
@@ -285,12 +302,12 @@ class Home extends MY_Controller
                     <a href="#">
                         <img src="' . base_url() . 'assets/uploads/thumbnail_produk/' . $thumbnail[0] . '">
                         <div class="content">
-                            <div class="name">' . $d->nama_produk . '</div>
+                            <div class="name">' . $nama_produk . '</div>
                             <div class="real">' .
                         $dHarga
                         . 'Rp ' . number_format($realHarga, 2) . '</div>
                                 <div class="content-detail">
-                                    Jumlah : <strong class="cart-quantity">' . $d->quantity . '/ Ukuran :' . $d->size . '</strong> 
+                                    Jumlah : <strong class="cart-quantity">' . $d->quantity . '/ Ukuran :' . $dsize . '</strong> 
                                 
                                 </div>
                         </div>
@@ -363,9 +380,9 @@ class Home extends MY_Controller
 
                 if ($simpan) {
                     $simpan_item = $this->cart_item->tambahDetailCart($data_item);
-                    if($diskon != 0){
+                    if ($diskon != 0) {
                         $realHarga = $harga - (($diskon / 100) * $harga);
-                    }else{
+                    } else {
                         $realHarga = $harga;
                     }
 
@@ -405,7 +422,7 @@ class Home extends MY_Controller
                             "status" => "unsuccess",
                             "success" => false,
                             "id_cart" => $idc,
-                            "message" => "berhasil diinput tapi gagall input item",
+                            "message" => "berhasil diinput tapi gagal input item",
                             "element" => '',
                         ));
                     }
@@ -414,7 +431,7 @@ class Home extends MY_Controller
                         "status" => "unsuccess",
                         "success" => false,
                         "id_cart" => "",
-                        "message" => "berhasil diinput tapi gagall input item",
+                        "message" => "berhasil diinput tapi gagal input item",
                         "element" => '',
                     ));
                 }
@@ -422,6 +439,7 @@ class Home extends MY_Controller
 
                 $idp = $this->input->post('id_pengguna');
                 $id_produk = $this->input->post('id_produk');
+                $id_sub_produk = $this->input->post('id_sub_produk');
                 $qty = $this->input->post('qty');
                 $img = $this->input->post('img');
                 $size = $this->input->post('size');
@@ -431,15 +449,16 @@ class Home extends MY_Controller
                 $data_item = array(
                     "id_cart" => $idc,
                     "id_produk" => $id_produk,
+                    "id_sub_produk" => $id_sub_produk,
                     "quantity" => $qty,
                     "size" => $size
                 );
 
                 $simpan_item = $this->cart_item->tambahDetailCart($data_item);
 
-                if($diskon != 0){
+                if ($diskon != 0) {
                     $realHarga = $harga - (($diskon / 100) * $harga);
-                }else{
+                } else {
                     $realHarga = $harga;
                 }
 

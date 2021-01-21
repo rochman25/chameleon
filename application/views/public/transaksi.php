@@ -112,26 +112,44 @@ $this->load->view('public/cart');
             </section>
             <section class="right-column">
                 <div class="content">
-                    <?php foreach ($cart as $row) { ?>
-                        <div class="products">
-                            <div class="product-box" id="product-box__39395">
-                                <img src="<?= base_url() ?>/assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>" alt="">
-                                <div class="product-info">
-                                    <div class="title"><?= $row['nama_produk'] ?></div>
-                                    <?php if ($row['diskon_produk'] != 0) { ?>
-                                        <div class="old-price">RP <?= number_format($row['harga_produk']) ?></div>
-                                        <div class="price">Rp <?= number_format($row['harga_produk'] - (($row['diskon_produk'] / 100) * $row['harga_produk'])) ?></div>
-                                    <?php } else { ?>
-                                        <div class="price">Rp <?= number_format($row['harga_produk']) ?></div>
-                                    <?php } ?>
-                                    <div class="qty-size">
-                                        Jumlah : <strong class="cart_quantity"><?= $row['quantity'] ?></strong> /
-                                        Ukuran : <strong><?= $row['size'] ?></strong>
+                    <?php foreach ($cart as $row) {
+                        if ($row['id_sub_produk'] == null) {
+                    ?>
+                            <div class="products">
+                                <div class="product-box" id="product-box__39395">
+                                    <img src="<?= base_url() ?>/assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>" alt="">
+                                    <div class="product-info">
+                                        <div class="title"><?= $row['nama_produk'] ?></div>
+                                        <?php if ($row['diskon_produk'] != 0) { ?>
+                                            <div class="old-price">RP <?= number_format($row['harga_produk']) ?></div>
+                                            <div class="price">Rp <?= number_format($row['harga_produk'] - (($row['diskon_produk'] / 100) * $row['harga_produk'])) ?></div>
+                                        <?php } else { ?>
+                                            <div class="price">Rp <?= number_format($row['harga_produk']) ?></div>
+                                        <?php } ?>
+                                        <div class="qty-size">
+                                            Jumlah : <strong class="cart_quantity"><?= $row['quantity'] ?></strong> /
+                                            Ukuran : <strong><?= $row['size'] ?></strong>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php } ?>
+                        <?php } else { ?>
+                            <div class="products">
+                                <div class="product-box" id="product-box__39395">
+                                    <img src="<?= base_url() ?>/assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>" alt="">
+                                    <div class="product-info">
+                                        <div class="title"><?= $row['nama_sub'] ?></div>
+                                        <div class="price">Rp <?= number_format($row['harga_sub']) ?></div>
+                                        <div class="qty-size">
+                                            Jumlah : <strong class="cart_quantity"><?= $row['quantity'] ?></strong> /
+                                            Ukuran : <strong><?= $row['size'] ?></strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    <?php
+                        }
+                    } ?>
                     <div class="title">Pilih Pengiriman:</div>
                     <div class="kurir">
                         <select style="color:black" name="kurir" id="kurir" required>
@@ -220,8 +238,8 @@ $this->load->view('public/footer');
                     total = total + total_ongkir
                     $('#total_ongkir').val(total_ongkir);
                     $('#total_bayar').val(total);
-                    $('#ongkos-kirim').text(number_format(total_ongkir,2,'.',','));
-                    $('#total-bayar').text(number_format(total,2,'.',','));
+                    $('#ongkos-kirim').text(number_format(total_ongkir, 2, '.', ','));
+                    $('#total-bayar').text(number_format(total, 2, '.', ','));
                     // $('#ongkos-kirim').val(total_ongkir);
                     // $('#total').text("Rp " + total.toLocaleString("en"));
                     console.log(data);
@@ -357,8 +375,8 @@ $this->load->view('public/footer');
                         total = total + total_ongkir
                         $('#total_ongkir').val(total_ongkir);
                         $('#total_bayar').val(total);
-                        $('#ongkos-kirim').text(number_format(total_ongkir,2,'.',','));
-                        $('#total-bayar').text(number_format(total,2,'.',','));
+                        $('#ongkos-kirim').text(number_format(total_ongkir, 2, '.', ','));
+                        $('#total-bayar').text(number_format(total, 2, '.', ','));
                         // $('#ongkos-kirim').val(total_ongkir);
                         // $('#total').text("Rp " + total.toLocaleString("en"));
                         console.log(data);

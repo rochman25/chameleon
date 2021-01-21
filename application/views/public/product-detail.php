@@ -114,11 +114,7 @@ $this->load->view('public/cart');
                                     <?php $label_p = explode(",", $produk->label_produk);
                                     foreach ($label_p as $key_l => $val_l) {
                                     ?>
-                                        <div class="badge_label_<?php echo str_replace(" ","_",$val_l) ?>" 
-                                        <?php if($key_l != 0){ ?>
-                                        style="margin-top:10px"
-                                        <?php } ?>
-                                        >
+                                        <div class="badge_label_<?php echo str_replace(" ", "_", $val_l) ?>" <?php if ($key_l != 0) { ?> style="margin-top:10px" <?php } ?>>
                                             <p style="margin-top:0px; font-size:large; font-weight:bold"><?= strtoupper($val_l) ?></p>
                                         </div>
                                     <?php } ?>
@@ -133,7 +129,7 @@ $this->load->view('public/cart');
                                 <ul class="clearfix">
                                     <?php foreach ($size as $s) {
                                     ?>
-                                        <li onclick="setUkuran('<?= $s; ?>');" id="produk<?=$s?>" style="color:black !important;" class="size ">
+                                        <li onclick="setUkuran('<?= $s; ?>');" id="produk<?= $s ?>" style="color:black !important;" class="size ">
                                             <span><?= $s; ?></span>
                                         </li>
                                     <?php
@@ -151,7 +147,7 @@ $this->load->view('public/cart');
                                     <li class="size  ">
                                         <span style="color:black;" id="value">1</span>
                                     </li>
-                                    <li onclick="ubahjml(1);" class=" size active ">
+                                    <li onclick="ubahjml(1);" class="size active ">
                                         <span>+</span>
                                     </li>
 
@@ -183,7 +179,8 @@ $this->load->view('public/cart');
                             </div>
                             <ul class="nav nav-tabs">
                                 <li class="active" data-target="product-deskripsi">
-                                    <a style="color:white;background-color:none;" href="javascript:;">Deskripsi</a></li>
+                                    <a style="color:white;background-color:none;" href="javascript:;">Deskripsi</a>
+                                </li>
                                 <!-- <li data-target="review"><a href="javascript:;">Rating dan Ulasan ( 5/5 )</a></li> -->
                             </ul>
                             <div class="tab-content">
@@ -206,22 +203,22 @@ $this->load->view('public/cart');
                                                 <div class="card-row">
                                                     <div class="row" style="margin-right: 0px;margin-left: 0px;">
                                                         <div class="column">
-                                                            <input type="radio" id="sub<?= $key ?>"> <label for="sub<?= $key ?>" style="margin-left: 10px;"><b><?= $item['nama_sub'] ?></b></label>
+                                                            <input type="radio" name="addon" id="sub<?= $key ?>" value="<?= $item['id'] ?>"> <label for="sub<?= $key ?>" style="margin-left: 10px;"><?= $item['nama_sub'] ?></label>
                                                         </div>
                                                         <div class="column">
-                                                            <b><?= "+ Rp" . number_format($item['harga_sub'], 2) ?></b>
+                                                            <b id="harga<?= $key ?>"><?= "+ Rp" . number_format($item['harga_sub'], 2) ?></b>
                                                         </div>
                                                     </div>
                                                     <div class="row" style="margin-right: 0px;margin-left: 0px;">
                                                         <div class="column">
                                                             <p><b>Ukuran</b></p>
-                                                            <div id="size" class="size-product">
+                                                            <div id="size" class="size-product2">
                                                                 <ul class="clearfix" style="font-size: 10px;">
                                                                     <?php
                                                                     $size = explode(",", $item['size_sub']);
                                                                     foreach ($size as $s) {
                                                                     ?>
-                                                                        <li onclick="setUkuran('<?= $s; ?>');" id="sub<?=$s?>" style="color:black !important;" class="size ">
+                                                                        <li onclick="setUkuran2('<?= $s; ?>');" id="sub<?= $s ?>" style="color:black !important;" class="size ">
                                                                             <span><?= $s; ?></span>
                                                                         </li>
                                                                     <?php
@@ -234,13 +231,13 @@ $this->load->view('public/cart');
                                                             <p><b>Jumlah</b></p>
                                                             <div id="ukuran" class="size-product">
                                                                 <ul class="clearfix" style="font-size: 10px;">
-                                                                    <li onclick="ubahjml2(2);" class="size active ">
+                                                                    <li onclick="ubahjml2(2);" class="size2 active ">
                                                                         <span>-</span>
                                                                     </li>
                                                                     <li class="size  ">
                                                                         <span style="color:black;" id="value2">1</span>
                                                                     </li>
-                                                                    <li onclick="ubahjml2(1);" class=" size active ">
+                                                                    <li onclick="ubahjml2(1);" class="size2 active ">
                                                                         <span>+</span>
                                                                     </li>
                                                                 </ul>
@@ -295,6 +292,7 @@ $this->load->view('public/footer');
     var def_jml2 = 1;
     var def_Size = "";
     var def_Size2 = "";
+    var add_on = "";
     var stok = '<?= $produk->stok_produk; ?>';
     var harga = '<?= $produk->harga_produk ?>'
     // var harga = '<?= $produk->diskon_produk != 0 ? $produk->harga_produk - (($produk->diskon_produk / 100) * $produk->harga_produk) : $produk->harga_produk ?>';
@@ -390,17 +388,23 @@ $this->load->view('public/footer');
         def_Size = "XL";
     }
 
-    function setUkuran(ukuran,id) {
-        def_Size = ukuran;
-        var id = document.getElementById(id)
-        id.classList.add('active');
-    }
-
     function setUkuran(ukuran) {
         def_Size = ukuran;
         // var id = document.getElementById(id)
         // id.classList.add('active');
     }
+
+    function setUkuran2(ukuran) {
+        def_Size2 = ukuran;
+        // var id = document.getElementById(id)
+        // id.classList.add('active');
+    }
+
+    // function setUkuran(ukuran) {
+    //     def_Size = ukuran;
+    //     // var id = document.getElementById(id)
+    //     // id.classList.add('active');
+    // }
 
     // /var size_view = 
     function ubahjml(state) {
@@ -443,7 +447,7 @@ $this->load->view('public/footer');
         console.log(stok);
 
         $(".addToCart").on("click", function() {
-
+            var id_cart = "";
             if (def_Size != "") {
                 var id_prod = $("#product").data("product-id");
                 var nama_barang = $("#product").data("product-nama");
@@ -463,7 +467,7 @@ $this->load->view('public/footer');
                                         } ?>',
                         id_produk: '<?= $produk->id_produk; ?>',
                         qty: def_jml,
-                        img: '<?= $thumbnail[0]; ?>',
+                        img: '<? $thumbnail[0]; ?>',
                         nama_barang: nama_barang,
                         harga: def_jml * harga,
                         size: def_Size,
@@ -473,7 +477,49 @@ $this->load->view('public/footer');
                     var res = JSON.parse(t);
 
                     if (true == res.success) {
+                        id_cart = res.id_cart;
+                        add_on = $('input[name="addon"]:checked').val();
+                        if (add_on) {
+                            // alert(add_on);
+                            // id_cart = "Invoice-202003212308-002";
+                            var idVal = $('input[name="addon"]:checked').attr("id");
+                            var harga_sub = $('#harga' + idVal.replace("sub", "")).text().replace("+ Rp", "")
+                            // alert(harga_sub);
+                            var nama_sub = $("label[for='" + idVal + "']").text()
+                            $.ajax({
+                                url: base_url + "user/Home/add_cart",
+                                type: "POST",
+                                data: {
+                                    id_cart: id_cart,
+                                    id_pengguna: '<?php if (empty($this->session->userdata['user_data']['id'])) {
+                                                        echo "";
+                                                    } else {
+                                                        echo $this->session->userdata['user_data']['id'];
+                                                    } ?>',
+                                    id_produk: '<?= $produk->id_produk; ?>',
+                                    id_sub_produk: add_on,
+                                    qty: def_jml2,
+                                    img: '<?= $thumbnail[0]; ?>',
+                                    nama_barang: nama_sub,
+                                    harga: def_jml2 * parseFloat(harga_sub),
+                                    size: def_Size2,
+                                }
+                            }).done(function(t) {
+                                var res = JSON.parse(t);
 
+                                if (true == res.success) {
+                                    id_cart = res.id_cart;
+                                    $(".cart-wrapper").append(res.element);
+                                    var i = parseInt($(".icon-cart").find(".notif").html());
+                                    $(".menu-cart").addClass("open"),
+                                        $(".overlay-desktop").addClass("active")
+
+                                }
+                            }).fail(function(t) {
+                                console.log(t)
+                                location.reload()
+                            });
+                        }
                         $(".cart-wrapper").append(res.element);
                         var i = parseInt($(".icon-cart").find(".notif").html());
                         $(".menu-cart").addClass("open"),
@@ -484,8 +530,8 @@ $this->load->view('public/footer');
 
                 }).fail(function(t) {
                     console.log(t)
-                    //   location.reload()
-                })
+                    location.reload()
+                });
             } else {
                 alert("Silahkan Piilih Ukuran Terlebih Dahulu!")
             }
@@ -614,6 +660,15 @@ $this->load->view('public/footer');
 
             generateSize(3, $(".option-2").find(".selected").data("value"));
         });
+
+        var radios = document.getElementsByName('addon');
+        for (i = 0; i < radios.length; i++) {
+            radios[i].onclick = function(e) {
+                if (e.ctrlKey || e.metaKey) {
+                    this.checked = false;
+                }
+            }
+        }
 
 
     });
