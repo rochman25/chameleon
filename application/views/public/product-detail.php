@@ -231,13 +231,13 @@ $this->load->view('public/cart');
                                                             <p><b>Jumlah</b></p>
                                                             <div id="ukuran" class="size-product">
                                                                 <ul class="clearfix" style="font-size: 10px;">
-                                                                    <li onclick="ubahjml2(2);" class="size2 active ">
+                                                                    <li onclick="ubahjml2(2,<?=$item['stok_sub']?>,<?=$item['id_sub_produk']?>);" class="size2 active ">
                                                                         <span>-</span>
                                                                     </li>
                                                                     <li class="size  ">
-                                                                        <span style="color:black;" id="value2">1</span>
+                                                                        <span style="color:black;" id="valuesub<?=$item['id_sub_produk']?>">1</span>
                                                                     </li>
-                                                                    <li onclick="ubahjml2(1);" class="size2 active ">
+                                                                    <li onclick="ubahjml2(1,<?=$item['stok_sub']?>,<?=$item['id_sub_produk']?>);" class="size2 active ">
                                                                         <span>+</span>
                                                                     </li>
                                                                 </ul>
@@ -427,10 +427,10 @@ $this->load->view('public/footer');
         document.getElementById('value').innerHTML = def_jml;
     }
 
-    function ubahjml2(state) {
+    function ubahjml2(state,jml,id) {
         console.log(state);
         if (state == 1) {
-            if (def_jml2 < stok) {
+            if (def_jml2 < jml) {
                 def_jml2++
             } else {
                 //  def_jml = stok;
@@ -442,7 +442,7 @@ $this->load->view('public/footer');
                 def_jml2--;
             }
         }
-        document.getElementById('value2').innerHTML = def_jml2;
+        document.getElementById('valuesub'+id).innerHTML = def_jml2;
     }
 
     $(document).ready(function() {

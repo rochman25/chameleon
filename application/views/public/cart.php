@@ -54,7 +54,7 @@ var base_url = '<?= base_url()?>';
                 var res = JSON.parse(t);
 				
 				console.log(res);
-				//if(res.success =="success"){
+				if(res.success =="success"){
 					if (res.data.length >=0) {
 						var harga = 0;
 						var notif = res.data.length;
@@ -68,7 +68,8 @@ var base_url = '<?= base_url()?>';
 							$("#totalharga").html("Rp "+res.total);
 						
 						}
-				// }else{
+				}
+				// else{
 
 				// } 
 			}

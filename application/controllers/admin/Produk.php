@@ -218,7 +218,7 @@ class Produk extends MY_Controller
                             if ($id_sub[$key] != null) {
                                 $data_sub_update[] =
                                     [
-                                        "id" => $id_sub[$key],
+                                        "id_sub_produk" => $id_sub[$key],
                                         "produk_id" => $data['produk']->id_produk,
                                         "nama_sub" => $item,
                                         "size_sub" => $size_sub[$key],
@@ -249,7 +249,7 @@ class Produk extends MY_Controller
                     }
                     // die(json_encode($data_sub));
                     if (!empty($data_sub_update)) {
-                        $subProduk = $this->subproduk->update_multiple($data_sub_update, "id");
+                        $subProduk = $this->subproduk->update_multiple($data_sub_update, "id_sub_produk");
                     }
 
                     if (!empty($data_sub_insert)) {
