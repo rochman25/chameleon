@@ -189,7 +189,7 @@
                                                                 foreach ($subProduk as $key => $item) {
                                                             ?>
                                                                     <div class="form-group" id="subProduk<?= $index ?>">
-                                                                        <input type="hidden" id="id_sub<?= $index ?>" name="id_sub[]" value="<?= $item['id'] ?>" class="form-control">
+                                                                        <input type="hidden" id="id_sub<?= $index ?>" name="id_sub[]" value="<?= $item['id_sub_produk'] ?>" class="form-control">
                                                                         <div class="row" style="margin-top: 10px;">
                                                                             <div class="col-lg-6">
                                                                                 <label for="nama_sub[]">Nama Sub Produk</label>
@@ -224,7 +224,7 @@
                                                                         </div>
                                                                         <div class="row mt-5">
                                                                             <div class="col-lg-12">
-                                                                                <button type="button" id="btnDelSub<?= $index ?>" data-id="subProduk<?= $index ?>" data-idsub="<?= $item['id'] ?>" class="btn btn-danger btn-sm btnHapusSub"> X Hapus Sub Produk </button>
+                                                                                <button type="button" id="btnDelSub<?= $index ?>" data-id="subProduk<?= $index ?>" data-idsub="<?= $item['id_sub_produk'] ?>" class="btn btn-danger btn-sm btnHapusSub"> X Hapus Sub Produk </button>
                                                                             </div>
                                                                         </div>
                                                                     </div>

@@ -34,7 +34,7 @@ class Pengguna_model extends MY_Model
         $this->cart->getWhere("cart_item.id_pengguna",$id);
         $this->cart->getJoin("detail_cart_item","detail_cart_item.id_cart = cart_item.id_cart","inner");
         $this->cart->getJoin("produk","detail_cart_item.id_produk = produk.id_produk","inner");
-        $this->cart->getJoin("sub_produk","detail_cart_item.id_sub_produk = sub_produk.id","left");
+        $this->cart->getJoin("sub_produk","detail_cart_item.id_sub_produk = sub_produk.id_sub_produk","left");
         return $this->cart->getData()->result_array();
     }
 

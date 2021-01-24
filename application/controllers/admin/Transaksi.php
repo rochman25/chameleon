@@ -35,6 +35,7 @@ class Transaksi extends MY_Controller
         if ($this->adminIsLoggedIn()) {
             $id = $this->input->get('id');
             $data['transaksi'] = $this->transaksi->get_transaksiById($id);
+            // die(json_encode($data));
             $this->load->view('admin/pages/transaksi/detail',$data);
             // die(json_encode($data));
         }else{

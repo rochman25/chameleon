@@ -51,7 +51,8 @@ class Transaksi_model extends MY_Model
         $this->getJoin("pengguna","pengguna.id_pengguna = transaksi.id_pengguna","inner");
         $this->getJoin("alamat_pengguna","pengguna.id_pengguna = alamat_pengguna.id_pengguna","inner");
         $this->getJoin("detail_transaksi","detail_transaksi.id_transaksi = transaksi.id_transaksi","inner");
-        $this->getJoin("produk","detail_transaksi.id_produk = produk.id_produk","inner");
+        $this->getJoin("produk","detail_transaksi.id_produk = produk.id_produk","left");
+        $this->getJoin("sub_produk","detail_transaksi.id_produk = sub_produk.id_sub_produk","left");
         $this->getWhere("transaksi.id_transaksi",$id);
         return $this->getData()->result();
     }

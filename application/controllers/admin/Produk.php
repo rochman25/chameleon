@@ -101,6 +101,7 @@ class Produk extends MY_Controller
                                     "harga_sub" => $harga_sub[$key],
                                     "berat_sub" => $berat_sub[$key],
                                     "diskon_sub" => $diskon_sub[$key],
+                                    "active" => true,
                                     "stok_sub" => $stok_sub[$key],
                                     "created_at" => date("Y-m-d H:i:s"),
                                     "updated_at" => date("Y-m-d H:i:s")
@@ -225,6 +226,7 @@ class Produk extends MY_Controller
                                         "berat_sub" => $berat_sub[$key],
                                         "diskon_sub" => $diskon_sub[$key],
                                         "stok_sub" => $stok_sub[$key],
+                                        "active" => true,
                                         "created_at" => date("Y-m-d H:i:s"),
                                         "updated_at" => date("Y-m-d H:i:s")
                                     ];
@@ -238,6 +240,7 @@ class Produk extends MY_Controller
                                         "berat_sub" => $berat_sub[$key],
                                         "diskon_sub" => $diskon_sub[$key],
                                         "stok_sub" => $stok_sub[$key],
+                                        "active" => true,
                                         "created_at" => date("Y-m-d H:i:s"),
                                         "updated_at" => date("Y-m-d H:i:s")
                                     ];
@@ -420,7 +423,10 @@ class Produk extends MY_Controller
     public function deleteSubProduk()
     {
         $id = $this->input->post('id');
-        $query = $this->subproduk->delete("id", $id);
+        // $query = $this->subproduk->delete("id_sub_produk", $id);
+        $query = $this->subproduk->getWhere("id_sub_produk",$id);
+        $query = $this->subproduk->update(["active" => false]);
+
         if ($query) {
             echo json_encode(['status' => true, 'message' => "success"]);
         } else {

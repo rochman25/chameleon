@@ -10,7 +10,7 @@ class Order extends MY_Controller
         $this->load->model('Transaksi_model', 'transaksi');
         $this->load->model('Alamat_model', 'alamat');
         $this->load->model('Cart_model', 'cart');
-        $this->load->model('Kategori_model','kategori');
+        $this->load->model('Kategori_model', 'kategori');
         $this->load->model('Detailcart_model', 'cart_item');
     }
 
@@ -26,17 +26,22 @@ class Order extends MY_Controller
             $data['profil'] = $this->user->getData()->row();
             $data['kategori'] = $this->kategori->getData()->result_array();
             $data['cart'] = $this->user->getCart();
+            // die(json_encode($data['cart']));
             $thumbnail = array();
             $total_harga = 0;
             $total_berat = 0;
             foreach ($data['cart'] as $row) {
-                if($row['id_sub_produk'] == null){
+                if ($row['id_sub_produk'] == null) {
                     $harga = $row['diskon_produk'] != 0 ? $row['harga_produk'] - (($row['diskon_produk'] / 100) * $row['harga_produk']) : $row['harga_produk'];
-                }else{
+                } else {
                     $harga = $row['harga_sub'];
                 }
+                // if($row['id_sub_produk'] != null){
+                //     $thumbnail[$row['id_sub_produk']] = base_url(). "assets/images/add_on.png";
+                // }else{
                 $foto = explode(',', $row['thumbnail_produk']);
-                $thumbnail[$row['id_produk']] = $foto[0];
+                $thumbnail[$row['id_produk']] = base_url() . "assets/uploads/thumbnail_produk/" . $foto[0];
+                // }
                 $total_harga += $harga * $row['quantity'];
                 $total_berat += $row['berat_produk'];
             }
@@ -69,7 +74,7 @@ class Order extends MY_Controller
                     "id_pengguna" => $idp
                 );
 
-                if($idA == ""){
+                if ($idA == "") {
                     $query = $this->alamat->insertData($data_alamat);
                     // die(json_encode($data_alamat));
                     $alamat = $this->user->getJoin("alamat_pengguna", "alamat_pengguna.id_pengguna=pengguna.id_pengguna", "left");
@@ -77,10 +82,10 @@ class Order extends MY_Controller
                     $alamat = $this->user->getData()->row();
 
                     $idA = $alamat->id_alamat;
-                }else{
+                } else {
                     $query = $this->alamat->updateData($data_alamat, $idA);
                 }
-                
+
                 $total_ongkir = $this->input->post('total_ongkir');
                 $total_bayar = $this->input->post('total_bayar');
                 $kurir = $this->input->post('kurir');
@@ -106,16 +111,27 @@ class Order extends MY_Controller
                     $data_detail = [];
                     $id_transaksi = $this->transaksi->getIdTransaksi($this->session->userdata('kode_transaksi'));
                     foreach ($data['cart'] as $row) {
+                        $id_produk = $row['id_produk'];
+                        $harga_produk = $row['harga_produk'];
+                        if($row['diskon_produk'] != 0){
+                            $harga_produk = $row['harga_produk'] - (($row['diskon_produk'] / 100) * $row['harga_produk']);
+                        }
+                        if($row['id_sub_produk'] != null){
+                            $id_produk = $row['id_sub_produk'];
+                            $harga_produk = $row['harga_sub'];
+                        }
 
                         $data_detail[] = [
                             "id_transaksi" => $id_transaksi->id_transaksi,
                             "kode_transaksi" => $id_transaksi->kode_transaksi,
-                            "id_produk" => $row['id_produk'],
+                            "id_produk" => $id_produk,
                             "jumlah_produk" => $row['quantity'],
-                            "total" => $row['harga_produk'] * $row['quantity'],
+                            "total" => $harga_produk * $row['quantity'],
                             "ukuran" => $row['size']
                         ];
                     }
+
+                    // die(json_encode($data_detail));
 
                     if ($this->transaksi->tambahDetail($data_detail)) {
 

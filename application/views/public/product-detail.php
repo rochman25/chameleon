@@ -203,7 +203,7 @@ $this->load->view('public/cart');
                                                 <div class="card-row">
                                                     <div class="row" style="margin-right: 0px;margin-left: 0px;">
                                                         <div class="column">
-                                                            <input type="radio" name="addon" id="sub<?= $key ?>" value="<?= $item['id'] ?>"> <label for="sub<?= $key ?>" style="margin-left: 10px;"><?= $item['nama_sub'] ?></label>
+                                                            <input type="radio" name="addon" id="sub<?= $key ?>" value="<?= $item['id_sub_produk'] ?>"> <label for="sub<?= $key ?>" style="margin-left: 10px;"><?= $item['nama_sub'] ?></label>
                                                         </div>
                                                         <div class="column">
                                                             <b id="harga<?= $key ?>"><?= "+ Rp" . number_format($item['harga_sub'], 2) ?></b>
@@ -467,7 +467,7 @@ $this->load->view('public/footer');
                                         } ?>',
                         id_produk: '<?= $produk->id_produk; ?>',
                         qty: def_jml,
-                        img: '<? $thumbnail[0]; ?>',
+                        img: '<?= base_url() . 'assets/uploads/thumbnail_produk/'. $thumbnail[0]; ?>',
                         nama_barang: nama_barang,
                         harga: def_jml * harga,
                         size: def_Size,
@@ -499,7 +499,7 @@ $this->load->view('public/footer');
                                     id_produk: '<?= $produk->id_produk; ?>',
                                     id_sub_produk: add_on,
                                     qty: def_jml2,
-                                    img: '<?= $thumbnail[0]; ?>',
+                                    img: '<?= base_url()."assets/images/add_on.png" ?>',
                                     nama_barang: nama_sub,
                                     harga: def_jml2 * parseFloat(harga_sub),
                                     size: def_Size2,

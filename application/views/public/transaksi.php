@@ -117,7 +117,7 @@ $this->load->view('public/cart');
                     ?>
                             <div class="products">
                                 <div class="product-box" id="product-box__39395">
-                                    <img src="<?= base_url() ?>/assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>" alt="">
+                                    <img src="<?= $thumbnail[$row['id_produk']] ?>" alt="">
                                     <div class="product-info">
                                         <div class="title"><?= $row['nama_produk'] ?></div>
                                         <?php if ($row['diskon_produk'] != 0) { ?>
@@ -136,7 +136,7 @@ $this->load->view('public/cart');
                         <?php } else { ?>
                             <div class="products">
                                 <div class="product-box" id="product-box__39395">
-                                    <img src="<?= base_url() ?>/assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>" alt="">
+                                    <img src="<?= base_url() ?>/assets/images/add_on.png" alt="">
                                     <div class="product-info">
                                         <div class="title"><?= $row['nama_sub'] ?></div>
                                         <div class="price">Rp <?= number_format($row['harga_sub']) ?></div>

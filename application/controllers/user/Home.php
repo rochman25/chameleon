@@ -254,7 +254,7 @@ class Home extends MY_Controller
             $datacart = $this->cart_item->order_by("id_detail_item_cart", "ASC");
             $datacart = $this->cart_item->getJoin("cart_item", "cart_item.id_cart=detail_cart_item.id_cart", "inner");
             $datacart = $this->cart_item->getJoin("produk", "produk.id_produk=detail_cart_item.id_produk", "inner");
-            $datacart = $this->cart_item->getJoin("sub_produk", "sub_produk.id = detail_cart_item.id_sub_produk", "left");
+            $datacart = $this->cart_item->getJoin("sub_produk", "sub_produk.id_sub_produk = detail_cart_item.id_sub_produk", "left");
             $datacart = $this->cart_item->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
             $datacart = $this->cart_item->getWhere("cart_item.id_cart", $this->input->get('id'));
             $datacart = $this->cart_item->getData()->result();
@@ -289,34 +289,67 @@ class Home extends MY_Controller
                     $nama_produk = $d->nama_produk;
                 }
 
-                $d = array(
-                    "id_cart" => $d->id_cart,
-                    "id_item" => $d->id_detail_item_cart,
-                    "nama_produk" => $nama_produk,
-                    "berat_produk" => $d->berat_produk,
-                    "qty" => $d->quantity,
-                    "harga" => $realHarga,
-                    "kategori" => $d->nama_kategori,
-                    "thumb" => $thumbnail,
-                    "element" => '<div class="cart-list" >
-                    <a href="#">
-                        <img src="' . base_url() . 'assets/uploads/thumbnail_produk/' . $thumbnail[0] . '">
-                        <div class="content">
-                            <div class="name">' . $nama_produk . '</div>
-                            <div class="real">' .
-                        $dHarga
-                        . 'Rp ' . number_format($realHarga, 2) . '</div>
-                                <div class="content-detail">
-                                    Jumlah : <strong class="cart-quantity">' . $d->quantity . '/ Ukuran :' . $dsize . '</strong> 
-                                
-                                </div>
-                        </div>
-                    </a>
-                    <a class="delete-cart" onclick="deleteitem(' . "'" . $d->id_detail_item_cart . "'" . ');" >
-                        <i class="svg_icon__header_garbage svg-icon"></i>
-                    </a>
-                </div>'
-                );
+                if($d->id_sub_produk != null){
+                    $d = array(
+                        "id_cart" => $d->id_cart,
+                        "id_item" => $d->id_detail_item_cart,
+                        "nama_produk" => $nama_produk,
+                        "berat_produk" => $d->berat_produk,
+                        "qty" => $d->quantity,
+                        "harga" => $realHarga,
+                        "kategori" => $d->nama_kategori,
+                        "thumb" => $thumbnail,
+                        "element" => '<div class="cart-list" >
+                        <a href="#">
+                            <img src="' . base_url() . 'assets/images/add_on.png">
+                            <div class="content">
+                                <div class="name">' . $nama_produk . '</div>
+                                <div class="real">' .
+                            $dHarga
+                            . 'Rp ' . number_format($realHarga, 2) . '</div>
+                                    <div class="content-detail">
+                                        Jumlah : <strong class="cart-quantity">' . $d->quantity . '/ Ukuran :' . $dsize . '</strong> 
+                                    
+                                    </div>
+                            </div>
+                        </a>
+                        <a class="delete-cart" onclick="deleteitem(' . "'" . $d->id_detail_item_cart . "'" . ');" >
+                            <i class="svg_icon__header_garbage svg-icon"></i>
+                        </a>
+                    </div>'
+                    );
+                }else{
+                    $d = array(
+                        "id_cart" => $d->id_cart,
+                        "id_item" => $d->id_detail_item_cart,
+                        "nama_produk" => $nama_produk,
+                        "berat_produk" => $d->berat_produk,
+                        "qty" => $d->quantity,
+                        "harga" => $realHarga,
+                        "kategori" => $d->nama_kategori,
+                        "thumb" => $thumbnail,
+                        "element" => '<div class="cart-list" >
+                        <a href="#">
+                            <img src="' . base_url() . 'assets/uploads/thumbnail_produk/' . $thumbnail[0] . '">
+                            <div class="content">
+                                <div class="name">' . $nama_produk . '</div>
+                                <div class="real">' .
+                            $dHarga
+                            . 'Rp ' . number_format($realHarga, 2) . '</div>
+                                    <div class="content-detail">
+                                        Jumlah : <strong class="cart-quantity">' . $d->quantity . '/ Ukuran :' . $dsize . '</strong> 
+                                    
+                                    </div>
+                            </div>
+                        </a>
+                        <a class="delete-cart" onclick="deleteitem(' . "'" . $d->id_detail_item_cart . "'" . ');" >
+                            <i class="svg_icon__header_garbage svg-icon"></i>
+                        </a>
+                    </div>'
+                    );
+                }
+
+                
                 array_push($datafull, $d);
                 $thumbnail = [];
             }
@@ -356,6 +389,7 @@ class Home extends MY_Controller
             $size = $this->input->post('size');
             $harga = $this->input->post('harga');
             $nama_barang = $this->input->post('nama_barang');
+            $img = $this->input->post('img');
             $diskon = (!empty($this->input->post('diskon')) ? $this->input->post('diskon') : 0);
             if ($idc == "" || empty($idc) || $idc == null) {
                 $idc = $this->cart->generateKode();
@@ -402,7 +436,7 @@ class Home extends MY_Controller
                             "id_cart" => $idc,
                             "element" => '<div class="cart-list" id="cart_list_39223">
                     <a href="#">
-                        <img src="#">
+                        <img src="'.$img.'">
                         <div class="content">
                             <div class="name">' . $nama_barang . '</div>
                             <div class="real">' . $dHarga
@@ -412,7 +446,7 @@ class Home extends MY_Controller
                                 </div>
                         </div>
                     </a>
-                    <a class="delete-cart" data-id="39223" href="#">
+                    <a class="delete-cart" data-id="39223" onclick="deleteitem(' . "'" . $idc . "'" . ');" href="#">
                         <i class="svg_icon__header_garbage svg-icon"></i>
                     </a>
                 </div>',
@@ -477,7 +511,7 @@ class Home extends MY_Controller
                         "id_cart" => $idc,
                         "element" => '<div class="cart-list" ">
     			<a href="#">
-        			<img src="' . base_url() . 'assets/uploads/thumbnail_produk/' . $img . '">
+        			<img src="' .$img. '">
         			<div class="content">
             			<div class="name">' . $nama_barang . '</div>
                     
