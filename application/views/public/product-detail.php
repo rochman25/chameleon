@@ -271,6 +271,8 @@ $this->load->view('public/cart');
                     <img src="<?= base_url() ?>assets/public/size_celana.jpg" width="100%">
                 <?php } else if ($produk->nama_kategori == "Jas") { ?>
                     <img src="<?= base_url() ?>assets/public/size_jas.jpg" width="100%">
+                <?php }else if($produk->nama_kategori == "Kemeja"){ ?>
+                    <img src="<?= base_url() ?>assets/public/size_kemeja.jpg" width="100%">
                 <?php } ?>
             </div>
         </div>
