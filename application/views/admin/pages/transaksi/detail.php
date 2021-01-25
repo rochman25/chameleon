@@ -46,7 +46,7 @@
                                                     <?= $transaksi[0]->alamat_1 ?><br>
                                                     <?= $transaksi[0]->alamat_2 ?><br>
                                                     Kecamatan <?= $transaksi[0]->kecamatan ?>, Kabupaten <?= $transaksi[0]->kabupaten ?>
-                                                    ,Provinsi <?=$transaksi[0]->provinsi ?> <?= $transaksi[0]->kode_pos ?>
+                                                    ,Provinsi <?= $transaksi[0]->provinsi ?> <?= $transaksi[0]->kode_pos ?>
                                                 </address>
                                             </div>
                                             <div class="col-md-6 text-md-right">
@@ -66,7 +66,18 @@
                                                     <?= $transaksi[0]->email ?>
                                                 </address>
                                             </div>
-
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <address>
+                                                    <strong>Catatan Pemesan:</strong><br>
+                                                    <?php if($transaksi[0]->catatan == null || $transaksi[0]->catatan == ""){
+                                                        echo "Tidak ada catatan dari pemesan";;
+                                                    }else{
+                                                        echo $transaksi[0]->catatan;
+                                                    } ?>
+                                                </address>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -80,41 +91,45 @@
                                                 <tbody>
                                                     <tr>
                                                         <th data-width="40" style="width: 40px;">#</th>
+                                                        <th data-width="100" style="width:100px;">Image</th>
                                                         <th>Nama</th>
                                                         <th>Ukuran</th>
                                                         <th class="text-center">Harga</th>
                                                         <th class="text-center">Jumlah</th>
                                                         <th class="text-right">Total</th>
                                                     </tr>
-                                                    <?php 
+                                                    <?php
                                                     $no = 1;
                                                     $totalHarga = 0;
                                                     foreach ($transaksi as $row => $val) {
-                                                        if($val->id_sub_produk == null){
-                                                        ?>
-                                                        <tr>
-                                                            <td><?=$no++;?></td>
-                                                            <td><?=$val->nama_produk?></td>
-                                                            <td><?=$val->ukuran?></td>
-                                                            <td class="text-center">Rp.<?=number_format($val->total,2)?></td>
-                                                            <td class="text-center"><?=$val->jumlah_produk?></td>
-                                                            <td class="text-right">Rp.<?=number_format($val->jumlah_produk * $val->total,2)?></td>
-                                                        </tr>
-                                                    <?php 
-                                                        }else{
+                                                        if ($val->id_sub_produk == null) {
+                                                            $foto = explode(",", $val->thumbnail_produk);
                                                     ?>
-                                                        <tr>
-                                                            <td><?=$no++;?></td>
-                                                            <td><?= $val->nama_sub ?></td>
-                                                            <td><?=$val->ukuran?></td>
-                                                            <td class="text-center">Rp.<?=number_format($val->total,2)?></td>
-                                                            <td class="text-center"><?=$val->jumlah_produk?></td>
-                                                            <td class="text-right">Rp.<?=number_format($val->jumlah_produk * $val->total,2)?></td>
-                                                        </tr>
+                                                            <tr>
+                                                                <td><?= $no++; ?></td>
+                                                                <td><img width="100" src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $foto[0] ?>"></td>
+                                                                <td><?= $val->nama_produk ?></td>
+                                                                <td><?= $val->ukuran ?></td>
+                                                                <td class="text-center">Rp.<?= number_format($val->total, 2) ?></td>
+                                                                <td class="text-center"><?= $val->jumlah_produk ?></td>
+                                                                <td class="text-right">Rp.<?= number_format($val->jumlah_produk * $val->total, 2) ?></td>
+                                                            </tr>
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <tr>
+                                                                <td><?= $no++; ?></td>
+                                                                <td><img width="100" src="<?= base_url() ?>assets/images/add_on.png"></td>
+                                                                <td><?= $val->nama_sub ?></td>
+                                                                <td><?= $val->ukuran ?></td>
+                                                                <td class="text-center">Rp.<?= number_format($val->total, 2) ?></td>
+                                                                <td class="text-center"><?= $val->jumlah_produk ?></td>
+                                                                <td class="text-right">Rp.<?= number_format($val->jumlah_produk * $val->total, 2) ?></td>
+                                                            </tr>
                                                     <?php
-                                                    }
-                                                    $totalHarga += $val->total;
-                                                } ?>
+                                                        }
+                                                        $totalHarga += $val->total;
+                                                    } ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -124,16 +139,16 @@
                                             <div class="col-lg-4 text-right">
                                                 <div class="invoice-detail-item">
                                                     <div class="invoice-detail-name">Subtotal</div>
-                                                    <div class="invoice-detail-value">Rp.<?=number_format($totalHarga,2)?></div>
+                                                    <div class="invoice-detail-value">Rp.<?= number_format($totalHarga, 2) ?></div>
                                                 </div>
                                                 <div class="invoice-detail-item">
                                                     <div class="invoice-detail-name">Ongkir</div>
-                                                    <div class="invoice-detail-value">Rp.<?=number_format($val->total_ongkir,2)?> (<?=strtoupper($val->kurir)?>)</div>
+                                                    <div class="invoice-detail-value">Rp.<?= number_format($val->total_ongkir, 2) ?> (<?= strtoupper($val->kurir) ?>)</div>
                                                 </div>
                                                 <hr class="mt-2 mb-2">
                                                 <div class="invoice-detail-item">
                                                     <div class="invoice-detail-name">Total</div>
-                                                    <div class="invoice-detail-value invoice-detail-value-lg">Rp.<?=number_format($val->total_harga,2)?></div>
+                                                    <div class="invoice-detail-value invoice-detail-value-lg">Rp.<?= number_format($val->total_harga, 2) ?></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -143,8 +158,8 @@
                             <hr>
                             <div class="text-md-right">
                                 <div class="float-lg-left mb-lg-0 mb-3">
-                                    <button class="btn btn-primary btn-icon icon-left" id="btnProses" data-target="#proses_modal" data-toggle="modal" data-id="<?=$transaksi[0]->id_transaksi?>"><i class="fas fa-credit-card"></i> Proses</button>
-                                    <button class="btn btn-danger btn-icon icon-left" id="btnBatal" data-target="#batal_modal" data-toggle="modal" data-id="<?=$transaksi[0]->id_transaksi?>"><i class="fas fa-times"></i> Batalkan</button>
+                                    <button class="btn btn-primary btn-icon icon-left" id="btnProses" data-target="#proses_modal" data-toggle="modal" data-id="<?= $transaksi[0]->id_transaksi ?>"><i class="fas fa-credit-card"></i> Proses</button>
+                                    <button class="btn btn-danger btn-icon icon-left" id="btnBatal" data-target="#batal_modal" data-toggle="modal" data-id="<?= $transaksi[0]->id_transaksi ?>"><i class="fas fa-times"></i> Batalkan</button>
                                 </div>
                                 <p><?= date("d/m/Y") ?></p>
                                 <!-- <button class="btn btn-warning btn-icon icon-left"><i class="fas fa-print"></i> Print</button> -->
@@ -224,7 +239,7 @@
                                         <input type="hidden" class="form-control" id="id_batal" name="id" required>
                                         <input type="hidden" class="form-control" name="status" value="batal">
                                         <p>
-                                            <h6>Apakah anda yakin membatalkan transaksi ini?</h6>
+                                        <h6>Apakah anda yakin membatalkan transaksi ini?</h6>
                                         </p>
                                     </div>
                                 </div>
@@ -248,14 +263,15 @@
     <?php $this->load->view('admin/assets/javascript') ?>
 </body>
 <script type="text/javascript">
-    $(document).on("click", "#btnBatal", function(){
+    $(document).on("click", "#btnBatal", function() {
         let id = $(this).data("id");
         $("#id_batal").val(id);
     })
 
-    $(document).on("click", "#btnProses",function(){
+    $(document).on("click", "#btnProses", function() {
         let id = $(this).data("id");
         $('#id_proses').val(id);
     })
 </script>
+
 </html>
