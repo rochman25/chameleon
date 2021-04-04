@@ -45,7 +45,7 @@ class Order extends MY_Controller
                 // }
                 $total_harga += $harga * $row['quantity'];
                 if($row['quantity'] > 1){
-                    $total_berat = $total + ($row['quantity'] * $row['berat_produk']);
+                    $total_berat = $total_berat + ($row['quantity'] * $row['berat_produk']);
                 }else{
                     $total_berat += $row['berat_produk'];   
                 }
@@ -163,4 +163,11 @@ class Order extends MY_Controller
             redirect('login');
         }
     }
+
+    public function order_detail($id){
+        $data['data'] = $this->transaksi->getWhere("id_transaksi", $id);
+        $data['data'] = $this->transaksi->getData()->row();
+        $this->load->view('public/order-detail',$data);
+    }
+
 }

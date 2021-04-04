@@ -155,7 +155,8 @@ $this->load->view('public/cart');
                         <select style="color:black" name="kurir" id="kurir" required>
                             <option value="">Pilih Kurir</option>
                             <option value="jne">JNE</option>
-                            <option value="pos">POS Indonesia</option>
+                            <option value="jnt">JNT</option>
+                            <!-- <option value="pos">POS Indonesia</option> -->
                         </select>
                     </div>
                     <br>
