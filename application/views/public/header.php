@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-	<title>Chameleon Cloth</title>
+	<title>CHAMELEON CLOTH - Make Your Appearance More Perfect</title>
 	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 	<meta charset="UTF-8">
-	<meta name="title" content="Chaeleon | #Cloth">
-	<meta name="description" content="Chameleons">
+	<meta name="title" content="CHAMELEON CLOTH">
+	<meta name="description" content="Make Your Appearance More Perfect">
 	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800|Open+Sans|Work+Sans" rel="stylesheet">
 	<meta property="fb:pages" content="" />
 	<meta name="google-site-verification" content="YRtB-WBotW8z2AMh6hLyCgAjgQRundXTa1bC2AdzPxQ" />
@@ -57,6 +57,8 @@
 		}
 	</style>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+	<script src="<?= base_url() ?>assets/public/js/all.js"></script>
+	<script src="<?= base_url() ?>assets/public/js/cart.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- Facebook Pixel Code -->
 	<noscript>
@@ -66,6 +68,26 @@
 	</noscript>
 	<!-- DO NOT MODIFY -->
 	<!-- End Facebook Pixel Code -->
+	
+	<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+ fbq('init', '920677795109660'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+ <img height="1" width="1" 
+src="https://www.facebook.com/tr?id=920677795109660&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
 </head>
 
 <body>

@@ -102,7 +102,7 @@
                                                     $no = 1;
                                                     $totalHarga = 0;
                                                     foreach ($transaksi as $row => $val) {
-                                                        if ($val->id_sub_produk == null) {
+                                                        if ($val->id_sub_produk == null && $val->kode_produk != null) {
                                                             $foto = explode(",", $val->thumbnail_produk);
                                                     ?>
                                                             <tr>
@@ -115,7 +115,7 @@
                                                                 <td class="text-right">Rp.<?= number_format($val->jumlah_produk * $val->total, 2) ?></td>
                                                             </tr>
                                                         <?php
-                                                        } else {
+                                                        } else if($val->id_sub_produk != null && $val->kode_produk == null) {
                                                         ?>
                                                             <tr>
                                                                 <td><?= $no++; ?></td>
@@ -127,6 +127,19 @@
                                                                 <td class="text-right">Rp.<?= number_format($val->jumlah_produk * $val->total, 2) ?></td>
                                                             </tr>
                                                     <?php
+                                                        }else{
+                                                            $foto = explode(",", $val->thumbnail_produk);
+                                                    ?>
+                                                        <tr>
+                                                                <td><?= $no++; ?></td>
+                                                                <td><img width="100" src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $foto[0] ?>"></td>
+                                                                <td><?= $val->nama_produk ?></td>
+                                                                <td><?= $val->ukuran ?></td>
+                                                                <td class="text-center">Rp.<?= number_format($val->total, 2) ?></td>
+                                                                <td class="text-center"><?= $val->jumlah_produk ?></td>
+                                                                <td class="text-right">Rp.<?= number_format($val->jumlah_produk * $val->total, 2) ?></td>
+                                                            </tr>
+                                                    <?php 
                                                         }
                                                         $totalHarga += $val->total;
                                                     } ?>

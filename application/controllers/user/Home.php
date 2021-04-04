@@ -751,10 +751,10 @@ class Home extends MY_Controller
     {
         $config = array(
             'protocol' => 'smtp',
-            'smtp_host' => 'mail.chameleoncloth.co.id',
+            'smtp_host' => 'smtp.gmail.com',
             'smtp_port' => '465',
-            'smtp_user' => 'admin@chameleoncloth.co.id',
-            'smtp_pass' => '${Admin123}', // informasi rahasia ini jangan di gunakan sembarangan
+            'smtp_user' => 'mail.chameleoncloth@gmail.com',
+            'smtp_pass' => 'Mail.chameleoncloth.co.id', // informasi rahasia ini jangan di gunakan sembarangan
             'smtp_crypto' => 'ssl',
             'mailtype' => 'html',
             'charset' => 'iso-8859-1',
@@ -790,10 +790,10 @@ class Home extends MY_Controller
     {
         $config = array(
             'protocol' => 'smtp',
-            'smtp_host' => 'mail.chameleoncloth.co.id',
+            'smtp_host' => 'smtp.gmail.com',
             'smtp_port' => '465',
-            'smtp_user' => 'admin@chameleoncloth.co.id',
-            'smtp_pass' => '${Admin123}', // informasi rahasia ini jangan di gunakan sembarangan
+            'smtp_user' => 'mail.chameleoncloth@gmail.com',
+            'smtp_pass' => 'Mail.chameleoncloth.co.id', // informasi rahasia ini jangan di gunakan sembarangan
             'smtp_crypto' => 'ssl',
             'mailtype' => 'html',
             'charset' => 'iso-8859-1',
@@ -938,6 +938,8 @@ class Home extends MY_Controller
                     $email = $this->input->post('email');
                     $data = $this->user->getDataByEmail($email);
                     if ($data != null) {
+                        // var_dump($this->send_forgetPass($email, $data->token));
+                        // die();
                         if ($this->send_forgetPass($email, $data->token)) {
                             $this->session->set_flashdata("pesan", "Silahkan cek email anda untuk reset password.");
                             $this->load->view('public/lupa-password');

@@ -91,7 +91,7 @@ class Produk extends MY_Controller
                     $berat_sub = $this->input->post('berat_sub');
                     $diskon_sub = $this->input->post('diskon_sub');
                     $stok_sub = $this->input->post('stok_sub');
-                    if (!empty($nama_sub)) {
+                    if (!in_array("",$nama_sub)) {
                         foreach ($nama_sub as $key => $item) {
                             $data_sub_insert[] =
                                 [
@@ -213,7 +213,8 @@ class Produk extends MY_Controller
                     $berat_sub = $this->input->post('berat_sub');
                     $diskon_sub = $this->input->post('diskon_sub');
                     $stok_sub = $this->input->post('stok_sub');
-                    if (!empty($nama_sub)) {
+                    // die(json_encode(!empty($nama_sub)));
+                    if (!in_array("",$nama_sub)) {
                         foreach ($nama_sub as $key => $item) {
                             if ($id_sub[$key] != null) {
                                 $data_sub_update[] =
