@@ -113,9 +113,9 @@ class Rajaongkir extends MY_Controller
         // }else{
         //     $weight = 1000;
         // }
-        if ($weight > 1200) {
-            $weight = 2000;
-        }
+        // if ($weight > 1200) {
+        //     $weight = 2000;
+        // }
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://pro.rajaongkir.com/api/cost",
             CURLOPT_RETURNTRANSFER => true,
