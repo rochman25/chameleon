@@ -29,7 +29,7 @@
 			</div>
 			<form action="<?= base_url()?>order" method="POST">
 				<input type="hidden" value=""/>
-				<input type="submit" value="Beli" class="confirm"/>
+				<input type="submit" value="SELANJUTNYA" class="confirm"/>
 			</form>
 			<!-- <a class="confirm" href="">hajar men</a> -->
 		</div>

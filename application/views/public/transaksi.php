@@ -18,7 +18,7 @@ $this->load->view('public/cart');
             <section class="left-column">
                 <div class="ticker">
                     <i class="svg-icon svg_icon__order_speaker"></i>
-                    <span>Hubungi Whatsapp 08xxxxxxxxxx jika terjadi kendala dalam proses belanja</span>
+                    <span>Hubungi Whatsapp 083116200500 jika terjadi kendala dalam proses belanja</span>
                 </div>
                 <div class="content">
                     <!-- <div class="title">Nama:</div> -->
@@ -155,11 +155,12 @@ $this->load->view('public/cart');
                         <select style="color:black" name="kurir" id="kurir" required>
                             <option value="">Pilih Kurir</option>
                             <option value="jne">JNE</option>
-                            <option value="pos">POS Indonesia</option>
+                            <option value="jnt">JNT</option>
+                            <!-- <option value="pos">POS Indonesia</option> -->
                         </select>
                     </div>
                     <br>
-                    <div class="title">Catatan untuk Chameleon cloth (optional)</div>
+                    <div class="title">Catatan untuk Chameleon Cloth (optional)</div>
                     <textarea style="color:black" name="catatan" class="notes"></textarea>
                     <div id="loader">
                         <h4 style="color:black">Loading</h4>
@@ -186,7 +187,7 @@ $this->load->view('public/cart');
                     <!-- <input type="hidden" id="kecamatan_id" value="<?= $profil->kecamatan_id ?>" required> -->
                     <input type="hidden" id="total_ongkir" name="total_ongkir" required>
                     <input type="hidden" id="total_bayar" name="total_bayar" required>
-                    <input type="submit" name="kirim" value="BELI" style="margin-bottom: 20px;">
+                    <input type="submit" name="kirim" value="CHECKOUT" style="margin-bottom: 20px;">
                     <!-- </form> -->
                 </div>
                 <!-- </form> -->
@@ -210,7 +211,7 @@ $this->load->view('public/footer');
             var mode = "GET";
             var total = <?php echo $total ?>;
             var total_ongkir = 0;
-            var total_barang = <?php echo count($cart) ?>;
+            var total_barang = <?php echo $total_jumlah ?>;
             var total_weight = <?php echo $total_berat ?>;
             // alert('woy');
             $('#loader').show();

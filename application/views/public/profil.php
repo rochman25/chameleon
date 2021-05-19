@@ -98,7 +98,7 @@ $this->load->view('public/cart');
                                 <div class="row" style="margin-right: 0px;margin-left: 0px;">
                                     <div class="column">
                                         <b><?= $no++ . ". "; ?></b>
-                                        <b style="text-decoration: underline;"><?= $row['kode_transaksi'] ?></b>
+                                        <b style="text-decoration: underline;"><a href="<?= base_url('order_detail/'.$row['kode_transaksi']) ?>"><?= $row['kode_transaksi'] ?></a></b>
                                     </div>
                                     <div class="column">
                                         <div class="row" style="margin-right: 0; margin-left: 0px;">

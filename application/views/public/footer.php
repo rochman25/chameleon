@@ -10,37 +10,19 @@
         </div>
 
         <div class="footer-list">
-            <h1>Tentang Kami</h1>
-            <ul>
-                <li><a href="#">Kontak &amp; Alamat</a></li>
-                <li><a href=""></a>
-                    <ul>
-                        <li><a href="">CHAMELEON CLOTH
-                                <br />Jl. Patimuan - Kedungreja, Cinyawang, Rt.02/03, Kec.Patimuan - Cilacap 53264</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href=""></a>
-                    <ul>
-                        <li>
-                            <a href="">LINE ID : chameleoncloth</a>
-                        </li>
-                        <li>
-                            <a href="">Nomor : 083116200500</a>
-                        </li>
-                        <li>
-                            <a href="">Email : cs@chameleoncloth.co.id</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+            <h1>Kontak &amp; Alamat</h1>
+                                <p>CHAMELEON CLOTH</p>
+                                <p>Jl. Patimuan - Kedungreja, Cinyawang, Rt.02/03, Kec.Patimuan - Cilacap 53264</p>
+                                <P>LINE ID : chameleoncloth</P>
+                                <P>Nomor : 083116200500</P>
+                                <P>Email : cs@chameleoncloth.co.id</P>
         </div>
         <div class="footer-list">
             <h1>Layanan</h1>
             <ul>
+                <li><a href="<?= base_url() ?>panduan/retur">Garansi</a></li>
                 <li><a href="<?= base_url() ?>panduan/pemesanan">Panduan Pemesanan</a></li>
                 <li><a href=" <?= base_url() ?>panduan/ukuran">Panduan Ukuran</a> </li>
-                <li><a href="<?= base_url() ?>panduan/retur"">Panduan Retur</a></li>
             </ul>
         </div>
         <div class=" pull-right-footer">
@@ -65,7 +47,7 @@
     </div>
 
     <div class="container copyright">
-        Copyright 2020 &copy; <a href="<?= base_url(); ?>">chameleoncloth.co.id</a>
+        © All Right Reserved</a>
     </div>
 </footer>
 
@@ -77,7 +59,4 @@
     });
 </script>
 </body>
-<script src="<?= base_url() ?>assets/public/js/all.js"></script>
-<script src="<?= base_url() ?>assets/public/js/cart.js"></script>
-
 </html>

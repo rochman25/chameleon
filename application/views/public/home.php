@@ -47,7 +47,7 @@ $this->load->view('public/cart');
             </div>
         </section>
         <section class="hot-product">
-            <h1>Laku Banget Nih Men</h1>
+            <h1>SEMUA PRODUK</h1>
             <div class="container">
                 <?php foreach ($produk as $p) {
                     $harga = $p['harga_produk'];
@@ -170,7 +170,7 @@ $this->load->view('public/cart');
         <section class="signup">
             <i class="svg-icon svg_icon__home_envelope"></i>
             <h1>Daftar Dengan Email</h1>
-            <h2>Jadi yang pertama untuk mendapatkan produk terbaru dan penawaran dari Chameleon</h2>
+            <h2>Jadi yang pertama untuk mendapatkan produk terbaru dan penawaran dari Chameleon Cloth</h2>
             <a href="<?= base_url() ?>login" class="home_button">
 
                 GABUNG SEKARANG

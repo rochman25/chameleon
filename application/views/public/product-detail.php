@@ -93,13 +93,13 @@ $this->load->view('public/cart');
                                                 if (isset($this->session->userdata['user_data'])) {
                                                 ?>
                                                     <button class="addToCart">
-                                                        <i class="svg-icon svg_icon__pdp_cart"></i> Order
+                                                        <i class="svg-icon svg_icon__pdp_cart"></i> ADD TO CHART
                                                     </button>
                                                 <?php
                                                 } else {
                                                 ?>
                                                     <a href="<?= base_url(); ?>login" style="padding:15px;" class="addToCart">
-                                                        <i class="svg-icon svg_icon__pdp_cart"></i>Beli
+                                                        <i class="svg-icon svg_icon__pdp_cart"></i>ADD TO CHART
                                                     </a>
                                                 <?php
                                                 } ?>
@@ -159,7 +159,7 @@ $this->load->view('public/cart');
                                 if (isset($this->session->userdata['user_data'])) {
                                 ?>
                                     <button class="addToCart">
-                                        <i class="svg-icon svg_icon__pdp_cart"></i> Order
+                                        <i class="svg-icon svg_icon__pdp_cart"></i> ADD TO CHART
                                     </button>
 
                                 <?php
@@ -167,7 +167,7 @@ $this->load->view('public/cart');
 
                                 ?>
                                     <a href="<?= base_url(); ?>login" style="padding:15px;" class="addToCart">
-                                        <i class="svg-icon svg_icon__pdp_cart"></i>Beli
+                                        <i class="svg-icon svg_icon__pdp_cart"></i>BELi
                                     </a>
 
                                 <?php
@@ -206,7 +206,7 @@ $this->load->view('public/cart');
                                                             <input type="radio" name="addon" id="sub<?= $key ?>" value="<?= $item['id_sub_produk'] ?>"> <label for="sub<?= $key ?>" style="margin-left: 10px;"><?= $item['nama_sub'] ?></label>
                                                         </div>
                                                         <div class="column">
-                                                            <b id="harga<?= $key ?>"><?= "+ Rp" . number_format($item['harga_sub'], 2) ?></b>
+                                                            <b id="harga<?= $key ?>"><?= "+ Rp " . number_format($item['harga_sub'], 2) ?></b>
                                                         </div>
                                                     </div>
                                                     <div class="row" style="margin-right: 0px;margin-left: 0px;">
@@ -447,6 +447,11 @@ $this->load->view('public/footer');
 
     $(document).ready(function() {
         console.log(stok);
+        
+         $(".size-product2 ul li").on("click", function () {
+			$(".size-product2 ul li").removeClass("active"),
+				$(this).addClass("active");
+        });
 
         $(".addToCart").on("click", function() {
             var id_cart = "";

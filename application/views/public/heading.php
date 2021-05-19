@@ -3,7 +3,7 @@
 	    <div class="header-fixed">
 	        <div class="subheader">
 	            <a href="<?= base_url() ?>" class="slogan">
-	                #Chameleon
+	                #BeYourSelf
 	            </a>
 	            <ul>
 

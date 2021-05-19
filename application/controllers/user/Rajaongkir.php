@@ -110,7 +110,8 @@ class Rajaongkir extends MY_Controller
         $weight = $_GET['weight'];
         // if($barang > 1){
         //     $weight = $barang * $weight;
-        // }else{
+        // }
+        // else{
         //     $weight = 1000;
         // }
         // if ($weight > 1200) {

@@ -852,7 +852,7 @@ header.desktop .mainheader>ul>li>a {
 
 header.desktop .mainheader>ul>li span {
 	border-radius: 4px;
-	background-color: #3bb175;
+	background-color: #0077ED;
 	padding: 7px 10px;
 }
 
@@ -861,7 +861,7 @@ header.desktop .mainheader>ul>li span {
 */
 .home_button {
 	border-radius: 4px;
-	background-color: #3bb175;
+	background-color: #0077ED;
 	padding: 10px 20px;
 	text-decoration: none;
 	color: #ffff;
@@ -1161,7 +1161,7 @@ header.desktop .mainheader .header-right .icon-right i {
 }
 
 header.desktop .mainheader .header-right .icon-right i span {
-	background-color: #3bb175;
+	background-color: #ff3a3a;
 	height: 16px;
 	padding: 0 6px;
 	position: absolute;
@@ -1326,7 +1326,7 @@ header.mobile .menu-lvl1 {
 	left: 0;
 	width: 248px;
 	height: 100vh;
-	background-color: #f3f3f3;
+	background-color: #1f1f1f;
 	transform: translateX(-100%);
 	transition: all 0.5s;
 	z-index: 199;
@@ -1346,7 +1346,7 @@ header.mobile .menu-lvl1>ul {
 header.mobile .menu-lvl1>ul>li {
 	position: relative;
 	padding: 18px 0;
-	border: solid #e0e0e0;
+	border: solid #2f2f2f;
 	border-width: 0 0 1px;
 }
 
@@ -1358,7 +1358,7 @@ header.mobile .menu-lvl1>ul>li>a {
 	font-style: normal;
 	font-stretch: normal;
 	letter-spacing: normal;
-	color: rgba(0, 0, 0, 0.7);
+	color: rgba(255 255 255 / 70%);
 	text-decoration: none;
 	text-transform: uppercase;
 	cursor: pointer;
@@ -1375,7 +1375,7 @@ header.mobile .menu-lvl1>ul>li>a>i {
 
 header.mobile .menu-lvl1>ul>li>a span {
 	border-radius: 4px;
-	background-color: #3bb175;
+	background-color: #0077ED;
 	padding: 7px 10px;
 	color: #fff;
 }
@@ -1547,7 +1547,7 @@ header.mobile .menu-lvl1 .menu-promo ul>li>a {
 }
 
 header.mobile .menu-lvl1 .logout {
-	color: rgba(0, 0, 0, 0.7);
+	color: rgba(255 255 255 / 70%);
 	display: block;
 	margin: 5px 10px;
 }
@@ -1590,7 +1590,8 @@ header.mobile .menu-lvl1 .logout i {
 	font-stretch: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	color: rgba(0, 0, 0, 0.7);
+	color: rgba(255 255 255 / 70%);
+	background-color: #1f1f1f;
 	padding: 18px;
 	border: solid #e0e0e0;
 	border-width: 0 0 1px;
@@ -1610,6 +1611,7 @@ header.mobile .menu-lvl1 .logout i {
 }
 
 .menu-cart .menu-cart-wrapper .cart-wrapper {
+    background-color: #1f1f1f;
 	overflow-y: scroll;
 	height: 100%;
 	padding: 8px 0 185px;
@@ -1650,7 +1652,7 @@ header.mobile .menu-lvl1 .logout i {
 	font-stretch: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	color: rgba(0, 0, 0, 0.5);
+	color: rgba(255 255 255 / 50%);
 	margin-top: 8px;
 }
 
@@ -1665,7 +1667,7 @@ header.mobile .menu-lvl1 .logout i {
 	font-stretch: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	color: rgba(0, 0, 0, 0.7);
+	color: rgba(255 255 255 / 70%);
 	margin-bottom: 8px;
 }
 
@@ -1695,7 +1697,7 @@ header.mobile .menu-lvl1 .logout i {
 	font-stretch: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	color: #b74d24;
+	color: #ff3a3a;
 }
 
 .menu-cart .menu-cart-wrapper .cart-wrapper .cart-list .delete-cart {
@@ -1735,7 +1737,7 @@ header.mobile .menu-lvl1 .logout i {
 .menu-cart .menu-cart-wrapper .cart-footer {
 	position: absolute;
 	bottom: 0;
-	background-color: #f3f3f3;
+	background-color: #1f1f1f;
 	left: 0;
 	width: 100%;
 	padding: 10px;
@@ -2038,9 +2040,9 @@ footer.footer .copyright {
 }
 
 #product .product-info .price_after .value {
-	font-size: 24px;
+	font-size: 17px;
 	font-weight: 700;
-	color: #3bb175;
+	color: #ff3a3a;
 	/* #03cc00; */
 	display: inline-block;
 	line-height: normal;
@@ -2174,7 +2176,7 @@ footer.footer .copyright {
 }
 
 #product .product-info #size ul li.active {
-	background-color: #3bb175;
+	background-color: #b4b4b4;
 	/* #03cc00; */
 	/* color: #fff; */
 }
@@ -2220,7 +2222,7 @@ footer.footer .copyright {
 }
 
 #product .product-info #ukuran ul li.active {
-	background-color: #3bb175;
+	background-color: #b4b4b4;
 	/* color: #fff; */
 }
 
@@ -2250,12 +2252,12 @@ footer.footer .copyright {
 }
 
 #product .product-info .addToCart {
-	width: 258px;
+	width: 155px;
 	height: 63px;
 	line-height: 63px;
 	text-align: center;
-	border-radius: 8px;
-	background-color: #3bb175;
+	border-radius: 33px;
+	background-color: #0077ED;
 	/* #03cc00; */
 	font-size: 18px;
 	font-weight: 700;
@@ -3009,7 +3011,7 @@ footer.footer .copyright {
 .orderpage section {
 	width: 50%;
 	height: 100%;
-	background-color: #f6f6f6;
+	background-color: #101010;
 	position: relative;
 	overflow: hidden;
 	z-index: 98;
@@ -3017,7 +3019,7 @@ footer.footer .copyright {
 
 .orderpage section .content {
 	position: relative;
-	background-color: #fff;
+	background-color: #1f1f1f;
 	border-radius: 4px;
 	padding: 20px 24px 24px;
 	height: 100%;
@@ -3026,7 +3028,7 @@ footer.footer .copyright {
 
 .orderpage section .content .title {
 	font-size: 12px;
-	color: rgba(0, 0, 0, 0.4);
+	color: rgba(255 255 255 / 40%);
 	margin-bottom: 8px;
 }
 
@@ -3051,7 +3053,7 @@ footer.footer .copyright {
 }
 
 .orderpage section.left-column .ticker {
-	background: rgba(24, 205, 245, 0.16);
+	background: #1f1f1f;
 	border-radius: 4px;
 	width: 100%;
 	padding: 10px;
@@ -3115,8 +3117,8 @@ footer.footer .copyright {
 }
 
 .orderpage section.left-column .address .address-box.selected {
-	border: 1px solid #b74d24;
-	background-color: rgba(183, 77, 36, 0.08);
+	border: 1px solid #337ab7;
+	background-color: #337ab70f
 }
 
 .orderpage section.left-column .address .address-box.selected ul li {
@@ -3382,7 +3384,7 @@ footer.footer .copyright {
 	font-stretch: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	color: rgba(0, 0, 0, 0.7);
+	color: rgba(255 255 255 / 70%);
 	display: -webkit-box;
 	-webkit-line-clamp: 1;
 	-webkit-box-orient: vertical;
@@ -3409,7 +3411,7 @@ footer.footer .copyright {
 	font-stretch: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	color: #b74d24;
+	color: #ff3a3a;
 	margin-bottom: 4px;
 }
 
@@ -3420,7 +3422,7 @@ footer.footer .copyright {
 	font-stretch: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	color: rgba(0, 0, 0, 0.7);
+	color: rgba(255 255 255 / 70%);
 }
 
 .orderpage section.right-column .products .product-box .product-info .qty-size .strong {
@@ -3486,7 +3488,7 @@ footer.footer .copyright {
 	font-stretch: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	color: rgba(0, 0, 0, 0.7);
+	color: rgba(255 255 255 / 70%);
 	text-transform: uppercase;
 }
 
@@ -3515,7 +3517,7 @@ footer.footer .copyright {
 	font-stretch: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	color: rgba(0, 0, 0, 0.7);
+	color: rgba(255 255 255 / 70%);
 }
 
 .orderpage section.right-column .order-summary .potongan-voucher strong,
@@ -4712,7 +4714,7 @@ footer.footer .copyright {
 	float: right;
 	width: 170px;
 	height: 42px;
-	background: #3bb175;
+	background: #0077ED;
 	border-radius: 4px;
 	color: #fff;
 	font-size: 12px;
@@ -5640,7 +5642,7 @@ footer.footer .copyright {
 	top: 32px;
 	left: 50%;
 	transform: translateX(-50%);
-	background: #0a0a0a;
+	background: #1f1f1f;
 	box-shadow: 3px 4px 15px rgba(0, 0, 0, 0.1);
 	border-radius: 8px;
 	padding: 32px;
@@ -5680,7 +5682,7 @@ footer.footer .copyright {
 	font-weight: 600;
 	font-size: 12px;
 	line-height: normal;
-	color: #3bb175;
+	color: #0077ED;
 }
 
 .new-login>form h2 {
@@ -5714,12 +5716,12 @@ footer.footer .copyright {
 	font-size: 12px;
 	line-height: normal;
 	text-transform: capitalize;
-	color: #3bb175;
+	color: #0077ED;
 	text-decoration: none;
 }
 
 .new-login>form input[type="submit"] {
-	background: #3bb175;
+	background: #0077ED;
 	border-radius: 4px;
 	height: 42px;
 	line-height: 42px;
@@ -5820,7 +5822,7 @@ footer.footer .copyright {
 	font-weight: 600;
 	font-size: 12px;
 	line-height: normal;
-	color: #3bb175;
+	color: #0077ED;
 }
 
 .new-register>form h2 {
@@ -5849,7 +5851,7 @@ footer.footer .copyright {
 }
 
 .new-register>form input[type="submit"] {
-	background: #3bb175;
+	background: #0077ED;
 	border-radius: 4px;
 	height: 42px;
 	line-height: 42px;
@@ -6615,7 +6617,6 @@ footer.footer .copyright {
 }
 
 .badge_label_limited {
-	background-color: rgb(5, 5, 5);
 	width: auto;
 	/* float: right; */
 	border: 1px solid rgb(252, 144, 4);
@@ -6625,43 +6626,42 @@ footer.footer .copyright {
 
 .badge_label_limited p {
 	text-align: center;
-	color: white;
+	color: rgb(252, 144, 4);
 	font-size: 10px;
 	font-weight: bold;
 	margin: 0;
 }
 
 .badge_label_new {
-	background-color:  rgb(5, 5, 5);
+	background-color:  #337ab7;
 	width: auto;
 	/* float: right; */
 	/* border: 15px solid green; */
 	padding: 5px;
-	border: 1px solid blue;
+	border: 1px #8a6d3b;
 	margin: 2px;
 }
 
 .badge_label_new p {
 	text-align: center;
-	color: blue;
+	color: #ffffff;
 	font-size: 10px;
 	font-weight: bold;
 	margin: 0;
 }
 
 .badge_label_paling_laris {
-	background-color:  rgb(5, 5, 5);
+	background-color:  #8a6d3b;
 	width: auto;
 	/* float: right; */
 	/* border: 15px solid green; */
 	padding: 5px;
-	border: 1px solid red;
 	margin: 2px;
 }
 
 .badge_label_paling_laris p {
 	text-align: center;
-	color: red;
+	color: white;
 	font-size: 10px;
 	font-weight: bold;
 	margin: 0;

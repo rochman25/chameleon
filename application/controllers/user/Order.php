@@ -30,6 +30,7 @@ class Order extends MY_Controller
             $thumbnail = array();
             $total_harga = 0;
             $total_berat = 0;
+            $total_jumlah = 0;
             foreach ($data['cart'] as $row) {
                 if ($row['id_sub_produk'] == null) {
                     $harga = $row['diskon_produk'] != 0 ? $row['harga_produk'] - (($row['diskon_produk'] / 100) * $row['harga_produk']) : $row['harga_produk'];
@@ -43,10 +44,16 @@ class Order extends MY_Controller
                 $thumbnail[$row['id_produk']] = base_url() . "assets/uploads/thumbnail_produk/" . $foto[0];
                 // }
                 $total_harga += $harga * $row['quantity'];
-                $total_berat += $row['berat_produk'];
+                if($row['quantity'] > 1){
+                    $total_berat = $total_berat + ($row['quantity'] * $row['berat_produk']);
+                }else{
+                    $total_berat += $row['berat_produk'];   
+                }
+                $total_jumlah += $row['quantity'];
             }
             $data['total'] = $total_harga;
             $data['total_berat'] = $total_berat;
+            $data['total_jumlah'] = $total_jumlah;
             $data['thumbnail'] = $thumbnail;
             if ($this->input->post('kirim')) {
                 $nama_lengkap = $this->input->post('nama_lengkap');
@@ -156,4 +163,11 @@ class Order extends MY_Controller
             redirect('login');
         }
     }
+
+    public function order_detail($id){
+        $data['data'] = $this->transaksi->getWhere("id_transaksi", $id);
+        $data['data'] = $this->transaksi->getData()->row();
+        $this->load->view('public/order-detail',$data);
+    }
+
 }
