@@ -172,8 +172,7 @@ class Order extends MY_Controller
         $data['profil'] = $this->user->getJoin("alamat_pengguna", "alamat_pengguna.id_pengguna=pengguna.id_pengguna", "left");
         $data['profil'] = $this->user->getWhere("pengguna.id_pengguna", $idp);
         $data['profil'] = $this->user->getData()->row();
-        // die(json_encode($data));
-        $this->load->view('public/order-detail',$data);
+        $this->load->view('public/orderdetail',$data);
     }
 
 }

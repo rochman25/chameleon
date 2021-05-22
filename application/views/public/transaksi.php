@@ -231,7 +231,7 @@ $this->load->view('public/footer');
                     // swal('Success!', data.rajaongkir.results[0].costs[0].cost[0].value, data.status);
                     var ongkir = 0;
                     if (courier == 'jne') {
-                        ongkir = data.rajaongkir.results[0].costs[1].cost[0].value
+                        ongkir = data.rajaongkir.results[0].costs[0].cost[0].value
                     } else {
                         ongkir = data.rajaongkir.results[0].costs[0].cost[0].value
                     }
