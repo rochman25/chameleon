@@ -100,4 +100,12 @@ class Transaksi_model extends MY_Model
         return $this->update($data);
     }
 
+    function getTransaksiWithDetail($kode){
+        $this->select('produk.nama_produk, produk.thumbnail_produk,produk.harga_produk, detail_transaksi.*');
+        $this->getJoin("detail_transaksi","detail_transaksi.id_transaksi = transaksi.id_transaksi","inner");
+        $this->getJoin("produk","produk.id_produk = detail_transaksi.id_produk","inner");
+        $this->getWhere("transaksi.kode_transaksi",$kode);
+        return $this->getData()->result_array();
+    }
+
 }
