@@ -168,10 +168,12 @@ class Order extends MY_Controller
         $idp = $this->session->userdata['user_data']['id'];
         $data['transaksi'] = $this->transaksi->getWhere("kode_transaksi", $id);
         $data['transaksi'] = $this->transaksi->getData()->row();
+        $data['kategori'] = $this->kategori->getData()->result_array();
         $data['detail_transaksi'] = $this->transaksi->getTransaksiWithDetail($id);
         $data['profil'] = $this->user->getJoin("alamat_pengguna", "alamat_pengguna.id_pengguna=pengguna.id_pengguna", "left");
         $data['profil'] = $this->user->getWhere("pengguna.id_pengguna", $idp);
         $data['profil'] = $this->user->getData()->row();
+        // die(json_encode($data));
         $this->load->view('public/orderdetail',$data);
     }
 
