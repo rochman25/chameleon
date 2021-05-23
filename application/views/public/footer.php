@@ -1,5 +1,5 @@
 <footer class="footer nav-footer" style="background-color: black;">
-  <div class="container">
+  <div class="container" style="display: block;">
     <div class="nav-footer-item nav col-lg-3 col-md-4 col-sm-6">
       <h4 style="margin-top: 0; 
                   font-size: 14px;
