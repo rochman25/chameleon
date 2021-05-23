@@ -74,7 +74,7 @@
     </div>
   </div>
   <div class="container copyright">
-    � All Right Reserved</a>
+    <span>&#169;</span> <b style="margin-left:5px"> All Right Reserved</b>
   </div>
 </footer>
 <script type="text/javascript">

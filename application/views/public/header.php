@@ -76,7 +76,7 @@
 			color: hsla(0, 0%, 100%, 0.7);
 		}
 
-		@media (max-width : 768px) {
+		/* @media (max-width : 768px) { */
 
 			.nav-footer .nav h4 {
 				cursor: pointer;
@@ -106,7 +106,7 @@
 			}
 
 
-		}
+		/* } */
 	</style>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 	<script src="<?= base_url() ?>assets/public/js/all.js"></script>
