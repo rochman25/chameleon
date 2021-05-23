@@ -28,7 +28,8 @@ $this->load->view('public/cart');
                         <div class="title">Harap membayar sebelum tanggal : <b style="color: white;"> <?= date("d-M-Y H:i:s", strtotime("+1 day", strtotime($transaksi->waktu_transaksi))) ?> </b></div>
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12">
-                        <h5 style="font-weight: bold;">SHIPPING - REG</h5>
+                        <h5 style="font-weight: bold;">SHIPPING - <?= strtoupper($transaksi->kurir) ?></h5>
+                        
                         <div class="title"><b style="color: white;"> <?= $profil->nama_lengkap ?> </b></div>
                         <div class="title">
                             <p style="color: white;"> <?= $profil->alamat_1 . " " . $profil->alamat_2 ?> </p>
@@ -45,8 +46,10 @@ $this->load->view('public/cart');
                         <div class="title">
                             <p style="color: white;"> <?= "Indonesia" ?> </p>
                         </div>
+                        <div class="title">No Resi : <b style="color: white;"><?= ($transaksi->no_resi == "" || $transaksi->no_resi == null ) ? "No resi belum diinputkan." : $transaksi->no_resi ?></b></div>
                         <div class="title">Nomor Telphone : <b style="color: white;"> <?= $profil->no_telp ?> </b></div>
                         <div class="title">Email : <b style="color: white;"> <?= $profil->email ?> </b></div>
+                        <div class="title">Catatan : <p style="color: white"> <?= ($transaksi->catatan == "" || $transaksi->catatan == null) ? "Tidak ada catatan khusus" : $transaksi->catatan ?> </p></div>
                     </div>
                 </div>
             </div>
@@ -92,16 +95,6 @@ $this->load->view('public/cart');
                 <?php
                     }
                 } ?>
-                <div class="title">Pilih Pengiriman:</div>
-                <div class="kurir">
-                    <select style="color:black" name="kurir" id="kurir" disabled required>
-                        <option value=""><?= strtoupper($transaksi->kurir) ?></option>
-                        <!-- <option value="pos">POS Indonesia</option> -->
-                    </select>
-                </div>
-                <br>
-                <div class="title">Catatan untuk Chameleon Cloth (optional)</div>
-                <textarea style="color:black" name="catatan" class="notes" disabled> <?= $transaksi->catatan; ?> </textarea>
                 <div class="order-summary" id="order">
                     <h1>Ringkasan Belanja</h1>
                     <hr>
