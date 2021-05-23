@@ -25,7 +25,7 @@ $this->load->view('public/cart');
                         <div class="title">Tanggal Order : <b style="color: white;"> <?= date('d-M-Y H:i:s', strtotime($transaksi->waktu_transaksi)) ?> </b></div>
                         <div class="title">Kode Transaksi : <b style="color: white;"> <?= $transaksi->kode_transaksi ?> </b></div>
                         <div class="title">Status : <b style="color: white;"> <?= $transaksi->status_transaksi ?> </b></div>
-                        <div class="title">Harap membayar sebelum tanggal : <b style="color: white;"> <?= date("d-M-Y H:i:s", strtotime("+1 day", strtotime($transaksi->waktu_transaksi))) ?> </b></div>
+                        <div class="title">Harap membayar sebelum tanggal : <b style="color: red;"> <?= date("d-M-Y H:i:s", strtotime("+1 day", strtotime($transaksi->waktu_transaksi))) ?> </b></div>
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12">
                         <h5 style="font-weight: bold;">SHIPPING - <?= strtoupper($transaksi->kurir) ?></h5>
