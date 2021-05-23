@@ -1805,9 +1805,9 @@ footer.footer {
 }
 
 footer.footer .container {
-	display: flex;
-	align-items: flex-start;
-	flex-wrap: wrap;
+	/* display: block; */
+	/* align-items: flex-start; */
+	/* flex-wrap: wrap; */
 }
 
 footer.footer .footer-list {

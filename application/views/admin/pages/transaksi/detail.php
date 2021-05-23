@@ -66,14 +66,20 @@
                                                     <?= $transaksi[0]->email ?>
                                                 </address>
                                             </div>
+                                            <div class="col-md-6 text-md-right">
+                                                <address>
+                                                    <strong>No Resi:</strong><br>
+                                                    <?= ($transaksi[0]->no_resi == "" || $transaksi[0]->no_resi == null) ? "No resi belum tersedia." : $transaksi[0]->no_resi ?>
+                                                </address>
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <address>
                                                     <strong>Catatan Pemesan:</strong><br>
-                                                    <?php if($transaksi[0]->catatan == null || $transaksi[0]->catatan == ""){
+                                                    <?php if ($transaksi[0]->catatan == null || $transaksi[0]->catatan == "") {
                                                         echo "Tidak ada catatan dari pemesan";;
-                                                    }else{
+                                                    } else {
                                                         echo $transaksi[0]->catatan;
                                                     } ?>
                                                 </address>
@@ -115,7 +121,7 @@
                                                                 <td class="text-right">Rp.<?= number_format($val->jumlah_produk * $val->total, 2) ?></td>
                                                             </tr>
                                                         <?php
-                                                        } else if($val->id_sub_produk != null && $val->kode_produk == null) {
+                                                        } else if ($val->id_sub_produk != null && $val->kode_produk == null) {
                                                         ?>
                                                             <tr>
                                                                 <td><?= $no++; ?></td>
@@ -126,11 +132,11 @@
                                                                 <td class="text-center"><?= $val->jumlah_produk ?></td>
                                                                 <td class="text-right">Rp.<?= number_format($val->jumlah_produk * $val->total, 2) ?></td>
                                                             </tr>
-                                                    <?php
-                                                        }else{
+                                                        <?php
+                                                        } else {
                                                             $foto = explode(",", $val->thumbnail_produk);
-                                                    ?>
-                                                        <tr>
+                                                        ?>
+                                                            <tr>
                                                                 <td><?= $no++; ?></td>
                                                                 <td><img width="100" src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $foto[0] ?>"></td>
                                                                 <td><?= $val->nama_produk ?></td>
@@ -139,7 +145,7 @@
                                                                 <td class="text-center"><?= $val->jumlah_produk ?></td>
                                                                 <td class="text-right">Rp.<?= number_format($val->jumlah_produk * $val->total, 2) ?></td>
                                                             </tr>
-                                                    <?php 
+                                                    <?php
                                                         }
                                                         $totalHarga += $val->total;
                                                     } ?>

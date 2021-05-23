@@ -46,7 +46,7 @@ $this->load->view('public/cart');
                         <div class="title">
                             <p style="color: white;"> <?= "Indonesia" ?> </p>
                         </div>
-                        <div class="title">No Resi : <b style="color: white;"><?= ($transaksi->no_resi == "" || $transaksi->no_resi == null ) ? "No resi belum diinputkan." : $transaksi->no_resi ?></b></div>
+                        <div class="title">No Resi : <b style="color: white;"><?= ($transaksi->no_resi == "" || $transaksi->no_resi == null ) ? "No resi belum tersedia." : $transaksi->no_resi ?></b></div>
                         <div class="title">Nomor Telphone : <b style="color: white;"> <?= $profil->no_telp ?> </b></div>
                         <div class="title">Email : <b style="color: white;"> <?= $profil->email ?> </b></div>
                         <div class="title">Catatan : <p style="color: white"> <?= ($transaksi->catatan == "" || $transaksi->catatan == null) ? "Tidak ada catatan khusus" : $transaksi->catatan ?> </p></div>
