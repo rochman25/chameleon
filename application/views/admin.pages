@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Data Banner Produk</title>
+    <title>Data Size Produk</title>
     <?php $this->load->view('admin/assets/stylesheets') ?>
 </head>
 
@@ -288,7 +288,6 @@
             let order = $(this).data('order');
             let link = $(this).data('link');
             let status = $(this).data('status');
-            console.log(id);
             $('input[id="id"]').val(id);
             $('#ubahProduk').val(produk);
             $('#ubahUrutan').val(order);

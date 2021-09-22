@@ -27,6 +27,12 @@ class MY_Model extends CI_Model{
         $query = $this->db->where($col, $kon);
         return $query;
     }
+    
+    function like($col, $kon)
+    {
+        $query = $this->db->like($col, $kon, 'both');
+        return $query;
+    }
 
     function order_by($col,$mode){
         $query = $this->db->order_by($col,$mode);

@@ -14,7 +14,7 @@ $this->load->view('public/cart');
 <section id="content">
     <div id="product" data-product-nama="<?= $produk->nama_produk; ?>" data-product-id="<?= $produk->id_produk; ?>">
         <div class="container">
-            <div class="row">
+            <div class="row" id="row_produk">
                 <!--  -->
                 <div class="col-lg-5 col-md-5 gallery-container" data-image-count="7">
                     <div id="containergallery" class="image-gallery">
@@ -33,7 +33,7 @@ $this->load->view('public/cart');
                         <?php } ?>
 
                     </div>
-                    <input onclick="toggleVideo();" type="button" value="VIDEO" />
+                
                 </div>
 
                 <!--  -->
@@ -55,18 +55,29 @@ $this->load->view('public/cart');
                 </div>
                 <div class="image-gallery-mobile owl-carousel">
 
-                    <input onclick="toggleMVideo();" type="button" value="VIDEO" />
+                   
                 </div>
 
                 <!--  -->
                 <div class="col-lg-7 col-md-7 col-xs-12">
 
-
                     <div class="product-ribbon clearfix">
                     </div>
                     <div class="product-info" style="margin-left:10px">
                         <div class="row">
-                            <div class="column" style="width: 50%;">
+                            <div class="column" style="width: 100%;margin-bottom: 15px;">
+                                <div class="column" style="float: left;width: 100%;margin-top:0px;margin-right:10%;text-align: center;display: flex;align-items: center;">
+                                    <?php $label_p = explode(",", $produk->label_produk);
+                                    foreach ($label_p as $key_l => $val_l) {
+                                    ?>
+                                        <div class="badge_label_<?php echo str_replace(" ", "_", $val_l) ?>" <?php if ($key_l != 0) { ?> style="margin-top:auto;" <?php } ?>>
+                                            <p style="margin-top:0px; font-size:xx-small; font-weight:bold"><?= strtoupper($val_l) ?></p>
+                                        </div>
+                                    <?php } ?>
+                                
+                                </div>
+                            </div>
+                            <div class="column" style="width: 100%;">
                                 <h1 style="margin-top:0px;"><?= $produk->nama_produk; ?></h1>
                                 <h2 style="font-size: 0;line-height: none;">
                                     <div class="row" style="margin-right: 0;margin-left: 0px;">
@@ -93,13 +104,13 @@ $this->load->view('public/cart');
                                                 if (isset($this->session->userdata['user_data'])) {
                                                 ?>
                                                     <button class="addToCart">
-                                                        <i class="svg-icon svg_icon__pdp_cart"></i> ADD TO CHART
+                                                        <i class="svg-icon svg_icon__pdp_cart"></i> Beli
                                                     </button>
                                                 <?php
                                                 } else {
                                                 ?>
                                                     <a href="<?= base_url(); ?>login" style="padding:15px;" class="addToCart">
-                                                        <i class="svg-icon svg_icon__pdp_cart"></i>ADD TO CHART
+                                                        <i class="svg-icon svg_icon__pdp_cart"></i> Beli
                                                     </a>
                                                 <?php
                                                 } ?>
@@ -109,18 +120,7 @@ $this->load->view('public/cart');
                                     </div>
                                 </h2>
                             </div>
-                            <div class="column" style="width: 50%;">
-                                <div class="column" style="float: right;width: 60%;margin-top:0px;margin-right:10%;text-align: right;">
-                                    <?php $label_p = explode(",", $produk->label_produk);
-                                    foreach ($label_p as $key_l => $val_l) {
-                                    ?>
-                                        <div class="badge_label_<?php echo str_replace(" ", "_", $val_l) ?>" <?php if ($key_l != 0) { ?> style="margin-top:10px" <?php } ?>>
-                                            <p style="margin-top:0px; font-size:large; font-weight:bold"><?= strtoupper($val_l) ?></p>
-                                        </div>
-                                    <?php } ?>
-                                    <a href="#" data-toggle="modal" data-target="#sizeModal" style="color: red; font-weight: bold; text-decoration: underline;  margin-top:10px">*Size Chart</a>
-                                </div>
-                            </div>
+                            
                         </div>
                         <br>
                         <div class="row">
@@ -129,7 +129,7 @@ $this->load->view('public/cart');
                                 <ul class="clearfix">
                                     <?php foreach ($size as $s) {
                                     ?>
-                                        <li onclick="setUkuran('<?= $s; ?>');" id="produk<?= $s ?>" style="color:black !important;" class="size ">
+                                        <li onclick="setUkuran('<?= $s; ?>');" id="produk<?= $s ?>" style="color:black !important;" class="size">
                                             <span><?= $s; ?></span>
                                         </li>
                                     <?php
@@ -137,29 +137,50 @@ $this->load->view('public/cart');
 
                                 </ul>
                             </div>
+                            <a href="#" data-toggle="modal" data-target="#findMyFitModal" style="color: black;text-decoration: none;display: flex;align-content: center;justify-content: flex-start;align-items: center;padding-top: 20px;">
+                            <div class="" <span="" style="
+                            padding-top: 5px;
+                            background: #5a5a5a;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding-left: 15px;
+                            padding-right: 15px;
+                            color: white;
+                            align-content: center;
+                            padding-bottom: 5px;
+                            border-radius: 15px;
+                            ">Find My Fit</div>
+                            </a>
+                            
+                            <br>
                             <br>
                             <span>Jumlah :</span>
-                            <div id="ukuran" class="size-product">
+                            <div id="ukuran" class="size-jumlah">
                                 <ul class="clearfix">
-                                    <li onclick="ubahjml(2);" class="size active ">
+                                    <li onclick="ubahjml(2);" class="size">
                                         <span>-</span>
                                     </li>
-                                    <li class="size  ">
-                                        <span style="color:black;" id="value">1</span>
+                                    <li>
+                                        <!--<span style="color:black;" id="jumlah" value="1">1</span>-->
+                                        <span id="value" value="0">0
+                                        </span>
+                                        <!--<p id="jumlah">0</p>-->
                                     </li>
-                                    <li onclick="ubahjml(1);" class="size active ">
+                                    <li onclick="ubahjml(1);" class="size">
                                         <span>+</span>
                                     </li>
 
                                 </ul>
                             </div>
-
+                            
+                            
                             <div class="button-action">
                                 <?php
                                 if (isset($this->session->userdata['user_data'])) {
                                 ?>
                                     <button class="addToCart">
-                                        <i class="svg-icon svg_icon__pdp_cart"></i> ADD TO CHART
+                                        <i class="svg-icon svg_icon__pdp_cart"></i> Beli
                                     </button>
 
                                 <?php
@@ -167,7 +188,7 @@ $this->load->view('public/cart');
 
                                 ?>
                                     <a href="<?= base_url(); ?>login" style="padding:15px;" class="addToCart">
-                                        <i class="svg-icon svg_icon__pdp_cart"></i>BELi
+                                        <i class="svg-icon svg_icon__pdp_cart"></i> BELi
                                     </a>
 
                                 <?php
@@ -179,16 +200,19 @@ $this->load->view('public/cart');
                             </div>
                             <ul class="nav nav-tabs">
                                 <li class="active" data-target="product-deskripsi">
-                                    <a style="color:white;background-color:none;" href="javascript:;">Deskripsi</a>
+                                    <a style="color: #5a5a5a;background-color:none;" href="javascript:;">Deskripsi</a>
                                 </li>
-                                <!-- <li data-target="review"><a href="javascript:;">Rating dan Ulasan ( 5/5 )</a></li> -->
+                                <li class="active" data-target="product-deskripsi">
+                                    <a href="#" data-toggle="modal" data-target="#sizeModal" style="color: red;font-weight: bold;text-d;/* text-decoration: underline; */-top:10px;">Size Chart</a></a>
+                                </li><!-- <li data-target="review"><a href="javascript:;">Rating dan Ulasan ( 5/5 )</a></li> -->
                             </ul>
                             <div class="tab-content">
                                 <div class="product-deskripsi">
+                                    <font color="5a5a5a">
                                     <?php if (empty($produk->deskripsi_produk)) {
                                         echo "<p>Belum ada deskripsi</p>";
                                     } else {
-                                        echo $produk->deskripsi_produk;
+                                        echo nl2br($produk->deskripsi_produk);
                                     } ?>
                                 </div>
                                 <div class="review">
@@ -197,7 +221,7 @@ $this->load->view('public/cart');
                             <?php
                             if (!empty($subProduk)) {
                                 foreach ($subProduk as $key => $item) { ?>
-                                    <div class="left-right">
+                                    <div class="left-right" hidden>
                                         <div class="right-side">
                                             <div class="card" style="margin-right:10px">
                                                 <div class="card-row">
@@ -226,6 +250,7 @@ $this->load->view('public/cart');
 
                                                                 </ul>
                                                             </div>
+                                                            
                                                         </div>
                                                         <div class="column">
                                                             <p><b>Jumlah</b></p>
@@ -254,9 +279,197 @@ $this->load->view('public/cart');
                     </div>
                 </div>
             </div>
+            
+            <div id="kosong" class="card" style="
+    width: 60%;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 32px;
+    box-sizing: border-box;
+    text-align: center;
+    position: inherit;
+    display: grid;
+    justify-content: center;
+    margin-left: 20%;
+    margin-right: 20%;
+">
+                <p style="
+    font-size: 27px;
+">SORRY!</p><p style="
+    padding-bottom: 27px;
+">Stock product habis, apakah mau pre order?</p>
+            <a href="https://wa.me/message/367KS3T7RIJXC1" style="padding: 7px;background: #0077ed;padding-left: 27px;padding-right: 27px;border-radius: 17px;margin: 7px;">
+    <i class=""></i><span style="
+    color: white;
+">Ya</span>
+</a>
+            <a href="https://chameleoncloth.co.id/user/home" style="padding: 7px;background: #5a5a5a;padding-left: 27px;padding-right: 27px;border-radius: 17px;margin: 7px;">
+    <i class=""></i><span style="
+    color: white;
+">Tidak</span>
+</a>
+</div>
+            
         </div>
     </div>
 </section>
+
+<!-- Modal -->
+  <!--<div class="modal fade" id="findMyFitModal" role="dialog">-->
+  <!--  <div class="modal-dialog">-->
+    
+      <!-- Modal content-->
+  <!--    <div class="modal-content">-->
+  <!--      <div class="modal-header">-->
+  <!--        <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+  <!--        <h4 class="modal-title">Find My Fit</h4>-->
+  <!--      </div>-->
+  <!--      <div class="modal-body">-->
+  <!--        <div class="form-group">-->
+  <!--                                  <div class="row">-->
+  <!--                                      <div class="col-lg-12">-->
+  <!--                                          <label>Berat</label>-->
+  <!--                                          <div class="input-group">-->
+  <!--                                              <input type="text" name="berat" id="berat" class="">-->
+  <!--                                          </div>-->
+  <!--                                      </div>-->
+  <!--                                  </div>-->
+  <!--                              </div>-->
+  <!--      </div>-->
+  <!--      <div class="modal-footer">-->
+  <!--        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+  <!--      </div>-->
+  <!--    </div>-->
+      
+  <!--  </div>-->
+  <!--</div>-->
+  
+<div class="modal fade" id="findMyFitModal" tabindex="-1" role="dialog" aria-labelledby="modalFindMyFit">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: black;font-weight: 900;font-size: 20px;text-align: center;">Fit Advisor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="reloadFindMyFit()" style="margin-top: -30px;font-size: xx-large;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                
+                <button id="reloadFindMyFit" type="button" class="close" hidden>
+                    <span>reloaad</span>
+                </button>
+                
+            </div>
+            <div class="modal-body">
+                <!--<form action="<?= base_url() ?>admin/banner/ubah" method="POST" enctype="multipart/form-data">-->
+                            <div id="inputFit">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <label>Berat</label>
+                                                <div class="input-group" style="width: 100%;">
+                                                    <input class="form-control" type="text" name="berat" id="berat" style="color: black;" onkeypress="return onlyNumberKey(event)" value="0">
+                                                     Kg
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <label>Tinggi</label>
+                                                <div class="input-group" style="width: 100%;">
+                                                    <input class="form-control" type="text" name="tinggi" id="tinggi" style="color: black;" onkeypress="return onlyNumberKey(event)" value="0">
+                                                    Cm
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer bg-whitesmoke br">
+                                    <button type="submit" id="cari" name="cari" class="btn btn-primary" onclick="findMyFit()">Cari</button>
+                                </div>
+                                
+                                
+                            </div>
+                            
+                            <div id="pilihGambarDepan" style="display: none;">
+                                <div style="height: 100%; width: 100%; display: block; margin: 10px; text-align: center;">
+                                    Pilih yang paling mirip dengan Badan Anda
+                                </div>
+                                <div class="row" id="imageDepan" style="height: 100%;width: 100%;display: flex;margin: 10px;text-align: center;padding-top: 50px;padding-bottom: 50px;">
+                                    <div style="width: 35%; margin: 10px;">
+                                        <a href="#" onclick="setGambarDepan('kurus');">
+                                            <img src="<?= base_url() ?>assets/fit_size/gambar_depan/kurus.svg" />
+                                        </a>
+                                        Kurus
+                                    </div>
+                                    <div style="width: 35%; margin: 10px;">
+                                        <a href="#" onclick="setGambarDepan('sedang');">
+                                            <img src="<?= base_url() ?>assets/fit_size/gambar_depan/sedang.svg" />
+                                        </a>
+                                        Sedang
+                                    </div>
+                                    <div style="width: 35%; margin: 10px;">
+                                        <a href="#" onclick="setGambarDepan('gemuk');">
+                                            <img src="<?= base_url() ?>assets/fit_size/gambar_depan/gemuk.svg" />
+                                        </a>
+                                        Gemuk
+                                    </div>
+                            </div>
+                            </div>
+                            
+                            
+                            <div id="pilihGambarSamping" style="display: none;" >
+                                 <div style="height: 100%; width: 100%; display: block; margin: 10px; text-align: center;">
+                                    Pilih yang paling mirip dengan Badan Anda
+                                </div>
+                                
+                                <div class="row" id="imageSamping" style="height: 100%;width: 100%;display: flex;margin: 10px;text-align: center;padding-top: 50px;padding-bottom: 50px;">
+                                    <div style="width: 35%; margin: 10px;">
+                                        <a href="#" onclick="setGambarSamping('tipis');">
+                                            <img src="<?= base_url() ?>assets/fit_size/gambar_samping/tipis.svg" />
+                                        </a>
+                                        Datar
+                                    </div>
+                                    <div style="width: 35%; margin: 10px;">
+                                        <a href="#" onclick="setGambarSamping('sedang');">
+                                            <img src="<?= base_url() ?>assets/fit_size/gambar_samping/sedang.svg" />
+                                        </a>
+                                        Rata - Rata
+                                    </div>
+                                    <div style="width: 35%; margin: 10px;">
+                                        <a href="#" onclick="setGambarSamping('buncit');">
+                                            <img src="<?= base_url() ?>assets/fit_size/gambar_samping/buncit.svg" />
+                                        </a>
+                                        Buncit
+                                    </div>
+                                </div>
+                            </div>
+                            
+                                
+                            <div id="hasilFit" style="display: none;">
+                                <div id="imageMyFit" class="image-gallery-mobile owl-carousel" style="width: 50%; height: 50%; display: block; margin-left: auto; margin-right: auto;">
+
+                                    <?php foreach ($thumbnail as $p) { ?>
+                                        <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $p; ?>" style="display: flex; justify-content:center;" />
+                                    <?php } ?>
+            
+                                </div>
+                                <br>
+                                <div style="text-align: center;">
+                                    <h5>Ukuran paling cocok</h5>
+                                    <div class="card" <h3="" id="sizeMyFit" name="sizeMyFit" value="..." style="margin-left: 95px;margin-right: 95px;font-size: 30px;font-weight: 900;">XS</div>
+                                    <h5 style="font-size: 8px;font-weight: 100;padding-left: 30px;padding-right: 30px;padding-bottom: 20px;padding-top: 15px;">Ukuran yang kami rekomendasikan didasarkan pada bagaimana Desainer menginginkan produk ini agar pas dengan tubuh Anda.</h5>
+                                </div>
+                            </div>
+                            
+                        <!--</form>-->
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="sizeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -278,6 +491,8 @@ $this->load->view('public/cart');
         </div>
     </div>
 </div>
+
+
 <?php
 $this->load->view('public/footer');
 ?>
@@ -290,15 +505,18 @@ $this->load->view('public/footer');
 </script>
 <script type="text/javascript">
     var base_url = '<?= base_url() ?>';
-    var def_jml = 1;
+    var def_jml = 0;
     var def_jml2 = 1;
     var def_Size = "";
     var def_Size2 = "";
+    var def_SizeAdd = "";
+    
+    var resData = "";
     var add_on = "";
     var stok = '<?= $produk->stok_produk; ?>';
-    var harga = '<?= $produk->harga_produk ?>'
+    var harga = '<?= $produk->harga_produk ?>';
     // var harga = '<?= $produk->diskon_produk != 0 ? $produk->harga_produk - (($produk->diskon_produk / 100) * $produk->harga_produk) : $produk->harga_produk ?>';
-    var diskon = '<?= $produk->diskon_produk ?>'
+    var diskon = '<?= $produk->diskon_produk ?>';
 
     var containervideo = document.getElementById('containervideo');
     var containergallery = document.getElementById('containergallery');
@@ -308,7 +526,13 @@ $this->load->view('public/footer');
     containermvideo.style.display = "none";
     var ishide = true;
     var ismhide = true;
-
+    var jml_barang = "0";
+    var gambar_depan = "";
+    var gambar_samping = "";
+    var tinggi_normal = 170;
+    var berat = 0;
+    var tinggi = 0;
+    
     function toggleVideo() {
         if (ishide) {
             containervideo.style.display = "none";
@@ -392,6 +616,8 @@ $this->load->view('public/footer');
 
     function setUkuran(ukuran) {
         def_Size = ukuran;
+        console.log(def_Size);
+        console.log(def_Size, def_SizeAdd);
         // var id = document.getElementById(id)
         // id.classList.add('active');
     }
@@ -410,21 +636,45 @@ $this->load->view('public/footer');
 
     // /var size_view = 
     function ubahjml(state) {
-        console.log(state);
-        if (state == 1) {
-            if (def_jml < stok) {
-                def_jml++
+        jml_barang = document.getElementById('value');
+        var number = jml_barang.innerHTML; 
+        def_jml = number;
+        
+        var value = document.getElementById("value").innerHTML;
+        if (def_jml == 0){
+            if(state == "1"){
+                number++;
+                jml_barang.innerHTML = number;
             } else {
-                //  def_jml = stok;
+                // def_jml == 0;
+                number = "0";
             }
+            
         } else {
-            if (def_jml <= 1) {
-                def_jml = 1;
+            if(state == "1"){
+                number++;
             } else {
-                def_jml--;
+                number--;
             }
+            jml_barang.innerHTML = number;
         }
-        document.getElementById('value').innerHTML = def_jml;
+        def_jml = number;
+        console.log(def_jml, stok);
+        
+        // if (state == 1) {
+        //     if (def_jml > stok) {
+        //         def_jml++
+        //     } else {
+        //          def_jml = 0;
+        //     }
+        // } else {
+        //     if (def_jml <= 1) {
+        //         def_jml = 1;
+        //     } else {
+        //         def_jml--;
+        //     }
+        // }
+        // document.getElementById('jumlah').innerHTML = def_jml;
     }
 
     function ubahjml2(state,jml,id) {
@@ -448,16 +698,34 @@ $this->load->view('public/footer');
     $(document).ready(function() {
         console.log(stok);
         
-         $(".size-product2 ul li").on("click", function () {
+        $(".size-product2 ul li").on("click", function () {
 			$(".size-product2 ul li").removeClass("active"),
 				$(this).addClass("active");
         });
-
+        
+        $(".size-jumlah ul li").on("click", function () {
+			$(".size-jumlah ul li").removeClass("active"),
+				$(this).addClass("active");
+        });
+    
+        
         $(".addToCart").on("click", function() {
             var id_cart = "";
-            if (def_Size != "") {
+            console.log("==", def_jml );
+            
+            console.log("==", def_SizeAdd );
+            
+            // if(def_SizeAdd == def_Size){
+                
+            // } else {
+                
+            // }
+            
+            def_SizeAdd = def_Size;
+                if (def_SizeAdd != "" && def_jml != 0) {
                 var id_prod = $("#product").data("product-id");
                 var nama_barang = $("#product").data("product-nama");
+                console.log("idp == ", id_prod);
                 $.ajax({
                     url: base_url + "user/Home/add_cart",
                     type: "POST",
@@ -477,12 +745,15 @@ $this->load->view('public/footer');
                         img: '<?= base_url() . 'assets/uploads/thumbnail_produk/'. $thumbnail[0]; ?>',
                         nama_barang: nama_barang,
                         harga: def_jml * harga,
+                        real_harga: harga,
                         size: def_Size,
                         diskon: diskon
                     }
                 }).done(function(t) {
                     var res = JSON.parse(t);
-
+                    // resData = res;
+                    // console.log("res ===== ", resData);
+                    
                     if (true == res.success) {
                         id_cart = res.id_cart;
                         add_on = $('input[name="addon"]:checked').val();
@@ -505,7 +776,8 @@ $this->load->view('public/footer');
                                                     } ?>',
                                     id_produk: '<?= $produk->id_produk; ?>',
                                     id_sub_produk: add_on,
-                                    qty: def_jml2,
+                                    qty: 0,
+                                    real_harga: harga,
                                     img: '<?= base_url()."assets/images/add_on.png" ?>',
                                     nama_barang: nama_sub,
                                     harga: def_jml2 * parseFloat(harga_sub),
@@ -513,38 +785,129 @@ $this->load->view('public/footer');
                                 }
                             }).done(function(t) {
                                 var res = JSON.parse(t);
-
+                                console.log("myres == ", res);
                                 if (true == res.success) {
                                     id_cart = res.id_cart;
                                     $(".cart-wrapper").append(res.element);
                                     var i = parseInt($(".icon-cart").find(".notif").html());
+                                    $("#totalharga").html("Rp "+res.total);
                                     $(".menu-cart").addClass("open"),
                                         $(".overlay-desktop").addClass("active")
-
                                 }
                             }).fail(function(t) {
                                 console.log(t)
                                 location.reload()
                             });
+                        
+                        
                         }
-                        $(".cart-wrapper").append(res.element);
+                    
+                    if(res.status == "success"){
+                        // $(".cart-wrapper").append(res.element);
+                        // var i = parseInt($(".icon-cart").find(".notif").html());
+                        // $("#totalharga").html("Rp "+res.total);
+                        
+                        // $(".menu-cart").addClass("open"),
+                        // $(".overlay-desktop").addClass("active")
+                        
+                        $(".cart-wrapper").empty();
+                        
+                        var base_url = '<?= base_url()?>';
+                        $.get({
+                            url: base_url + "user/Home/get_cart?id=<?php if (!$id_cart == null || !$id_cart == ""){
+            						echo $id_cart->id_cart; }
+            						else{
+            							echo "";
+            							}
+            							?>",
+                            type: "GET",
+                        }).done(function (t) {
+                            var res = JSON.parse(t);
+            				
+            				console.log(res);
+            				// if(res.success =="success"){
+            					if (res.data.length >=0) {
+            						var harga = 0;
+            						var notif = res.data.length;
+            					//	console.log("ini"+notif);
+            						res.data.forEach(myFunction);
+            							function myFunction(item, index) {
+              						//	console.log(item.element);
+              							$(".cart-wrapper").append(item.element);
+                        
+            							$(".icon-cart").find(".notif").html(notif);
+            							$("#totalharga").html("Rp "+res.total);
+            						
+            						}
+            			        }
+            			        
+                        }).fail(function (t) {
+                            console.log(t)
+                              // location.reload()
+                        })
+                        
                         var i = parseInt($(".icon-cart").find(".notif").html());
                         $(".menu-cart").addClass("open"),
-                            $(".overlay-desktop").addClass("active")
-
+                        $(".overlay-desktop").addClass("active")
+                        
+                    } else {
+                        
+                        $(".cart-wrapper").empty();
+                        
+                        var base_url = '<?= base_url()?>';
+                        $.get({
+                            url: base_url + "user/Home/get_cart?id=<?php if (!$id_cart == null || !$id_cart == ""){
+            						echo $id_cart->id_cart; }
+            						else{
+            							echo "";
+            							}
+            							?>",
+                            type: "GET",
+                        }).done(function (t) {
+                            var res = JSON.parse(t);
+            				
+            				console.log(res);
+            				// if(res.success =="success"){
+            					if (res.data.length >=0) {
+            						var harga = 0;
+            						var notif = res.data.length;
+            					//	console.log("ini"+notif);
+            						res.data.forEach(myFunction);
+            							function myFunction(item, index) {
+              						//	console.log(item.element);
+              							$(".cart-wrapper").append(item.element);
+                        
+            							$(".icon-cart").find(".notif").html(notif);
+            							$("#totalharga").html("Rp "+res.total);
+            						
+            						}
+            			        }
+            			        
+                        }).fail(function (t) {
+                            console.log(t)
+                              // location.reload()
+                        })
+                        
+                        var i = parseInt($(".icon-cart").find(".notif").html());
+                        $(".menu-cart").addClass("open"),
+                        $(".overlay-desktop").addClass("active")
+                        
                     }
-
+                    
+                }
 
                 }).fail(function(t) {
                     console.log(t)
-                    location.reload()
+                    // location.reload()
                 });
-            } else {
-                alert("Silahkan Piilih Ukuran Terlebih Dahulu!")
-            }
+                } else {
+                    alert("Silahkan Pilih Ukuran dan jumlah terlebih dahulu!")
+                }
+                
         })
     })
 </script>
+
 <script>
     function callZoom() {
         $('#elevate-zoom').elevateZoom({
@@ -676,9 +1039,139 @@ $this->load->view('public/footer');
                 }
             }
         }
+        
+        console.log("stok == " , stok);
 
-
+        if (stok == 0){
+            $("#row_produk").hide();
+            $("#kosong").show();
+        } else {
+            $("#kosong").hide();
+        }
+        
+        document.getElementById('hasilFit').style.display = 'none';
+        document.getElementById('inputFit').style.display = 'block';
+        
+        // $('#findMyFitModal').modal({
+        //     backdrop: 'static',
+        //     keyboard: true
+        //  })
     });
+    
+    function onlyNumberKey(evt) {
+          
+        // Only ASCII character in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
+    }
+    
+    
+        // document.getElementById("cari").addEventListener("click", findMyFit);
+        // document.getElementById("berat").value("");
+        // document.getElementById("tinggi").value("");
+        
+        function reloadFindMyFit(){
+            document.getElementById('inputFit').style.display = 'block';
+            document.getElementById('hasilFit').style.display = 'none';
+            
+            document.getElementById('berat').value = 0;
+            document.getElementById('tinggi').value = 0;
+        }
+        
+        function findMyFit(){
+            berat = document.getElementById('berat').value;
+            tinggi = document.getElementById('tinggi').value;
+            
+            const sizeMyFit = document.getElementById("sizeMyFit");
+            
+            if(berat == 0 || tinggi == 0){
+                alert("Silahkan masukkan berat dan tinggi terlebih dahulu!")
+            } else {
+                document.getElementById('pilihGambarDepan').style.display = 'block';
+                document.getElementById('inputFit').style.display = 'none';
+            }
+            
+        }
+        
+        function setGambarDepan(size) {
+            gambar_depan = size;
+            document.getElementById('pilihGambarDepan').style.display = 'none';
+            document.getElementById('pilihGambarSamping').style.display = 'block';
+            console.log(gambar_depan);
+        }
+    
+        function setGambarSamping(size) {
+            gambar_samping = size;
+            console.log(gambar_samping, gambar_depan);
+            document.getElementById('pilihGambarSamping').style.display = 'none';
+            document.getElementById('hasilFit').style.display = 'block';
+            
+            // berat = (parseInt(berat) + 100);
+            if(gambar_depan == "sedang" && gambar_samping == "sedang"){
+                berat = (parseInt(berat) + 0);
+            } else if(gambar_depan == "kurus" || gambar_samping == "tipis"){
+                berat = (parseInt(berat) - 1);
+            } else if(gambar_depan == "gemuk" || gambar_samping == "buncit"){
+                berat = (parseInt(berat) + 1);
+            }
+            
+            //tinggi kurang dari tinggi normal
+            if(tinggi < tinggi_normal){
+               tinggi = (tinggi_normal - parseInt(tinggi));
+               
+               if((tinggi >= 1 && tinggi <= 5)){
+                   berat = (parseInt(berat) - 1);
+               } else if((tinggi >= 6 && tinggi <= 10)){
+                   berat = (parseInt(berat) - 2);
+               } else if((tinggi >= 11 && tinggi <= 15)){
+                   berat = (parseInt(berat) - 3);
+               } else if((tinggi >= 16 && tinggi <= 20)){
+                   berat = (parseInt(berat) - 4);
+               } else if((tinggi >= 21 && tinggi <= 25)){
+                   berat = (parseInt(berat) - 5);
+               }
+               console.log(tinggi);
+            } else { //tinggi lebih dari tinggi normal
+                tinggi = (parseInt(tinggi) - tinggi_normal);
+               
+               if((tinggi >= 1 && tinggi <= 5)){
+                   berat = (parseInt(berat) + 1);
+               } else if((tinggi >= 6 && tinggi <= 10)){
+                   berat = (parseInt(berat) + 2);
+               } else if((tinggi >= 11 && tinggi <= 15)){
+                   berat = (parseInt(berat) + 3);
+               } else if((tinggi >= 16 && tinggi <= 20)){
+                   berat = (parseInt(berat) + 4);
+               } else if((tinggi >= 21 && tinggi <= 25)){
+                   berat = (parseInt(berat) + 5);
+               }
+               console.log(tinggi);
+            }
+            
+            console.log(berat);
+            
+            if(berat < 40) {
+                sizeMyFit.innerHTML = "Berat kamu kurang dari 40.";
+            } else if((berat >= 40 && berat <= 47)){
+                sizeMyFit.innerHTML = "XS";
+            } else if ((berat >= 48 && berat <= 55)){
+                sizeMyFit.innerHTML = "S";
+            } else if (((berat >= 56 && berat <= 65))){
+                sizeMyFit.innerHTML = "M";
+            } else if (((berat >= 66 && berat <= 75))){
+                sizeMyFit.innerHTML = "L";
+            } else if ((berat >= 76 && berat <= 85)){
+                sizeMyFit.innerHTML = "XL";
+            } else if ((berat >= 86 && berat <= 95)){
+               sizeMyFit.innerHTML = "XXL";
+            } else if ((berat >= 96)) {
+               sizeMyFit.innerHTML = "Ukuran melebihi batas. ";    
+            }
+                    
+        }
+    
 </script>
 </body>
 

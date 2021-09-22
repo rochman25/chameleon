@@ -36,6 +36,11 @@ class MY_Controller extends CI_Controller
         $config['allowed_types'] = 'jpeg|jpg|png';
         $config['file_name'] = $image;
         $config['overwrite'] = false;
+        // $config['max_size'] = 100;/
+        // $config['image_library']    = 'gd2';
+        // $config['quality']      = 60;
+        // var_dump($config);die;
+                            
         $this->upload->initialize($config);
     }
 
@@ -55,6 +60,22 @@ class MY_Controller extends CI_Controller
         $this->upload->initialize($config);
     }
 
+    function uploadFotoBestSeller($image){
+        $config['upload_path'] = 'assets/uploads/thumbnail_best_seller';
+        $config['allowed_types'] = 'jpeg|jpg|png';
+        $config['file_name'] = $image;
+        $config['overwrite'] = true;
+        $this->upload->initialize($config);
+    }
+    
+    function uploadFotoNewArrival($image){
+        $config['upload_path'] = 'assets/uploads/thumbnail_new_arrival';
+        $config['allowed_types'] = 'jpeg|jpg|png';
+        $config['file_name'] = $image;
+        $config['overwrite'] = true;
+        $this->upload->initialize($config);
+    }
+    
     public function getrajaongkir($type, $mode = "GET")
     {
         // die(json_encode($mode));

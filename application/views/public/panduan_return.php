@@ -27,28 +27,45 @@ body {font-family: "Lato", sans-serif}
 <body>
 
 <!-- Page content -->
-<div class="w3-content" style="max-width:2000px;margin-top:0px;background: #020202;">
+<div class="w3-content" style="max-width:2000px;margin-top:0px">
 
   <!-- Automatic Slideshow Images -->
     <img src="/assets/images/banner-garansi.jpg" style="width:100%">
   
   <!-- The Band Section -->
   <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
-    <h2 class="w3-wide">GARANSI</h2>
+    <p class="w3-justify" style="display: flex;font-size: 27px;font-weight: 700;justify-content: center;">Garansi</p>
     <p class="w3-opacity"><i>Tukar size</i></p>
-    <p class="w3-justify">Dalam transaksi online, kami menyadari besarnya resiko kesalahan dalam pemilihan size. Untuk itu kami menyediakan layanan penukaran ukuran yang bisa kamu manfaatkan apabila memilih produk yang salah, baik itu kekecilan atau kebesaran. Syaratnya sebagai berikut :</p>
+    <p class="" style="
+    text-align: left;
+"> Dalam transaksi online, kami menyadari besarnya resiko kesalahan dalam pemilihan size. Untuk itu kami menyediakan layanan penukaran ukuran yang bisa kamu manfaatkan apabila memilih produk yang salah, baik itu kekecilan atau kebesaran. Syaratnya sebagai berikut :</p>
     <br></br>
-    <p class="w3-justify">• Pengembalian maksimal 3 hari setelah barang sampai</p>
-    <p class="w3-justify">• Belum terkena wewangian</p>
-    <p class="w3-justify">• Belum di pakai (kecuali di coba)</p>
-    <p class="w3-justify">• Label masih utuh</p>
-    <p class="w3-justify">• Setelah konfirmasi penukaran, pembeli harus mengirimkan resi dalam kurun waktu 1 x 24 jam untuk menjaga barang yang akan ditukar tetap tersedia</p>
-    
+        <p class="" style="
+    text-align: left;
+">• Pengembalian maksimal 3 hari setelah barang sampai</p>
+        <p class="" style="
+    text-align: left;
+">• Belum terkena wewangian</p>
+        <p class="" style="
+    text-align: left;
+">• Belum di pakai (kecuali di coba)</p>
+        <p class="" style="
+    text-align: left;
+">• Label masih utuh</p>
+        <p class="" style="
+    text-align: left;
+">• Setelah konfirmasi penukaran, pembeli harus mengirimkan resi dalam kurun waktu 1 x 24 jam untuk menjaga barang yang akan ditukar tetap tersedia</p>
+    <br>
+    <p class="w3-justify" style="display: flex;font-size: 27px;font-weight: 700;justify-content: center;">Note</p>
+        <p class="" style="
+    text-align: left;
+">• Garansi tidak berlaku untuk pesanan custom dan produk promo</p>
+    <br>
     </div>
   </div>
 
 <!-- Footer -->
-<footer>
+<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
 </footer>
 
 </body>

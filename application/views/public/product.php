@@ -21,17 +21,26 @@ $this->load->view('public/cart');
             <div class="container">
                 <div class="bottom_absolute">
                     <h1> </h1>
-                    <h2><?= $section; ?></h2>
+                    <?php
+                        if ($section == "semua" || $section == "Semua Produk") {
+                            ?>
+                            <h2>Semua Produk</h2>
+
+                            <?php
+                        } else {?>
+                             <h2><?= $section; ?></h2>
+                             <?php
+                     } ?>
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="row">
-                <div class="all-product-card-wrapper clearfix">
-                    <div class="left-side-wrapper">
+                <!--<div class="all-product-card-wrapper clearfix">
+                    <!--<div class="left-side-wrapper">
                         <div class="filtering">
                             <div class="sorting">
-                                <div style="color:white;" class="labels">Urutkan</div>
+                                <div style="color: #5a5a5a;" class="labels">Urutkan</div>
                                 <div>
                                     <select id="order" onchange="location = this.value" data-sort="" data-order="">
                                         <option value="?sort=published_at&order=">Terbaru</option>
@@ -74,10 +83,21 @@ $this->load->view('public/cart');
                                     <div class="product-card-wrapper" style="margin-bottom: 15%;height:auto;">
                                         <a href="<?= base_url(); ?>detail?produk=<?= $row['id_produk']; ?>">
                                             <div class="product-category">
+                                                <?php if ($row['label_produk'] != null) { ?>
+                                                                <div class="column" style="float: right;width: 100%;position: absolute;padding-left: 7px;padding-top: 7px;">
+                                                                    <?php $label_p = explode(",", $row['label_produk']);
+                                                                    foreach ($label_p as $key_l => $val_l) {
+                                                                    ?>
+                                                                        <div class="badge_label_<?php echo str_replace(" ", "_", $val_l) ?>">
+                                                                            <p style="font-size: 8px;"><?= strtoupper($val_l) ?></p>
+                                                                        </div>
+                                                                    <?php } ?>
+                                                                </div>
+                                                            <?php } ?>
                                                 <img src="" style="height:auto;" alt="" data-src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>">
                                                 <div class="row" style="margin-right: 0;margin-left: 0px;margin-bottom:10px; margin-top:0px">
                                                     <?php if ($row['label_produk'] != null) { ?>
-                                                        <div class="column" style="width: 70%;">
+                                                        <div class="column" style="width: 100%;">
                                                         <?php } else { ?>
                                                             <div class="column" style="width: 100%;">
                                                             <?php } ?>
@@ -98,17 +118,6 @@ $this->load->view('public/cart');
                                                                 <?php } ?>
                                                             </div>
                                                             </div>
-                                                            <?php if ($row['label_produk'] != null) { ?>
-                                                                <div class="column" style="float: right;width: 30%;">
-                                                                    <?php $label_p = explode(",", $row['label_produk']);
-                                                                    foreach ($label_p as $key_l => $val_l) {
-                                                                    ?>
-                                                                        <div class="badge_label_<?php echo $val_l ?>">
-                                                                            <p><?= strtoupper($val_l) ?></p>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                </div>
-                                                            <?php } ?>
                                                         </div>
                                                         <!-- <h2 style="font-size: 20px;font-weight: bold;"><?= $row['nama_produk']; ?></h2>
                                                         <div class="price-wrapper">

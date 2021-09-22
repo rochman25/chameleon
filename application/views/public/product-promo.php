@@ -14,11 +14,11 @@ $this->load->view('public/cart');
 ?>
 <section id="content">
     <div class="category-page">
-        <div class="header" style="background-image:url(https://www.mensrepublic.id/assets/images/uploads/banner/fe2298aa-b7e7-54f1-e8d4-80a9049a31aa.jpg)">
+        <div class="header" style="">
         <div class="container">
             <div class="bottom_absolute">
                 <h1> Promo </h1>
-                <h2>YOI #IndonesiaMelangkah</h2>
+                <h2> </h2>
             </div>
         </div>
     </div>

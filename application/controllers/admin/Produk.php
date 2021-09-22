@@ -10,6 +10,7 @@ class Produk extends MY_Controller
         $this->load->model('Produk_model', 'produk');
         $this->load->model('Kategori_model', 'kategori');
         $this->load->model('SubProduk_model', 'subproduk');
+        $this->load->model('SizeProdukCelana_model', 'sizecelana');
         $this->load->library('upload');
     }
 
@@ -39,20 +40,32 @@ class Produk extends MY_Controller
         if ($this->adminIsLoggedIn()) {
             $diskon_percent = 0;
             $data['kat_p'] = $this->kategori->getData()->result_array();
+            $data['size_celana'] = $this->sizecelana->getDataSizeCelana();
+            
+            $size = $this->sizecelana->getDataSizeCelana();
+            // die(json_encode($size));
+            
             if ($this->input->post('kirim')) {
                 $nama_p = $this->input->post('nama_p');
                 $desc_p = $this->input->post('desc_p');
                 $stok_p = $this->input->post('stok_p');
                 $harga_p = $this->input->post('harga_p');
                 $label_p = $this->input->post('label_p');
+                $size_c = $this->input->post('size_c');
+                 
                 $berat_p = $this->input->post('berat_p');
                 $diskon_p = $this->input->post('diskon_p');
                 $kat_p = $this->input->post('kat_p');
-                $size_p = $this->input->post('size_p');
+                // $size_p = $this->input->post('size_p');
                 $link = $this->input->post('link');
                 $namaFile = "";
+                
+                $size_c = implode(",", $size_c);
                 $label_p = implode(",", $label_p);
+                
+                // die(json_encode($size_c));
                 // $thumbnail = $_FILES['file']['name'];
+                
                 if ($this->session->userdata('produk_data') != null) {
                     $kode_p = $this->session->userdata['produk_data']['kode'];
                 } else {
@@ -60,6 +73,8 @@ class Produk extends MY_Controller
                 }
 
                 $namaFile = implode(",", $this->session->userdata['produk_data']['thumbnail']);
+                // die(json_encode($namaFile));
+                
                 // die(json_encode())
                 $diskon_percent = 100 * ($harga_p - $diskon_p) / $harga_p;
                 $i = 0;
@@ -70,7 +85,7 @@ class Produk extends MY_Controller
                     "stok_produk" => $stok_p,
                     "harga_produk" => $harga_p,
                     "id_kategori" => $kat_p,
-                    "size_produk" => $size_p,
+                    "size_produk" => $size_c,
                     "label_produk" => $label_p,
                     "berat_produk" => $berat_p,
                     "diskon_produk" => $diskon_percent,
@@ -90,6 +105,7 @@ class Produk extends MY_Controller
                     $harga_sub = $this->input->post('harga_sub');
                     $berat_sub = $this->input->post('berat_sub');
                     $diskon_sub = $this->input->post('diskon_sub');
+                    // die(json_encode($data));
                     $stok_sub = $this->input->post('stok_sub');
                     if (!in_array("",$nama_sub)) {
                         foreach ($nama_sub as $key => $item) {
@@ -122,9 +138,10 @@ class Produk extends MY_Controller
                         );
                         redirect('admin/produk');
                     } else {
+                        $this->session->unset_userdata('produk_data');
                         $this->session->set_flashdata(
                             'pesan',
-                            '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
+                            '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil ditambahkan</div>'
                         );
                         redirect('admin/produk');
                     }
@@ -136,6 +153,7 @@ class Produk extends MY_Controller
                     redirect('admin/produk');
                 }
             } else {
+                // die(json_encode($data));
                 $this->load->view('admin/pages/produk/form_produk', $data);
             }
         } else {
@@ -152,6 +170,9 @@ class Produk extends MY_Controller
             $data['kat_p'] = $this->kategori->getData()->result_array();
             $data['produk'] = $this->produk->getById($id);
             $data['subProduk'] = $this->subproduk->getByIdProduk($data['produk']->id_produk);
+            $data['size_celana'] = $this->sizecelana->getDataSizeCelana();
+            // $data['id_size_celana'] = $this->produk->getBySize($id);
+            // die(json_encode($data));
             if ($this->input->post('kirim')) {
                 $nama_p = $this->input->post('nama_p');
                 $desc_p = $this->input->post('desc_p');
@@ -160,13 +181,17 @@ class Produk extends MY_Controller
                 $berat_p = $this->input->post('berat_p');
                 $diskon_p = $this->input->post('diskon_p');
                 $label_p = $this->input->post('label_p');
+                $size_c = $this->input->post('size_c');
+                
                 $kat_p = $this->input->post('kat_p');
-                $size_p = $this->input->post('size_p');
+                // $size_p = $this->input->post('size_p');
                 $link = $this->input->post('link');
 
                 $label_p = implode(",", $label_p);
+                $size_c = implode(",", $size_c);
+                
                 $diskon_percent = 100 * ($harga_p - $diskon_p) / $harga_p;
-
+                // die(json_encode($size_c));
                 if ($this->session->userdata('produk_data') != null) {
                     $thumbnail = implode(",", $this->session->userdata['produk_data']['thumbnail']);
                     $datas = array(
@@ -179,7 +204,7 @@ class Produk extends MY_Controller
                         "label_produk" => $label_p,
                         "diskon_produk" => $diskon_percent,
                         "thumbnail_produk" => $thumbnail,
-                        "size_produk" => $size_p,
+                        "size_produk" => $size_c,
                         "video_link" => $link,
                         "updated_at" => date("Y-m-d H:i:s")
                     );
@@ -194,7 +219,7 @@ class Produk extends MY_Controller
                         "diskon_produk" => $diskon_percent,
                         "label_produk" => $label_p,
                         "berat_produk" => $berat_p,
-                        "size_produk" => $size_p,
+                        "size_produk" => $size_c,
                         "video_link" => $link,
                         "updated_at" => date("Y-m-d H:i:s")
                     );
@@ -321,6 +346,8 @@ class Produk extends MY_Controller
             if ($this->input->post('status') != "remove") {
                 $data = [];
                 $foto = null;
+                
+                // die(json_encode($foto));
                 $i = 0;
                 $index = 0;
                 $kode_p = $this->input->post('kode_p');
@@ -351,8 +378,36 @@ class Produk extends MY_Controller
                         $_FILES['file']['tmp_name'] = $_FILES['thumbnail']['tmp_name'][$i];
                         $_FILES['file']['error'] = $_FILES['thumbnail']['error'][$i];
                         $_FILES['file']['size'] = $_FILES['thumbnail']['size'][$i];
-                        $this->uploadFoto($name);
+                        
+                        // $this->uploadFoto($name);
+                        
+                        $config['upload_path'] = 'assets/uploads/thumbnail_produk';
+                        $config['allowed_types'] = 'jpeg|jpg|png';
+                        $config['file_name'] = $name;
+                        $config['overwrite'] = false;
+                        
+                        $this->upload->initialize($config);
+                        
                         if ($this->upload->do_upload("file")) {
+                            $image = $this->upload->data();
+                            
+                            $config = array(
+                                'image_library'   => 'gd2',
+                                'source_image'  => $image['full_path'],
+                                'maintain_ratio'  => true,
+                                'width'           =>  1000,
+                                'height'          =>  1000,
+                            );
+                            $this->load->library('image_lib', $config);
+                             
+                             if (!$this->image_lib->resize()) {
+                                 $this->session->set_flashdata(
+                                    'pesan',
+                                    '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah error: ' . $this->image_lib->display_errors() . '</div>'
+                                );
+                             }
+                            $this->image_lib->clear();
+                            
                             $data[$i] = $name;
                         } else {
                             $this->session->set_flashdata(
@@ -395,6 +450,7 @@ class Produk extends MY_Controller
         }
     }
 
+    
     public function deleteFile()
     {
         $id = $this->input->post('id');
@@ -457,6 +513,7 @@ class Produk extends MY_Controller
     {
         if ($this->adminIsLoggedIn()) {
             $id = $this->input->post('id');
+            // var_dump($id);die;
             if ($this->produk->delete("id_produk", $id)) {
                 $this->session->set_flashdata(
                     'pesan',

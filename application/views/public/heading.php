@@ -1,14 +1,17 @@
 	<!-- header desktop -->
 	<header class="desktop">
 	    <div class="header-fixed">
+	        <div class="top-bar">
+	            
+	        </div>
 	        <div class="subheader">
 	            <a href="<?= base_url() ?>" class="slogan">
 	                #BeYourSelf
 	            </a>
 	            <ul>
 
-	                <li><a href="<?= base_url() ?>panduan/pemesanan">Panduan Pemesanan</a></li>
-            <li><a href=" <?= base_url() ?>panduan/ukuran">Panduan Ukuran</a> </li> <li><a href="<?= base_url() ?>panduan/retur">Panduan Retur</a></li>
+	                <li><a href="<?= base_url() ?>panduan/retur">Garansi</a></li>
+            <li><a href=" <?= base_url() ?>panduan/pemesanan">Cara Pemesanan</a> </li> <li><a href="<?= base_url() ?>panduan/ukuran">Panduan Ukuran</a></li>
 	            </ul>
 	        </div>
 	        <div class="mainheader">
@@ -20,6 +23,17 @@
 	                    <a href="#">koleksi</a>
 	                    <div class="dropdown dropdown-collection">
 	                        <div class="dropdown-wrapper">
+	                            <div class="collections">
+	                                <div class="">
+	                                    <a href="<?= base_url(); ?>produk/semua">
+	                                        <!-- <div class="gradient"></div> -->
+	                                        <!-- <img src="<?= base_url() ?>assets/images/Celana/Celana-BG.png" alt="Sepatu"> -->
+	                                        <h2 style="font-size: 20px;">Semua Produk</h2>
+	                                    </a>
+	                                </div>
+	                                <ul>
+	                                </ul>
+								</div>
 								<?php foreach($kategori as $key => $item){ ?>
 	                            <div class="collections">
 	                                <div class="">

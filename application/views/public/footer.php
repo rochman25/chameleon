@@ -1,6 +1,6 @@
 <footer class="footer nav-footer" style="background-color: black;">
   <div class="container" style="display: block;">
-    <div class="nav-footer-item nav col-lg-3 col-md-4 col-sm-6">
+    <div class="nav-footer-item nav col-lg-12 col-md-4 col-sm-6">
       <h4 style="margin-top: 0; 
                   font-size: 14px;
 	                font-weight: 600;
@@ -11,12 +11,17 @@
 	                color: #fff;
 	                text-transform: uppercase;">koleksi</h4>
       <ul>
-        <li><a href="<?= base_url() ?>produk/jas">Jas</a></li>
-        <li><a href="<?= base_url() ?>produk/kemeja">Kemeja</a></li>
-        <li><a href="<?= base_url() ?>produk/celana">Celana</a></li>
+          
+	                            
+	    <li><a href="<?= base_url() ?>produk/semua">Semua Produk</a></li>				
+		<?php foreach($kategori as $key => $item){ ?>						
+            <li><a href="<?= base_url(); ?>produk/<?=$item['nama_kategori']?>"><?=$item['nama_kategori']?></a></li>
+        <?php } ?>
+        
+        <!--<li><a href="<?= base_url() ?>produk/celana">Celana</a></li>-->
       </ul>
     </div>
-    <div class="nav-footer-item nav col-lg-3 col-md-4 col-sm-6">
+    <div class="nav-footer-item nav col-lg-12 col-md-4 col-sm-6">
       <h4 style="margin-top: 0; 
                   font-size: 14px;
 	                font-weight: 600;
@@ -30,12 +35,13 @@
       <ul>
         <li>CHAMELEON CLOTH</p>
         <li>Jl. Patimuan - Kedungreja, Cinyawang, Rt.02/03, Kec.Patimuan - Cilacap 53264</li>
-        <li>LINE ID : chameleoncloth</li>
-        <li>Nomor : 083116200500</li>
+        <li>LINE ID : chameleoncloth (08:00 AM - 05:00 PM)</li>
+        <li>WhatsApp : 083116200500 (08:00 AM - 05:00 PM)</li>
+        <li>WhatsApp : 083835525655 (08:00 AM - 05:00 PM)</li>
         <li>Email : cs@chameleoncloth.co.id</li>
         </li>
     </div>
-    <div class="nav-footer-item nav col-lg-3 col-md-4 col-sm-6">
+    <div class="nav-footer-item nav col-lg-12 col-md-4 col-sm-6">
       <h4 style="margin-top: 0; 
                   font-size: 14px;
 	                font-weight: 600;
@@ -67,7 +73,7 @@
             <a href="https://m.youtube.com/channel/UCDdDpkjX-TVzufeMUq3D0Hw" target="_blank"><i class="fa fa-youtube fa-2x"></i></a>
           </div>
           <div class="socialmedia-item">
-            <a href="https://api.whatsapp.com/send?phone=6283116200500" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+            <a href="https://wa.me/message/367KS3T7RIJXC1" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
           </div>
         </div>
       </div>

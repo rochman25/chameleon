@@ -11,14 +11,15 @@
 	<meta property="fb:pages" content="" />
 	<meta name="google-site-verification" content="YRtB-WBotW8z2AMh6hLyCgAjgQRundXTa1bC2AdzPxQ" />
 	<meta name="msapplication-TileColor" content="#ffffff">
-	<meta name="msapplication-TileImage" content="<?= base_url() ?>assets/images/chameleon_cloth_logo_black.png">
+	<meta name="msapplication-TileImage" content="<?= base_url() ?>assets/images/clogo.jpg">
 	<meta name="theme-color" content="#ffffff">
 
-	<link rel="shortcut icon" href="<?= base_url() ?>assets/images/chameleon_cloth_logo_black.png" />
+	<link rel="shortcut icon" href="<?= base_url() ?>assets/images/clogo.jpg" />
 	<link rel="stylesheet" href="<?= base_url() ?>assets/public/css/fontawesome-all.css">
 	<link rel="stylesheet" href="<?= base_url() ?>assets/public/css/jqueryuimin.css">
 	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/public/css/all.css">
-	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/public/css/master.css?id=9e0f65abec8cb3ae96f8">
+	<!--<link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/public/css/master.css?id=9e0f65abec8cb3ae96f8">-->
+	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/public/css/master.css">
 	<style>
 		.loader {
 			border: 16px solid #f3f3f3;
@@ -41,7 +42,7 @@
 			}
 		}
 
-		.product-deskripsi p {
+		.product-deskripsi p{
 			/* max-width: 75ch; */
 			word-wrap: break-word;
 			line-height: 1;
@@ -55,7 +56,7 @@
 			/* overflow: hidden; */
 			/* older browsers */
 		}
-
+		
 		.nav-footer .nav ul {
 			padding: 0;
 		}
@@ -104,9 +105,6 @@
 				max-height: 500px;
 				transition: max-height 1s ease-in !important;
 			}
-
-
-		/* } */
 	</style>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 	<script src="<?= base_url() ?>assets/public/js/all.js"></script>
@@ -120,35 +118,26 @@
 	</noscript>
 	<!-- DO NOT MODIFY -->
 	<!-- End Facebook Pixel Code -->
-
+	
 	<!-- Facebook Pixel Code -->
-	<script>
-		! function(f, b, e, v, n, t, s) {
-			if (f.fbq) return;
-			n = f.fbq = function() {
-				n.callMethod ?
-					n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-			};
-			if (!f._fbq) f._fbq = n;
-			n.push = n;
-			n.loaded = !0;
-			n.version = '2.0';
-			n.queue = [];
-			t = b.createElement(e);
-			t.async = !0;
-			t.src = v;
-			s = b.getElementsByTagName(e)[0];
-			s.parentNode.insertBefore(t, s)
-		}(window, document, 'script',
-			'https://connect.facebook.net/en_US/fbevents.js');
-		fbq('init', '920677795109660');
-		fbq('track', 'PageView');
-	</script>
-	<noscript>
-		<img height="1" width="1" src="https://www.facebook.com/tr?id=920677795109660&ev=PageView
-&noscript=1" />
-	</noscript>
-	<!-- End Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+ fbq('init', '920677795109660'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+ <img height="1" width="1" 
+src="https://www.facebook.com/tr?id=920677795109660&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
 </head>
 
 <body>

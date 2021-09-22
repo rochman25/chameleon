@@ -24,34 +24,67 @@ $this->load->view('public/cart');
                     <!-- <div class="title">Nama:</div> -->
                     <!-- <div class="value"><?= $profil->nama_lengkap ?></div> -->
                     <!-- <div class="col-lg-6"> -->
-                    <div class="title">Nama Lengkap</div>
+                    <div class="title" style="
+                    font-size: 13px;
+                    padding: 5px;
+                    font-weight: 800;
+                    ">Nama Lengkap</div>
                     <input type="text" name="nama_lengkap" style="color:black" value="<?= $profil->nama_lengkap ?>" required>
                     <!-- </div> -->
 
-                    <div class="title">Nomor Telepon:</div>
+                    <div class="title" style="
+                    font-size: 13px;
+                    padding: 5px;
+                    font-weight: 800;
+                    padding-top: 20px;
+                    ">Nomor Telepon:</div>
                     <input type="text" name="no_telp" style="color:black" value="<?= $profil->no_telp ?>" required>
 
-                    <div class="title">Email:</div>
+                    <div class="title" style="
+                    font-size: 13px;
+                    padding: 5px;
+                    font-weight: 800;
+                    padding-top: 20px;
+                    ">Email:</div>
                     <!-- <div class="value phone-number"><?= $profil->email ?></div> -->
                     <input type="text" style="color:black" disabled name="email" value="<?= $profil->email ?>">
 
-                    <div class="title">Pilih Alamat Pengiriman:</div>
+                    <div class="title" style="
+                    font-size: 13px;
+                    padding: 5px;
+                    font-weight: 800;
+                    padding-top: 20px;
+                    ">Pilih Alamat Pengiriman:</div>
                     <div class="address">
-                        <div class="address-box selected">
+                        <div class="address-box selected" style="border-radius: 15px;padding-bottom: 27px;">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="title">Alamat 1</div>
+                                    <div class="title" style="
+                    font-size: 13px;
+                    padding: 5px;
+                    font-weight: 800;
+                    ">Alamat 1</div>
                                     <input type="text" name="alamat_1" placeholder="contoh: jln pramuka" style="color:black" value="<?= $profil->alamat_1 ?>" required>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="title">Alamat 2</div>
+                                    <div class="title" style="
+                    font-size: 13px;
+                    padding: 5px;
+                    font-weight: 800;
+                    padding-top: 20px;
+                    ">Alamat 2</div>
                                     <input type="text" name="alamat_2" placeholder="contoh: Desa Sungai Raya Rt 01 / Rw 02" style="color:black" value="<?= $profil->alamat_2 ?>" required>
                                 </div>
                                 <input type="hidden" value="<?= $profil->id_alamat ?>" name="id_alamat">
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="title">Provinsi</div>
+                                    <div class="title" style="
+                    font-size: 13px;
+                    padding: 5px;
+                    font-weight: 800;
+                    padding-top: 20px;
+                    ">Provinsi</div>
                                     <select style="color:black" name="provinsi_id" id="provinsi_id">
                                         <?php if ($profil->provinsi_id == "") { ?>
                                             <option value="">Pilih Provinsi</option>
@@ -65,7 +98,12 @@ $this->load->view('public/cart');
                                     </select>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="title">Kabupaten</div>
+                                    <div class="title" style="
+                    font-size: 13px;
+                    padding: 5px;
+                    font-weight: 800;
+                    padding-top: 20px;
+                    ">Kabupaten</div>
                                     <div class="loader" id="loader_kabupaten"></div>
                                     <select style="color:black" name="kabupaten_id" id="kabupaten_id">
                                         <?php if ($profil->kabupaten_id == "") { ?>
@@ -78,7 +116,12 @@ $this->load->view('public/cart');
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="title">Kecamatan</div>
+                                    <div class="title" style="
+                    font-size: 13px;
+                    padding: 5px;
+                    font-weight: 800;
+                    padding-top: 20px;
+                    ">Kecamatan</div>
                                     <div class="loader" id="loader_kecamatan"></div>
                                     <select style="color:black" name="kecamatan_id" id="kecamatan_id">
                                         <?php if ($profil->kecamatan_id == "") { ?>
@@ -89,7 +132,12 @@ $this->load->view('public/cart');
                                     </select>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="title">Kode Pos</div>
+                                    <div class="title" style="
+                    font-size: 13px;
+                    padding: 5px;
+                    font-weight: 800;
+                    padding-top: 20px;
+                    ">Kode Pos</div>
                                     <input type="text" style="color:black" name="kode_pos" value="<?= $profil->kode_pos ?>">
                                 </div>
                                 <input type="hidden" value="<?= $profil->id_alamat ?>" name="id_alamat">
@@ -150,20 +198,27 @@ $this->load->view('public/cart');
                     <?php
                         }
                     } ?>
-                    <div class="title">Pilih Pengiriman:</div>
+                    <div class="title" style="
+                    font-size: 13px;
+                    padding: 5px;
+                    font-weight: 800;
+                    ">Pilih Pengiriman:</div>
                     <div class="kurir">
                         <select style="color:black" name="kurir" id="kurir" required>
                             <option value="">Pilih Kurir</option>
                             <option value="jne">JNE</option>
-                            <option value="jnt">JNT</option>
-                            <!-- <option value="pos">POS Indonesia</option> -->
+                            <option value="jnt">J&T</option>
                         </select>
                     </div>
                     <br>
-                    <div class="title">Catatan untuk Chameleon Cloth (optional)</div>
+                    <div class="title" style="
+                    font-size: 13px;
+                    padding: 5px;
+                    font-weight: 800;
+                    ">Catatan untuk CHAMELEON CLOTH (optional)</div>
                     <textarea style="color:black" name="catatan" class="notes"></textarea>
-                    <div id="loader">
-                        <h4 style="color:black">Loading</h4>
+                    <div id="loader" style="">
+                        <h4 style="color: #0000008c;font-size: 15px;font-weight: 800;text-align: center;">Please wait..</h4>
                         <div class="loader">
                         </div>
                     </div>

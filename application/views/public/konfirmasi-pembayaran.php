@@ -34,20 +34,57 @@ $this->load->view('public/cart');
                 <div class="left-side">
                     <div class="card">
                         <div class="card-row">
-                            <div class="list-transaction page" style="color: white;">
+                            <div class="list-transaction page" style="color: #5a5a5a;">
                                 <p>
-                                    Pesanan anda <b><?= $data->kode_transaksi ?></b> telah dipesan Jumlah yang perlu dibayar <b>Rp <?= number_format($data->total_harga, 0, ",", ".") ?></b>
+                                    Pesanan anda <b><?= $data->kode_transaksi ?></b> telah dipesan, Jumlah yang perlu dibayar <b>Rp <?= number_format($data->total_harga, 0, ",", ".") ?></b>
                                 </p>
                                 <p>
                                     Terimakasih atas pesanan anda! Pesanan akan diproses setelah anda melakukan pembayaran. Mohon membayar sebelum <b><?= date("d/m/Y H:i:s",strtotime($data->waktu_transaksi."+1 days")) ?></b> (WIB) di ATM atau internet banking manapun ke nomor rekening dibawah ini : 
                                 </p>
                                 <p>
-                                    <b>
+                                    <div class="card-row" style="
+                                    border-radius: 8px;
+                                    /* box-shadow: 3px 4px 15px rgb(0 0 0 / 10%); */
+                                    /*border: 1px solid #ccc;*/
+                                    transition: 0.3s;
+                                    margin-bottom: 5px;
+                                    background: black;
+                                    margin-top: 50px;
+                                    ">
+                                    <b style="color: white;
+                                    display: flex;
+                                    flex-wrap: nowrap;
+                                    align-content: center;
+                                    justify-content: center;
+                                    position: unset;
+                                    padding-top: 17px;
+                                    padding-left: 10px;
+                                    padding-right: 10px;
+                                    ">
                                         BRI 677901015573536 A/N NAUFAL HUNAIF
                                     </b><br>
-                                    <b>
+                                    </div>
+                                    <div class="card-row" style="
+                                    border-radius: 8px;
+                                    /* box-shadow: 3px 4px 15px rgb(0 0 0 / 10%); */
+                                    /*border: 1px solid #ccc;*/
+                                    transition: 0.3s;
+                                    margin-bottom: 50px;
+                                    background: black;
+                                    ">
+                                    <b style="color: white;
+                                    display: flex;
+                                    flex-wrap: nowrap;
+                                    align-content: center;
+                                    justify-content: center;
+                                    position: unset;
+                                    padding-top: 17px;
+                                    padding-left: 10px;
+                                    padding-right: 10px;
+                                    padding-bottom: 17px;">
                                         Mandiri 1800004486124 A/N NAUFAL HUNAIF
                                     </b>
+                                    </div>
                                 </p>
                                 <!-- <h1>Detail Transaksi</h1> -->
                                 <!-- <table style="color:black;" class="table table-hover">
@@ -64,10 +101,10 @@ $this->load->view('public/cart');
                                 </table> -->
                                 <form action="<?= base_url() ?>prosespembayaran" enctype="multipart/form-data" method="POST">
                                     <input type="hidden" name="idtransaksi" value="<?= $data->id_transaksi; ?>" />
-                                    <label style="color:white !important;" for="myfile">Bukti pembayaran <b style="color: orange;">(extensi : jpg | jpeg | png / max size: 1MB)</b> </label>
-                                    <input style="color:white !important;" type='file' name='bukti' accept='image/*' />
+                                    <label style="color:#5a5a5a; !important;" for="myfile">Bukti pembayaran <b style="color: orange;">(extensi : jpg | jpeg | png / max size: 1MB)</b> </label>
+                                    <input style="color:#5a5a5a; !important;" type='file' name='bukti' accept='image/*' />
 
-                                    <input type="submit" value="Konfirmasi Pembayaran">
+                                    <input type="submit" value="Konfirmasi Pembayaran" style="margin-bottom: 10px;">
                                 </form>
                             </div>
                         </div>

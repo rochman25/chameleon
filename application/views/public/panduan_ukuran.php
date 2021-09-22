@@ -27,38 +27,35 @@ body {font-family: "Lato", sans-serif}
 <body>
 
 <!-- Page content -->
-<div class="w3-content" style="max-width:2000px;margin-top:0px;background: #020202;">
+<div class="w3-content" style="max-width:2000px;margin-top:0px">
 
   <!-- Automatic Slideshow Images -->
-    <img src="/assets/images/banner-garansi.jpg" style="width:100%">
+    <img src="" style="width:100%">
   
   <!-- The Band Section -->
-  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
-    <!-- SIZE JAS -->
-    <h2 class="w3-wide">SIZE JAS</h2>
-    <br></br>
-    <img src="/assets/public/size_jas.jpg" style="width:100%">
+  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px;margin-bottom: 27px;" id="band">
+    <!-- SIZE Jas -->
+    <p class="w3-justify" style="display: flex;font-size: 27px;font-weight: 700;justify-content: center;">SIZE JAS</p>
+    <img src="/assets/public/size_jas.jpg" style="width:100%;border-radius: 18px;border: 1px solid #ccc;">
     <br></br>
     <br></br>
     <br></br>
     <!-- SIZE KEMEJA -->
-    <h2 class="w3-wide">SIZE KEMEJA</h2>
-    <br></br>
-    <img src="/assets/public/size_kemeja.jpg" style="width:100%">
+    <p class="w3-justify" style="display: flex;font-size: 27px;font-weight: 700;justify-content: center;">SIZE KEMEJA</p>
+    <img src="/assets/public/size_kemeja.jpg" style="width:100%;border-radius: 18px;border: 1px solid #ccc;">
     <br></br>
     <br></br>
     <br></br>
     <!-- SIZE CELANA -->
-    <h2 class="w3-wide">SIZE CELANA</h2>
-    <br></br>
-    <img src="/assets/public/size_celana.jpg" style="width:100%">
+    <p class="w3-justify" style="display: flex;font-size: 27px;font-weight: 700;justify-content: center;">SIZE CELANA</p>
+    <img src="/assets/public/size_celana.jpg" style="width:100%;border-radius: 18px;border: 1px solid #ccc;">
     
     
     </div>
   </div>
 
 <!-- Footer -->
-<footer>
+<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
 </footer>
 
 </body>

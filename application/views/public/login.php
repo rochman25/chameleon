@@ -15,7 +15,7 @@ $this->load->view('public/m_heading');
 	<div class="new-login-register">
         <div class="new-register none">
             <h1>Daftar</h1>
-            <p>Sudah punya akun Chameleon Cloth <strong>Masuk</strong></p>
+            <p>Sudah punya akun CHAMELEON CLOTH <strong>Masuk</strong></p>
             <form action="<?= base_url()?>daftar" method="post">
                 <h2>Email</h2>
                     <input type="email" style="color:black" name="email" value="">
@@ -24,7 +24,7 @@ $this->load->view('public/m_heading');
         </div>
         <div class="new-login">
             <h1>Masuk</h1>
-        <p>Belum punya akun Chameleon ? <strong>Daftar</strong></p>
+        <p>Belum punya akun CHAMELEON CLOTH ? <strong>Daftar</strong></p>
         <p style="color: red"><b><?= $this->session->flashdata('pesan') ?></b></p>
         <form action="<?= base_url()?>login" method="post">
             <h2>Email</h2>
