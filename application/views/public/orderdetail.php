@@ -20,36 +20,36 @@ $this->load->view('public/cart');
             </div>
             <div class="content" style="overflow: hidden;">
                 <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12" style="margin-bottom: 30px;">
-                        <h5 style="font-weight: bold;">Order : <?= $transaksi->kode_transaksi ?></h5>
-                        <div class="title">Tanggal Order : <b style="color: white;"> <?= date('d-M-Y H:i:s', strtotime($transaksi->waktu_transaksi)) ?> </b></div>
-                        <div class="title">Kode Transaksi : <b style="color: white;"> <?= $transaksi->kode_transaksi ?> </b></div>
-                        <div class="title">Status : <b style="color: white;"> <?= $transaksi->status_transaksi ?> </b></div>
+                    <h5 style="font-weight: bold;padding-bottom: 15px;text-align: center;">Order : <?= $transaksi->kode_transaksi ?></h5>
+                    <div class="content" style="margin-bottom: 30px;background: #f4f4f4;">
+                        <div class="title">Kode Transaksi : <b style="color: #5a5a5a;"> <?= $transaksi->kode_transaksi ?> </b></div>
+                        <div class="title">Tanggal Order : <b style="color: #5a5a5a;"> <?= date('d-M-Y H:i:s', strtotime($transaksi->waktu_transaksi)) ?> </b></div>
                         <div class="title">Harap membayar sebelum tanggal : <b style="color: red;"> <?= date("d-M-Y H:i:s", strtotime("+1 day", strtotime($transaksi->waktu_transaksi))) ?> </b></div>
+                        <div class="title">Status : <b style="color: #5a5a5a;"> <?= $transaksi->status_transaksi ?> </b></div>
+                        <div class="title">No Resi : <b style="color: #5a5a5a;"><?= ($transaksi->no_resi == "" || $transaksi->no_resi == null ) ? "No resi belum tersedia." : $transaksi->no_resi ?></b></div>
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12">
                         <h5 style="font-weight: bold;">SHIPPING - <?= strtoupper($transaksi->kurir) ?></h5>
                         
-                        <div class="title"><b style="color: white;"> <?= $profil->nama_lengkap ?> </b></div>
+                        <div class="title"><b style="color: #5a5a5a;"> <?= $profil->nama_lengkap ?> </b></div>
                         <div class="title">
-                            <p style="color: white;"> <?= $profil->alamat_1 . " " . $profil->alamat_2 ?> </p>
+                            <p style="margin: 0;color: #5a5a5a;"> <?= $profil->alamat_1 . " " . $profil->alamat_2 ?> </p>
                         </div>
                         <div class="title">
-                            <p style="color: white;"> <?= $profil->kecamatan ?> </p>
+                            <p style="margin: 0;color: #5a5a5a;"> <?= $profil->kecamatan ?> </p>
                         </div>
                         <div class="title">
-                            <p style="color: white;"> <?= $profil->kabupaten . " " . $profil->kode_pos ?> </p>
+                            <p style="margin: 0;color: #5a5a5a;"> <?= $profil->kabupaten . " " . $profil->kode_pos ?> </p>
                         </div>
                         <div class="title">
-                            <p style="color: white;"> <?= $profil->provinsi ?> </p>
+                            <p style="margin: 0;color: #5a5a5a;"> <?= $profil->provinsi ?> </p>
                         </div>
                         <div class="title">
-                            <p style="color: white;"> <?= "Indonesia" ?> </p>
+                            <p style="margin: 0;color: #5a5a5a;padding-bottom: 15px;"> <?= "Indonesia" ?> </p>
                         </div>
-                        <div class="title">No Resi : <b style="color: white;"><?= ($transaksi->no_resi == "" || $transaksi->no_resi == null ) ? "No resi belum tersedia." : $transaksi->no_resi ?></b></div>
-                        <div class="title">Nomor Telphone : <b style="color: white;"> <?= $profil->no_telp ?> </b></div>
-                        <div class="title">Email : <b style="color: white;"> <?= $profil->email ?> </b></div>
-                        <div class="title">Catatan : <p style="color: white"> <?= ($transaksi->catatan == "" || $transaksi->catatan == null) ? "Tidak ada catatan khusus" : $transaksi->catatan ?> </p></div>
+                        <div class="title">Nomor Telphone : <b style="color: #5a5a5a;"> <?= $profil->no_telp ?> </b></div>
+                        <div class="title">Email : <b style="color: #5a5a5a;"> <?= $profil->email ?> </b></div>
+                        <div class="title">Catatan : <p style="color: #5a5a5a"> <?= ($transaksi->catatan == "" || $transaksi->catatan == null) ? "Tidak ada catatan khusus" : $transaksi->catatan ?> </p></div>
                     </div>
                 </div>
             </div>

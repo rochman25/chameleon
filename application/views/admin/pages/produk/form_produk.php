@@ -73,12 +73,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="row">
-                                                    <div class="col-lg-3">
-                                                        <label for="size_p">Ukuran Produk</label>
-                                                        <input type="text" name="size_p" id="size_p" placeholder="Masukkan ukuran produk" value="<?php if (isset($produk)) {
-                                                                                                                                                        echo $produk->size_produk;
-                                                                                                                                                    } ?>" class="form-control">
-                                                    </div>
+                                                   
                                                     <div class="col-lg-3">
                                                         <label for="stok_p">Stok Produk</label>
                                                         <input type="number" name="stok_p" id="stok_p" placeholder="Masukkan stok produk" value="<?php if (isset($produk)) {
@@ -105,6 +100,33 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            
+                                            <div class="form-group">
+                                                <label class="form-label">Size Produk</label>
+                                                <div class="selectgroup selectgroup-pills">
+                                                        <?php									
+        													foreach ($size_celana as $data) {
+        													    
+        													    echo "<label class='selectgroup-item'> ";
+        													    
+        													    if(isset($produk) && strpos($produk->size_produk, $data->size_produk) !== false){
+        													        echo " <input type='checkbox' name='size_c[]' value='".$data->size_produk."' class='selectgroup-input' checked>
+                														    
+                														    <span class='selectgroup-button'>".$data->size_produk."</span>
+                														</label>";
+        													    } else {
+        													        echo " <input type='checkbox' name='size_c[]' value='".$data->size_produk."' class='selectgroup-input'>
+                														    
+                														    <span class='selectgroup-button'>".$data->size_produk."</span>
+                														</label>";
+        													    }
+        													    
+        													}
+        													
+        												?>
+                                                </div>
+                                            </div>
+                                            
                                             <div class="form-group">
                                                 <label class="form-label">Label Produk</label>
                                                 <div class="selectgroup selectgroup-pills">
@@ -144,7 +166,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <label for="desc_p">Deskripsi Produk</label>
-                                                        <textarea id="summernote" style="height:300px" name="desc_p" id="desc_p"><?php if (isset($produk)) {
+                                                        <textarea id="summernote" class="form-control" style="height:200px; width: 100%; font-size: 12px; white-space: pre-line; word-wrap: break-word;" name="desc_p" id="desc_p"><?php if (isset($produk)) {
                                                                                                                                         echo $produk->deskripsi_produk;
                                                                                                                                     } ?></textarea>
                                                     </div>
@@ -173,7 +195,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="card card-success">
+                                            <div class="card card-success" hidden>
                                                 <div class="card-header">
                                                     <h4>Sub Produk</h4>
                                                     <div class="card-header-action">
@@ -377,19 +399,38 @@
                     foto_upload.options.thumbnail.call(foto_upload, mockFile, "<?= base_url() ?>assets/uploads/thumbnail_produk/" + value);
                 })
             });
-            // $('#summernote').summernote('lineHeight', 10);
-            $('#summernote').summernote({
-                lineHeights: ['1'],
-                toolbar: [
-                    // [groupName, [list of button]]
-                    // ['style', [ 'italic', 'underline', 'clear']],
-                    // ['font', ['strikethrough']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']]
-                ]
-            });
+            // $('#summernote').summernote({
+            //     width: 755,
+            //     height: 300,
+            //     fontsize: '12',
+            //     addDefaultFonts: true,
+                
+            //     toolbar: [
+            //     //   ['undo', ['undo',]],
+            //     //   ['redo', ['redo',]],
+            //     //   ['style', ['bold', 'italic', 'underline',]],
+            //     //   ['font', ['strikethrough',]],
+            //     //   ['fontsize', ['fontsize']],
+            //     //   ['color', ['color']],
+            //     //   ['para', ['ul', 'ol', 'paragraph']],
+            //     ]
+            //   });
+              
+            //  $('#summernote').css('font-size','12px');
+        
+            //     // $('#summernote').summernote('lineHeight', 10);
+            // $('#summernote').summernote({
+            //     lineHeights: ['10'],
+            //     toolbar: [
+            //         // [groupName, [list of button]]
+            //         // ['style', [ 'italic', 'underline', 'clear']],
+            //         // ['font', ['strikethrough']],
+            //         // ['fontsize', ['fontsize']],
+            //         // ['color', ['color']],
+            //         // ['para', ['ul', 'ol', 'paragraph']],
+            //         // ['height', ['height']]
+            //     ]
+            // });
 
             $('#tambahSubProduk').on('click', function() {
                 var $div = $('div[id^="subProduk"]:last');

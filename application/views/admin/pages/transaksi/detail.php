@@ -116,9 +116,9 @@
                                                                 <td><img width="100" src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $foto[0] ?>"></td>
                                                                 <td><?= $val->nama_produk ?></td>
                                                                 <td><?= $val->ukuran ?></td>
-                                                                <td class="text-center">Rp.<?= number_format($val->total, 2) ?></td>
+                                                                <td class="text-center">Rp.<?= number_format($val->harga_produk, 2) ?></td>
                                                                 <td class="text-center"><?= $val->jumlah_produk ?></td>
-                                                                <td class="text-right">Rp.<?= number_format($val->jumlah_produk * $val->total, 2) ?></td>
+                                                                <td class="text-right">Rp.<?= number_format($val->jumlah_produk * $val->harga_produk, 2) ?></td>
                                                             </tr>
                                                         <?php
                                                         } else if ($val->id_sub_produk != null && $val->kode_produk == null) {
@@ -128,9 +128,9 @@
                                                                 <td><img width="100" src="<?= base_url() ?>assets/images/add_on.png"></td>
                                                                 <td><?= $val->nama_sub ?></td>
                                                                 <td><?= $val->ukuran ?></td>
-                                                                <td class="text-center">Rp.<?= number_format($val->total, 2) ?></td>
+                                                                <td class="text-center">Rp.<?= number_format($val->harga_produk, 2) ?></td>
                                                                 <td class="text-center"><?= $val->jumlah_produk ?></td>
-                                                                <td class="text-right">Rp.<?= number_format($val->jumlah_produk * $val->total, 2) ?></td>
+                                                                <td class="text-right">Rp.<?= number_format($val->jumlah_produk * $val->harga_produk, 2) ?></td>
                                                             </tr>
                                                         <?php
                                                         } else {
@@ -141,9 +141,9 @@
                                                                 <td><img width="100" src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $foto[0] ?>"></td>
                                                                 <td><?= $val->nama_produk ?></td>
                                                                 <td><?= $val->ukuran ?></td>
-                                                                <td class="text-center">Rp.<?= number_format($val->total, 2) ?></td>
+                                                                <td class="text-center">Rp.<?= number_format($val->harga_produk, 2) ?></td>
                                                                 <td class="text-center"><?= $val->jumlah_produk ?></td>
-                                                                <td class="text-right">Rp.<?= number_format($val->jumlah_produk * $val->total, 2) ?></td>
+                                                                <td class="text-right">Rp.<?= number_format($val->jumlah_produk * $val->harga_produk, 2) ?></td>
                                                             </tr>
                                                     <?php
                                                         }

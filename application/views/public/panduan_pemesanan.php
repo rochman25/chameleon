@@ -27,31 +27,49 @@ body {font-family: "Lato", sans-serif}
 <body>
 
 <!-- Page content -->
-<div class="w3-content" style="max-width:2000px;margin-top:0px;background: #020202;">
+<div class="w3-content" style="max-width:2000px;margin-top:0px">
 
   <!-- Automatic Slideshow Images -->
     <img src="/assets/images/banner-garansi.jpg" style="width:100%">
   
   <!-- The Band Section -->
   <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
-    <h2 class="w3-wide">PANDUAN PEMESANAN</h2>
+    <p class="w3-justify" style="display: flex;font-size: 27px;font-weight: 700;justify-content: center;">PANDUAN PEMESANAN</p>
     <p class="w3-opacity"><i>di CHAMELEON CLOTH</i></p>
-    <p class="w3-justify"> Hello Men!, untuk kemudahan dan kenyamanan kamu dalam proses berbelanja, kamu bisa mengikuti langkah langkah di bawah ini :</p>
+        <p class="" style="
+    text-align: left;
+"> Hello Men!, untuk kemudahan dan kenyamanan kamu dalam proses berbelanja, kamu bisa mengikuti langkah langkah di bawah ini :</p>
     <br></br>
-    <p class="w3-justify">• Buka web chameleoncloth.co.id</p>
-    <p class="w3-justify">• Buat akun di web chameleoncloth.co.id dan isi data diri kamu secara lengkap</p>
-    <p class="w3-justify">• Pilih produk dan size yang kamu inginkan</p>
-    <p class="w3-justify">• Pilih metode pengiriman dan pembayaran yang kamu inginkan</p>
-    <p class="w3-justify">• Lakukan pembayaran ke rekening resmi CHAMELEON CLOTH, ( A/N Naufal Hunaif )</p>
-    <p class="w3-justify">• Jangan lupa konfirmasi pembayaran di chameleoncloth.co.id setelah melakukan pembayaran</p>
-    <p class="w3-justify">• CHAMELEON CLOTH akan segera mengkonfirmasi dan memproses pesanan kamu</p>
-    <p class="w3-justify">• ! Hubungi customer service kami di 083116200500 jika terdapat kendala dalam proses transaksi</p>
+        <p class="" style="
+    text-align: left;
+">• Buka web www.chameleoncloth.co.id</p>
+        <p class="" style="
+    text-align: left;
+">• Buat akun di web www.chameleoncloth.co.id dan isi data diri kamu secara lengkap</p>
+        <p class="" style="
+    text-align: left;
+">• Pilih produk dan size yang kamu inginkan</p>
+        <p class="" style="
+    text-align: left;
+">• Pilih metode pengiriman dan pembayaran yang kamu inginkan</p>
+        <p class="" style="
+    text-align: left;
+">• Lakukan pembayaran ke rekening resmi CHAMELEON CLOTH, ( A/N Naufal Hunaif )</p>
+        <p class="" style="
+    text-align: left;
+">• Jangan lupa konfirmasi pembayaran di CHAMELEON CLOTH setelah melakukan pembayaran</p>
+        <p class="" style="
+    text-align: left;
+">• CHAMELEON CLOTH akan segera mengkonfirmasi dan memproses pesanan kamu</p>
+        <p class="" style="
+    text-align: left;
+">• ! Hubungi customer service kami di 083116200500 jika terdapat kendala dalam proses transaksi</p>
     
     </div>
   </div>
 
 <!-- Footer -->
-<footer>
+<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
 </footer>
 
 </body>

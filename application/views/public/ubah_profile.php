@@ -59,8 +59,8 @@ $this->load->view('public/cart');
                             </button>
                             <div class="row">
                                 <div class="column" style="width:100%; float: right;">
-                                    <a href="<?= base_url() ?>keluar" class="logout">
-                                        <i class="fa fa-sign-out"></i> logout </a>
+                                    <!--<a href="<?= base_url() ?>keluar" class="logout">
+                                        <i class="fa fa-sign-out"></i> logout </a>-->
                                 </div>
                             </div>
                         </div>
@@ -74,39 +74,67 @@ $this->load->view('public/cart');
                                 <?php echo $this->session->flashdata('pesan') ?>
                                 <form action="<?= base_url("ubah_profile") ?>" method="POST">
                                     <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="title">Username</div>
+                                        <div class="col-lg-6" style="padding-bottom: 20px;">
+                                            <div class="title" style="
+                                            padding: 5px;
+                                            font-size: 13px;
+                                            font-weight: 800;
+                                            ">Username</div>
                                             <input type="text" style="color: black;" disabled name="username" value="<?= $profil->username ?>">
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="title">Nama Lengkap</div>
+                                        <div class="col-lg-6" style="padding-bottom: 20px;">
+                                            <div class="title" style="
+                                            padding: 5px;
+                                            font-size: 13px;
+                                            font-weight: 800;
+                                            ">Nama Lengkap</div>
                                             <input type="text" style="color: black;" name="nama_lengkap" value="<?= $profil->nama_lengkap ?>">
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="title">Email</div>
+                                        <div class="col-lg-6" style="padding-bottom: 20px;">
+                                            <div class="title" style="
+                                            padding: 5px;
+                                            font-size: 13px;
+                                            font-weight: 800;
+                                            ">Email</div>
                                             <input type="text" style="color: black;" disabled name="email" value="<?= $profil->email ?>">
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="title">No Telphone</div>
+                                        <div class="col-lg-6" style="padding-bottom: 20px;">
+                                            <div class="title" style="
+                                            padding: 5px;
+                                            font-size: 13px;
+                                            font-weight: 800;
+                                            ">No Telphone</div>
                                             <input type="text" style="color: black;" name="no_telp" value="<?= $profil->no_telp ?>">
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="title">Alamat 1</div>
+                                        <div class="col-lg-6" style="padding-bottom: 20px;">
+                                            <div class="title" style="
+                                            padding: 5px;
+                                            font-size: 13px;
+                                            font-weight: 800;
+                                            ">Alamat 1</div>
                                             <input type="text" style="color: black;" name="alamat_1" value="<?= $profil->alamat_1 ?>">
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="title">Alamat 2</div>
+                                        <div class="col-lg-6" style="padding-bottom: 20px;">
+                                            <div class="title" style="
+                                            padding: 5px;
+                                            font-size: 13px;
+                                            font-weight: 800;
+                                            ">Alamat 2</div>
                                             <input type="text" style="color: black;" name="alamat_2" value="<?= $profil->alamat_2 ?>">
                                         </div>
                                         <input type="hidden" value="<?= $profil->id_alamat ?>" name="id_alamat">
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="title">Provinsi</div>
+                                        <div class="col-lg-6" style="padding-bottom: 20px;">
+                                            <div class="title" style="
+                                            padding: 5px;
+                                            font-size: 13px;
+                                            font-weight: 800;
+                                            ">Provinsi</div>
                                             <select style="color:black" name="provinsi_id" id="provinsi_id">
                                                 <?php if ($profil->provinsi_id == "") { ?>
                                                     <option value="">Pilih Provinsi</option>
@@ -119,8 +147,12 @@ $this->load->view('public/cart');
                                                 <?php } ?>
                                             </select>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="title">Kabupaten</div>
+                                        <div class="col-lg-6" style="padding-bottom: 20px;">
+                                            <div class="title" style="
+                                            padding: 5px;
+                                            font-size: 13px;
+                                            font-weight: 800;
+                                            ">Kabupaten</div>
                                             <div class="loader" id="loader_kabupaten"></div>
                                             <select style="color:black" name="kabupaten_id" id="kabupaten_id">
                                                 <?php if ($profil->kabupaten_id == "") { ?>
@@ -132,8 +164,12 @@ $this->load->view('public/cart');
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="title">Kecamatan</div>
+                                        <div class="col-lg-6" style="padding-bottom: 20px;">
+                                            <div class="title" style="
+                                            padding: 5px;
+                                            font-size: 13px;
+                                            font-weight: 800;
+                                            ">Kecamatan</div>
                                             <div class="loader" id="loader_kecamatan"></div>
                                             <select style="color:black" name="kecamatan_id" id="kecamatan_id">
                                                 <?php if ($profil->kecamatan_id == "") { ?>
@@ -143,14 +179,18 @@ $this->load->view('public/cart');
                                                 <?php } ?>
                                             </select>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="title">Kode Pos</div>
+                                        <div class="col-lg-6" style="padding-bottom: 20px;">
+                                            <div class="title" style="
+                                            padding: 5px;
+                                            font-size: 13px;
+                                            font-weight: 800;
+                                            ">Kode Pos</div>
                                             <input type="text" style="color: black;" name="kode_pos" value="<?= $profil->kode_pos ?>">
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-6">
-                                            <input style="background:#3bb175; float:left" type="submit" name="kirim" value="Simpan">
+                                        <div class="col-lg-6" style="padding-bottom: 20px;">
+                                            <input style="background:#0077ed; float:left" type="submit" name="kirim" value="Simpan">
                                         </div>
                                     </div>
                                 </form>

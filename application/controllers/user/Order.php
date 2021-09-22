@@ -31,6 +31,7 @@ class Order extends MY_Controller
             $total_harga = 0;
             $total_berat = 0;
             $total_jumlah = 0;
+            
             foreach ($data['cart'] as $row) {
                 if ($row['id_sub_produk'] == null) {
                     $harga = $row['diskon_produk'] != 0 ? $row['harga_produk'] - (($row['diskon_produk'] / 100) * $row['harga_produk']) : $row['harga_produk'];
@@ -55,6 +56,7 @@ class Order extends MY_Controller
             $data['total_berat'] = $total_berat;
             $data['total_jumlah'] = $total_jumlah;
             $data['thumbnail'] = $thumbnail;
+            
             if ($this->input->post('kirim')) {
                 $nama_lengkap = $this->input->post('nama_lengkap');
                 $no_telp = $this->input->post('no_telp');
@@ -99,6 +101,7 @@ class Order extends MY_Controller
                 $catatan = $this->input->post('catatan');
                 $kode = $this->transaksi->generateKode($data['profil']->email);
                 $this->session->set_userdata('kode_transaksi', $kode);
+                
                 $data_t = array(
                     "kode_transaksi" => $kode,
                     "kurir" => $kurir,
@@ -111,12 +114,15 @@ class Order extends MY_Controller
                     "total_harga" => $total_bayar,
                     "total_ongkir" => $total_ongkir
                 );
-
+                
+                // var_dump($data_t);die;
+                
                 if ($this->transaksi->tambahData($data_t)) {
                     $cart = $this->cart->cekCart();
                     $this->cart_item->deleteDetailCart($cart->id_cart);
                     $data_detail = [];
                     $id_transaksi = $this->transaksi->getIdTransaksi($this->session->userdata('kode_transaksi'));
+                    
                     foreach ($data['cart'] as $row) {
                         $id_produk = $row['id_produk'];
                         $harga_produk = $row['harga_produk'];
@@ -143,7 +149,7 @@ class Order extends MY_Controller
                     if ($this->transaksi->tambahDetail($data_detail)) {
 
                         $this->session->unset_userdata('kode_transaksi');
-                        $this->session->set_flashdata('pesan', "Transaksi anda berhasil, silahkan transfer ke rekening kami, untuk detail dapat dilihat dengan klik button konfirmasi berikut.");
+                        $this->session->set_flashdata('pesan', "Transaksi anda berhasil, silahkan melakukan pembayaran ke rekening kami, untuk detail dapat dilihat dengan klik button konfirmasi berikut.");
                         redirect('user/home/profil');
                     } else {
                         die(json_encode(array("error" => "ada masalah lagi")));

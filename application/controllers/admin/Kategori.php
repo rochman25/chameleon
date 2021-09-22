@@ -29,8 +29,35 @@ class Kategori extends MY_Controller
             if (!empty($_FILES['thumbnail']['name'])) {
                 $eks = substr(strrchr($_FILES['thumbnail']['name'], '.'), 1);
                 $thumbnail = str_replace(' ', '-', $nama) . "." . $eks;
-                $this->uploadFotoKategori($thumbnail);
+                
+                // $this->uploadFotoKategori($thumbnail);
+                
+                $config['upload_path'] = 'assets/uploads/thumbnail_kategori';
+                $config['allowed_types'] = 'jpeg|jpg|png';
+                $config['file_name'] = $thumbnail;
+                $config['overwrite'] = true;
+                $this->upload->initialize($config);
+                
                 if ($this->upload->do_upload("thumbnail")) {
+                    $image = $this->upload->data();
+                            
+                    $config = array(
+                                'image_library'   => 'gd2',
+                                'source_image'  => $image['full_path'],
+                                'maintain_ratio'  => true,
+                                'width'           =>  500,
+                                'height'          =>  500,
+                            );
+                
+                    $this->load->library('image_lib', $config);
+                    if (!$this->image_lib->resize()) {
+                        $this->session->set_flashdata(
+                                'pesan',
+                                '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah error: ' . $this->image_lib->display_errors() . '</div>'
+                        );
+                    }
+                    $this->image_lib->clear();
+                            
                     $data = array(
                         "nama_kategori" => $nama,
                         "deskripsi_kategori" => $desc,

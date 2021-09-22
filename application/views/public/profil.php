@@ -48,7 +48,7 @@ $this->load->view('public/cart');
             <?php } ?>
             <div class="left-right">
                 <div class="left-side">
-                    <h1 style="font-size: 18px; text-align: center;">Account</h1>
+                    <h1 style="text-align: center;font-weight: 700;font-size: 24px;line-height: normal;text-transform: uppercase;color: #5a5a5a;margin-bottom: 32px;">Account</h1>
                     <div class="card">
                         <div class="card-row">
                             <!-- <img src="https://www.mensrepublic.id/assets/images/dashboard/default-avatar.png" alt=""> -->
@@ -88,7 +88,7 @@ $this->load->view('public/cart');
                         <i class="svg-icon svg_icon__dashboard_logout"></i> <span>logout</span> </a> -->
                 </div>
                 <div class="right-side">
-                    <h1 style="font-size: 18px; text-align: center;">Orders</h1>
+                    <h1 style="font-size: 18px;text-align: center;text-align: center;font-weight: 700;font-size: 24px;line-height: normal;text-transform: uppercase;color: #5a5a5a;margin-bottom: 32px;">Orders</h1>
                     <!-- <div class="list-transaction page"> -->
                     <?php
                     $no = 1;

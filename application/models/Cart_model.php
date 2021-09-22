@@ -13,6 +13,11 @@ class Cart_model extends MY_Model
         $this->getWhere('id_pengguna',$this->session->userdata['user_data']['id']);
         return $this->getData()->row();
     }
+    
+    function cekCartNow(){
+        $this->getWhere('id_pengguna',$this->session->userdata['user_data']['id']);
+        return $this->getData()->row()->id_cart;
+    }
 
     function tambah_cart($data){
         $this->db->set('id_cart','UUID()',false);
