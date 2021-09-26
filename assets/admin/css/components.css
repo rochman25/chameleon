@@ -1410,10 +1410,10 @@ tr:first-child > td > .fc-day-grid-event {
   margin-bottom: 30px;
   padding: 40px; }
   .invoice .invoice-title .invoice-number {
-    float: right;
+    float: left;
     font-size: 20px;
     font-weight: 700;
-    margin-top: -45px; }
+    /*margin-top: -45px;*/ }
   .invoice hr {
     margin-top: 40px;
     margin-bottom: 40px;
