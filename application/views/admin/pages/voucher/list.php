@@ -61,14 +61,14 @@
                                                     foreach ($voucher as $row) { ?>
                                                         <tr>
                                                             <th scope="row"><?= $no++ ?></th>
-                                                            <td id="data-produk" data-id="<?= $row['code_voucher'] ?>"><a href="<?= base_url() ?>admin/voucher/ubah?id=<?= $row['id_voucher'] ?>"><?= $row['code_voucher'] ?></a></td>
+                                                            <td id="data-produk" data-id="<?= $row['code_voucher'] ?>"><a href="<?= base_url() ?>admin/voucher/ubah/<?= $row['id_voucher'] ?>"><?= $row['code_voucher'] ?></a></td>
                                                             <td><?= $row['discount_voucher'] ?></td>
                                                             <td>
                                                                 <?= $row['created_at'] ?>
                                                             </td>
                                                             <td><?= $row['updated_at'] ?></td>
                                                             <td>
-                                                                 <a href="<?= base_url() ?>admin/voucher/ubah?id=<?= $row['id_voucher'] ?>" class="btn btn-success">Ubah</a>
+                                                                 <a href="<?= base_url() ?>admin/voucher/ubah/<?= $row['id_voucher'] ?>" class="btn btn-success">Ubah</a>
                                                                  <button id="btnHapus" data-target="#hapusModal" data-toggle="modal" data-id="<?= $row['id_voucher'] ?>" class="btn btn-danger">Hapus</button> 
                                                             </td>
                                                         </tr>
