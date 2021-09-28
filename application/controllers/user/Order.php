@@ -67,6 +67,7 @@ class Order extends MY_Controller
                 $kabupaten_id = explode(",", $this->input->post('kabupaten_id'));
                 $idA = $this->input->post('id_alamat');
                 $kode_pos = $this->input->post('kode_pos');
+                $system_note = $this->input->post('system_note');
                 // die(json_encode($idA));
                 $data_alamat = array(
                     "nama_lengkap" => $nama_lengkap,
@@ -112,7 +113,8 @@ class Order extends MY_Controller
                     "id_pengguna" => $this->session->userdata['user_data']['id'],
                     "id_alamat" => $idA,
                     "total_harga" => $total_bayar,
-                    "total_ongkir" => $total_ongkir
+                    "total_ongkir" => $total_ongkir,
+                    "system_note" => $system_note
                 );
                 
                 // var_dump($data_t);die;

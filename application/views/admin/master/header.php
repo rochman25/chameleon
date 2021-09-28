@@ -119,6 +119,9 @@
             <li class="nav-item">
                 <a href="<?= base_url() ?>admin/new_arrival" class="nav-link"><i class="fas fa-external-link-square-alt"></i><span>New Arrival</span></a>
             </li>
+            <li class="nav-item">
+                <a href="<?= base_url() ?>admin/voucher" class="nav-link"><i class="fas fa-percent"></i><span>Voucher Ongkir</span></a>
+            </li>
             <li class="menu-header">Transaksi</li>
             <!-- <li class="nav-item">
                 <a href="<?= base_url() ?>admin/transaksi/pembayaran" class="nav-link"><i class="fas fa-shopping-bag"></i><span>Pembayaran</span></a>

@@ -399,19 +399,19 @@ class Home extends MY_Controller
             $datacart = $this->cart_item->getWhere("cart_item.id_cart", $this->input->get('id'));
             $datacart = $this->cart_item->getData()->result();
             
-            $dataQty = $this->cart_item->order_by("id_detail_item_cart", "ASC");
-            $dataQty = $this->cart_item->getJoin("cart_item", "cart_item.id_cart=detail_cart_item.id_cart", "inner");
-            $dataQty = $this->cart_item->getJoin("produk", "produk.id_produk=detail_cart_item.id_produk", "inner");
-            $dataQty = $this->cart_item->getJoin("sub_produk", "sub_produk.id_sub_produk = detail_cart_item.id_sub_produk", "left");
-            $dataQty = $this->cart_item->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
-            $dataQty = $this->cart_item->getWhere("cart_item.id_cart", $this->input->get('id'));
-            $dataQty = $this->cart_item->getData()->row()->quantity;
+            // $dataQty = $this->cart_item->order_by("id_detail_item_cart", "ASC");
+            // $dataQty = $this->cart_item->getJoin("cart_item", "cart_item.id_cart=detail_cart_item.id_cart", "inner");
+            // $dataQty = $this->cart_item->getJoin("produk", "produk.id_produk=detail_cart_item.id_produk", "inner");
+            // $dataQty = $this->cart_item->getJoin("sub_produk", "sub_produk.id_sub_produk = detail_cart_item.id_sub_produk", "left");
+            // $dataQty = $this->cart_item->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
+            // $dataQty = $this->cart_item->getWhere("cart_item.id_cart", $this->input->get('id'));
+            // $dataQty = $this->cart_item->getData()->row()->quantity;
             
-            $dataQty = $this->cart_item->cekQtyProduk($this->input->get('id'));
+            // $dataQty = $this->cart_item->cekQtyProduk($this->input->get('id'));
             // $dataQty = $this->cart_item->getData()->select_sum('detail_cart_item.quantity')->result();
             
             
-            $total = "";
+            // $total = "";
             
             foreach ($datacart as $d) {
                 $foto = explode(',', $d->thumbnail_produk);
