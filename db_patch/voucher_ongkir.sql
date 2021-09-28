@@ -7,3 +7,5 @@ CREATE TABLE `voucher_ongkir` ( `id_voucher` INT NOT NULL auto_increment,
                                 UNIQUE ( `code_voucher` ) ) engine = innodb;
 
 ALTER TABLE `transaksi` ADD `system_note` TEXT NULL AFTER `catatan`;
+
+ALTER TABLE `voucher_ongkir`  ADD `is_active` BOOLEAN NOT NULL DEFAULT TRUE  AFTER `discount_voucher`;

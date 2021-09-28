@@ -26,6 +26,7 @@ class Voucher extends MY_Controller
             if ($this->input->post('kirim')) {
                 $code = $this->input->post('code_voucher');
                 $discount = $this->input->post('discount_voucher');
+                $is_active = $this->input->post('is_active');
                 
                 //validate data
                 $this->form_validation->set_rules('code_voucher', 'Kode Voucher', 'required|alpha_numeric|max_length[20]|is_unique[voucher_ongkir.code_voucher]');
@@ -38,6 +39,7 @@ class Voucher extends MY_Controller
                     $data = array(
                         "code_voucher" => $code,
                         "discount_voucher" => $discount,
+                        "is_active" => $is_active,
                         "created_at" => date("Y-m-d H:i:s"),
                         "updated_at" => date("Y-m-d H:i:s")
                     );
@@ -72,7 +74,7 @@ class Voucher extends MY_Controller
             if ($this->input->post('kirim')) {
                 $code = $this->input->post('code_voucher');
                 $discount = $this->input->post('discount_voucher');
-                
+                $is_active = $this->input->post('is_active');
                 if($this->input->post('code_voucher') != $data['voucher']->code_voucher) {
                     $is_unique =  '|is_unique[voucher_ongkir.code_voucher]';
                  } else {
@@ -87,9 +89,15 @@ class Voucher extends MY_Controller
                 {
                     $this->load->view('admin/pages/voucher/form_voucher', $data);
                 }else{
+                    if($is_active == "TRUE"){
+                        $is_active = TRUE;
+                    }else{
+                        $is_active = FALSE;
+                    }
                     $dataInput = array(
                         "code_voucher" => $code,
                         "discount_voucher" => $discount,
+                        "is_active" => $is_active,
                         "created_at" => date("Y-m-d H:i:s"),
                         "updated_at" => date("Y-m-d H:i:s")
                     );

@@ -165,9 +165,8 @@ class Home extends MY_Controller
                 $cek = $this->admin->login($email);
                 // die(json_encode($cek));
                 if ($cek != null) {
-                    // if ($this->bcrypt->check_password($pass, $cek->password)) {
+                    if ($this->bcrypt->check_password($pass, $cek->password)) {
                     // if ($cek->password == $pass) {
-                    if(true){
                         $datas = array(
                             "updated_at" => date("Y-m-d H:i:s")
                         );

@@ -71,6 +71,20 @@
                                                         <b style="color:red"><?php echo form_error('discount_voucher'); ?></b>
                                                     </div>
                                                 </div>
+                                                <div class="row" style="margin-top: 10px;">
+                                                    <div class="col-lg-6">
+                                                        <label for="kat_p">Aktif </label>
+                                                        <br />
+                                                        <input type="radio" name="is_active" value="TRUE" <?php if (isset($voucher) && $voucher->is_active) {
+                                                                                                                echo "checked";
+                                                                                                            }?>>Ya
+                                                        <br />
+                                                        <input type="radio" name="is_active" value="FALSE" <?php if (isset($voucher) && !$voucher->is_active) {
+                                                                                                                echo "checked";
+                                                                                                            }?>>Tidak
+                                                        <b style="color:red"><?php echo form_error('discount_voucher'); ?></b>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="card-footer">

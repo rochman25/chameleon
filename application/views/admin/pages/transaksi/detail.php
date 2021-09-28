@@ -85,6 +85,19 @@
                                                 </address>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <address>
+                                                    <strong>System Note:</strong><br>
+                                                    <?php if ($transaksi[0]->system_note == null || $transaksi[0]->system_note == "") {
+                                                        echo "Tidak ada catatan system";;
+                                                    } else {
+                                                        $arr = explode(":",$transaksi[0]->system_note);
+                                                        echo $arr[0]."<br/>".$arr[3]." ".$arr[4];
+                                                    } ?>
+                                                </address>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 

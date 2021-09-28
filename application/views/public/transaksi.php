@@ -274,14 +274,14 @@ $this->load->view('public/footer');
             var courier = $(this).val();
             var destination = $("#kecamatan_id").val();
             var mode = "GET";
+            // alert('woy');
+            $('#loader').show();
+            $('#order').hide();
             var total_ongkir = 0;
             var total = <?php echo $total ?>;
             var total_barang = <?php echo $total_jumlah ?>;
             var total_weight = <?php echo $total_berat ?>;
-            // alert('woy');
-            $('#loader').show();
-            $('#order').hide();
-
+            $('#voucher').val("");
             $.ajax({
                 type: 'GET',
                 url: "<?php echo site_url() ?>" + "user/rajaongkir/hitung_ongkir",
@@ -311,6 +311,9 @@ $this->load->view('public/footer');
                     // $('#ongkos-kirim').val(total_ongkir);
                     // $('#total').text("Rp " + total.toLocaleString("en"));
                     console.log(data);
+                    // if (!$('#voucher').val()) {
+                    //     $('#voucher').trigger("change");
+                    // }
                     // $('#voucher').trigger("change");
                     $('#loader').hide();
                     $('#order').show();
@@ -321,12 +324,13 @@ $this->load->view('public/footer');
                 }
             })
         });
+
         $('#voucher').change(function() {
             if (!$('#kurir').val()) {
                 alert("Harap Pilih kurir terlebih dahulu.");
                 $(this).val("");
             } else {
-                var total_ongkir = $('#total_ongkir').val();
+                var totalongkir = $('#total_ongkir').val();
                 $('#loader').show();
                 $('#order').hide();
                 if ($(this).val().length !== 0) {
@@ -337,19 +341,21 @@ $this->load->view('public/footer');
                         success: function(data) {
                             console.log(data);
                             if (!data.status) {
-                                alert("Kode Voucher Tidak Valid.");
                                 $(this).val("");
+                                alert("Kode Voucher Tidak Valid.");
                             } else {
                                 let ongkir = 0;
                                 var total_bayar = <?php echo $total ?>;
                                 if (data.data.discount_voucher < 100) {
                                     let percentage = 100 - data.data.discount_voucher;
-                                    ongkir = (percentage / 100) * total_ongkir;
+                                    ongkir = (percentage / 100) * totalongkir;
                                     total_bayar = <?php echo $total ?> + ongkir;
                                 }
+                                $('#total_ongkir').val(ongkir);
                                 $('#total_bayar').val(total_bayar);
                                 $('#ongkos-kirim').text(number_format(ongkir, 2, '.', ','));
                                 $('#total-bayar').text(number_format(total_bayar, 2, '.', ','));
+                                $('#system_note').val("voucher-ongkir:id:"+data.data.id_voucher+":code_discount:"+data.data.code_voucher+":discount:"+data.data.discount_voucher);
                                 console.log(data);
                             }
                             $('#loader').hide();
@@ -364,9 +370,9 @@ $this->load->view('public/footer');
                     })
                 } else {
                     let ongkir = 0;
-                    var total_bayar = total;
-                    ongkir = total_ongkir;
-                    total_bayar = <?php echo $total ?> + ongkir;
+                    var total_bayar = <?php echo $total; ?>;
+                    ongkir = totalongkir;
+                    total_bayar = Number(total_bayar) + Number(ongkir);
                     $('#total_bayar').val(total_bayar);
                     $('#ongkos-kirim').text(number_format(ongkir, 2, '.', ','));
                     $('#total-bayar').text(number_format(total_bayar, 2, '.', ','));
@@ -429,7 +435,7 @@ $this->load->view('public/footer');
                         $('#kabupaten_id').append('<option value="' + value.city_id + ',' + value.city_name + '">' + value.city_name + '</option>')
                     });
                     $('#kabupaten_id').show();
-                    $('#loader_kabupaten').hide()
+                    $('#loader_kabupaten').hide();
                     console.log(data)
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -466,6 +472,7 @@ $this->load->view('public/footer');
         });
         $('#kecamatan_id').on('change', function() {
             var courier = $("#kurir").val();
+            $('#voucher').val("");
             if (courier != "") {
                 var destination = $(this).val();
                 var mode = "GET";
