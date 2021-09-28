@@ -28,7 +28,7 @@ class Voucher extends MY_Controller
                 $discount = $this->input->post('discount_voucher');
                 
                 //validate data
-                $this->form_validation->set_rules('code_voucher', 'Kode Voucher', 'required|is_unique[voucher_ongkir.code_voucher]');
+                $this->form_validation->set_rules('code_voucher', 'Kode Voucher', 'required|alpha_numeric|max_length[20]|is_unique[voucher_ongkir.code_voucher]');
                 $this->form_validation->set_rules('discount_voucher', 'Diskon Voucher', 'required');
 
                 if ($this->form_validation->run() == FALSE)
@@ -80,7 +80,7 @@ class Voucher extends MY_Controller
                  }
                  
                 //validate data
-                $this->form_validation->set_rules('code_voucher', 'Kode Voucher', 'required'.$is_unique);
+                $this->form_validation->set_rules('code_voucher', 'Kode Voucher', 'required|alpha_numeric|max_length[20]'.$is_unique);
                 $this->form_validation->set_rules('discount_voucher', 'Diskon Voucher', 'required');
 
                 if ($this->form_validation->run() == FALSE)
@@ -137,4 +137,15 @@ class Voucher extends MY_Controller
             redirect('admin/home/login');
         }
     }
+
+    public function checkVoucher($voucher){
+        $getVoucher = $this->voucher->getVoucher($voucher);
+        if($getVoucher){
+            $response = ["status" => true,"data" => $getVoucher];
+        }else{
+            $response = ["status" => false,"data" => null];
+        }
+        echo json_encode($response);
+    }
+
 }

@@ -20,4 +20,9 @@ class Voucher_ongkir_model extends MY_Model
         return $this->update($data);
     }
 
+    function getVoucher($code){
+        $this->getWhere('code_voucher',$code);
+        return $this->getData()->row();
+    }
+
 }   

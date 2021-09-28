@@ -5,3 +5,5 @@ CREATE TABLE `voucher_ongkir` ( `id_voucher` INT NOT NULL auto_increment,
                                 `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
                                 PRIMARY KEY ( `id_voucher` ),
                                 UNIQUE ( `code_voucher` ) ) engine = innodb;
+
+ALTER TABLE `transaksi` ADD `system_note` TEXT NULL AFTER `catatan`;
