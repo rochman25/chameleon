@@ -26,11 +26,11 @@ $this->load->view('public/cart');
                         <div class="title">Tanggal Order : <b style="color: #5a5a5a;"> <?= date('d-M-Y H:i:s', strtotime($transaksi->waktu_transaksi)) ?> </b></div>
                         <div class="title">Harap membayar sebelum tanggal : <b style="color: red;"> <?= date("d-M-Y H:i:s", strtotime("+1 day", strtotime($transaksi->waktu_transaksi))) ?> </b></div>
                         <div class="title">Status : <b style="color: #5a5a5a;"> <?= $transaksi->status_transaksi ?> </b></div>
-                        <div class="title">No Resi : <b style="color: #5a5a5a;"><?= ($transaksi->no_resi == "" || $transaksi->no_resi == null ) ? "No resi belum tersedia." : $transaksi->no_resi ?></b></div>
+                        <div class="title">No Resi : <b style="color: #5a5a5a;"><?= ($transaksi->no_resi == "" || $transaksi->no_resi == null) ? "No resi belum tersedia." : $transaksi->no_resi ?></b></div>
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12">
                         <h5 style="font-weight: bold;">SHIPPING - <?= strtoupper($transaksi->kurir) ?></h5>
-                        
+
                         <div class="title"><b style="color: #5a5a5a;"> <?= $profil->nama_lengkap ?> </b></div>
                         <div class="title">
                             <p style="margin: 0;color: #5a5a5a;"> <?= $profil->alamat_1 . " " . $profil->alamat_2 ?> </p>
@@ -49,7 +49,8 @@ $this->load->view('public/cart');
                         </div>
                         <div class="title">Nomor Telphone : <b style="color: #5a5a5a;"> <?= $profil->no_telp ?> </b></div>
                         <div class="title">Email : <b style="color: #5a5a5a;"> <?= $profil->email ?> </b></div>
-                        <div class="title">Catatan : <p style="color: #5a5a5a"> <?= ($transaksi->catatan == "" || $transaksi->catatan == null) ? "Tidak ada catatan khusus" : $transaksi->catatan ?> </p></div>
+                        <div class="title">Catatan : <p style="color: #5a5a5a"> <?= ($transaksi->catatan == "" || $transaksi->catatan == null) ? "Tidak ada catatan khusus" : $transaksi->catatan ?> </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -57,7 +58,9 @@ $this->load->view('public/cart');
         <section class="right-column">
             <div class="content" style="overflow: hidden;">
                 <?php foreach ($detail_transaksi as $row) {
+                    $totalDiskon = 0;
                     if ($row['id_sub_produk'] == null) {
+                        $diskon = (($row['diskon_produk'] / 100) * $row['harga_produk']);
                         $foto = explode(',', $row['thumbnail_produk']);
                 ?>
                         <div class="products">
@@ -78,7 +81,9 @@ $this->load->view('public/cart');
                                 </div>
                             </div>
                         </div>
-                    <?php } else { ?>
+                    <?php
+                        $totalDiskon += $diskon;
+                    } else { ?>
                         <div class="products">
                             <div class="product-box" id="product-box__39395">
                                 <img src="<?= base_url() ?>/assets/images/add_on.png" alt="">
@@ -101,6 +106,20 @@ $this->load->view('public/cart');
                     <div class="summary-ongkir">
                         <span>Ongkos Kirim</span>
                         <span class="summary-ongkir-value"><b>Rp</b> <b id="ongkos-kirim"> <?= $transaksi->total_ongkir ?></b> </span>
+                    </div>
+                    <div class="summary-ongkir">
+                        <span>Diskon Produk</span>
+                        <span class="summary-ongkir-value"><b> Rp</b> <b id="diskon-produk"><?= number_format($totalDiskon) ?></b> </span>
+                    </div>
+                    <div class="summary-ongkir">
+                        <?php
+                            if($transaksi->system_note){
+                                $arr = explode(":", $transaksi->system_note);
+                                // $arr[3] . " " . $arr[4];
+                            }
+                        ?>
+                        <span>Diskon Ongkos Kirim</span>
+                        <span class="summary-ongkir-value"><b> Rp</b> <b id="diskon-ongkir"><?=number_format($arr[6],0)?></b> </span>
                     </div>
                     <div class="summary-belanja">
                         <span>Total Belanja</span>
