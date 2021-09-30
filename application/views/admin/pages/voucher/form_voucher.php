@@ -62,8 +62,8 @@
                                                         <b style="color:red"><?php echo form_error('code_voucher'); ?></b>
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <label for="kat_p">Besaran Discount (%)</label>
-                                                        <input type="number" name="discount_voucher" max="100" min="1" required id="discount_voucher" placeholder="Masukkan Besaran Discount" value="<?php if (isset($voucher)) {
+                                                        <label for="kat_p">Besaran Discount</label>
+                                                        <input type="number" name="discount_voucher" min="1" required id="discount_voucher" placeholder="Masukkan Besaran Discount" value="<?php if (isset($voucher)) {
                                                                                                                                                                                                             echo $voucher->discount_voucher;
                                                                                                                                                                                                         } else {
                                                                                                                                                                                                             echo set_value('discount_voucher');

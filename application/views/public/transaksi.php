@@ -160,8 +160,11 @@ $this->load->view('public/cart');
             </section>
             <section class="right-column">
                 <div class="content">
-                    <?php foreach ($cart as $row) {
+                    <?php 
+                    $totalDiskon = 0;
+                    foreach ($cart as $row) {
                         if ($row['id_sub_produk'] == null) {
+                        $diskon = (($row['diskon_produk'] / 100) * $row['harga_produk']);
                     ?>
                             <div class="products">
                                 <div class="product-box" id="product-box__39395">
@@ -181,7 +184,9 @@ $this->load->view('public/cart');
                                     </div>
                                 </div>
                             </div>
-                        <?php } else { ?>
+                        <?php 
+                    $totalDiskon += $diskon;
+                    } else { ?>
                             <div class="products">
                                 <div class="product-box" id="product-box__39395">
                                     <img src="<?= base_url() ?>/assets/images/add_on.png" alt="">
@@ -236,6 +241,14 @@ $this->load->view('public/cart');
                         <div class="summary-ongkir">
                             <span>Ongkos Kirim</span>
                             <span class="summary-ongkir-value"><b>Rp</b> <b id="ongkos-kirim"> 0</b> </span>
+                        </div>
+                        <div class="summary-ongkir">
+                            <span>Diskon Produk</span>
+                            <span class="summary-ongkir-value"><b> -  Rp</b> <b id="diskon-produk"><?=number_format($totalDiskon)?></b> </span>
+                        </div>
+                        <div class="summary-ongkir">
+                            <span>Diskon Ongkos Kirim</span>
+                            <span class="summary-ongkir-value"><b>Rp</b> <b id="diskon-ongkir"> 0</b> </span>
                         </div>
                         <div class="summary-belanja">
                             <span>Total Belanja</span>
@@ -346,16 +359,14 @@ $this->load->view('public/footer');
                             } else {
                                 let ongkir = 0;
                                 var total_bayar = <?php echo $total ?>;
-                                if (data.data.discount_voucher < 100) {
-                                    let percentage = 100 - data.data.discount_voucher;
-                                    ongkir = (percentage / 100) * totalongkir;
-                                    total_bayar = <?php echo $total ?> + ongkir;
-                                }
-                                $('#total_ongkir').val(ongkir);
+                                ongkir = totalongkir - data.data.discount_voucher;
+                                total_bayar = <?php echo $total ?> + ongkir;
+                                // $('#total_ongkir').val(ongkir);
                                 $('#total_bayar').val(total_bayar);
-                                $('#ongkos-kirim').text(number_format(ongkir, 2, '.', ','));
+                                // $('#ongkos-kirim').text(number_format(ongkir, 2, '.', ','));
+                                $('#diskon-ongkir').text("-"+number_format(data.data.discount_voucher));
                                 $('#total-bayar').text(number_format(total_bayar, 2, '.', ','));
-                                $('#system_note').val("voucher-ongkir:id:"+data.data.id_voucher+":code_discount:"+data.data.code_voucher+":discount:"+data.data.discount_voucher);
+                                $('#system_note').val("voucher-ongkir:id:" + data.data.id_voucher + ":code_discount:" + data.data.code_voucher + ":discount:" + data.data.discount_voucher);
                                 console.log(data);
                             }
                             $('#loader').hide();
