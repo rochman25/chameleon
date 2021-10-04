@@ -111,4 +111,18 @@ class Transaksi_model extends MY_Model
         return $this->getData()->result_array();
     }
 
+    function getPendingTransaksi(){
+        $this->getWhere('status_transaksi','pending');
+        // $this->getWhere('waktu_expired >',date("Y-m-d"));
+        return $this->getData()->result_array();
+    }
+
+    function cancelTransaksi($id){
+        $data = [
+            "status_transaksi" => 'batal'
+        ];
+        $this->getWhere('id_transaksi',$id);
+        return $this->update($data);
+    }
+
 }
