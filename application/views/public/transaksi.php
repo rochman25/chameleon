@@ -248,7 +248,7 @@ $this->load->view('public/cart');
                         </div>
                         <div class="summary-ongkir">
                             <span>Diskon Ongkos Kirim</span>
-                            <span class="summary-ongkir-value"><b>Rp</b> <b id="diskon-ongkir"> 0</b> </span>
+                            <span class="summary-ongkir-value"><b> - Rp</b> <b id="diskon-ongkir"> 0</b> </span>
                         </div>
                         <div class="summary-belanja">
                             <span>Total Belanja</span>
@@ -364,7 +364,7 @@ $this->load->view('public/footer');
                                 // $('#total_ongkir').val(ongkir);
                                 $('#total_bayar').val(total_bayar);
                                 // $('#ongkos-kirim').text(number_format(ongkir, 2, '.', ','));
-                                $('#diskon-ongkir').text("-"+number_format(data.data.discount_voucher));
+                                $('#diskon-ongkir').text(number_format(data.data.discount_voucher));
                                 $('#total-bayar').text(number_format(total_bayar, 2, '.', ','));
                                 $('#system_note').val("voucher-ongkir:id:" + data.data.id_voucher + ":code_discount:" + data.data.code_voucher + ":discount:" + data.data.discount_voucher);
                                 console.log(data);
