@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Form Produk</title>
+    <title>Form Voucher</title>
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/admin/node_modules/dropzone/dist/min/dropzone.min.css">
     <?php $this->load->view('admin/assets/stylesheets') ?>
@@ -31,23 +31,23 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Form Produk Chameleon</h1>
+                        <h1>Form Voucher Chameleon</h1>
                         <div class="section-header-breadcrumb">
                             <div class="breadcrumb-item"><a href="<?= base_url() ?>admin/home">Dashboard</a></div>
                             <div class="breadcrumb-item active"><a href="<?= base_url() ?>admin/akun">Admin</a></div>
                         </div>
                     </div>
                     <div class="section-body">
-                        <h2 class="section-title">Form Produk</h2>
+                        <h2 class="section-title">Form Voucher</h2>
                         <p class="section-lead">
-                            Silahkan lengkapi form dibawah ini untuk menambahkan produk baru.
+                            Silahkan lengkapi form dibawah ini untuk menambahkan voucher baru.
                         </p>
                         <div class="row">
                             <div class="col-12 col-md-12 col-lg-12">
                                 <div class="card">
                                     <form action="" enctype="multipart/form-data" method="POST">
                                         <div class="card-header">
-                                            <h4>Detail Produk</h4>
+                                            <h4>Detail Voucher</h4>
                                         </div>
                                         <div class="card-body">
                                             <div class="form-group">
