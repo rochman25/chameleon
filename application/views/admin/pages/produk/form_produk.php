@@ -160,6 +160,12 @@
                                                                                                                                             } ?>>
                                                         <span class="selectgroup-button">PREMIUM</span>
                                                     </label>
+                                                    <label class="selectgroup-item">
+                                                        <input type="checkbox" name="label_p[]" value="sold out" class="selectgroup-input" <?php if (isset($produk) && strpos($produk->label_produk, 'sold out') !== false) {
+                                                                                                                                                echo "checked";
+                                                                                                                                            } ?>>
+                                                        <span class="selectgroup-button">SOLD OUT</span>
+                                                    </label>
                                                 </div>
                                             </div>
                                             <div class="form-group">

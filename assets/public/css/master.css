@@ -7008,6 +7008,22 @@ footer.footer .copyright {
 	margin: 0;
 }
 
+.badge_label_sold_out {
+	background-color:  #fb2727;
+	width: 75px;
+	padding: 5px;
+	margin: 2px;
+	border-radius: 20px;
+}
+
+.badge_label_sold_out p {
+	text-align: center;
+	color: white;
+	font-size: 10px;
+	font-weight: bold;
+	margin: 0;
+}
+
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 400px) {
 	.column {
