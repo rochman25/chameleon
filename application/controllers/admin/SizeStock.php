@@ -8,12 +8,14 @@ class SizeStock extends MY_Controller
     {
         parent::__construct();
         $this->load->model('SizeStock_model', 'size_stock');
+        $this->load->library('form_validation');
     }
 
-    public function index()
+    public function index($id_produk = null)
     {
         if ($this->adminIsLoggedIn()) {
-            $data['size_stock'] = $this->size_stock->getData()->result_array();
+            $data['id_produk'] = $id_produk;
+            $data['size_stock'] = $this->size_stock->getByIdProduk($id_produk);
             $this->load->view('admin/pages/size_stock/list', $data);
         } else {
             redirect('admin/home/login');
@@ -48,24 +50,25 @@ class SizeStock extends MY_Controller
                             'pesan',
                             '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil dimasukkan</div>'
                         );
-                        redirect('admin/SizeStock');
+                        redirect('admin/SizeStock/index/'.$id_produk);
                     } else {
                         $this->session->set_flashdata(
                             'pesan',
                             '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
                         );
-                        redirect('admin/SizeStock');
+                        redirect('admin/SizeStock/index/'.$id_produk);
                     }
                 }
             } else {
-                $this->load->view('admin/pages/size_stock/form_size_stock');
+                $data['id_produk'] = $_GET['id_produk'];
+                $this->load->view('admin/pages/size_stock/form_size_stock', $data);
             }
         } else {
             redirect('admin/home/login');
         }
     }
 
-    public function edit($id)
+    public function ubah($id)
     {
         if ($this->adminIsLoggedIn()) {
             $data['size_stock'] = $this->size_stock->getById($id);
@@ -89,44 +92,45 @@ class SizeStock extends MY_Controller
                         "created_at" => date("Y-m-d H:i:s"),
                         "updated_at" => date("Y-m-d H:i:s")
                     );
-                    if ($this->size_stock->update($dataInput, $id)) {
+                    if ($this->size_stock->updateData($dataInput, $id)) {
                         $this->session->set_flashdata(
                             'pesan',
                             '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil disimpan</div>'
                         );
-                        redirect('admin/SizeStock');
+                        redirect('admin/SizeStock/index/'.$id_produk);
                     } else {
                         $this->session->set_flashdata(
                             'pesan',
                             '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
                         );
-                        redirect('admin/SizeStock');
+                        redirect('admin/SizeStock/index/'.$id_produk);
                     }
                 }
             } else {
-                $this->load->view('admin/pages/size_stock/form_size_stock');
+                $this->load->view('admin/pages/size_stock/form_size_stock', $data);
             }
         } else {
             redirect('admin/home/login');
         }
     }
 
-    public function hapus($id)
+    public function hapus()
     {
         if ($this->adminIsLoggedIn()) {
             $id = $this->input->post('id');
+            $id_produk = $this->input->post('id_produk');
             if ($this->size_stock->delete("id", $id)) {
                 $this->session->set_flashdata(
                     'pesan',
                     '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil dihapus</div>'
                 );
-                redirect('admin/SizeStock');
+                redirect('admin/SizeStock/index/'.$id_produk);
             } else {
                 $this->session->set_flashdata(
                     'pesan',
                     '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
                 );
-                redirect('admin/SizeStock');
+                redirect('admin/SizeStock/index/'.$id_produk);
             }
         } else {
             redirect('admin/home/login');
