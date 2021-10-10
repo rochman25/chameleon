@@ -72,5 +72,7 @@ $route['verifikasi']    = 'user/home/verifikasi';
 $route['order']         = 'user/order/index';
 $route['order_detail/(:any)']   = 'user/order/order_detail/$1';
 
+$route['admin/prerelease'] = 'admin/PreRelease/index';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
