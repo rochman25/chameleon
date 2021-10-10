@@ -60,7 +60,7 @@
                                                     foreach ($pre_release as $row) { ?>
                                                         <tr>
                                                             <th scope="row"><?= $no++ ?></th>
-                                                            <td id="data-produk" data-id="<?= $row['kode_produk'] ?>"><a href="<?= base_url() ?>admin/produk/ubah/<?= $row['id_produk'] ?>"><?= $row['kode_produk'] ?></a></td>
+                                                            <td id="data-produk" data-id="<?= $row['kode_produk'] ?>"><a href="<?= base_url() ?>admin/produk/ubah?id=<?= $row['kode_produk'] ?>"><?= $row['kode_produk']."-".$row['nama_produk']?></a></td>
                                                             <td><?= $row['release_date'] ?></td>
                                                             <td><?= $row['updated_at'] ?></td>
                                                             <td>

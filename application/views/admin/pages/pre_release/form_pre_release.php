@@ -45,7 +45,7 @@
                                                     <div class="col-lg-12">
                                                         <div class="form-group">
                                                             <label>Produk</label>
-                                                            <select class="form-control select2" name="id_produk" width="100%">
+                                                            <select class="form-control select2" name="id_produk" style="width:100%">
                                                                 <option>Pilih Produk</option>
                                                                 <?php foreach($produk as $index => $item){ ?>
                                                                     <option value="<?= $item['id_produk'] ?>" <?php if(isset($pre_release) && $pre_release->id_produk == $item['id_produk']){ echo "selected"; } ?>><?= $item['kode_produk']." - ".$item['nama_produk'] ?></option>
