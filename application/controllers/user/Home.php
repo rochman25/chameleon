@@ -28,84 +28,84 @@ class Home extends MY_Controller
         $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
         // $data['produk'] = $this->produk->getWhere('produk.stok_produk > ', '0');
         $data['produk'] = $this->produk->getData()->result_array();
-        
+
         $data['produk_best'] = $this->produk->getBestProduk();
-        
+
         $data['produk_new'] = $this->produk->getNewProduct();
-        
+
         $data['produk_best_seller'] = $this->produk->getBestSeller();
-        
+
         $data['produk_new_release'] = $this->produk->getNewRelease();
-        
+
         // $new = $this->produk->getBestProduk();
         // var_dump($new);die;
-        
+
         // $data['produk_best_seller'] = $this->produk->order_by("kode_produk", "DESC");
         // $data['produk_best_seller'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
         // $data['produk_best_seller'] = $this->produk->getWhere('produk.stok_produk > ', '0');
         // $data['produk_best_seller'] = $this->produk->limit(3);
         // $data['produk_best_seller'] = $this->produk->getData()->result_array();
-        
+
         $data['produk_release'] = $this->produk->order_by("kode_produk", "DESC");
         $data['produk_release'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
         $data['produk_release'] = $this->produk->getWhere('produk.stok_produk > ', '0');
         $data['produk_release'] = $this->produk->limit(1);
         $data['produk_release'] = $this->produk->getData()->result_array();
-        
+
         $data['kategori'] = $this->kategori->getData()->result_array();
         $data['banner'] = $this->banner->order_by("order", "ASC");
         $data['banner'] = $this->banner->getWhere("active", "1");
         $data['banner'] = $this->banner->getData()->result_array();
-        
+
         $data['dataBestSellerOne'] = $this->best_seller->order_by("order", "DESC");
         $data['dataBestSellerOne'] = $this->best_seller->getWhere("active", "1");
         $data['dataBestSellerOne'] = $this->best_seller->limit(2);
         $data['dataBestSellerOne'] = $this->best_seller->getData()->result_array();
-        
-        
+
+
         $data['dataBestSeller'] = $this->best_seller->order_by("order", "DESC");
         $data['dataBestSeller'] = $this->best_seller->getWhere("active", "1");
         $data['dataBestSeller'] = $this->best_seller->getWhere("title", "Best Seller");
         $data['dataBestSeller'] = $this->best_seller->getData()->result_array();
-        
+
         $data['dataNewArrivalOne'] = $this->new_arrival->order_by("order", "DESC");
         $data['dataNewArrivalOne'] = $this->new_arrival->getWhere("active", "1");
         $data['dataNewArrivalOne'] = $this->new_arrival->limit(2);
         $data['dataNewArrivalOne'] = $this->new_arrival->getData()->result_array();
-        
+
         $data['dataNewArrival'] = $this->new_arrival->order_by("order", "DESC");
         $data['dataNewArrival'] = $this->new_arrival->getWhere("active", "1");
         $data['dataNewArrival'] = $this->new_arrival->getData()->result_array();
-        
+
         foreach ($data['produk'] as $row) {
             $foto = explode(',', $row['thumbnail_produk']);
             $thumbnail[$row['id_produk']] = $foto[0];
         }
-        
+
         foreach ($data['produk_best'] as $row) {
             $foto = explode(',', $row['thumbnail_produk']);
             $thumbnail[$row['id_produk']] = $foto[0];
         }
-        
+
         foreach ($data['produk_new'] as $row) {
             $foto = explode(',', $row['thumbnail_produk']);
             $thumbnail[$row['id_produk']] = $foto[0];
         }
-        
+
         foreach ($data['produk_new_release'] as $row) {
             $foto = explode(',', $row['thumbnail_produk']);
             $thumbnail[$row['id_produk']] = $foto[0];
         }
-        
+
         foreach ($data['produk_best_seller'] as $row) {
             $foto = explode(',', $row['thumbnail_produk']);
             $thumbnail[$row['id_produk']] = $foto[0];
         }
-        
+
         $data['thumbnail'] = $thumbnail;
-            
+
         // var_dump($thumbnail);die;
-        
+
         if ($this->userIsLoggedIn()) {
             $data['id_cart'] = $this->cart->getWhere("id_pengguna", $this->session->userdata['user_data']['id']);
             $data['id_cart'] = $this->cart->getData()->row();
@@ -132,43 +132,41 @@ class Home extends MY_Controller
         $data['thumbnail'] = $thumbnail;
         $this->load->view('public/product', $data);
     }
-    
+
     public function produk($kategori = "")
     {
         if ($kategori == "semua" || $kategori == "Semua Produk") {
             // $datakategori =  $this->kategori->getLike('nama_kategori', $kategori);
             // $datakategori = $this->kategori->getData()->row();
-            
+
             // $thumbnail = array();
             // $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
             // $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
             // // $data['produk'] = $this->produk->getWhere("produk.stok >", "0");
             // $data['produk'] = $this->produk->getData()->result_array();
             // // $data['kategori'] = $this->kategori->getData()->result_array();
-            
+
             // foreach ($data['produk'] as $row) {
             //     $foto = explode(',', $row['thumbnail_produk']);
             //     $thumbnail[$row['id_produk']] = $foto[0];
             // }
             // $data['thumbnail'] = $thumbnail;
-            
+
             // $datakategori =  $this->kategori->getLike('nama_kategori', $kategori);
             $datakategori = $this->kategori->getData()->row();
-            
+
             $thumbnail = array();
-                $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
-                // $data['produk'] = $this->produk->getWhere('produk.id_kategori', $datakategori->id_kategori);
-                $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
-                // $data['produk'] = $this->produk->getWhere("produk.stok_produk >", "0");
-                $data['produk'] = $this->produk->getData()->result_array();
-                $data['kategori'] = $this->kategori->getData()->result_array();
-                foreach ($data['produk'] as $row) {
-                    $foto = explode(',', $row['thumbnail_produk']);
-                    $thumbnail[$row['id_produk']] = $foto[0];
-                }
-                $data['thumbnail'] = $thumbnail;
-            
-            
+            $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
+            // $data['produk'] = $this->produk->getWhere('produk.id_kategori', $datakategori->id_kategori);
+            $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
+            // $data['produk'] = $this->produk->getWhere("produk.stok_produk >", "0");
+            $data['produk'] = $this->produk->getData()->result_array();
+            $data['kategori'] = $this->kategori->getData()->result_array();
+            foreach ($data['produk'] as $row) {
+                $foto = explode(',', $row['thumbnail_produk']);
+                $thumbnail[$row['id_produk']] = $foto[0];
+            }
+            $data['thumbnail'] = $thumbnail;
         } else {
             $datakategori =  $this->kategori->getLike('nama_kategori', $kategori);
             $datakategori = $this->kategori->getData()->row();
@@ -193,7 +191,7 @@ class Home extends MY_Controller
                 $data['thumbnail'] = $thumbnail;
             }
         }
-        
+
         $data['thumbnail'] = $thumbnail;
         if ($this->userIsLoggedIn()) {
             $data['id_cart'] = $this->cart->getWhere("id_pengguna", $this->session->userdata['user_data']['id']);
@@ -202,9 +200,9 @@ class Home extends MY_Controller
             $data['id_cart'] = "";
         }
         $data['section'] = $kategori;
-        
+
         // var_dump($data);die;
-        
+
         if ($kategori == "celana") {
             $data['bg'] = base_url('assets/images/Celana/Celana-BG.png');
         } else if ($kategori == "kemeja") {
@@ -216,57 +214,67 @@ class Home extends MY_Controller
         }
         $this->load->view('public/product', $data);
     }
-    
+
     public function promo()
     {
         $this->load->view('public/product-promo');
     }
-    
+
     public function produk_detail()
     {
         //die(json_encode($this->session->userdata("c72e6711-4ea1-11ea-9a04-e03f4931b17e")));
+        $this->load->model('PreRelease_model', 'pre_release');
         $id_produk = $this->input->get('produk');
-
-        $thumbnail = array();
-        $ukuran = array();
-        
-        $data['produk'] = $this->produk->getWhere("id_produk", $id_produk);
-        $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
-        $data['produk'] = $this->produk->getData()->row();
-        
-        $data['subProduk'] = $this->subproduk->getByIdProduk($id_produk);
-        $data['kategori'] = $this->kategori->getData()->result_array();
-        
-        // $idCart = $this->cart->cekCartNow();
-        // $data['cekCartProduk'] = $this->cart_item->cekIdProduks($id_produk, $idCart);
-        
-        // $cekIdProduk = $this->cart_item->cekIdProduk($id_produk, $idc);
-        // die(json_encode($data));
-
-        $foto = explode(',', $data['produk']->thumbnail_produk);
-        $size = explode(',', $data['produk']->size_produk);
-        
-        // var_dump($foto);die;
-        
-        foreach ($foto as $f) {
-            $thumbnail[] = $f;
+        $preRelease = $this->pre_release->getByIdProduk($id_produk);
+        $release_date = null;
+        if($preRelease){
+            $release_date = $preRelease->release_date;
         }
-        foreach ($size as $u) {
-            $ukuran[] = $u;
-        }
+        if ($this->checkPreRelease($release_date) == false) {
+            $thumbnail = array();
+            $ukuran = array();
 
-        $data['thumbnail'] = $thumbnail;
-        $data['size'] = $ukuran;
-        if ($this->userIsLoggedIn()) {
-            $data['id_cart'] = $this->cart->getWhere("id_pengguna", $this->session->userdata['user_data']['id']);
-            $data['id_cart'] = $this->cart->getData()->row();
+            $data['produk'] = $this->produk->getWhere("id_produk", $id_produk);
+            $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
+            $data['produk'] = $this->produk->getData()->row();
+
+            $data['subProduk'] = $this->subproduk->getByIdProduk($id_produk);
+            $data['kategori'] = $this->kategori->getData()->result_array();
+
+            // $idCart = $this->cart->cekCartNow();
+            // $data['cekCartProduk'] = $this->cart_item->cekIdProduks($id_produk, $idCart);
+
+            // $cekIdProduk = $this->cart_item->cekIdProduk($id_produk, $idc);
+            // die(json_encode($data));
+
+            $foto = explode(',', $data['produk']->thumbnail_produk);
+            $size = explode(',', $data['produk']->size_produk);
+
+            // var_dump($foto);die;
+
+            foreach ($foto as $f) {
+                $thumbnail[] = $f;
+            }
+            foreach ($size as $u) {
+                $ukuran[] = $u;
+            }
+
+            $data['thumbnail'] = $thumbnail;
+            $data['size'] = $ukuran;
+            if ($this->userIsLoggedIn()) {
+                $data['id_cart'] = $this->cart->getWhere("id_pengguna", $this->session->userdata['user_data']['id']);
+                $data['id_cart'] = $this->cart->getData()->row();
+            } else {
+                $data['id_cart'] = "";
+            }
+            // die(json_encode($data));
+            $this->load->view('public/product-detail', $data);
         } else {
-            $data['id_cart'] = "";
+            $data['pre_release'] = $preRelease;
+            $this->load->view('public/product-pre_release', $data);
         }
-        // die(json_encode($data));
-        $this->load->view('public/product-detail', $data);
     }
-    
+
     public function hapus_item()
     {
         $id_item = $this->input->post('id_item');
@@ -289,7 +297,7 @@ class Home extends MY_Controller
             ));
         }
     }
-    
+
     public function login()
     {
         if ($this->userIsLoggedIn()) {
@@ -348,33 +356,32 @@ class Home extends MY_Controller
             }
         }
     }
-    
-    public function getUpdateCart(){
+
+    public function getUpdateCart()
+    {
         $idc = $this->input->post('id_cart');
         $idp = $this->input->post('id_pengguna');
         $id_produk = $this->input->post('id_produk');
-        
+
         $data = $this->cart_item->getUpdateCart($id_produk, $idc);
-        
+
         // var_dump($idc);die;
         // $session_cart = array(
         //                     "current_cart" => $idc,
         //                     "created_at" => date("Y-m-d H:i:s")
         //                 );
         //                 $this->session->set_userdata($idp, $session_cart);
-        
+
         echo json_encode(array(
-                            "status" => "update",
-                            "update" => true,
-                            "id_cart" => $idc,
-                            "element" => '<div class="cart-list" id="cart_list_39223">
+            "status" => "update",
+            "update" => true,
+            "id_cart" => $idc,
+            "element" => '<div class="cart-list" id="cart_list_39223">
                                     
                             </div>',
         ));
-                        
-                        
     }
-    
+
     public function get_cart()
     {
         if (!$this->userIsLoggedIn()) {
@@ -386,11 +393,11 @@ class Home extends MY_Controller
                 "element" => '',
             ));
         } else {
-            
+
             $datafull = array();
             $thumbnail = array();
             $harga = 0;
-            
+
             $datacart = $this->cart_item->order_by("id_detail_item_cart", "ASC");
             $datacart = $this->cart_item->getJoin("cart_item", "cart_item.id_cart=detail_cart_item.id_cart", "inner");
             $datacart = $this->cart_item->getJoin("produk", "produk.id_produk=detail_cart_item.id_produk", "inner");
@@ -398,7 +405,7 @@ class Home extends MY_Controller
             $datacart = $this->cart_item->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
             $datacart = $this->cart_item->getWhere("cart_item.id_cart", $this->input->get('id'));
             $datacart = $this->cart_item->getData()->result();
-            
+
             // $dataQty = $this->cart_item->order_by("id_detail_item_cart", "ASC");
             // $dataQty = $this->cart_item->getJoin("cart_item", "cart_item.id_cart=detail_cart_item.id_cart", "inner");
             // $dataQty = $this->cart_item->getJoin("produk", "produk.id_produk=detail_cart_item.id_produk", "inner");
@@ -406,13 +413,13 @@ class Home extends MY_Controller
             // $dataQty = $this->cart_item->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
             // $dataQty = $this->cart_item->getWhere("cart_item.id_cart", $this->input->get('id'));
             // $dataQty = $this->cart_item->getData()->row()->quantity;
-            
+
             // $dataQty = $this->cart_item->cekQtyProduk($this->input->get('id'));
             // $dataQty = $this->cart_item->getData()->select_sum('detail_cart_item.quantity')->result();
-            
-            
+
+
             // $total = "";
-            
+
             foreach ($datacart as $d) {
                 $foto = explode(',', $d->thumbnail_produk);
                 foreach ($foto as $f) {
@@ -434,7 +441,7 @@ class Home extends MY_Controller
                 if ($d->id_sub_produk == null) {
                     $dsize = $d->size;
                     $dHarga = $d->diskon_produk != 0 ? "<p style='text-decoration:line-through;font-size:10px'> Rp $d->harga_produk </p>" : "";
-                }else{
+                } else {
                     $dHarga = "";
                     $dsize = $d->size;
                 }
@@ -445,7 +452,7 @@ class Home extends MY_Controller
                     $nama_produk = $d->nama_produk;
                 }
 
-                if($d->id_sub_produk != null){
+                if ($d->id_sub_produk != null) {
                     $d = array(
                         "id_cart" => $d->id_cart,
                         "id_item" => $d->id_detail_item_cart,
@@ -474,12 +481,10 @@ class Home extends MY_Controller
                         </a>
                     </div>'
                     );
-                    
-                    
-                }else{
+                } else {
                     // var_dump($harga);die;
                     // var_dump($total);die;
-                    
+
                     $d = array(
                         "id_cart" => $d->id_cart,
                         "id_item" => $d->id_detail_item_cart,
@@ -496,8 +501,8 @@ class Home extends MY_Controller
                                 <div class="content">
                                     <div class="name">' . $nama_produk . '</div>
                                     <div class="real">' .
-                                $dHarga
-                                . 'Rp ' . number_format($realHarga, 2) . '</div>
+                            $dHarga
+                            . 'Rp ' . number_format($realHarga, 2) . '</div>
                                         <div class="content-detail">
                                             Jumlah : <strong class="cart-quantity">' . $d->quantity . '/ Ukuran :' . $dsize . '</strong> 
                                         
@@ -511,22 +516,22 @@ class Home extends MY_Controller
                     );
                 }
 
-                
+
                 array_push($datafull, $d);
                 $thumbnail = [];
             }
-            
+
             $totalHargaShirt = array();
-            
-            foreach($datafull as $d){
-            //   $totalHargaShirt = $d['total'];
-              array_push($totalHargaShirt, $d['total']);
+
+            foreach ($datafull as $d) {
+                //   $totalHargaShirt = $d['total'];
+                array_push($totalHargaShirt, $d['total']);
             }
-            
+
             echo json_encode(array("data" => $datafull, "total" => array_sum($totalHargaShirt)));
         }
     }
-    
+
     public function update_cart()
     {
         if (!$this->userIsLoggedIn()) {
@@ -540,7 +545,7 @@ class Home extends MY_Controller
         } else {
         }
     }
-    
+
     public function add_cart()
     {
         if (!$this->userIsLoggedIn()) {
@@ -563,9 +568,9 @@ class Home extends MY_Controller
             $nama_barang = $this->input->post('nama_barang');
             $img = $this->input->post('img');
             $diskon = (!empty($this->input->post('diskon')) ? $this->input->post('diskon') : 0);
-            
+
             // var_dump($harga, $qty);die;
-            
+
             if ($idc == "" || empty($idc) || $idc == null) {
                 $idc = $this->cart->generateKode();
                 $data = array(
@@ -580,7 +585,7 @@ class Home extends MY_Controller
                     "size" => $size
                 );
                 $cek = $this->cart->cekCart();
-                
+
                 if ($cek != null) {
                     $simpan = true;
                     $data_item['id_cart'] = $cek->id_cart;
@@ -601,7 +606,7 @@ class Home extends MY_Controller
                     $dHarga = $diskon != 0 ? "<p style='text-decoration:line-through;font-size:10px'> Rp $harga </p>" : "";
 
                     // var_dump($dHarga);die;
-                    
+
                     if ($simpan_item) {
                         $session_cart = array(
                             "current_cart" => $idc,
@@ -615,11 +620,11 @@ class Home extends MY_Controller
                             "total" => $harga,
                             "element" => '<div class="cart-list" id="cart_list_39223">
                                             <a href="#">
-                                                <img src="'.$img.'">
+                                                <img src="' . $img . '">
                                                 <div class="content">
                                                     <div class="name">' . $nama_barang . '</div>
                                                     <div class="real">' . $dHarga
-                                                        . 'Rp ' . number_format($realHarga, 2) . '</div>
+                                . 'Rp ' . number_format($realHarga, 2) . '</div>
                                                         <div class="content-detail">
                                                             Jumlah : <strong class="cart-quantity">' . $qty . '/Ukuran : ' . $size . ' </strong> 
                                                         </div>
@@ -650,9 +655,9 @@ class Home extends MY_Controller
                     ));
                 }
             } else {
-                
+
                 $real_harga_clothes = $this->input->post('real_harga');
-                
+
                 $idc = $this->input->post('id_cart');
                 $idp = $this->input->post('id_pengguna');
                 $id_produk = $this->input->post('id_produk');
@@ -663,7 +668,7 @@ class Home extends MY_Controller
                 $harga = $this->input->post('harga');
                 $diskon = (!empty($this->input->post('diskon')) ? $this->input->post('diskon') : 0);
                 $nama_barang = $this->input->post('nama_barang');
-                
+
                 $data_item = array(
                     "id_cart" => $idc,
                     "id_produk" => $id_produk,
@@ -675,24 +680,24 @@ class Home extends MY_Controller
                 // var_dump($size);die;
                 $cekSize = $this->cart_item->cekSizeCart($id_produk, $idc, $size);
                 $cekIdProduk = $this->cart_item->cekIdProduk($id_produk, $idc);
-                
-                if (!$cekSize){
-                    
+
+                if (!$cekSize) {
+
                     $simpan_item = $this->cart_item->tambahDetailCart($data_item);
                     if ($diskon != 0) {
                         $realHarga = $real_harga_clothes - (($diskon / 100) * $real_harga_clothes);
                     } else {
                         $realHarga = $real_harga_clothes;
                     }
-    
+
                     // $harga = $harga + $realHarga;
                     $dHarga = $diskon != 0 ? "<p style='text-decoration:line-through;font-size:10px'> Rp $real_harga_clothes </p>" : "";
-                    
+
                     $dataQty = $this->cart_item->cekQtyProduk($idc);
                     $totals = (int)$dataQty->quantity * $realHarga;
-                    
+
                     // var_dump($realHarga);die;
-                    
+
                     if ($simpan_item) {
                         $session_cart = array(
                             "current_cart" => $idc,
@@ -706,12 +711,12 @@ class Home extends MY_Controller
                             "total" => $totals,
                             "element" => '<div class="cart-list" ">
                 			<a href="#">
-                    			<img src="' .$img. '">
+                    			<img src="' . $img . '">
                     			<div class="content">
                         			<div class="name">' . $nama_barang . '</div>
                                 
                                     <div class="real">' . $dHarga
-                                        . 'Rp ' . number_format($real_harga, 2) . '</div>
+                                . 'Rp ' . number_format($real_harga, 2) . '</div>
                                         <div class="content-detail">
                                 			Jumlah : <strong class="cart-quantity">' . $qty . ' / Ukuran : ' . $size . '</strong> 
                             			</div>
@@ -722,78 +727,78 @@ class Home extends MY_Controller
                             </a>
             			</div>',
                         ));
-                    // } else if ($updateItem){
-                    //     $session_cart = array(
-                    //         "current_cart" => $idc,
-                    //         "created_at" => date("Y-m-d H:i:s")
-                    //     );
-                    //     $this->session->set_userdata($idp);
-                    //     echo json_encode(array(
-                    //         "status" => "success_update",
-                    //         "success" => true,
-                    //         "id_cart" => $idc
-                            
-                    //     ));
+                        // } else if ($updateItem){
+                        //     $session_cart = array(
+                        //         "current_cart" => $idc,
+                        //         "created_at" => date("Y-m-d H:i:s")
+                        //     );
+                        //     $this->session->set_userdata($idp);
+                        //     echo json_encode(array(
+                        //         "status" => "success_update",
+                        //         "success" => true,
+                        //         "id_cart" => $idc
+
+                        //     ));
                     } else {
-                            echo json_encode(array(
-                                "status" => "unsuccess",
-                                "success" => false,
-                                "id_cart" => "",
-                                "message" => "berhasil diinput tapi gagall input item",
-                                "element" => '',
-                                "total" => $harga
-                            ));
-                        }
-                        // var_dump($size, $cekSize);
-                    } else {
-                        
-                        $data_item_baru = array(
-                            "id_sub_produk" => $id_sub_produk,
-                            "quantity" => $qty,
-                            "size" => $size,
-                        );
-                        
-                        $updateItem = $this->cart_item->updateQuantity($id_produk, $idc, $size, $data_item_baru);
-                        
-                        if ($diskon != 0) {
-                            $realHarga = $harga - (($diskon / 100) * $harga);
-                        } else {
-                            $realHarga = $harga;
-                        }
-                        
-                        // real harga
-                        // var_dump($real_harga_clothes);die;
-        
-                        // $harga = $harga + $realHarga;
-                        $dHarga = $diskon != 0 ? "<p style='text-decoration:line-through;font-size:10px'> Rp $harga </p>" : "";
-                        
                         echo json_encode(array(
-                            "status" => "update",
-                            "success" => true,
-                            "id_cart" => $idc,
+                            "status" => "unsuccess",
+                            "success" => false,
+                            "id_cart" => "",
+                            "message" => "berhasil diinput tapi gagall input item",
+                            "element" => '',
                             "total" => $harga
                         ));
-                        
-                    //   $updateItem = $this->cart_item->updateQuantity("", $idc, $data_item_baru);
-                        // var_dump($updateItem, $cekSize);die;
                     }
-                
+                    // var_dump($size, $cekSize);
+                } else {
+
+                    $data_item_baru = array(
+                        "id_sub_produk" => $id_sub_produk,
+                        "quantity" => $qty,
+                        "size" => $size,
+                    );
+
+                    $updateItem = $this->cart_item->updateQuantity($id_produk, $idc, $size, $data_item_baru);
+
+                    if ($diskon != 0) {
+                        $realHarga = $harga - (($diskon / 100) * $harga);
+                    } else {
+                        $realHarga = $harga;
+                    }
+
+                    // real harga
+                    // var_dump($real_harga_clothes);die;
+
+                    // $harga = $harga + $realHarga;
+                    $dHarga = $diskon != 0 ? "<p style='text-decoration:line-through;font-size:10px'> Rp $harga </p>" : "";
+
+                    echo json_encode(array(
+                        "status" => "update",
+                        "success" => true,
+                        "id_cart" => $idc,
+                        "total" => $harga
+                    ));
+
+                    //   $updateItem = $this->cart_item->updateQuantity("", $idc, $data_item_baru);
+                    // var_dump($updateItem, $cekSize);die;
+                }
+
                 // if($id_produk == $cekIdProduk){
-                    // $data_item_baru = array(
-                    //     "id_sub_produk" => $id_sub_produk,
-                    //     "quantity" => $qty,
-                    //     "size" => $size
-                    // );
-                    
-                    
+                // $data_item_baru = array(
+                //     "id_sub_produk" => $id_sub_produk,
+                //     "quantity" => $qty,
+                //     "size" => $size
+                // );
+
+
                 // } else {
                 //     $simpan_item = $this->cart_item->tambahDetailCart($data_item);
                 // }
-                
+
                 // $simpan_item = $this->cart_item->tambahDetailCart($data_item);
 
-                
-                
+
+
                 // redirect(base_url('login'));
             }
         }
@@ -1007,20 +1012,20 @@ class Home extends MY_Controller
         //         }
         //         $data['thumbnail'] = $thumbnail;
         //     }
-            
+
         $data['kategori'] = $this->kategori->getData()->result_array();
-            
+
         //
         $this->load->view('public/panduan_return', $data);
     }
     public function panduan_pemesanan()
     {
         $data['kategori'] = $this->kategori->getData()->result_array();
-            
+
         //
         $this->load->view('public/panduan_pemesanan', $data);
     }
-    
+
     public function logout()
     {
         if ($this->userIsLoggedIn()) {
@@ -1251,6 +1256,16 @@ class Home extends MY_Controller
                 }
             }
         }
+    }
+
+    private function checkPreRelease($release_date){
+        if($release_date != null){
+            $release_date = strtotime($release_date);
+            if($release_date > strtotime("now")){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
