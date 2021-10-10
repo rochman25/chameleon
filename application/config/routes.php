@@ -74,12 +74,12 @@ $route['order_detail/(:any)']   = 'user/order/order_detail/$1';
 
 $route['admin/prerelease'] = 'admin/PreRelease/index';
 $route['admin/prerelease/tambah'] = 'admin/PreRelease/tambah';
-$route['admin/prerelease/ubah/:1'] = 'admin/PreRelease/ubah/$1';
+$route['admin/prerelease/ubah/:1'] = 'admin/PreRelease/ubah';
 $route['admin/prerelease/hapus'] = 'admin/PreRelease/hapus';
 
 $route['admin/sizestock/index/(:any)'] = 'admin/SizeStock/index/$1';
 $route['admin/sizestock/tambah'] = 'admin/SizeStock/tambah';
-$route['admin/sizestock/ubah/:1'] = 'admin/SizeStock/ubah/$1';
+$route['admin/sizestock/ubah/:1'] = 'admin/SizeStock/ubah';
 $route['admin/sizestock/hapus'] = 'admin/SizeStock/hapus';
 
 $route['404_override'] = '';
