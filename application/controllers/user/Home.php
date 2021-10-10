@@ -226,7 +226,11 @@ class Home extends MY_Controller
         $this->load->model('PreRelease_model', 'pre_release');
         $id_produk = $this->input->get('produk');
         $preRelease = $this->pre_release->getByIdProduk($id_produk);
-        if (!$preRelease || !$this->checkPreRelease($preRelease->release_date)) {
+        $release_date = null;
+        if($preRelease){
+            $release_date = $preRelease->release_date;
+        }
+        if ($this->checkPreRelease($release_date) == false) {
             $thumbnail = array();
             $ukuran = array();
 
@@ -1255,9 +1259,11 @@ class Home extends MY_Controller
     }
 
     private function checkPreRelease($release_date){
-        $release_date = strtotime($release_date);
-        if($release_date <= strtotime("now")){
-            return true;
+        if($release_date != null){
+            $release_date = strtotime($release_date);
+            if($release_date > strtotime("now")){
+                return true;
+            }
         }
         return false;
     }
