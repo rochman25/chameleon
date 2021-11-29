@@ -241,7 +241,7 @@ class Home extends MY_Controller
 
             $data['subProduk'] = $this->subproduk->getByIdProduk($id_produk);
             $data['kategori'] = $this->kategori->getData()->result_array();
-            $data['stok_produk'] = $this->sizestock->calculateSizeStock($id_produk) == 0 ? $data['produk']->size_produk : $this->sizestock->calculateSizeStock($id_produk);
+            $data['stok_produk'] = $this->sizestock->calculateSizeStock($id_produk) == 0 ? 0 : $this->sizestock->calculateSizeStock($id_produk);
             $data['size_stock'] = $this->sizestock->getByKodeProduk($id_produk);
             // $idCart = $this->cart->cekCartNow();
             // $data['cekCartProduk'] = $this->cart_item->cekIdProduks($id_produk, $idCart);
