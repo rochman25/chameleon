@@ -128,11 +128,15 @@ $this->load->view('public/cart');
                             <div id="size" class="size-product">
                                 <ul class="clearfix">
                                     <?php foreach ($size as $s) {
+                                        foreach ($size_stock as $index => $item) {
+                                            if ($item->size == $s && $item->stock > 0) {
                                     ?>
-                                        <li onclick="setUkuran('<?= $s; ?>');" id="produk<?= $s ?>" style="color:black !important;" class="size">
-                                            <span><?= $s; ?></span>
-                                        </li>
+                                                <li onclick="setUkuran('<?= $s; ?>');" id="produk<?= $s ?>" style="color:black !important;" class="size">
+                                                    <span><?= $s; ?></span>
+                                                </li>
                                     <?php
+                                            }
+                                        }
                                     } ?>
 
                                 </ul>
@@ -280,35 +284,24 @@ $this->load->view('public/cart');
                 </div>
             </div>
 
-            <div id="kosong" class="card" style="
-    width: 60%;
-    background: #ffffff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 32px;
-    box-sizing: border-box;
-    text-align: center;
-    position: inherit;
-    display: grid;
-    justify-content: center;
-    margin-left: 20%;
-    margin-right: 20%;
-">
-                <p style="
-    font-size: 27px;
-">SORRY!</p>
-                <p style="
-    padding-bottom: 27px;
-">Stock product habis, apakah mau pre order?</p>
+            <div id="kosong" class="card" style=" width: 60%; background: #ffffff;
+                                                    border: 1px solid #ccc;
+                                                    border-radius: 8px;
+                                                    padding: 32px;
+                                                    box-sizing: border-box;
+                                                    text-align: center;
+                                                    position: inherit;
+                                                    display: grid;
+                                                    justify-content: center;
+                                                    margin-left: 20%;
+                                                    margin-right: 20%;">
+                <p style="font-size: 27px;">SORRY!</p>
+                <p style="padding-bottom: 27px;">Stock product habis, apakah mau pre order?</p>
                 <a href="https://wa.me/message/367KS3T7RIJXC1" style="padding: 7px;background: #0077ed;padding-left: 27px;padding-right: 27px;border-radius: 17px;margin: 7px;">
-                    <i class=""></i><span style="
-    color: white;
-">Ya</span>
+                    <i class=""></i><span style="color: white;">Ya</span>
                 </a>
                 <a href="https://chameleoncloth.co.id/user/home" style="padding: 7px;background: #5a5a5a;padding-left: 27px;padding-right: 27px;border-radius: 17px;margin: 7px;">
-                    <i class=""></i><span style="
-    color: white;
-">Tidak</span>
+                    <i class=""></i><span style="color: white;">Tidak</span>
                 </a>
             </div>
 
@@ -514,7 +507,7 @@ $this->load->view('public/footer');
 
     var resData = "";
     var add_on = "";
-    var stok = '<?= $produk->stok_produk; ?>';
+    var stok = '<?= $stok_produk; ?>';
     var harga = '<?= $produk->harga_produk ?>';
     // var harga = '<?= $produk->diskon_produk != 0 ? $produk->harga_produk - (($produk->diskon_produk / 100) * $produk->harga_produk) : $produk->harga_produk ?>';
     var diskon = '<?= $produk->diskon_produk ?>';

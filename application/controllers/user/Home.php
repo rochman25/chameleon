@@ -17,6 +17,7 @@ class Home extends MY_Controller
         $this->load->model('Alamat_model', 'alamat');
         $this->load->model('Detailcart_model', 'cart_item');
         $this->load->model('Transaksi_model', 'transaksi');
+        $this->load->model('SizeStock_model','sizestock');
         $this->load->library('bcrypt');
         $this->load->library('form_validation');
     }
@@ -240,7 +241,8 @@ class Home extends MY_Controller
 
             $data['subProduk'] = $this->subproduk->getByIdProduk($id_produk);
             $data['kategori'] = $this->kategori->getData()->result_array();
-
+            $data['stok_produk'] = $this->sizestock->calculateSizeStock($id_produk) == 0 ? $data['produk']->size_produk : $this->sizestock->calculateSizeStock($id_produk);
+            $data['size_stock'] = $this->sizestock->getByKodeProduk($id_produk);
             // $idCart = $this->cart->cekCartNow();
             // $data['cekCartProduk'] = $this->cart_item->cekIdProduks($id_produk, $idCart);
 
