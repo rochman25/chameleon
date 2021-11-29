@@ -73,10 +73,10 @@
                                                                 <img style="margin:10px" width="100px" height="100px" src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>">
                                                             </td>
                                                             <td>
-                                                                <a href="<?= base_url() ?>admin/sizestock/index/<?=$row['id_produk']?>" class="btn btn-info">Size Stock</a>
-                                                                <button id="btnUbah" data-toggle="modal" data-target="#updateModal" data-id="<?= $row['kode_produk']; ?>" data-stok="<?= $row['stok_produk']; ?>" class="btn btn-success"><i class="fa fa-pencil" style="margin-right:5px"></i>Stok</button>
+                                                                <!-- <a href="<?= base_url() ?>admin/sizestock/index/<?=$row['id_produk']?>" class="btn btn-info">Size Stock</a> -->
+                                                                <button id="btnUbah" data-toggle="modal" data-target="#updateModal" data-id="<?= $row['kode_produk']; ?>" data-stok="<?= $row['stok_produk']; ?>" class="btn btn-success" style="margin-bottom:5px;"><i class="fa fa-pencil" style="margin-right:5px;"></i>Stok</button>
                                                                 <!-- <a href="<?= base_url() ?>admin/produk/ubah?id=<?= $row['id_produk'] ?>" class="btn btn-success">Ubah</a> -->
-                                                                 <button id="btnHapus" data-target="#hapusModal" data-toggle="modal" data-id="<?= $row['id_produk'] ?>" class="btn btn-danger">Hapus</button> 
+                                                                 <button id="btnHapus" data-target="#hapusModal" data-toggle="modal" data-id="<?= $row['id_produk'] ?>" class="btn btn-danger" style="margin-bottom:5px;"><i class="fa fa-trash" style="margin-right:5px;"></i>Hapus</button> 
                                                             </td>
                                                         </tr>
                                                     <?php } ?>
