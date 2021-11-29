@@ -42,4 +42,22 @@ class SizeStock_model extends MY_Model
         return $this->db->where('id_produk',$id_produk)->where('size',$size)->get($this->table)->row();
     }
 
+    function calculateSizeStock($id_produk){
+        $stock_size = $this->getByKodeProduk($id_produk);
+        $stock = 0;
+        foreach($stock_size as $index => $item){
+            $stock += $item->stock;
+        }
+        return $stock;
+    }
+
+    public function decreaseStock($id_produk, $size, $stock){
+        $size_stock = $this->checkStockProduk($id_produk, $size);
+        $data = [
+            "stock" => $size_stock->stock - $stock
+        ];
+        $this->getWhere('id',$size_stock->id);
+        return $this->update($data);
+    }
+
 }

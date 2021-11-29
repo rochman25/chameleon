@@ -15,6 +15,7 @@ class Transaksi extends MY_Controller
         $this->load->model('Produk_model','produk');
         $this->load->model('Cart_model', 'cart');
         $this->load->model('Detailcart_model','detail');
+        $this->load->model('SizeStock_model','sizeStock');
     }
 
     public function index()
@@ -58,11 +59,13 @@ class Transaksi extends MY_Controller
             if($status == "validasi"){
 
                 $data_t = $this->transaksi->get_transaksiById($id);
+                // die(json_encode($data_t));
                 foreach($data_t as $row){
                     $data_p[] = [
                         "id_produk" => $row->id_produk,
                         "stok_produk" => ($row->stok_produk - $row->jumlah_produk)
                     ];
+                    $this->sizeStock->decreaseStock($row->id_produk, $row->ukuran, $row->jumlah_produk);
                 }
                 $this->produk->update_multiple($data_p,"id_produk");
             }
