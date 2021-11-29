@@ -31,4 +31,15 @@ class SizeStock_model extends MY_Model
         return $query->result();
     }
 
+    function getByKodeProduk($kode){
+        // die(json_encode($kode));
+        $this->db->select($this->table.".*")
+                ->where("id_produk",$kode);
+        return $this->db->get($this->table)->result();
+    }
+
+    function checkStockProduk($id_produk, $size){
+        return $this->db->where('id_produk',$id_produk)->where('size',$size)->get($this->table)->row();
+    }
+
 }

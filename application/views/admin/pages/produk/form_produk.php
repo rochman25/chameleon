@@ -74,25 +74,25 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                    
-                                                    <div class="col-lg-3">
+                                                    <!-- <div class="col-lg-3">
                                                         <label for="stok_p">Stok Produk</label>
                                                         <input type="number" name="stok_p" id="stok_p" placeholder="Masukkan stok produk" value="<?php if (isset($produk)) {
                                                                                                                                                         echo $produk->stok_produk;
                                                                                                                                                     } ?>" class="form-control">
-                                                    </div>
-                                                    <div class="col-lg-2">
+                                                    </div> -->
+                                                    <div class="col-lg-4">
                                                         <label for="harga_p">Harga Produk</label>
                                                         <input type="number" name="harga_p" id="harga_p" placeholder="Masukkan harga produk" value="<?php if (isset($produk)) {
                                                                                                                                                         echo $produk->harga_produk;
                                                                                                                                                     } ?>" class="form-control">
                                                     </div>
-                                                    <div class="col-lg-2">
+                                                    <div class="col-lg-4">
                                                         <label for="harga_p">Harga Diskon Produk</label>
                                                         <input type="number" min="0" name="diskon_p" id="diskon_p" placeholder="Masukkan harga diskon produk" value="<?php if (isset($produk)) {
                                                                                                                                                             echo $produk->harga_produk - ($produk->diskon_produk/100 * $produk->harga_produk);
                                                                                                                                                         } ?>" class="form-control">
                                                     </div>
-                                                    <div class="col-lg-2">
+                                                    <div class="col-lg-4">
                                                         <label for="berat_p">Berat Produk (gram)</label>
                                                         <input type="number" name="berat_p" id="berat_p" placeholder="Masukkan berat produk" value="<?php if (isset($produk)) {
                                                                                                                                                         echo $produk->berat_produk;
@@ -102,29 +102,55 @@
                                             </div>
                                             
                                             <div class="form-group">
-                                                <label class="form-label">Size Produk</label>
-                                                <div class="selectgroup selectgroup-pills">
+                                                <label class="form-label">Size dan Stok Produk</label>
+                                                <!-- <div class="selectgroup selectgroup-pills"> -->
                                                         <?php									
         													foreach ($size_celana as $data) {
         													    
-        													    echo "<label class='selectgroup-item'> ";
+        													    echo "
+                                                                <div class='row'>
+                                                                    <div class='col-lg-3 col-md-3 col-sm-6'>
+                                                                <label class='selectgroup-item'> ";
         													    
         													    if(isset($produk) && strpos($produk->size_produk, $data->size_produk) !== false){
         													        echo " <input type='checkbox' name='size_c[]' value='".$data->size_produk."' class='selectgroup-input' checked>
                 														    
                 														    <span class='selectgroup-button'>".$data->size_produk."</span>
-                														</label>";
+                														</label>
+                                                                    ";
         													    } else {
         													        echo " <input type='checkbox' name='size_c[]' value='".$data->size_produk."' class='selectgroup-input'>
                 														    
                 														    <span class='selectgroup-button'>".$data->size_produk."</span>
                 														</label>";
         													    }
+                                                                echo "</div>";
+                                                                $value = 0;
+                                                                if(isset($size_stock)){
+                                                                    foreach($size_stock as $index_ss => $item_ss){
+                                                                        if($item_ss->size == $data->size_produk){
+                                                                            $value = $item_ss->stock;
+                                                                        }
+                                                                    }
+                                                                    echo "
+                                                                    <div class='col-lg-9 col-md-9 col-sm-6'>
+                                                                        <input type='numeric' style='margin-bottom:10px;' placeholder='Masukkan Stok Produk Ukuran $data->size_produk ' name='stok_size_$data->size_produk' value='$value' class='form-control'>
+                                                                    </div>
+                                                                    ";
+                                                                }else{
+                                                                    echo "
+                                                                    <div class='col-lg-9 col-md-9 col-sm-6'>
+                                                                        <input type='numeric' style='margin-bottom:10px;' placeholder='Masukkan Stok Produk Ukuran $data->size_produk ' name='stok_size_$data->size_produk' value='$value' class='form-control'>
+                                                                    </div>
+                                                                    ";
+                                                                }
+                                                                    
+                                                                echo "</div>";
         													    
         													}
         													
         												?>
-                                                </div>
+                                                <!-- </div> -->
                                             </div>
                                             
                                             <div class="form-group">
