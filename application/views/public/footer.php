@@ -11,13 +11,13 @@
 	                color: #fff;
 	                text-transform: uppercase;">koleksi</h4>
       <ul>
-          
-	                            
-	    <li><a href="<?= base_url() ?>produk/semua">Semua Produk</a></li>				
-		<?php foreach($kategori as $key => $item){ ?>						
-            <li><a href="<?= base_url(); ?>produk/<?=$item['nama_kategori']?>"><?=$item['nama_kategori']?></a></li>
+
+
+        <li><a href="<?= base_url() ?>produk/semua">Semua Produk</a></li>
+        <?php foreach ($kategori as $key => $item) { ?>
+          <li><a href="<?= base_url(); ?>produk/<?= $item['nama_kategori'] ?>"><?= $item['nama_kategori'] ?></a></li>
         <?php } ?>
-        
+
         <!--<li><a href="<?= base_url() ?>produk/celana">Celana</a></li>-->
       </ul>
     </div>
@@ -94,3 +94,14 @@
 </body>
 
 </html>
+<script>
+  $(function() {
+    $('#koleksi').hover(function() {
+        // alert("woi")
+        $('.voucher').hide();
+      });
+    $('#koleksi').mouseleave(function() {
+      $('.voucher').show();
+    });
+  });
+</script>

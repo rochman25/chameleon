@@ -26,4 +26,10 @@ class Voucher_ongkir_model extends MY_Model
         return $this->getData()->row();
     }
 
+    function getLastestVoucher(){
+        $this->getWhere('is_active',TRUE);
+        $this->db->order_by('created_at','DESC');
+        return $this->getData()->row();
+    }
+
 }   
