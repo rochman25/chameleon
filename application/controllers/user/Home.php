@@ -354,7 +354,8 @@ class Home extends MY_Controller
                     $this->load->view('public/login');
                 }
             } else {
-                $this->load->view('public/login');
+                $data['kategori'] = $this->kategori->getData()->result_array();
+                $this->load->view('public/login',$data);
             }
         }
     }
