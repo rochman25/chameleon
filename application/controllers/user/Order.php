@@ -13,6 +13,7 @@ class Order extends MY_Controller
         $this->load->model('Kategori_model', 'kategori');
         $this->load->model('Detailcart_model', 'cart_item');
         $this->load->model('SizeStock_model','sizeStock');
+        $this->load->model('Voucher_ongkir_model','voucher_ongkir');
     }
 
     public function index()
@@ -26,6 +27,7 @@ class Order extends MY_Controller
             $data['profil'] = $this->user->getWhere("pengguna.id_pengguna", $idp);
             $data['profil'] = $this->user->getData()->row();
             $data['kategori'] = $this->kategori->getData()->result_array();
+            $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
             $data['cart'] = $this->user->getCart();
             // die(json_encode($data['cart']));
             $thumbnail = array();
@@ -182,6 +184,7 @@ class Order extends MY_Controller
         $data['transaksi'] = $this->transaksi->getWhere("kode_transaksi", $id);
         $data['transaksi'] = $this->transaksi->getData()->row();
         $data['kategori'] = $this->kategori->getData()->result_array();
+        // $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
         $data['detail_transaksi'] = $this->transaksi->getTransaksiWithDetail($id);
         $data['profil'] = $this->user->getJoin("alamat_pengguna", "alamat_pengguna.id_pengguna=pengguna.id_pengguna", "left");
         $data['profil'] = $this->user->getWhere("pengguna.id_pengguna", $idp);

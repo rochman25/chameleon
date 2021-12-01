@@ -19,6 +19,7 @@ class Home extends MY_Controller
         $this->load->model('Transaksi_model', 'transaksi');
         $this->load->model('SizeStock_model','sizestock');
         $this->load->model('PreRelease_model', 'pre_release');
+        $this->load->model('Voucher_ongkir_model','voucher_ongkir');
         $this->load->library('bcrypt');
         $this->load->library('form_validation');
     }
@@ -112,6 +113,7 @@ class Home extends MY_Controller
         } else {
             $data['id_cart'] = "";
         }
+        $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
         //   die(json_encode($data));
         $this->load->view('public/home', $data);
     }
@@ -130,6 +132,7 @@ class Home extends MY_Controller
         $data['bg'] = base_url('assets/images/Kemeja/Kemeja-BG.png');
         $data['section'] = "Hasil pencarian," . $cari;
         $data['thumbnail'] = $thumbnail;
+        $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
         $this->load->view('public/product', $data);
     }
 
@@ -208,6 +211,7 @@ class Home extends MY_Controller
         } else {
             $data['bg'] = base_url('assets/images/Celana/Celana-BG.png');
         }
+        $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
         $this->load->view('public/product', $data);
     }
 
@@ -256,10 +260,12 @@ class Home extends MY_Controller
             } else {
                 $data['id_cart'] = "";
             }
+            $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
             $this->load->view('public/product-detail', $data);
         } else {
             $data['pre_release'] = $preRelease;
             $data['kategori'] = $this->kategori->getData()->result_array();
+            $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
             $this->load->view('public/product-pre_release', $data);
         }
     }
@@ -320,28 +326,35 @@ class Home extends MY_Controller
                             $this->session->set_userdata('user_data', $user);
                             redirect(base_url());
                         } else {
+                            $data['kategori'] = $this->kategori->getData()->result_array();
+                            $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
                             $this->session->set_flashdata(
                                 'pesan',
                                 '<div class="alert alert-danger mr-auto">Password atau Username salah</div>'
                             );
-                            $this->load->view('public/login');
+                            $this->load->view('public/login',$data);
                         }
                     } else {
+                        $data['kategori'] = $this->kategori->getData()->result_array();
+                        $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
                         $this->session->set_flashdata(
                             'pesan',
                             '<div class="alert alert-danger mr-auto">Akun belum diverifikasi silahkan cek email untuk verfikasi akun.</div>'
                         );
-                        $this->load->view('public/login');
+                        $this->load->view('public/login',$data);
                     }
                 } else {
+                    $data['kategori'] = $this->kategori->getData()->result_array();
+                    $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
                     $this->session->set_flashdata(
                         'pesan',
                         '<div class="alert alert-danger mr-auto">Akun tidak ditemukan</div>'
                     );
-                    $this->load->view('public/login');
+                    $this->load->view('public/login',$data);
                 }
             } else {
                 $data['kategori'] = $this->kategori->getData()->result_array();
+                $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
                 $this->load->view('public/login',$data);
             }
         }
@@ -851,11 +864,15 @@ class Home extends MY_Controller
                     $this->load->view('public/login');
                     // die(json_encode("ada"));
                 } else {
+                    $data['kategori'] = $this->kategori->getData()->result_array();
+                    $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
                     $this->load->view('public/register', $data);
                 }
                 // die(json_encode($data));
             } else {
                 $data['email'] = "";
+                $data['kategori'] = $this->kategori->getData()->result_array();
+                $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
                 $this->load->view('public/login', $data);
             }
         }
@@ -906,6 +923,7 @@ class Home extends MY_Controller
             //    die(json_encode($data['transaksi']));
             $data['id_cart'] = $this->cart->getWhere("id_pengguna", $this->session->userdata['user_data']['id']);
             $data['id_cart'] = $this->cart->getData()->row();
+            $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
             $this->load->view('public/profil', $data);
         } else {
             redirect(base_url('login'));
@@ -966,6 +984,7 @@ class Home extends MY_Controller
                 }
             } else {
                 // die(json_encode($data));
+                $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
                 $this->load->view('public/ubah_profile', $data);
             }
             // die(json_encode($data));
@@ -1004,13 +1023,14 @@ class Home extends MY_Controller
         //     }
 
         $data['kategori'] = $this->kategori->getData()->result_array();
-
+        $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
         //
         $this->load->view('public/panduan_return', $data);
     }
     public function panduan_pemesanan()
     {
         $data['kategori'] = $this->kategori->getData()->result_array();
+        $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
 
         //
         $this->load->view('public/panduan_pemesanan', $data);
@@ -1124,6 +1144,7 @@ class Home extends MY_Controller
             $data['data'] = $this->transaksi->getWhere("id_transaksi", $id);
             $data['data'] = $this->transaksi->getData()->row();
             $data['kategori'] = $this->kategori->getData()->result_array();
+            $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
             // die(json_encode($data));
             $this->load->view('public/konfirmasi-pembayaran', $data);
         }
@@ -1220,6 +1241,8 @@ class Home extends MY_Controller
                     }
                 } else {
                     $data['code'] = $code;
+                    $data['kategori'] = $this->kategori->getData()->result_array();
+                    $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
                     $this->load->view('public/form-lupa-password', $data);
                 }
             } else {

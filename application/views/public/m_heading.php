@@ -38,14 +38,14 @@
                         <!-- <i class="svg-icon svg_icon__header_carret_right"></i> -->
                     </a>
                 </li>
-                <?php foreach($kategori as $key => $item){ ?>
-                <li>
-                    <a href="<?= base_url() ?>produk/<?= $item['nama_kategori'] ?>">
-                        <!-- <div class="gradient"></div> -->
-                        <!-- <img src="<?= base_url() ?>assets/images/Celana/Celana-BG.png" alt="Sepatu"> -->
-                        <?= $item['nama_kategori'] ?>
-                    </a>
-                </li>
+                <?php foreach ($kategori as $key => $item) { ?>
+                    <li>
+                        <a href="<?= base_url() ?>produk/<?= $item['nama_kategori'] ?>">
+                            <!-- <div class="gradient"></div> -->
+                            <!-- <img src="<?= base_url() ?>assets/images/Celana/Celana-BG.png" alt="Sepatu"> -->
+                            <?= $item['nama_kategori'] ?>
+                        </a>
+                    </li>
                 <?php } ?>
                 <!-- <div class="menu-lvl2 menu-collection">
                         <div class="header">
@@ -104,14 +104,19 @@
             </a>
             <!-- </div> -->
             <!-- </div> -->
-            <?php if(isset($this->session->userdata['user_data']) &&
-            $this->session->userdata['user_data'] == true
-       ){ ?>
-            <a href="<?= base_url() ?>keluar" class="logout">
-                <i class="svg-icon svg_icon__header_logout"></i>keluar
-            </a>
+            <?php if (
+                isset($this->session->userdata['user_data']) &&
+                $this->session->userdata['user_data'] == true
+            ) { ?>
+                <a href="<?= base_url() ?>keluar" class="logout">
+                    <i class="svg-icon svg_icon__header_logout"></i>keluar
+                </a>
             <?php } ?>
         </div>
-
+        <?php if (isset($voucher)) { ?>
+            <div class="voucher">
+                <p>Get <b>Discount <?= number_format($voucher->discount_voucher, 0) ?> </b> with Voucher Code <b><?= $voucher->code_voucher ?></b> </p>
+            </div>
+        <?php } ?>
     </div>
 </header>
