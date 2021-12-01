@@ -65,10 +65,19 @@ class Transaksi extends MY_Controller
                         "id_produk" => $row->id_produk,
                         "stok_produk" => ($row->stok_produk - $row->jumlah_produk)
                     ];
-                    $this->sizeStock->decreaseStock($row->id_produk, $row->ukuran, $row->jumlah_produk);
+                    // $this->sizeStock->decreaseStock($row->id_produk, $row->ukuran, $row->jumlah_produk);
                 }
                 $this->produk->update_multiple($data_p,"id_produk");
             }
+
+            if($status == "batal"){
+                $data_t = $this->transaksi->get_transaksiById($id);
+                // die(json_encode($data_t));
+                foreach($data_t as $row){
+                    $this->sizeStock->increaseStock($row->id_produk, $row->ukuran, $row->jumlah_produk);
+                }
+            }
+
             if ($this->transaksi->updateData($data, $id)) {
                 $this->session->set_flashdata(
                     'pesan',

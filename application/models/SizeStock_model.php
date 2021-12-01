@@ -60,4 +60,13 @@ class SizeStock_model extends MY_Model
         return $this->update($data);
     }
 
+    public function increaseStock($id_produk, $size, $stock){
+        $size_stock = $this->checkStockProduk($id_produk, $size);
+        $data = [
+            "stock" => $size_stock->stock + $stock
+        ];
+        $this->getWhere('id',$size_stock->id);
+        return $this->update($data);
+    }
+
 }

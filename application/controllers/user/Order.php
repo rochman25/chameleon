@@ -12,6 +12,7 @@ class Order extends MY_Controller
         $this->load->model('Cart_model', 'cart');
         $this->load->model('Kategori_model', 'kategori');
         $this->load->model('Detailcart_model', 'cart_item');
+        $this->load->model('SizeStock_model','sizeStock');
     }
 
     public function index()
@@ -58,6 +59,7 @@ class Order extends MY_Controller
             $data['thumbnail'] = $thumbnail;
             
             if ($this->input->post('kirim')) {
+                $this->db->trans_begin();
                 $nama_lengkap = $this->input->post('nama_lengkap');
                 $no_telp = $this->input->post('no_telp');
                 $alamat_1 = $this->input->post('alamat_1');
@@ -144,19 +146,22 @@ class Order extends MY_Controller
                             "total" => $harga_produk * $row['quantity'],
                             "ukuran" => $row['size']
                         ];
+                        $this->sizeStock->decreaseStock($id_produk, $row['size'], $row['quantity']);
                     }
 
                     // die(json_encode($data_detail));
 
                     if ($this->transaksi->tambahDetail($data_detail)) {
-
+                        $this->db->trans_commit();
                         $this->session->unset_userdata('kode_transaksi');
                         $this->session->set_flashdata('pesan', "Transaksi anda berhasil, silahkan melakukan pembayaran ke rekening kami, untuk detail dapat dilihat dengan klik button konfirmasi berikut.");
                         redirect('user/home/profil');
                     } else {
+                        $this->db->trans_rollback();
                         die(json_encode(array("error" => "ada masalah lagi")));
                     }
                 } else {
+                    $this->db->trans_rollback();
                     die(json_encode(array("error" => "ada masalah")));
                 }
 
