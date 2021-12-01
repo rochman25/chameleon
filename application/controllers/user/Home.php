@@ -18,6 +18,7 @@ class Home extends MY_Controller
         $this->load->model('Detailcart_model', 'cart_item');
         $this->load->model('Transaksi_model', 'transaksi');
         $this->load->model('SizeStock_model','sizestock');
+        $this->load->model('PreRelease_model', 'pre_release');
         $this->load->library('bcrypt');
         $this->load->library('form_validation');
     }
@@ -69,10 +70,16 @@ class Home extends MY_Controller
         $data['dataNewArrival'] = $this->new_arrival->order_by("order", "DESC");
         $data['dataNewArrival'] = $this->new_arrival->getWhere("active", "1");
         $data['dataNewArrival'] = $this->new_arrival->getData()->result_array();
-
-        foreach ($data['produk'] as $row) {
+        foreach ($data['produk'] as $index => $row) {
             $foto = explode(',', $row['thumbnail_produk']);
             $thumbnail[$row['id_produk']] = $foto[0];
+            $id_produk = $row['id_produk'];
+            $preRelease = $this->pre_release->getByIdProduk($id_produk);
+            if($preRelease){
+                if($preRelease->release_date > date("Y-m-d H:i:s")){
+                    $data['produk'][$index]['pre_release'] = $preRelease->release_date;
+                }
+            }
         }
 
         foreach ($data['produk_best'] as $row) {
@@ -137,9 +144,16 @@ class Home extends MY_Controller
             // $data['produk'] = $this->produk->getWhere("produk.stok_produk >", "0");
             $data['produk'] = $this->produk->getData()->result_array();
             $data['kategori'] = $this->kategori->getData()->result_array();
-            foreach ($data['produk'] as $row) {
+            foreach ($data['produk'] as $index => $row) {
                 $foto = explode(',', $row['thumbnail_produk']);
                 $thumbnail[$row['id_produk']] = $foto[0];
+                $id_produk = $row['id_produk'];
+                $preRelease = $this->pre_release->getByIdProduk($id_produk);
+                if($preRelease){
+                    if($preRelease->release_date > date("Y-m-d H:i:s")){
+                        $data['produk'][$index]['pre_release'] = $preRelease->release_date;
+                    }
+                }
             }
             $data['thumbnail'] = $thumbnail;
         } else {
@@ -159,9 +173,16 @@ class Home extends MY_Controller
                 // $data['produk'] = $this->produk->getWhere("produk.stok_produk >", "0");
                 $data['produk'] = $this->produk->getData()->result_array();
                 $data['kategori'] = $this->kategori->getData()->result_array();
-                foreach ($data['produk'] as $row) {
+                foreach ($data['produk'] as $index => $row) {
                     $foto = explode(',', $row['thumbnail_produk']);
                     $thumbnail[$row['id_produk']] = $foto[0];
+                    $id_produk = $row['id_produk'];
+                    $preRelease = $this->pre_release->getByIdProduk($id_produk);
+                    if($preRelease){
+                        if($preRelease->release_date > date("Y-m-d H:i:s")){
+                            $data['produk'][$index]['pre_release'] = $preRelease->release_date;
+                        }
+                    }
                 }
                 $data['thumbnail'] = $thumbnail;
             }
@@ -238,6 +259,7 @@ class Home extends MY_Controller
             $this->load->view('public/product-detail', $data);
         } else {
             $data['pre_release'] = $preRelease;
+            $data['kategori'] = $this->kategori->getData()->result_array();
             $this->load->view('public/product-pre_release', $data);
         }
     }

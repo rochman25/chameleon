@@ -76,42 +76,40 @@ $this->load->view('public/cart');
         left: 0;
         bottom: 0;
         width: 100%;
+        /* z-index: -99 */
     }
 </style>
 
 <body>
+    <div class="container">
+        <!-- Page content -->
+        <div class="w3-content" style="max-width:2000px;margin-top:0px">
 
-    <!-- Page content -->
-    <div class="w3-content" style="max-width:2000px;margin-top:0px">
-
-        <!-- Automatic Slideshow Images -->
-        <img src="" style="width:100%">
-
-        <!-- The Band Section -->
-        <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px;margin-bottom: 27px;" id="band">
-            <h1>Countdown Release</h1>
-            <p>Lorem ipsum dolor sit amet</p>
-            <div id="clockdiv">
-                <div>
-                    <span class="days"></span>
-                    <div class="smalltext">Days</div>
-                </div>
-                <div>
-                    <span class="hours"></span>
-                    <div class="smalltext">Hours</div>
-                </div>
-                <div>
-                    <span class="minutes"></span>
-                    <div class="smalltext">Minutes</div>
-                </div>
-                <div>
-                    <span class="seconds"></span>
-                    <div class="smalltext">Seconds</div>
+            <!-- The Band Section -->
+            <div class="w3-container w3-content w3-center w3-padding-64" style="height: auto;" id="band">
+                <h1>Countdown Release</h1>
+                <!-- <p>Lorem ipsum dolor sit amet</p> -->
+                <div id="clockdiv">
+                    <div>
+                        <span class="days"></span>
+                        <div class="smalltext">Days</div>
+                    </div>
+                    <div>
+                        <span class="hours"></span>
+                        <div class="smalltext">Hours</div>
+                    </div>
+                    <div>
+                        <span class="minutes"></span>
+                        <div class="smalltext">Minutes</div>
+                    </div>
+                    <div>
+                        <span class="seconds"></span>
+                        <div class="smalltext">Seconds</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
     <?php
     $this->load->view('public/footer');
     ?>
@@ -166,4 +164,11 @@ $this->load->view('public/cart');
     const deadline = new Date(Date.parse(release_date));
     console.log(deadline)
     initializeClock('clockdiv', deadline);
+    (function($) {
+        if ($(window).width() > 767) {
+            var fooHeight = $("footer.footer").outerHeight(true);
+            // Add margin to body for reveal effect
+            $("body").css("margin-bottom", fooHeight + "px");
+        }
+    })(jQuery);
 </script>

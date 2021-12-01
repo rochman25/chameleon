@@ -75,6 +75,38 @@ $this->load->view('public/cart');
         float: none;
         /*padding: 5px;*/
     }
+
+    .clockdiv {
+        font-family: sans-serif;
+        color: #1f1f1f;
+        display: inline-block;
+        font-weight: 20;
+        text-align: center;
+        font-size: 14px;
+        margin: auto;
+        width: 100%;
+    }
+
+    .clockdiv>div {
+        padding: 1px;
+        border-radius: 3px;
+        background: transparent;
+        display: inline-block;
+    }
+
+    .clockdiv div>span {
+        padding: 10px;
+        border-radius: 3px;
+        background: #fff;
+        opacity: 90%;
+        display: inline-block;
+    }
+
+    .smalltext {
+        padding-top: 5px;
+        font-size: 16px;
+        color: #1f1f1f;
+    }
 </style>
 
 <section id="content">
@@ -123,7 +155,7 @@ $this->load->view('public/cart');
                     $harga = $p['harga_produk'];
                 ?>
                     <div class="product-hotcard" style="padding-bottom: 0;">
-                        <a href="<?= base_url() ?>detail?produk=<?= $p['id_produk'] ?>" style="position: inherit;">
+                        <a href="<?= base_url() ?>detail?produk=<?= $p['id_produk'] ?>" style="position: relative;">
                             <?php if ($p['label_produk'] != null) { ?>
                                 <div class="column" style="float: right;width: 100%;display: unset;position: absolute;padding-left: 7px;padding-top: 7px;">
                                     <?php $label_p = explode(",", $p['label_produk']);
@@ -133,6 +165,24 @@ $this->load->view('public/cart');
                                             <p style="font-size: 8px;"><?= strtoupper($val_l) ?></p>
                                         </div>
                                     <?php } ?>
+                                </div>
+                            <?php } ?>
+                            <?php if (isset($p['pre_release'])) { ?>
+                                <div class="column" style="width: 100%; display: unset;position: absolute;margin: 0;top: 50%;-ms-transform: translateY(-50%);transform: translateY(-50%);">
+                                    <div id="clockdiv-<?= $p['id_produk'] ?>" class="clockdiv">
+                                        <div>
+                                            <span class="days"></span>
+                                        </div>
+                                        <div>
+                                            <span class="hours"></span>
+                                        </div>
+                                        <div>
+                                            <span class="minutes"></span>
+                                        </div>
+                                        <div>
+                                            <span class="seconds"></span>
+                                        </div>
+                                    </div>
                                 </div>
                             <?php } ?>
                             <img src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$p['id_produk']] ?>" alt="">
@@ -158,11 +208,11 @@ $this->load->view('public/cart');
                                                 </div>
                                             <?php } ?>
                                         </div>
+                                        <!-- <div class="price-before" style="text-decoration : line-through">Rp 429,000</div> -->
+                                        <!-- <div class="price-after">Rp.<?= number_format($harga, 0); ?></div> -->
                                         </div>
-
                                     </div>
-                                    <!-- <div class="price-before" style="text-decoration : line-through">Rp 429,000</div> -->
-                                    <!-- <div class="price-after">Rp.<?= number_format($harga, 0); ?></div> -->
+
                         </a>
                     </div>
                 <?php } ?>
@@ -396,3 +446,60 @@ $this->load->view('public/cart');
 <?php
 $this->load->view('public/footer');
 ?>
+
+<script>
+    function getTimeRemaining(endtime) {
+        const total = Date.parse(endtime) - Date.parse(new Date());
+        const seconds = Math.floor((total / 1000) % 60);
+        const minutes = Math.floor((total / 1000 / 60) % 60);
+        const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+        const days = Math.floor(total / (1000 * 60 * 60 * 24));
+
+        return {
+            total,
+            days,
+            hours,
+            minutes,
+            seconds
+        };
+    }
+
+    function initializeClock(id, endtime) {
+        const clock = document.getElementById(id);
+        const daysSpan = clock.querySelector('.days');
+        const hoursSpan = clock.querySelector('.hours');
+        const minutesSpan = clock.querySelector('.minutes');
+        const secondsSpan = clock.querySelector('.seconds');
+
+        // let timeinterval;
+        // let timeinterval = setInterval(updateClock, 2000);
+        updateClock();
+        const timeinterval = setInterval(updateClock, 1000);
+
+        function updateClock() {
+            const t = getTimeRemaining(endtime);
+
+            daysSpan.innerHTML = t.days;
+            hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+            minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+            secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+            if (t.total <= 0) {
+                clearInterval(timeinterval);
+                location.reload();
+            }
+        }
+
+
+    }
+    var products = <?= json_encode($produk) ?>;
+    console.log(products);
+    products.forEach(element => {
+        if (typeof element.pre_release != "undefined") {
+            console.log(element.pre_release);
+            const deadline = new Date(Date.parse(element.pre_release));
+            console.log(deadline)
+            initializeClock('clockdiv-' + element.id_produk, deadline);
+        }
+    });
+</script>
