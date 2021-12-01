@@ -124,7 +124,7 @@ $this->load->view('public/cart');
                             }
                         ?>
                         <span>Diskon Ongkos Kirim</span>
-                        <span class="summary-ongkir-value"><b> - Rp</b> <b id="diskon-ongkir"><?=number_format($arr[6],0)?></b> </span>
+                        <span class="summary-ongkir-value"><b> - Rp</b> <b id="diskon-ongkir"><?=number_format($arr[6]??0,0)?></b> </span>
                     </div>
                     <div class="summary-belanja">
                         <span>Total Belanja</span>
