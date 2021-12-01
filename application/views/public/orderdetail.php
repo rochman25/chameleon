@@ -57,9 +57,11 @@ $this->load->view('public/cart');
         </section>
         <section class="right-column">
             <div class="content" style="overflow: hidden;">
-                <?php foreach ($detail_transaksi as $row) {
+                <?php 
+                $jumlah_item = 0;
+                $totalHarga = 0;
+                foreach ($detail_transaksi as $row) {
                     $totalDiskon = 0;
-                    $totalHarga = 0;
                     if ($row['id_sub_produk'] == null) {
                         $diskon = (($row['diskon_produk'] / 100) * $row['harga_produk']);
                         $foto = explode(',', $row['thumbnail_produk']);
@@ -72,10 +74,10 @@ $this->load->view('public/cart');
                                     <?php if ($row['diskon_produk'] != 0) { ?>
                                         <div class="old-price">RP <?= number_format($row['harga_produk']) ?></div>
                                         <div class="price">Rp <?= number_format($row['harga_produk'] - (($row['diskon_produk'] / 100) * $row['harga_produk'])) ?></div>
-                                        <?php $totalHarga += (($row['harga_produk'] - (($row['diskon_produk'] / 100) * $row['harga_produk']))); ?>
+                                        <?php $totalHarga += (($row['harga_produk'] - (($row['diskon_produk'] / 100) * $row['harga_produk'])) * $row['jumlah_produk']); ?>
                                     <?php } else { ?>
                                         <div class="price">Rp <?= number_format($row['harga_produk']) ?></div>
-                                        <?php $totalHarga += ($row['harga_produk']); ?>
+                                        <?php $totalHarga += ($row['harga_produk'] * $row['jumlah_produk']); ?>
                                     <?php } ?>
                                     <div class="qty-size">
                                         Jumlah : <strong class="cart_quantity"><?= $row['jumlah_produk'] ?></strong> /

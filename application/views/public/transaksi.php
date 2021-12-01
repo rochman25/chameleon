@@ -360,6 +360,9 @@ $this->load->view('public/footer');
                                 let ongkir = 0;
                                 var total_bayar = <?php echo $total ?>;
                                 ongkir = totalongkir - data.data.discount_voucher;
+                                if(ongkir < 0){
+                                    ongkir = 0;
+                                }
                                 total_bayar = <?php echo $total ?> + ongkir;
                                 // $('#total_ongkir').val(ongkir);
                                 $('#total_bayar').val(total_bayar);
@@ -509,7 +512,7 @@ $this->load->view('public/footer');
                         // swal('Success!', data.rajaongkir.results[0].costs[0].cost[0].value, data.status);
                         var ongkir = 0;
                         if (courier == 'jne') {
-                            ongkir = data.rajaongkir.results[0].costs[1].cost[0].value
+                            ongkir = data.rajaongkir.results[0].costs[0].cost[0].value
                         } else {
                             ongkir = data.rajaongkir.results[0].costs[0].cost[0].value
                         }
