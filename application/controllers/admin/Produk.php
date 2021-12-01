@@ -21,15 +21,13 @@ class Produk extends MY_Controller
             $thumbnail = array();
             $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
             $data['produk'] = $this->produk->getData()->result_array();
-            foreach ($data['produk'] as $row) {
+            foreach ($data['produk'] as $index => $row) {
                 $foto = explode(',', $row['thumbnail_produk']);
-                // foreach($foto as $rowf){
-                //     $thumbnail[$row['id_produk']][] = $rowf;
-                // }
                 $thumbnail[$row['id_produk']] = $foto[0];
+                $data['produk'][$index]['stok_produk'] = $this->sizestock->calculateSizeStock($row['id_produk']);
             }
+            // die(json_encode($data));
             $data['thumbnail'] = $thumbnail;
-            // die(json_encode($thumbnail));
             $this->load->view('admin/pages/produk/list', $data);
         } else {
             redirect('admin/home/login');
@@ -49,7 +47,6 @@ class Produk extends MY_Controller
                 $this->db->trans_begin();
                 $nama_p = $this->input->post('nama_p');
                 $desc_p = $this->input->post('desc_p');
-                $stok_p = $this->input->post('stok_p');
                 $harga_p = $this->input->post('harga_p');
                 $label_p = $this->input->post('label_p');
                 $size_c = $this->input->post('size_c');
@@ -57,15 +54,12 @@ class Produk extends MY_Controller
                 $berat_p = $this->input->post('berat_p');
                 $diskon_p = $this->input->post('diskon_p');
                 $kat_p = $this->input->post('kat_p');
-                // $size_p = $this->input->post('size_p');
                 $link = $this->input->post('link');
                 $namaFile = "";
 
                 $size_c = implode(",", $size_c);
                 $label_p = implode(",", $label_p);
 
-                // die(json_encode($size_c));
-                // $thumbnail = $_FILES['file']['name'];
 
                 if ($this->session->userdata('produk_data') != null) {
                     $kode_p = $this->session->userdata['produk_data']['kode'];
@@ -74,9 +68,7 @@ class Produk extends MY_Controller
                 }
 
                 $namaFile = implode(",", $this->session->userdata['produk_data']['thumbnail']);
-                // die(json_encode($namaFile));
 
-                // die(json_encode())
                 $diskon_percent = 100 * ($harga_p - $diskon_p) / $harga_p;
                 $i = 0;
                 $data = array(
@@ -94,19 +86,17 @@ class Produk extends MY_Controller
                     "video_link" => $link,
                     "created_at" => date("Y-m-d H:i:s")
                 );
-                // die(json_encode($data));
+
                 if ($this->produk->tambah_produk($data)) {
 
 
                     $data_sub_insert = [];
                     $dataproduk = $this->produk->getById($kode_p);
-                    $id_sub = $this->input->post('id_sub');
                     $nama_sub = $this->input->post('nama_sub');
                     $size_sub = $this->input->post('size_sub');
                     $harga_sub = $this->input->post('harga_sub');
                     $berat_sub = $this->input->post('berat_sub');
                     $diskon_sub = $this->input->post('diskon_sub');
-                    // die(json_encode($data));
                     $stok_sub = $this->input->post('stok_sub');
                     if (!in_array("", $nama_sub)) {
                         foreach ($nama_sub as $key => $item) {
@@ -168,7 +158,6 @@ class Produk extends MY_Controller
                     redirect('admin/produk');
                 }
             } else {
-                // die(json_encode($data));
                 $this->load->view('admin/pages/produk/form_produk', $data);
             }
         } else {
@@ -181,7 +170,6 @@ class Produk extends MY_Controller
         if ($this->adminIsLoggedIn()) {
             $id = $this->input->get('id');
             $diskon_percent = 0;
-            // die(json_encode($this->input->post('nama_sub')));
             $data['kat_p'] = $this->kategori->getData()->result_array();
             $data['produk'] = $this->produk->getById($id);
             $data['subProduk'] = $this->subproduk->getByIdProduk($data['produk']->id_produk);
@@ -199,7 +187,6 @@ class Produk extends MY_Controller
                 $size_c = $this->input->post('size_c');
 
                 $kat_p = $this->input->post('kat_p');
-                // $size_p = $this->input->post('size_p');
                 $link = $this->input->post('link');
 
                 $label_p = implode(",", $label_p);

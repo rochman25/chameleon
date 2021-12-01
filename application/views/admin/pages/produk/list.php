@@ -65,7 +65,6 @@
                                                             <td id="data-produk" data-id="<?= $row['kode_produk'] ?>"><a href="<?= base_url() ?>admin/produk/ubah?id=<?= $row['kode_produk'] ?>"><?= $row['kode_produk'] ?></a></td>
                                                             <td><?= $row['nama_produk'] ?></td>
                                                             <td>
-                                                                <!-- <?= sprintf("%.2f%%", $row['stok_produk'] * 100) ?> -->
                                                                 <?= $row['stok_produk'] ?>
                                                             </td>
                                                             <td><?= $row['harga_produk'] ?></td>
@@ -74,7 +73,7 @@
                                                             </td>
                                                             <td>
                                                                 <!-- <a href="<?= base_url() ?>admin/sizestock/index/<?=$row['id_produk']?>" class="btn btn-info">Size Stock</a> -->
-                                                                <button id="btnUbah" data-toggle="modal" data-target="#updateModal" data-id="<?= $row['kode_produk']; ?>" data-stok="<?= $row['stok_produk']; ?>" class="btn btn-success" style="margin-bottom:5px;"><i class="fa fa-pencil" style="margin-right:5px;"></i>Stok</button>
+                                                                <!-- <button id="btnUbah" data-toggle="modal" data-target="#updateModal" data-id="<?= $row['kode_produk']; ?>" data-stok="<?= $row['stok_produk']; ?>" class="btn btn-success" style="margin-bottom:5px;"><i class="fa fa-pencil" style="margin-right:5px;"></i>Stok</button> -->
                                                                 <!-- <a href="<?= base_url() ?>admin/produk/ubah?id=<?= $row['id_produk'] ?>" class="btn btn-success">Ubah</a> -->
                                                                  <button id="btnHapus" data-target="#hapusModal" data-toggle="modal" data-id="<?= $row['id_produk'] ?>" class="btn btn-danger" style="margin-bottom:5px;"><i class="fa fa-trash" style="margin-right:5px;"></i>Hapus</button> 
                                                             </td>

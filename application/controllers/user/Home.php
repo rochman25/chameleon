@@ -38,14 +38,6 @@ class Home extends MY_Controller
 
         $data['produk_new_release'] = $this->produk->getNewRelease();
 
-        // $new = $this->produk->getBestProduk();
-        // var_dump($new);die;
-
-        // $data['produk_best_seller'] = $this->produk->order_by("kode_produk", "DESC");
-        // $data['produk_best_seller'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
-        // $data['produk_best_seller'] = $this->produk->getWhere('produk.stok_produk > ', '0');
-        // $data['produk_best_seller'] = $this->produk->limit(3);
-        // $data['produk_best_seller'] = $this->produk->getData()->result_array();
 
         $data['produk_release'] = $this->produk->order_by("kode_produk", "DESC");
         $data['produk_release'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
@@ -137,28 +129,10 @@ class Home extends MY_Controller
     public function produk($kategori = "")
     {
         if ($kategori == "semua" || $kategori == "Semua Produk") {
-            // $datakategori =  $this->kategori->getLike('nama_kategori', $kategori);
-            // $datakategori = $this->kategori->getData()->row();
-
-            // $thumbnail = array();
-            // $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
-            // $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
-            // // $data['produk'] = $this->produk->getWhere("produk.stok >", "0");
-            // $data['produk'] = $this->produk->getData()->result_array();
-            // // $data['kategori'] = $this->kategori->getData()->result_array();
-
-            // foreach ($data['produk'] as $row) {
-            //     $foto = explode(',', $row['thumbnail_produk']);
-            //     $thumbnail[$row['id_produk']] = $foto[0];
-            // }
-            // $data['thumbnail'] = $thumbnail;
-
-            // $datakategori =  $this->kategori->getLike('nama_kategori', $kategori);
             $datakategori = $this->kategori->getData()->row();
 
             $thumbnail = array();
             $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
-            // $data['produk'] = $this->produk->getWhere('produk.id_kategori', $datakategori->id_kategori);
             $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
             // $data['produk'] = $this->produk->getWhere("produk.stok_produk >", "0");
             $data['produk'] = $this->produk->getData()->result_array();
@@ -223,7 +197,6 @@ class Home extends MY_Controller
 
     public function produk_detail()
     {
-        //die(json_encode($this->session->userdata("c72e6711-4ea1-11ea-9a04-e03f4931b17e")));
         $this->load->model('PreRelease_model', 'pre_release');
         $id_produk = $this->input->get('produk');
         $preRelease = $this->pre_release->getByIdProduk($id_produk);
@@ -243,16 +216,9 @@ class Home extends MY_Controller
             $data['kategori'] = $this->kategori->getData()->result_array();
             $data['stok_produk'] = $this->sizestock->calculateSizeStock($id_produk) == 0 ? 0 : $this->sizestock->calculateSizeStock($id_produk);
             $data['size_stock'] = $this->sizestock->getByKodeProduk($id_produk);
-            // $idCart = $this->cart->cekCartNow();
-            // $data['cekCartProduk'] = $this->cart_item->cekIdProduks($id_produk, $idCart);
-
-            // $cekIdProduk = $this->cart_item->cekIdProduk($id_produk, $idc);
-            // die(json_encode($data));
 
             $foto = explode(',', $data['produk']->thumbnail_produk);
             $size = explode(',', $data['produk']->size_produk);
-
-            // var_dump($foto);die;
 
             foreach ($foto as $f) {
                 $thumbnail[] = $f;
@@ -269,7 +235,6 @@ class Home extends MY_Controller
             } else {
                 $data['id_cart'] = "";
             }
-            // die(json_encode($data));
             $this->load->view('public/product-detail', $data);
         } else {
             $data['pre_release'] = $preRelease;
