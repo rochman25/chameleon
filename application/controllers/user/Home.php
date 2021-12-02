@@ -432,7 +432,10 @@ class Home extends MY_Controller
                     $realHarga = $d->harga_sub;
                 } else {
                     if ($d->diskon_produk != 0) {
-                        $realHarga = $d->harga_produk - (($d->diskon_produk / 100) * $d->harga_produk);
+                        $realHarga = ceil($d->harga_produk - (($d->diskon_produk / 100) * $d->harga_produk));
+                        // die(json_encode(ceil($realHarga)));
+                        // $realHarga = $d->harga_produk - $d->diskon_produk;
+                        // $realHarga = $d->diskon_produk;
                     } else {
                         $realHarga = $d->harga_produk;
                     }
@@ -443,7 +446,7 @@ class Home extends MY_Controller
 
                 if ($d->id_sub_produk == null) {
                     $dsize = $d->size;
-                    $dHarga = $d->diskon_produk != 0 ? "<p style='text-decoration:line-through;font-size:10px'> Rp $d->harga_produk </p>" : "";
+                    $dHarga = $d->diskon_produk != 0 ? "<p style='text-decoration:line-through;font-size:10px'> Rp ".number_format($d->harga_produk,0)."</p>" : "";
                 } else {
                     $dHarga = "";
                     $dsize = $d->size;
@@ -505,7 +508,7 @@ class Home extends MY_Controller
                                     <div class="name">' . $nama_produk . '</div>
                                     <div class="real">' .
                             $dHarga
-                            . 'Rp ' . number_format($realHarga, 2) . '</div>
+                            . 'Rp ' . number_format($realHarga, 0) . '</div>
                                         <div class="content-detail">
                                             Jumlah : <strong class="cart-quantity">' . $d->quantity . '/ Ukuran :' . $dsize . '</strong> 
                                         
@@ -530,8 +533,8 @@ class Home extends MY_Controller
                 //   $totalHargaShirt = $d['total'];
                 array_push($totalHargaShirt, $d['total']);
             }
-
-            echo json_encode(array("data" => $datafull, "total" => array_sum($totalHargaShirt)));
+            // die(json_encode($totalHargaShirt));
+            echo json_encode(array("data" => $datafull, "total" => number_format(array_sum($totalHargaShirt),0)));
         }
     }
 

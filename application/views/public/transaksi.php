@@ -185,7 +185,7 @@ $this->load->view('public/cart');
                                 </div>
                             </div>
                         <?php 
-                    $totalDiskon += $diskon;
+                    $totalDiskon += ($diskon  * $row['quantity']);
                     } else { ?>
                             <div class="products">
                                 <div class="product-box" id="product-box__39395">
@@ -252,12 +252,12 @@ $this->load->view('public/cart');
                         </div>
                         <div class="summary-belanja">
                             <span>Total Belanja</span>
-                            <span class="summary-belanja-value"><b>Rp <?= number_format($total, 2) ?></b></span>
+                            <span class="summary-belanja-value"><b>Rp <?= number_format($total, 0) ?></b></span>
                         </div>
                         <hr>
                         <div class="summary-all">
                             <span>Total Bayar</span>
-                            <span><strong class="summary-all-value"></strong><b>Rp</b> <b id="total-bayar"><?= number_format($total, 2) ?></b> </span>
+                            <span><strong class="summary-all-value"></strong><b>Rp</b> <b id="total-bayar"><?= number_format($total, 0) ?></b> </span>
                         </div>
                     </div>
                     <!-- <input type="hidden" id="kecamatan_id" value="<?= $profil->kecamatan_id ?>" required> -->

@@ -87,7 +87,7 @@ $this->load->view('public/cart');
                             </div>
                         </div>
                     <?php
-                        $totalDiskon += $diskon;
+                    $totalDiskon += ($diskon  * $row['jumlah_produk']);
                     } else { ?>
                         <div class="products">
                             <div class="product-box" id="product-box__39395">
