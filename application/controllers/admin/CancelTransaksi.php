@@ -8,6 +8,7 @@ class CancelTransaksi extends MY_Controller
     {
         parent::__construct();
         $this->load->model('Transaksi_model', 'transaksi');
+        $this->load->model('SizeStock_model','sizeStock');
     }
 
     private function checkExpired($expired_time){
@@ -29,6 +30,10 @@ class CancelTransaksi extends MY_Controller
                         "id_transaksi" => $item['id_transaksi'],
                         "status_transaksi" => "batal"
                     ];
+                    $data_t = $this->transaksi->get_transaksiById($item['id_transaksi']);
+                    foreach($data_t as $row){
+                        $this->sizeStock->increaseStock($row->id_produk, $row->ukuran, $row->jumlah_produk);
+                    }
                 }
             }
             echo json_encode($result);

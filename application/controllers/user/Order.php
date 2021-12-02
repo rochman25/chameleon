@@ -113,7 +113,7 @@ class Order extends MY_Controller
                     "catatan" => $catatan,
                     "status_transaksi" => "pending",
                     "waktu_transaksi" => date("Y-m-d H:i:s"),
-                    // "waktu_expired" => date("Y-m-d H:i:s"),
+                    "waktu_expired" => date("Y-m-d H:i:s", time() + 86400),
                     "id_pengguna" => $this->session->userdata['user_data']['id'],
                     "id_alamat" => $idA,
                     "total_harga" => $total_bayar,
