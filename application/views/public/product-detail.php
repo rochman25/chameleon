@@ -527,6 +527,9 @@ $this->load->view('public/footer');
     var berat = 0;
     var tinggi = 0;
 
+    var maxStock = 0;
+    var sizeStock = <?= json_encode($size_stock); ?>
+
     function toggleVideo() {
         if (ishide) {
             containervideo.style.display = "none";
@@ -610,8 +613,16 @@ $this->load->view('public/footer');
 
     function setUkuran(ukuran) {
         def_Size = ukuran;
-        console.log(def_Size);
-        console.log(def_Size, def_SizeAdd);
+        def_jml = 0;
+        document.getElementById('value').innerHTML = 0;
+        console.log(`defSize:${def_Size}`);
+        sizeStock.map(function(item) {
+            if (item.size == ukuran) {
+                maxStock = item.stock;
+            }
+        });
+        console.log(`maxStock:${maxStock}`);
+        // console.log(`sizeStock:${JSON.parse(sizeStock)}`);
         // var id = document.getElementById(id)
         // id.classList.add('active');
     }
@@ -630,49 +641,41 @@ $this->load->view('public/footer');
 
     // /var size_view = 
     function ubahjml(state) {
-        jml_barang = document.getElementById('value');
-        var number = jml_barang.innerHTML;
-        def_jml = number;
+        if (def_Size) {
+            jml_barang = document.getElementById('value');
+            var number = jml_barang.innerHTML;
+            def_jml = number;
 
-        var value = document.getElementById("value").innerHTML;
-        if (def_jml == 0) {
-            if (state == "1") {
-                number++;
+            var value = document.getElementById("value").innerHTML;
+            if (def_jml == 0) {
+                if (state == "1") {
+                    number++;
+                    jml_barang.innerHTML = number;
+                } else {
+                    number = "0";
+                }
+
+            } else {
+                if (state == "1") {
+                    console.log(`compare`,def_jml<parseInt(maxStock));
+                    if (def_jml < parseInt(maxStock)) {
+                        number++;
+                    }
+                } else {
+                    number--;
+                }
                 jml_barang.innerHTML = number;
-            } else {
-                // def_jml == 0;
-                number = "0";
             }
-
+            def_jml = number;
+            console.log(`withStok`,def_jml, stok);
         } else {
-            if (state == "1") {
-                number++;
-            } else {
-                number--;
-            }
-            jml_barang.innerHTML = number;
+            alert("Harap Pilih Ukuran Terlebih dahulu.")
         }
-        def_jml = number;
-        console.log(def_jml, stok);
-
-        // if (state == 1) {
-        //     if (def_jml > stok) {
-        //         def_jml++
-        //     } else {
-        //          def_jml = 0;
-        //     }
-        // } else {
-        //     if (def_jml <= 1) {
-        //         def_jml = 1;
-        //     } else {
-        //         def_jml--;
-        //     }
-        // }
-        // document.getElementById('jumlah').innerHTML = def_jml;
     }
 
     function ubahjml2(state, jml, id) {
         console.log(state);
+        // if (def_Size2) {
         if (state == 1) {
             if (def_jml2 < jml) {
                 def_jml2++
@@ -687,6 +690,9 @@ $this->load->view('public/footer');
             }
         }
         document.getElementById('valuesub' + id).innerHTML = def_jml2;
+        // } else {
+        //     alert("Harap Pilih Ukuran Terlebih dahulu.")
+        // }
     }
 
     $(document).ready(function() {
