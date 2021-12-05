@@ -12,7 +12,7 @@ class CancelTransaksi extends MY_Controller
     }
 
     private function checkExpired($expired_time){
-        $today = date("Y-m-d");
+        $today = date("Y-m-d H:i:s");
         if($today>=$expired_time){
             return true;
         }
