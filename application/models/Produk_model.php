@@ -89,4 +89,12 @@ class Produk_model extends MY_Model
         return $this->getData()->result_array();
 	}
 
+    public function addSoldOutLabel($id_produk,$label){
+        $this->getWhere('id_produk',$id_produk);
+        $data = [
+            "label_produk" => $label.",sold out"
+        ];
+        return $this->update($data);
+    }
+
 }
