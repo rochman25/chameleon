@@ -432,7 +432,7 @@ class Home extends MY_Controller
                     $realHarga = $d->harga_sub;
                 } else {
                     if ($d->diskon_produk != 0) {
-                        $realHarga = ceil($d->harga_produk - (($d->diskon_produk / 100) * $d->harga_produk));
+                        $realHarga = $d->harga_produk - (($d->diskon_produk / 100) * $d->harga_produk);
                         // die(json_encode(ceil($realHarga)));
                         // $realHarga = $d->harga_produk - $d->diskon_produk;
                         // $realHarga = $d->diskon_produk;
