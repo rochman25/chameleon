@@ -167,7 +167,7 @@ class Order extends MY_Controller
                     die(json_encode(array("error" => "ada masalah")));
                 }
 
-                // die(json_encode($data));
+                die(json_encode($data));
 
             } else {
                 // die(json_encode($data));

@@ -13,7 +13,7 @@ $this->load->view('public/cart');
 
 <section id="content">
     <!-- <div class="container"> -->
-    <form action="" method="post">
+    <form action="" id="formTransaksi" method="post">
         <div class="orderpage">
             <section class="left-column">
                 <div class="ticker">
@@ -160,11 +160,11 @@ $this->load->view('public/cart');
             </section>
             <section class="right-column">
                 <div class="content">
-                    <?php 
+                    <?php
                     $totalDiskon = 0;
                     foreach ($cart as $row) {
                         if ($row['id_sub_produk'] == null) {
-                        $diskon = (($row['diskon_produk'] / 100) * $row['harga_produk']);
+                            $diskon = (($row['diskon_produk'] / 100) * $row['harga_produk']);
                     ?>
                             <div class="products">
                                 <div class="product-box" id="product-box__39395">
@@ -184,9 +184,9 @@ $this->load->view('public/cart');
                                     </div>
                                 </div>
                             </div>
-                        <?php 
-                    $totalDiskon += ($diskon  * $row['quantity']);
-                    } else { ?>
+                        <?php
+                            $totalDiskon += ($diskon  * $row['quantity']);
+                        } else { ?>
                             <div class="products">
                                 <div class="product-box" id="product-box__39395">
                                     <img src="<?= base_url() ?>/assets/images/add_on.png" alt="">
@@ -244,7 +244,7 @@ $this->load->view('public/cart');
                         </div>
                         <div class="summary-ongkir">
                             <span>Diskon Produk</span>
-                            <span class="summary-ongkir-value"><b> -  Rp</b> <b id="diskon-produk"><?=number_format($totalDiskon)?></b> </span>
+                            <span class="summary-ongkir-value"><b> - Rp</b> <b id="diskon-produk"><?= number_format($totalDiskon) ?></b> </span>
                         </div>
                         <div class="summary-ongkir">
                             <span>Diskon Ongkos Kirim</span>
@@ -264,7 +264,7 @@ $this->load->view('public/cart');
                     <input type="hidden" id="total_ongkir" name="total_ongkir" required>
                     <input type="hidden" id="total_bayar" name="total_bayar" required>
                     <input type="hidden" id="system_note" name="system_note">
-                    <input type="submit" name="kirim" value="CHECKOUT" style="margin-bottom: 20px;">
+                    <input type="submit" id="btnCheckout" name="kirim" value="CHECKOUT" style="margin-bottom: 20px;">
                     <!-- </form> -->
                 </div>
                 <!-- </form> -->
@@ -279,6 +279,7 @@ $this->load->view('public/footer');
 <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 <!-- <script src="<?= base_url() ?>assets/admin/node_modules/sweetalert2.min.js"></script> -->
 <!-- <link rel="stylesheet" href="<?= base_url() ?>assets/admin/node_modules/sweetalert2.min.css"> -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('#loader').hide();
@@ -360,7 +361,7 @@ $this->load->view('public/footer');
                                 let ongkir = 0;
                                 var total_bayar = <?php echo $total ?>;
                                 ongkir = totalongkir - data.data.discount_voucher;
-                                if(ongkir < 0){
+                                if (ongkir < 0) {
                                     ongkir = 0;
                                 }
                                 total_bayar = <?php echo $total ?> + ongkir;
@@ -534,6 +535,40 @@ $this->load->view('public/footer');
                     }
                 })
             }
+        });
+
+        $('#btnCheckout').click(function(e) {
+            if ($('#kurir').val()) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'GET',
+                    url: "<?php echo site_url() ?>" + "user/produk/check_cart_product_size",
+                    dataType: 'JSON',
+                    success: function(data) {
+                        if (data.status) {
+                            if (data.value > 0) {
+                                // $('#formTransaksi').submit()
+                                // $("#btnCheckout").unbind('click').click();
+                            } else {
+                                Swal.fire({
+                                    title: 'Oops!',
+                                    text: data.message,
+                                    icon: 'info',
+                                    confirmButtonText: 'Ok'
+                                });
+                            }
+                        } else {
+                            Swal.fire({
+                                title: 'Error',
+                                text: data.message,
+                                icon: 'error',
+                                confirmButtonText: 'Ok'
+                            });
+                        }
+                    }
+                });
+            }
+
         });
     });
 
