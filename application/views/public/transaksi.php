@@ -548,7 +548,7 @@ $this->load->view('public/footer');
                         if (data.status) {
                             if (data.value > 0) {
                                 // $('#formTransaksi').submit()
-                                // $("#btnCheckout").unbind('click').click();
+                                $("#btnCheckout").unbind('click').click();
                             } else {
                                 Swal.fire({
                                     title: 'Oops!',

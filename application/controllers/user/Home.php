@@ -17,9 +17,9 @@ class Home extends MY_Controller
         $this->load->model('Alamat_model', 'alamat');
         $this->load->model('Detailcart_model', 'cart_item');
         $this->load->model('Transaksi_model', 'transaksi');
-        $this->load->model('SizeStock_model','sizestock');
+        $this->load->model('SizeStock_model', 'sizestock');
         $this->load->model('PreRelease_model', 'pre_release');
-        $this->load->model('Voucher_ongkir_model','voucher_ongkir');
+        $this->load->model('Voucher_ongkir_model', 'voucher_ongkir');
         $this->load->library('bcrypt');
         $this->load->library('form_validation');
     }
@@ -76,8 +76,8 @@ class Home extends MY_Controller
             $thumbnail[$row['id_produk']] = $foto[0];
             $id_produk = $row['id_produk'];
             $preRelease = $this->pre_release->getByIdProduk($id_produk);
-            if($preRelease){
-                if($preRelease->release_date > date("Y-m-d H:i:s")){
+            if ($preRelease) {
+                if ($preRelease->release_date > date("Y-m-d H:i:s")) {
                     $data['produk'][$index]['pre_release'] = $preRelease->release_date;
                 }
             }
@@ -152,8 +152,8 @@ class Home extends MY_Controller
                 $thumbnail[$row['id_produk']] = $foto[0];
                 $id_produk = $row['id_produk'];
                 $preRelease = $this->pre_release->getByIdProduk($id_produk);
-                if($preRelease){
-                    if($preRelease->release_date > date("Y-m-d H:i:s")){
+                if ($preRelease) {
+                    if ($preRelease->release_date > date("Y-m-d H:i:s")) {
                         $data['produk'][$index]['pre_release'] = $preRelease->release_date;
                     }
                 }
@@ -181,8 +181,8 @@ class Home extends MY_Controller
                     $thumbnail[$row['id_produk']] = $foto[0];
                     $id_produk = $row['id_produk'];
                     $preRelease = $this->pre_release->getByIdProduk($id_produk);
-                    if($preRelease){
-                        if($preRelease->release_date > date("Y-m-d H:i:s")){
+                    if ($preRelease) {
+                        if ($preRelease->release_date > date("Y-m-d H:i:s")) {
                             $data['produk'][$index]['pre_release'] = $preRelease->release_date;
                         }
                     }
@@ -226,7 +226,7 @@ class Home extends MY_Controller
         $id_produk = $this->input->get('produk');
         $preRelease = $this->pre_release->getByIdProduk($id_produk);
         $release_date = null;
-        if($preRelease){
+        if ($preRelease) {
             $release_date = $preRelease->release_date;
         }
         if ($this->checkPreRelease($release_date) == false) {
@@ -332,7 +332,7 @@ class Home extends MY_Controller
                                 'pesan',
                                 '<div class="alert alert-danger mr-auto">Password atau Username salah</div>'
                             );
-                            $this->load->view('public/login',$data);
+                            $this->load->view('public/login', $data);
                         }
                     } else {
                         $data['kategori'] = $this->kategori->getData()->result_array();
@@ -341,7 +341,7 @@ class Home extends MY_Controller
                             'pesan',
                             '<div class="alert alert-danger mr-auto">Akun belum diverifikasi silahkan cek email untuk verfikasi akun.</div>'
                         );
-                        $this->load->view('public/login',$data);
+                        $this->load->view('public/login', $data);
                     }
                 } else {
                     $data['kategori'] = $this->kategori->getData()->result_array();
@@ -350,12 +350,12 @@ class Home extends MY_Controller
                         'pesan',
                         '<div class="alert alert-danger mr-auto">Akun tidak ditemukan</div>'
                     );
-                    $this->load->view('public/login',$data);
+                    $this->load->view('public/login', $data);
                 }
             } else {
                 $data['kategori'] = $this->kategori->getData()->result_array();
                 $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
-                $this->load->view('public/login',$data);
+                $this->load->view('public/login', $data);
             }
         }
     }
@@ -446,7 +446,7 @@ class Home extends MY_Controller
 
                 if ($d->id_sub_produk == null) {
                     $dsize = $d->size;
-                    $dHarga = $d->diskon_produk != 0 ? "<p style='text-decoration:line-through;font-size:10px'> Rp ".number_format($d->harga_produk,0)."</p>" : "";
+                    $dHarga = $d->diskon_produk != 0 ? "<p style='text-decoration:line-through;font-size:10px'> Rp " . number_format($d->harga_produk, 0) . "</p>" : "";
                 } else {
                     $dHarga = "";
                     $dsize = $d->size;
@@ -458,7 +458,26 @@ class Home extends MY_Controller
                     $nama_produk = $d->nama_produk;
                 }
 
+                $checkProduk = $this->sizestock->checkStockProduk($d->id_produk, $d->size);
+
                 if ($d->id_sub_produk != null) {
+                    $element = '<div class="cart-list" >
+                        <img src="' . base_url() . 'assets/images/add_on.png">
+                            <div class="content">
+                                <a href="#">
+                                    <div class="name">' . $nama_produk . '</div>
+                                        <div class="real">' .
+                        $dHarga
+                        . 'Rp ' . number_format($realHarga, 2) . '</div>
+                                        <div class="content-detail">
+                                            Jumlah : <strong class="cart-quantity">' . $d->quantity . '/ Ukuran :' . $dsize . '</strong>   
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="delete-cart" onclick="deleteitem(' . "'" . $d->id_detail_item_cart . "'" . ');" >
+                                    <i class="svg_icon__header_garbage svg-icon"></i>
+                                </a>
+                        </div>';
                     $d = array(
                         "id_cart" => $d->id_cart,
                         "id_item" => $d->id_detail_item_cart,
@@ -468,29 +487,49 @@ class Home extends MY_Controller
                         "harga" => $realHarga,
                         "kategori" => $d->nama_kategori,
                         "thumb" => $thumbnail,
-                        "element" => '<div class="cart-list" >
-                        <a href="#">
-                            <img src="' . base_url() . 'assets/images/add_on.png">
-                            <div class="content">
-                                <div class="name">' . $nama_produk . '</div>
-                                <div class="real">' .
-                            $dHarga
-                            . 'Rp ' . number_format($realHarga, 2) . '</div>
-                                    <div class="content-detail">
-                                        Jumlah : <strong class="cart-quantity">' . $d->quantity . '/ Ukuran :' . $dsize . '</strong> 
-                                    
-                                    </div>
-                            </div>
-                        </a>
-                        <a class="delete-cart" onclick="deleteitem(' . "'" . $d->id_detail_item_cart . "'" . ');" >
-                            <i class="svg_icon__header_garbage svg-icon"></i>
-                        </a>
-                    </div>'
+                        "element" => $element
                     );
                 } else {
                     // var_dump($harga);die;
                     // var_dump($total);die;
-
+                    if ($checkProduk->stock <= 0) {
+                        $element = '<div class="cart-list" >
+                                    <a href="#" class="soldout_container">
+                                        <img src="' . base_url() . 'assets/uploads/thumbnail_produk/' . $thumbnail[0] . '">
+                                        <div class="content">
+                                            <div class="name">' . $nama_produk . '</div>
+                                            <div class="real">' .$dHarga. 'Rp ' . number_format($realHarga, 0) . '</div>
+                                            <div class="content-detail">
+                                                Jumlah : <strong class="cart-quantity">' . $d->quantity . '/ Ukuran :' . $dsize . '</strong> 
+                                            </div>
+                                        </div>
+                                        <div class="soldout_overlay">
+                                            <p style="padding-top:5px">STOK HABIS</p>
+                                        </div>
+                                    </a>
+                                    <a class="delete-cart" onclick="deleteitem(' . "'" . $d->id_detail_item_cart . "'" . ');" >
+                                        <i class="svg_icon__header_garbage svg-icon"></i>
+                                    </a>
+                                </div>';
+                    } else {
+                        $element = '<div class="cart-list" >
+                                    <a href="#">
+                                        <img src="' . base_url() . 'assets/uploads/thumbnail_produk/' . $thumbnail[0] . '">
+                                        <div class="content">
+                                            <div class="name">' . $nama_produk . '</div>
+                                            <div class="real">' .
+                            $dHarga
+                            . 'Rp ' . number_format($realHarga, 0) . '</div>
+                                            <div class="content-detail">
+                                                Jumlah : <strong class="cart-quantity">' . $d->quantity . '/ Ukuran :' . $dsize . '</strong> 
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="delete-cart" onclick="deleteitem(' . "'" . $d->id_detail_item_cart . "'" . ');" >
+                                        <i class="svg_icon__header_garbage svg-icon"></i>
+                                    </a>
+                                </div>';
+                    }
                     $d = array(
                         "id_cart" => $d->id_cart,
                         "id_item" => $d->id_detail_item_cart,
@@ -501,24 +540,7 @@ class Home extends MY_Controller
                         "total" => $realHarga * $d->quantity,
                         "kategori" => $d->nama_kategori,
                         "thumb" => $thumbnail,
-                        "element" => '<div class="cart-list" >
-                            <a href="#">
-                                <img src="' . base_url() . 'assets/uploads/thumbnail_produk/' . $thumbnail[0] . '">
-                                <div class="content">
-                                    <div class="name">' . $nama_produk . '</div>
-                                    <div class="real">' .
-                            $dHarga
-                            . 'Rp ' . number_format($realHarga, 0) . '</div>
-                                        <div class="content-detail">
-                                            Jumlah : <strong class="cart-quantity">' . $d->quantity . '/ Ukuran :' . $dsize . '</strong> 
-                                        
-                                        </div>
-                                </div>
-                            </a>
-                            <a class="delete-cart" onclick="deleteitem(' . "'" . $d->id_detail_item_cart . "'" . ');" >
-                                <i class="svg_icon__header_garbage svg-icon"></i>
-                            </a>
-                        </div>'
+                        "element" => $element
                     );
                 }
 
@@ -534,7 +556,7 @@ class Home extends MY_Controller
                 array_push($totalHargaShirt, $d['total']);
             }
             // die(json_encode($totalHargaShirt));
-            echo json_encode(array("data" => $datafull, "total" => number_format(array_sum($totalHargaShirt),0)));
+            echo json_encode(array("data" => $datafull, "total" => number_format(array_sum($totalHargaShirt), 0)));
         }
     }
 
@@ -1274,14 +1296,14 @@ class Home extends MY_Controller
         }
     }
 
-    private function checkPreRelease($release_date){
-        if($release_date != null){
+    private function checkPreRelease($release_date)
+    {
+        if ($release_date != null) {
             $release_date = strtotime($release_date);
-            if($release_date > strtotime("now")){
+            if ($release_date > strtotime("now")) {
                 return true;
             }
         }
         return false;
     }
-
 }

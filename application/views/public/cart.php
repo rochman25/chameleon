@@ -4,7 +4,7 @@
 			Keranjang Belanja
 			<i class="svg_icon__header_close svg-icon"></i>
 		</div>
-		<?php 		
+		<?php
 		if (isset($this->session->userdata['user_data'])) {
 			$id = $this->session->userdata['user_data']['id'];
 			// die(json_encode($this->session->userdata()));
@@ -21,7 +21,7 @@
 					</div>
 					<form action="<?= base_url() ?>order" method="POST">
 						<input type="hidden" value="" />
-						<input type="submit" value="SELANJUTNYA" class="confirm" />
+						<input type="submit" id="cart_check_out" value="SELANJUTNYA" class="confirm" />
 					</form>
 					<!-- <a class="confirm" href="">hajar men</a> -->
 				</div>
@@ -36,7 +36,7 @@
 		} ?>
 	</div>
 </div>
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
 	var base_url = '<?= base_url() ?>';
 	$(document).ready(function() {
@@ -71,7 +71,37 @@
 		}).fail(function(t) {
 			console.log(t)
 			// location.reload()
-		})
+		});
+
+		$('#cart_check_out').click(function(e) {
+			e.preventDefault();
+			$.ajax({
+				type: 'GET',
+				url: "<?php echo site_url() ?>" + "user/produk/check_cart_product_size",
+				dataType: 'JSON',
+				success: function(data) {
+					if (data.status) {
+						if (data.value > 0) {
+							$("#cart_check_out").unbind('click').click();
+						} else {
+							Swal.fire({
+								title: 'Ups, produk tidak cukup.',
+								text: 'kamu bisa ubah cart atau kembali ke halaman sebelumnya',
+								icon: 'info',
+								confirmButtonText: 'Ok'
+							});
+						}
+					} else {
+						Swal.fire({
+							title: 'Error',
+							text: data.message,
+							icon: 'error',
+							confirmButtonText: 'Ok'
+						});
+					}
+				}
+			});
+		});
 
 	})
 

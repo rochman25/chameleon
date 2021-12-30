@@ -2106,6 +2106,28 @@ header.mobile .menu-lvl1 .logout i {
 	text-transform: uppercase;
 }
 
+.soldout_container {
+	position: relative;
+	width: 100%;
+}
+
+.soldout_overlay {
+	position: absolute; 
+	top:0%;
+	background: rgb(0, 0, 0);
+	background: rgba(0, 0, 0, 0.5); /* Black see-through */
+	color: #f1f1f1; 
+	width:80%;
+	height: 100%;
+	transition: .5s ease;
+	opacity:1;
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 20px;
+	text-align: center;
+  }
+
 @media only screen and (max-width: 1200px) {
 	header.desktop {
 		display: none;
