@@ -80,13 +80,15 @@
 				url: "<?php echo site_url() ?>" + "user/produk/check_cart_product_size",
 				dataType: 'JSON',
 				success: function(data) {
+					console.log(data);
 					if (data.status) {
 						if (data.value > 0) {
 							$("#cart_check_out").unbind('click').click();
 						} else {
 							Swal.fire({
 								title: 'Ups, produk tidak cukup.',
-								text: 'kamu bisa ubah cart atau kembali ke halaman sebelumnya',
+								width:600,
+								html: data.product_out+'<br/>kamu bisa ubah cart atau kembali ke halaman sebelumnya',
 								icon: 'info',
 								confirmButtonText: 'Ok'
 							});
