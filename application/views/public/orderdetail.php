@@ -10,7 +10,7 @@ $this->load->view('public/heading');
 $this->load->view('public/m_heading');
 $this->load->view('public/cart');
 ?>
-<section id="content">
+<section id="content" style="display: flex;flex-direction: column;align-content: center;align-items: center;background: white;">
     <!-- <div class="container"> -->
     <div class="orderpage">
         <section class="left-column">
@@ -20,8 +20,8 @@ $this->load->view('public/cart');
             </div>
             <div class="content" style="overflow: hidden;">
                 <div class="row">
-                    <h5 style="font-weight: bold;padding-bottom: 15px;text-align: center;">Order : <?= $transaksi->kode_transaksi ?></h5>
-                    <div class="content" style="margin-bottom: 30px;background: #f4f4f4;">
+                    <h5 style="font-weight: bold;padding-bottom: 15px;text-align: center;font-size: xx-large;">Order Detail</h5>
+                    <div class="col-lg-6 col-md-12 col-sm-12" style="margin-bottom: 30px;background: #ffffff;">
                         <div class="title">Kode Transaksi : <b style="color: #5a5a5a;"> <?= $transaksi->kode_transaksi ?> </b></div>
                         <div class="title">Tanggal Order : <b style="color: #5a5a5a;"> <?= date('d-M-Y H:i:s', strtotime($transaksi->waktu_transaksi)) ?> </b></div>
                         <div class="title">Harap membayar sebelum tanggal : <b style="color: red;"> <?= date("d-M-Y H:i:s", strtotime("+1 day", strtotime($transaksi->waktu_transaksi))) ?> </b></div>
@@ -60,7 +60,9 @@ $this->load->view('public/cart');
                 <?php 
                 $jumlah_item = 0;
                 $totalHarga = 0;
+                $totalRealHarga = 0;
                 foreach ($detail_transaksi as $row) {
+                    $totalRealHarga += ($row['harga_produk'] * $row['jumlah_produk']);
                     $totalDiskon = 0;
                     if ($row['id_sub_produk'] == null) {
                         $diskon = (($row['diskon_produk'] / 100) * $row['harga_produk']);
@@ -80,8 +82,8 @@ $this->load->view('public/cart');
                                         <?php $totalHarga += ($row['harga_produk'] * $row['jumlah_produk']); ?>
                                     <?php } ?>
                                     <div class="qty-size">
-                                        Jumlah : <strong class="cart_quantity"><?= $row['jumlah_produk'] ?></strong> /
-                                        Ukuran : <strong><?= $row['ukuran'] ?></strong>
+                                         Size : <strong><?= $row['ukuran'] ?></strong>
+                                        × <strong class="cart_quantity"><?= $row['jumlah_produk'] ?></strong>
                                     </div>
                                 </div>
                             </div>
@@ -108,13 +110,17 @@ $this->load->view('public/cart');
                 <div class="order-summary" id="order">
                     <h1>Ringkasan Belanja</h1>
                     <hr>
+                    <div class="summary-belanja">
+                        <span>Subtotal</span>
+                        <span class="summary-belanja-value"><b>Rp <?= number_format($totalRealHarga, 0) ?></b></span>
+                    </div>
                     <div class="summary-ongkir">
                         <span>Ongkos Kirim</span>
                         <span class="summary-ongkir-value"><b>Rp</b> <b id="ongkos-kirim"> <?= number_format($transaksi->total_ongkir) ?></b> </span>
                     </div>
                     <div class="summary-ongkir">
-                        <span>Diskon Produk</span>
-                        <span class="summary-ongkir-value"><b> - Rp</b> <b id="diskon-produk"><?= number_format($totalDiskon) ?></b> </span>
+                        <span>Diskon</span>
+                        <span class="summary-ongkir-value" style="color: red;"><b> - Rp</b> <b id="diskon-produk"><?= number_format($totalDiskon) ?></b> </span>
                     </div>
                     <div class="summary-ongkir">
                         <?php
@@ -124,16 +130,12 @@ $this->load->view('public/cart');
                             }
                         ?>
                         <span>Diskon Ongkos Kirim</span>
-                        <span class="summary-ongkir-value"><b> - Rp</b> <b id="diskon-ongkir"><?=number_format($arr[6]??0,0)?></b> </span>
-                    </div>
-                    <div class="summary-belanja">
-                        <span>Total Belanja</span>
-                        <span class="summary-belanja-value"><b>Rp <?= number_format($totalHarga, 0) ?></b></span>
+                        <span class="summary-ongkir-value" style="color: red;"><b> - Rp</b> <b id="diskon-ongkir"><?=number_format($arr[6]??0,0)?></b> </span>
                     </div>
                     <hr>
                     <div class="summary-all">
-                        <span>Total Bayar</span>
-                        <span><strong class="summary-all-value"></strong><b>Rp</b> <b id="total-bayar"><?= number_format($transaksi->total_harga, 0) ?></b> </span>
+                        <span style="font-size: larger;font-weight: 900;color: #5a5a5a;">Total</span>
+                        <span style="font-size: larger;font-weight: 900;color: #5a5a5a;"><strong class="summary-all-value"></strong><b>Rp</b> <b id="total-bayar"><?= number_format($transaksi->total_harga, 0) ?></b> </span>
                     </div>
                 </div>
             </div>
