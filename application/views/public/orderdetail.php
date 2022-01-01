@@ -61,9 +61,9 @@ $this->load->view('public/cart');
                 $jumlah_item = 0;
                 $totalHarga = 0;
                 $totalRealHarga = 0;
+                $totalDiskon = 0;
                 foreach ($detail_transaksi as $row) {
                     $totalRealHarga += ($row['harga_produk'] * $row['jumlah_produk']);
-                    $totalDiskon = 0;
                     if ($row['id_sub_produk'] == null) {
                         $diskon = (($row['diskon_produk'] / 100) * $row['harga_produk']);
                         $foto = explode(',', $row['thumbnail_produk']);
@@ -89,7 +89,7 @@ $this->load->view('public/cart');
                             </div>
                         </div>
                     <?php
-                    $totalDiskon += ($diskon  * $row['jumlah_produk']);
+                    $totalDiskon += ($diskon * $row['jumlah_produk']);
                     } else { ?>
                         <div class="products">
                             <div class="product-box" id="product-box__39395">
