@@ -2,6 +2,7 @@
 
 require('./application/third_party/phpoffice/vendor/autoload.php');
 require('./application/libraries/go2hi/src/go2hi/go2hi.php');
+require('./application/controllers/admin/SendInvoice.php');
 
 use go2hi\go2hi;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -223,10 +224,10 @@ class Transaksi extends MY_Controller
             $id = $this->input->get('id');
 
             $this->load->library('pdfgenerator');
-        
+
             // // title dari pdf
             $data['title_pdf'] = 'Laporan Penjualan Toko Kita';
-            
+
             // // filename dari pdf ketika didownload
             $file_pdf = 'laporan_penjualan_toko_kita';
             // setting paper
@@ -236,47 +237,89 @@ class Transaksi extends MY_Controller
             // $paper = array(0,0,560,160);
             //orientasi paper potrait / landscape
             $orientation = "landscape";
-            
-            $html = $this->load->view('admin/pdf/address_transaction',$data, true);
-        
-            
+
+            $html = $this->load->view('admin/pdf/address_transaction', $data, true);
+
+
             // run dompdf
-            $this->pdfgenerator->generate($html, $file_pdf,$paper,$orientation);
+            $this->pdfgenerator->generate($html, $file_pdf, $paper, $orientation);
         } catch (\Throwable $th) {
             die(json_encode($th->getMessage()));
             // error('500');
         }
     }
 
-    public function export_invoice(){
+    public function export_invoice()
+    {
         try {
             $id = $this->input->get('id');
 
             $this->load->library('pdfgenerator');
             $this->load->helper('date');
-        
+
             // // title dari pdf
             $data['title_pdf'] = 'Laporan Penjualan Toko Kita';
-            
+
             // // filename dari pdf ketika didownload
             $file_pdf = 'laporan_penjualan_toko_kita';
             // setting paper
             $paper = 'A4';
-            $id = $this->input->get('id');
             $data['transaksi'] = $this->transaksi->get_transaksiById($id);
-            $data['tanggal'] = hari_ini(). ", ".go2hi::date('d F Y', go2hi::GO2HI_HIJRI)."H / ".date("d F Y");
-            
+            $data['tanggal'] = hari_ini() . ", " . go2hi::date('d F Y', go2hi::GO2HI_HIJRI) . "H / " . date("d F Y");
+
             // $paper = array(0,0,560,160);
             //orientasi paper potrait / landscape
             $orientation = "potrait";
-            
-            $html = $this->load->view('admin/pdf/invoice',$data, true);
+
+            $html = $this->load->view('admin/pdf/invoice', $data, true);
             // $this->load->view('admin/pdf/invoice',$data);
-            
+
             // run dompdf
-            $this->pdfgenerator->generate($html, $file_pdf,$paper,$orientation);
+            $this->pdfgenerator->generate($html, $file_pdf, $paper, $orientation);
         } catch (\Throwable $th) {
             die(json_encode($th->getMessage()));
+        }
+    }
+
+    public function send_invoice()
+    {
+        try {
+            $this->load->helper('mail');
+            $this->load->helper('date');
+            $id = $this->input->get('id');
+            $data['transaksi'] = $this->transaksi->get_transaksiById($id);
+            $data['tanggal'] = hari_ini() . ", " . go2hi::date('d F Y', go2hi::GO2HI_HIJRI) . "H / " . date("d F Y");
+            $message = $this->load->view('admin/pdf/invoice', $data, true);
+
+            $config = setEmail();
+
+            $this->load->library('email', $config);
+            $this->email->set_newline("\r\n");
+            $this->email->from($config['smtp_user']);
+            $this->email->to($data['transaksi'][0]->email);
+            $this->email->subject('Invoice');
+            $this->email->message($message);
+
+            $sendInvoiceMail = $this->email->send();
+            if($sendInvoiceMail){
+                $this->session->set_flashdata(
+                    'pesan',
+                    '<div class="alert alert-success mr-auto alert-dismissible">Invoice berhasil dikirim</div>'
+                );
+                redirect('admin/transaksi/detail?id='.$id);
+            }else{
+                $this->session->set_flashdata(
+                    'pesan',
+                    '<div class="alert alert-danger mr-auto alert-dismissible">Invoice gagal dikirim</div>'
+                );
+                redirect('admin/transaksi/detail?id='.$id);
+            }
+        } catch (\Throwable $th) {
+            $this->session->set_flashdata(
+                'pesan',
+                '<div class="alert alert-danger mr-auto alert-dismissible">Server error.</div>'
+            );
+            redirect('admin/transaksi/detail?id='.$id);
         }
     }
 }

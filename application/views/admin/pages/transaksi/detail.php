@@ -29,6 +29,7 @@
                         <p class="section-lead">
                             Berikut data detail transaksi.
                         </p> -->
+                        <?php echo $this->session->flashdata('pesan') ?>
                         <div class="invoice">
                             <div class="invoice-print">
                                 <div class="row">
@@ -88,6 +89,8 @@
                                                 <a href="<?= base_url() ?>admin/transaksi/export_address?id=<?= $transaksi[0]->id_transaksi ?>" class="btn btn-info btn-icon icon-left" target="_blank"><i class="fas fa-print"></i> Cetak Alamat</a>
                                                 <br/>
                                                 <a style="margin-top: 10px;" href="<?= base_url() ?>admin/transaksi/export_invoice?id=<?= $transaksi[0]->id_transaksi ?>" class="btn btn-success btn-icon icon-left" target="_blank"><i class="fas fa-print"></i> Cetak Invoice</a>
+                                                <br/>
+                                                <a style="margin-top: 10px;" href="<?= base_url() ?>admin/transaksi/send_invoice?id=<?= $transaksi[0]->id_transaksi ?>" class="btn btn-primary btn-icon icon-left"><i class="fas fa-envelope"></i> Kirim Invoice</a>
                                             </div>
                                         </div>
                                         <div class="row">
