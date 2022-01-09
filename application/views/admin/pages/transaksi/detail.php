@@ -84,6 +84,11 @@
                                                     } ?>
                                                 </address>
                                             </div>
+                                            <div class="col-md-6 text-md-right">
+                                                <a href="<?= base_url() ?>admin/transaksi/export_address?id=<?= $transaksi[0]->id_transaksi ?>" class="btn btn-info btn-icon icon-left" target="_blank"><i class="fas fa-print"></i> Cetak Alamat</a>
+                                                <br/>
+                                                <a style="margin-top: 10px;" href="<?= base_url() ?>admin/transaksi/export_invoice?id=<?= $transaksi[0]->id_transaksi ?>" class="btn btn-success btn-icon icon-left" target="_blank"><i class="fas fa-print"></i> Cetak Invoice</a>
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -92,8 +97,8 @@
                                                     <?php if ($transaksi[0]->system_note == null || $transaksi[0]->system_note == "") {
                                                         echo "Tidak ada catatan system";;
                                                     } else {
-                                                        $arr = explode(":",$transaksi[0]->system_note);
-                                                        echo $arr[0]."<br/>".$arr[3]." ".$arr[4];
+                                                        $arr = explode(":", $transaksi[0]->system_note);
+                                                        echo $arr[0] . "<br/>" . $arr[3] . " " . $arr[4];
                                                     } ?>
                                                 </address>
                                             </div>
@@ -192,7 +197,6 @@
                                 <div class="float-lg-left mb-lg-0 mb-3">
                                     <button class="btn btn-primary btn-icon icon-left" id="btnProses" data-target="#proses_modal" data-toggle="modal" data-id="<?= $transaksi[0]->id_transaksi ?>"><i class="fas fa-credit-card"></i> Proses</button>
                                     <button class="btn btn-danger btn-icon icon-left" id="btnBatal" data-target="#batal_modal" data-toggle="modal" data-id="<?= $transaksi[0]->id_transaksi ?>"><i class="fas fa-times"></i> Batalkan</button>
-                                    <a href="<?= base_url() ?>admin/transaksi/export_address?id=<?=$transaksi[0]->id_transaksi?>" class="btn btn-info btn-icon icon-left" target="_blank"><i class="fas fa-print"></i> Cetak Alamat</a>
                                 </div>
                                 <p><?= date("d/m/Y") ?></p>
                                 <!-- <button class="btn btn-warning btn-icon icon-left"><i class="fas fa-print"></i> Print</button> -->

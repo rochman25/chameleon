@@ -1,7 +1,9 @@
 <?php
 
 require('./application/third_party/phpoffice/vendor/autoload.php');
+require('./application/libraries/go2hi/src/go2hi/go2hi.php');
 
+use go2hi\go2hi;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -243,6 +245,38 @@ class Transaksi extends MY_Controller
         } catch (\Throwable $th) {
             die(json_encode($th->getMessage()));
             // error('500');
+        }
+    }
+
+    public function export_invoice(){
+        try {
+            $id = $this->input->get('id');
+
+            $this->load->library('pdfgenerator');
+            $this->load->helper('date');
+        
+            // // title dari pdf
+            $data['title_pdf'] = 'Laporan Penjualan Toko Kita';
+            
+            // // filename dari pdf ketika didownload
+            $file_pdf = 'laporan_penjualan_toko_kita';
+            // setting paper
+            $paper = 'A4';
+            $id = $this->input->get('id');
+            $data['transaksi'] = $this->transaksi->get_transaksiById($id);
+            $data['tanggal'] = hari_ini(). ", ".go2hi::date('d F Y', go2hi::GO2HI_HIJRI)."H / ".date("d F Y");
+            
+            // $paper = array(0,0,560,160);
+            //orientasi paper potrait / landscape
+            $orientation = "potrait";
+            
+            $html = $this->load->view('admin/pdf/invoice',$data, true);
+            // $this->load->view('admin/pdf/invoice',$data);
+            
+            // run dompdf
+            $this->pdfgenerator->generate($html, $file_pdf,$paper,$orientation);
+        } catch (\Throwable $th) {
+            die(json_encode($th->getMessage()));
         }
     }
 }
