@@ -109,7 +109,7 @@
 			</div>
 			<?php if(isset($voucher)){ ?>
 			<div class="voucher">
-				<p>Get <b>Discount <?= number_format($voucher->discount_voucher,0) ?> </b> with Voucher Code <b><?= $voucher->code_voucher ?></b> </p>
+				<p>Get Free Shipping <b> <?= number_format($voucher->discount_voucher,0) ?> </b> with Voucher Code <b><?= $voucher->code_voucher ?></b> </p>
 			</div>
 			<?php } ?>
 		</div>

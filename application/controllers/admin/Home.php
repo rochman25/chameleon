@@ -163,8 +163,9 @@ class Home extends MY_Controller
                 $pass = $this->input->post('pass');
 
                 $cek = $this->admin->login($email);
-                // die(json_encode($cek));
+                //die(json_encode($cek));
                 if ($cek != null) {
+                    //if($cek){
                     if ($this->bcrypt->check_password($pass, $cek->password)) {
                     // if ($cek->password == $pass) {
                         $datas = array(

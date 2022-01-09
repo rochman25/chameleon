@@ -154,12 +154,13 @@ $this->load->view('public/cart');
 
             if (t.total <= 0) {
                 clearInterval(timeinterval);
+                clock.style.display = "none";
                 location.reload();
             }
         }
 
         updateClock();
-        const timeinterval = setInterval(updateClock, 1000);
+        var timeinterval = setInterval(updateClock, 1000);
     }
     const deadline = new Date(Date.parse(release_date));
     console.log(deadline)

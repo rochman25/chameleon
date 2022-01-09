@@ -60,7 +60,6 @@ class Produk extends MY_Controller
                 $size_c = implode(",", $size_c);
                 $label_p = implode(",", $label_p);
 
-
                 if ($this->session->userdata('produk_data') != null) {
                     $kode_p = $this->session->userdata['produk_data']['kode'];
                 } else {
@@ -97,6 +96,7 @@ class Produk extends MY_Controller
                     $harga_sub = $this->input->post('harga_sub');
                     $berat_sub = $this->input->post('berat_sub');
                     $diskon_sub = $this->input->post('diskon_sub');
+                    // die(json_encode($data));
                     $stok_sub = $this->input->post('stok_sub');
                     if (!in_array("", $nama_sub)) {
                         foreach ($nama_sub as $key => $item) {
@@ -158,6 +158,7 @@ class Produk extends MY_Controller
                     redirect('admin/produk');
                 }
             } else {
+                // die(json_encode($data));
                 $this->load->view('admin/pages/produk/form_produk', $data);
             }
         } else {
@@ -374,7 +375,6 @@ class Produk extends MY_Controller
             if ($this->input->post('status') != "remove") {
                 $data = [];
                 $foto = null;
-
                 // die(json_encode($foto));
                 $i = 0;
                 $index = 0;
@@ -428,6 +428,7 @@ class Produk extends MY_Controller
                             );
                             $this->load->library('image_lib', $config);
 
+
                             if (!$this->image_lib->resize()) {
                                 $this->session->set_flashdata(
                                     'pesan',
@@ -477,7 +478,6 @@ class Produk extends MY_Controller
             redirect('admin/home/login');
         }
     }
-
 
     public function deleteFile()
     {

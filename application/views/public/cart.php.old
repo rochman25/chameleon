@@ -4,16 +4,16 @@
             Keranjang Belanja
             <i class="svg_icon__header_close svg-icon"></i>
 		</div>
-		<?php if(isset($his->session->userdata['user_data'])){
-				$id = $his->session->userdata['user_data']['id'];
-				if(isset($his->session->userdata[$id])){
-					?>
-						<div class="cart-wrapper" id="cart" data-cart-id="<?= $this->session->userdata[$id]["current_cart"];?>">
-							
-						</div>
-					<?php
-				}
-		}else{
+    		<?php if(isset($his->session->userdata['user_data'])){
+    				$id = $his->session->userdata['user_data']['id'];
+    				if(isset($his->session->userdata[$id])){
+    					?>
+    						<div class="cart-wrapper" id="cart" data-cart-id="<?= $this->session->userdata[$id]["current_cart"];?>">
+    							
+    						</div>
+    					<?php
+    				}
+    		}else{
 			?>
 				<div class="cart-wrapper" data-cart-id="">
 			
@@ -23,13 +23,13 @@
 		
 		<div class="cart-footer">
 			<div>
-				<span class="sum">Total</span>
+				<span class="sum">Subtotal</span>
 				<span id="totalharga" class="total_sum">Rp 0</span>
 				<div class="clearfix"></div>
 			</div>
 			<form action="<?= base_url()?>order" method="POST">
 				<input type="hidden" value=""/>
-				<input type="submit" value="Beli" class="confirm"/>
+				<input type="submit" value="SELANJUTNYA" class="confirm" style="border-radius: 7px;"/>
 			</form>
 			<!-- <a class="confirm" href="">hajar men</a> -->
 		</div>
@@ -54,7 +54,7 @@ var base_url = '<?= base_url()?>';
                 var res = JSON.parse(t);
 				
 				console.log(res);
-				if(res.success =="success"){
+				// if(res.success =="success"){
 					if (res.data.length >=0) {
 						var harga = 0;
 						var notif = res.data.length;
@@ -68,7 +68,7 @@ var base_url = '<?= base_url()?>';
 							$("#totalharga").html("Rp "+res.total);
 						
 						}
-				}
+				// }
 				// else{
 
 				// } 
@@ -93,8 +93,6 @@ var base_url = '<?= base_url()?>';
                 console.log(res);
                  if (true == res.success) {
                     location.reload()
-                         
-
                  } 
                  
 

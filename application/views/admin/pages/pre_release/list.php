@@ -41,7 +41,7 @@
                                         <h4>Pre Release List</h4>
                                     </div>
                                     <div class="card-body">
-                                        <a href="<?= base_url() ?>admin/prerelease/tambah" class="btn btn-primary" style="margin-bottom:10px"><i class="fa fa-plus"></i> Tambah Pre Release</a>
+                                        <a href="<?= base_url() ?>admin/PreRelease/tambah" class="btn btn-primary" style="margin-bottom:10px"><i class="fa fa-plus"></i> Tambah Pre Release</a>
                                         <?= $this->session->flashdata('pesan') ?>
                                         <div class="table-responsive">
                                             <table class="table table-hover" id="table-1">
@@ -64,7 +64,7 @@
                                                             <td><?= $row['release_date'] ?></td>
                                                             <td><?= $row['updated_at'] ?></td>
                                                             <td>
-                                                                 <a href="<?= base_url() ?>admin/prerelease/ubah/<?= $row['id'] ?>" class="btn btn-success">Ubah</a>
+                                                                 <a href="<?= base_url() ?>admin/PreRelease/ubah/<?= $row['id'] ?>" class="btn btn-success">Ubah</a>
                                                                  <button id="btnHapus" data-target="#hapusModal" data-toggle="modal" data-id="<?= $row['id'] ?>" class="btn btn-danger">Hapus</button> 
                                                             </td>
                                                         </tr>
@@ -93,7 +93,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= base_url() ?>admin/prerelease/hapus" method="POST">
+                <form action="<?= base_url() ?>admin/PreRelease/hapus" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
                             <div class="row">

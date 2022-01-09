@@ -47,13 +47,13 @@ class PreRelease extends MY_Controller
                             'pesan',
                             '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil dimasukkan</div>'
                         );
-                        redirect('admin/prerelease');
+                        redirect('admin/PreRelease');
                     } else {
                         $this->session->set_flashdata(
                             'pesan',
                             '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
                         );
-                        redirect('admin/prerelease');
+                        redirect('admin/PreRelease');
                     }
                 }
             } else {
@@ -92,13 +92,13 @@ class PreRelease extends MY_Controller
                             'pesan',
                             '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil disimpan</div>'
                         );
-                        redirect('admin/prerelease');
+                        redirect('admin/PreRelease');
                     } else {
                         $this->session->set_flashdata(
                             'pesan',
                             '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
                         );
-                        redirect('admin/prerelease');
+                        redirect('admin/PreRelease');
                     }
                 }
             } else {
@@ -119,13 +119,13 @@ class PreRelease extends MY_Controller
                     'pesan',
                     '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil dihapus</div>'
                 );
-                redirect('admin/prerelease');
+                redirect('admin/PreRelease');
             } else {
                 $this->session->set_flashdata(
                     'pesan',
                     '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
                 );
-                redirect('admin/prerelease');
+                redirect('admin/PreRelease');
             }
         } else {
             redirect('admin/home/login');

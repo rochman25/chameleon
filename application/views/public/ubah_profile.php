@@ -80,7 +80,7 @@ $this->load->view('public/cart');
                                             font-size: 13px;
                                             font-weight: 800;
                                             ">Username</div>
-                                            <input type="text" style="color: black;" disabled name="username" value="<?= $profil->username ?>">
+                                            <input type="text" style="color: black;border-radius: 7px;" disabled name="username" value="<?= $profil->username ?>">
                                         </div>
                                         <div class="col-lg-6" style="padding-bottom: 20px;">
                                             <div class="title" style="
@@ -88,7 +88,7 @@ $this->load->view('public/cart');
                                             font-size: 13px;
                                             font-weight: 800;
                                             ">Nama Lengkap</div>
-                                            <input type="text" style="color: black;" name="nama_lengkap" value="<?= $profil->nama_lengkap ?>">
+                                            <input type="text" style="color: black;border-radius: 7px;" name="nama_lengkap" value="<?= $profil->nama_lengkap ?>">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -98,7 +98,7 @@ $this->load->view('public/cart');
                                             font-size: 13px;
                                             font-weight: 800;
                                             ">Email</div>
-                                            <input type="text" style="color: black;" disabled name="email" value="<?= $profil->email ?>">
+                                            <input type="text" style="color: black;border-radius: 7px;" disabled name="email" value="<?= $profil->email ?>">
                                         </div>
                                         <div class="col-lg-6" style="padding-bottom: 20px;">
                                             <div class="title" style="
@@ -106,7 +106,7 @@ $this->load->view('public/cart');
                                             font-size: 13px;
                                             font-weight: 800;
                                             ">No Telphone</div>
-                                            <input type="text" style="color: black;" name="no_telp" value="<?= $profil->no_telp ?>">
+                                            <input type="text" style="color: black;border-radius: 7px;" name="no_telp" value="<?= $profil->no_telp ?>">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -116,7 +116,7 @@ $this->load->view('public/cart');
                                             font-size: 13px;
                                             font-weight: 800;
                                             ">Alamat 1</div>
-                                            <input type="text" style="color: black;" name="alamat_1" value="<?= $profil->alamat_1 ?>">
+                                            <input type="text" style="color: black;border-radius: 7px;" name="alamat_1" value="<?= $profil->alamat_1 ?>">
                                         </div>
                                         <div class="col-lg-6" style="padding-bottom: 20px;">
                                             <div class="title" style="
@@ -124,7 +124,7 @@ $this->load->view('public/cart');
                                             font-size: 13px;
                                             font-weight: 800;
                                             ">Alamat 2</div>
-                                            <input type="text" style="color: black;" name="alamat_2" value="<?= $profil->alamat_2 ?>">
+                                            <input type="text" style="color: black;border-radius: 7px;" name="alamat_2" value="<?= $profil->alamat_2 ?>">
                                         </div>
                                         <input type="hidden" value="<?= $profil->id_alamat ?>" name="id_alamat">
                                     </div>
@@ -135,7 +135,7 @@ $this->load->view('public/cart');
                                             font-size: 13px;
                                             font-weight: 800;
                                             ">Provinsi</div>
-                                            <select style="color:black" name="provinsi_id" id="provinsi_id">
+                                            <select style="color:black;border-radius: 7px;" name="provinsi_id" id="provinsi_id">
                                                 <?php if ($profil->provinsi_id == "") { ?>
                                                     <option value="">Pilih Provinsi</option>
                                                 <?php } else { ?>
@@ -154,7 +154,7 @@ $this->load->view('public/cart');
                                             font-weight: 800;
                                             ">Kabupaten</div>
                                             <div class="loader" id="loader_kabupaten"></div>
-                                            <select style="color:black" name="kabupaten_id" id="kabupaten_id">
+                                            <select style="color:black;border-radius: 7px;" name="kabupaten_id" id="kabupaten_id">
                                                 <?php if ($profil->kabupaten_id == "") { ?>
                                                     <option value="">Pilih Kabupaten</option>
                                                 <?php } else { ?>
@@ -171,7 +171,7 @@ $this->load->view('public/cart');
                                             font-weight: 800;
                                             ">Kecamatan</div>
                                             <div class="loader" id="loader_kecamatan"></div>
-                                            <select style="color:black" name="kecamatan_id" id="kecamatan_id">
+                                            <select style="color:black;border-radius: 7px;" name="kecamatan_id" id="kecamatan_id">
                                                 <?php if ($profil->kecamatan_id == "") { ?>
                                                     <option value="">Pilih Kecamatan</option>
                                                 <?php } else { ?>
@@ -185,12 +185,12 @@ $this->load->view('public/cart');
                                             font-size: 13px;
                                             font-weight: 800;
                                             ">Kode Pos</div>
-                                            <input type="text" style="color: black;" name="kode_pos" value="<?= $profil->kode_pos ?>">
+                                            <input type="text" style="color: black;border-radius: 7px;" name="kode_pos" value="<?= $profil->kode_pos ?>">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6" style="padding-bottom: 20px;">
-                                            <input style="background:#0077ed; float:left" type="submit" name="kirim" value="Simpan">
+                                            <input style="background:#0077ed;float:left;border-radius: 7px;" type="submit" name="kirim" value="Simpan">
                                         </div>
                                     </div>
                                 </form>

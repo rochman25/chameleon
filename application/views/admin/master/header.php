@@ -123,7 +123,7 @@
                 <a href="<?= base_url() ?>admin/voucher" class="nav-link"><i class="fas fa-percent"></i><span>Voucher Ongkir</span></a>
             </li>
             <li class="nav-item">
-                <a href="<?= base_url() ?>admin/prerelease" class="nav-link"><i class="fas fa-stopwatch"></i><span>Pre Release</span></a>
+                <a href="<?= base_url() ?>admin/PreRelease" class="nav-link"><i class="fas fa-stopwatch"></i><span>Pre Release</span></a>
             </li>
             <li class="menu-header">Transaksi</li>
             <!-- <li class="nav-item">

@@ -383,15 +383,15 @@ $this->load->view('public/cart');
         <!--</div>-->
 
 
-        <section class="signup">
+        <!--<section class="signup">
             <h1>NEW RELEASE</h1>
         </section>
 
         <section class="hot-product-two-row" style="height: 50px;">
-        </section>
+        </section>-->
 
         <!--<section class="hot-product-two-row">-->
-        <section class="banner" style="padding-bottom: 45%;">
+        <!--<section class="banner" style="padding-bottom: 45%;">
             <div class="owl-carousel owl-theme" style="position: absolute;">
 
                 <?php foreach ($produk_new_release as $p) {
@@ -408,7 +408,7 @@ $this->load->view('public/cart');
                     </a>
                 <?php } ?>
             </div>
-        </section>
+        </section>-->
         <!--</section>-->
         <section class="signup">
             <h1>DAFTAR DENGAN EMAIL</h1>
@@ -473,8 +473,7 @@ $this->load->view('public/footer');
 
         // let timeinterval;
         // let timeinterval = setInterval(updateClock, 2000);
-        updateClock();
-        const timeinterval = setInterval(updateClock, 1000);
+
 
         function updateClock() {
             const t = getTimeRemaining(endtime);
@@ -486,9 +485,13 @@ $this->load->view('public/footer');
 
             if (t.total <= 0) {
                 clearInterval(timeinterval);
-                location.reload();
+                // location.reload();
+                clock.style.display = "none";
             }
         }
+        
+        updateClock();
+        var timeinterval = setInterval(updateClock, 1000);
 
 
     }

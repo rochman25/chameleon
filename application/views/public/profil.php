@@ -97,8 +97,8 @@ $this->load->view('public/cart');
                             <div class="card-row">
                                 <div class="row" style="margin-right: 0px;margin-left: 0px;">
                                     <div class="column">
-                                        <b><?= $no++ . ". "; ?></b>
-                                        <b style="text-decoration: underline;"><a href="<?= base_url('order_detail/'.$row['kode_transaksi']) ?>"><?= $row['kode_transaksi'] ?></a></b>
+                                        
+                                        <b style="text-decoration: none;"><a href="<?= base_url('order_detail/'.$row['kode_transaksi']) ?>" style="color: #5a5a5a;"><?= $row['kode_transaksi'] ?></a></b>
                                     </div>
                                     <div class="column">
                                         <div class="row" style="margin-right: 0; margin-left: 0px;">
@@ -108,37 +108,34 @@ $this->load->view('public/cart');
                                                     <!-- <span style="float: right;"> -->
                                                     <form action="<?= base_url() ?>pembayaran" method="POST">
                                                         <input type="hidden" name="idtransaksi" value="<?= $row['id_transaksi'] ?>">
-                                                        <input class="btn-sm btn-success" style="margin-top:0px;" type="submit" value="Konfirmasi">
+                                                        <input class="btn-sm btn-success" style="margin-top:0px;border-radius: 7px;" type="submit" value="Konfirmasi">
                                                     </form>
                                                     <!-- </span> -->
                                                 <?php } else { ?>
-                                                    <p style="text-align:right; font-weight:bold ;"><a href="#" class="btntoggle" data-id="<?= $row['kode_transaksi'] ?>">Check</a></p>
+                                                    <form action="<?= base_url('order_detail/'.$row['kode_transaksi']) ?>">
+                                                        <input type="hidden" value="<?= $row['kode_transaksi'] ?>">
+                                                        <input class="btn-sm btn-success" style="margin-top:0px;background: #000000;border-radius: 7px;" type="submit" value="See Details">
+                                                    </form>
                                                 <?php } ?>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-row">
-                                <div class="collapsed" id="panel<?=$row['kode_transaksi']?>">
-                                    <hr style="margin: 0px;">
-                                    <b>&#8203; &#8203; &#8203;</b>
-                                    <p><b>Status : </b>
+                                <p><b style="font-weight: 100;">Status : </b>
                                         <?php if ($row['status_transaksi'] == 'batal') {
-                                            echo '<span class="" style="color:red">Pesanan anda dibatalkan.</span>';
+                                            echo '<span class="" style="color: #5a5a5a;font-weight: 900;">Batal</span>';
                                         } else { ?>
-                                            <b style="color: #00ff00;"><?= ucfirst($row['status_transaksi']) ?>
+                                            <b style="color: #5a5a5a;"><?= ucfirst($row['status_transaksi']) ?>
                                             </b>
                                         <?php } ?>
                                     </p>
                                     <?php if ($row['status_transaksi'] == 'proses') {
-                                        echo '<span class="">Pesanan sedang diproses</span>';
+                                        echo '<span class="">Process</span>';
                                     } else if ($row['status_transaksi'] == 'validasi') {
-                                        echo '<span class="badge badge-success">Pesanan anda sudah divalidasi</span>';
+                                        echo '<span class="badge badge-success">Validation</span>';
                                     } else if ($row['status_transaksi'] == "kirim") {
                                         echo '<b>No Resi : ' . (!empty($row['no_resi']) ? $row['no_resi'] . " <b>(" . strtoupper($row['kurir']) . ")</b>" : "No resi belum dimasukkan.") . '</b>';
                                     } ?>
-                                </div>
                             </div>
                         </div>
                     <?php } ?>
