@@ -1,6 +1,8 @@
 <?php
 
+use go2hi\go2hi;
 
+require('./application/libraries/go2hi/src/go2hi/go2hi.php');
 class Order extends MY_Controller
 {
     function __construct()
@@ -12,8 +14,8 @@ class Order extends MY_Controller
         $this->load->model('Cart_model', 'cart');
         $this->load->model('Kategori_model', 'kategori');
         $this->load->model('Detailcart_model', 'cart_item');
-        $this->load->model('SizeStock_model','sizeStock');
-        $this->load->model('Voucher_ongkir_model','voucher_ongkir');
+        $this->load->model('SizeStock_model', 'sizeStock');
+        $this->load->model('Voucher_ongkir_model', 'voucher_ongkir');
     }
 
     public function index()
@@ -34,7 +36,7 @@ class Order extends MY_Controller
             $total_harga = 0;
             $total_berat = 0;
             $total_jumlah = 0;
-            
+
             foreach ($data['cart'] as $row) {
                 if ($row['id_sub_produk'] == null) {
                     $harga = $row['diskon_produk'] != 0 ? $row['harga_produk'] - (($row['diskon_produk'] / 100) * $row['harga_produk']) : $row['harga_produk'];
@@ -48,10 +50,10 @@ class Order extends MY_Controller
                 $thumbnail[$row['id_produk']] = base_url() . "assets/uploads/thumbnail_produk/" . $foto[0];
                 // }
                 $total_harga += $harga * $row['quantity'];
-                if($row['quantity'] > 1){
+                if ($row['quantity'] > 1) {
                     $total_berat = $total_berat + ($row['quantity'] * $row['berat_produk']);
-                }else{
-                    $total_berat += $row['berat_produk'];   
+                } else {
+                    $total_berat += $row['berat_produk'];
                 }
                 $total_jumlah += $row['quantity'];
             }
@@ -59,9 +61,10 @@ class Order extends MY_Controller
             $data['total_berat'] = $total_berat;
             $data['total_jumlah'] = $total_jumlah;
             $data['thumbnail'] = $thumbnail;
-            
+
             if ($this->input->post('kirim')) {
-                $this->db->trans_begin();
+                $status = true;
+                // $this->db->trans_begin();
                 $nama_lengkap = $this->input->post('nama_lengkap');
                 $no_telp = $this->input->post('no_telp');
                 $alamat_1 = $this->input->post('alamat_1');
@@ -106,7 +109,7 @@ class Order extends MY_Controller
                 $catatan = $this->input->post('catatan');
                 $kode = $this->transaksi->generateKode($data['profil']->email);
                 $this->session->set_userdata('kode_transaksi', $kode);
-                
+
                 $data_t = array(
                     "kode_transaksi" => $kode,
                     "kurir" => $kurir,
@@ -120,22 +123,23 @@ class Order extends MY_Controller
                     "total_ongkir" => $total_ongkir,
                     "system_note" => $system_note
                 );
-                
+
                 // var_dump($data_t);die;
-                
-                if ($this->transaksi->tambahData($data_t)) {
+                $id_transaksi = "";
+                $transaksi = $this->transaksi->tambahData($data_t);
+                if ($transaksi) {
                     $cart = $this->cart->cekCart();
                     $this->cart_item->deleteDetailCart($cart->id_cart);
                     $data_detail = [];
                     $id_transaksi = $this->transaksi->getIdTransaksi($this->session->userdata('kode_transaksi'));
-                    
+
                     foreach ($data['cart'] as $row) {
                         $id_produk = $row['id_produk'];
                         $harga_produk = $row['harga_produk'];
-                        if($row['diskon_produk'] != 0){
+                        if ($row['diskon_produk'] != 0) {
                             $harga_produk = $row['harga_produk'] - (($row['diskon_produk'] / 100) * $row['harga_produk']);
                         }
-                        if($row['id_sub_produk'] != null){
+                        if ($row['id_sub_produk'] != null) {
                             $id_produk = $row['id_sub_produk'];
                             $harga_produk = $row['harga_sub'];
                         }
@@ -152,23 +156,26 @@ class Order extends MY_Controller
                     }
 
                     // die(json_encode($data_detail));
-
-                    if ($this->transaksi->tambahDetail($data_detail)) {
+                    $detail = $this->transaksi->tambahDetail($data_detail);
+                    if ($detail) {
                         $this->db->trans_commit();
-                        $this->session->unset_userdata('kode_transaksi');
-                        $this->session->set_flashdata('pesan', "Transaksi anda berhasil, silahkan melakukan pembayaran ke rekening kami, untuk detail dapat dilihat dengan klik button konfirmasi berikut.");
-                        redirect('user/home/profil');
+                        $status = true;
                     } else {
+                        $status = false;
                         $this->db->trans_rollback();
-                        die(json_encode(array("error" => "ada masalah lagi")));
                     }
                 } else {
+                    $status = false;
                     $this->db->trans_rollback();
-                    die(json_encode(array("error" => "ada masalah")));
                 }
 
-                die(json_encode($data));
-
+                if ($status) {
+                    $this->session->unset_userdata('kode_transaksi');
+                    $this->session->set_flashdata('pesan', "Transaksi anda berhasil, silahkan melakukan pembayaran ke rekening kami, untuk detail dapat dilihat dengan klik button konfirmasi berikut.");
+                } else {
+                    $this->session->set_flashdata('pesan', "Transaksi anda gagal, silahkan coba lagi nanti.");
+                }
+                redirect('user/home/profil');
             } else {
                 // die(json_encode($data));
                 $data['id_cart'] = "";
@@ -179,7 +186,8 @@ class Order extends MY_Controller
         }
     }
 
-    public function order_detail($id){
+    public function order_detail($id)
+    {
         $idp = $this->session->userdata['user_data']['id'];
         $data['transaksi'] = $this->transaksi->getWhere("kode_transaksi", $id);
         $data['transaksi'] = $this->transaksi->getData()->row();
@@ -190,7 +198,28 @@ class Order extends MY_Controller
         $data['profil'] = $this->user->getWhere("pengguna.id_pengguna", $idp);
         $data['profil'] = $this->user->getData()->row();
         // die(json_encode($data));
-        $this->load->view('public/orderdetail',$data);
+        $this->load->view('public/orderdetail', $data);
     }
 
+    public function sendInvoice($id = "e6de6dce-7196-11ec-9f7e-001a7dda7113")
+    {
+        $this->load->helper('mail');
+        $this->load->helper('date');
+        // die(json_encode($this->transaksi->get_transaksiById($id)));
+        $data['transaksi'] = $this->transaksi->get_transaksiById($id);
+
+        $data['tanggal'] = hari_ini() . ", " . go2hi::date('d F Y', go2hi::GO2HI_HIJRI) . "H / " . date("d F Y");
+        $message = $this->load->view('admin/pdf/invoice', $data, true);
+
+        $config = setEmail();
+
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from($config['smtp_user']);
+        $this->email->to($data['transaksi'][0]->email);
+        $this->email->subject('Invoice Transaksi #' . $data['transaksi'][0]->kode_transaksi);
+        $this->email->message($message);
+
+        $this->email->send();
+    }
 }

@@ -2,7 +2,6 @@
 
 require('./application/third_party/phpoffice/vendor/autoload.php');
 require('./application/libraries/go2hi/src/go2hi/go2hi.php');
-require('./application/controllers/admin/SendInvoice.php');
 
 use go2hi\go2hi;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
