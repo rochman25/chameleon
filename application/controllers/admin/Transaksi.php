@@ -12,10 +12,10 @@ class Transaksi extends MY_Controller
     {
         parent::__construct();
         $this->load->model('Transaksi_model', 'transaksi');
-        $this->load->model('Produk_model','produk');
+        $this->load->model('Produk_model', 'produk');
         $this->load->model('Cart_model', 'cart');
-        $this->load->model('Detailcart_model','detail');
-        $this->load->model('SizeStock_model','sizeStock');
+        $this->load->model('Detailcart_model', 'detail');
+        $this->load->model('SizeStock_model', 'sizeStock');
     }
 
     public function index()
@@ -25,8 +25,8 @@ class Transaksi extends MY_Controller
             $data = [
                 "transaksi" => $transaksi,
             ];
-            $this->load->view('admin/pages/transaksi/list_transaksi',$data);
-        }else{
+            $this->load->view('admin/pages/transaksi/list_transaksi', $data);
+        } else {
             redirect('admin/home/login');
         }
     }
@@ -37,9 +37,9 @@ class Transaksi extends MY_Controller
             $id = $this->input->get('id');
             $data['transaksi'] = $this->transaksi->get_transaksiById($id);
             // die(json_encode($data));
-            $this->load->view('admin/pages/transaksi/detail',$data);
+            $this->load->view('admin/pages/transaksi/detail', $data);
             // die(json_encode($data));
-        }else{
+        } else {
             redirect('admin/home/login');
         }
     }
@@ -56,24 +56,24 @@ class Transaksi extends MY_Controller
                 "no_resi" => $noresi
             ];
             $data_p = [];
-            if($status == "validasi"){
+            if ($status == "validasi") {
 
                 $data_t = $this->transaksi->get_transaksiById($id);
                 // die(json_encode($data_t));
-                foreach($data_t as $row){
+                foreach ($data_t as $row) {
                     $data_p[] = [
                         "id_produk" => $row->id_produk,
                         "stok_produk" => ($row->stok_produk - $row->jumlah_produk)
                     ];
                     // $this->sizeStock->decreaseStock($row->id_produk, $row->ukuran, $row->jumlah_produk);
                 }
-                $this->produk->update_multiple($data_p,"id_produk");
+                $this->produk->update_multiple($data_p, "id_produk");
             }
 
-            if($status == "batal"){
+            if ($status == "batal") {
                 $data_t = $this->transaksi->get_transaksiById($id);
                 // die(json_encode($data_t));
-                foreach($data_t as $row){
+                foreach ($data_t as $row) {
                     $this->sizeStock->increaseStock($row->id_produk, $row->ukuran, $row->jumlah_produk);
                 }
             }
@@ -84,14 +84,14 @@ class Transaksi extends MY_Controller
                     '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil diupdate</div>'
                 );
                 redirect('admin/transaksi');
-            }else{
+            } else {
                 $this->session->set_flashdata(
                     'pesan',
                     '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
                 );
                 redirect('admin/transaksi');
             }
-        }else{
+        } else {
             redirect('admin/home/login');
         }
     }
@@ -103,8 +103,8 @@ class Transaksi extends MY_Controller
             $data = [
                 "transaksi" => $transaksi
             ];
-            $this->load->view('admin/pages/transaksi/list_pembayaran',$data);
-        }else{
+            $this->load->view('admin/pages/transaksi/list_pembayaran', $data);
+        } else {
             redirect('admin/home/login');
         }
     }
@@ -116,8 +116,8 @@ class Transaksi extends MY_Controller
             $data = [
                 "transaksi" => $transaksi
             ];
-            $this->load->view('admin/pages/transaksi/list_pengiriman',$data);
-        }else{
+            $this->load->view('admin/pages/transaksi/list_pengiriman', $data);
+        } else {
             redirect('admin/home/login');
         }
     }
@@ -125,7 +125,7 @@ class Transaksi extends MY_Controller
     public function cart()
     {
         if ($this->adminIsLoggedIn()) {
-            $cart = $this->cart->getJoin("pengguna","pengguna.id_pengguna = cart_item.id_pengguna","inner");
+            $cart = $this->cart->getJoin("pengguna", "pengguna.id_pengguna = cart_item.id_pengguna", "inner");
             $cart = $this->cart->getData()->result_array();
             $data = [
                 "cart" => $cart
@@ -140,18 +140,18 @@ class Transaksi extends MY_Controller
     {
         if ($this->adminIsLoggedIn()) {
             $id = $this->input->get('id');
-            $cart = $this->detail->getWhere('detail_cart_item.id_cart',$id);
-            $cart = $this->detail->getJoin("produk","produk.id_produk = detail_cart_item.id_produk","inner");
+            $cart = $this->detail->getWhere('detail_cart_item.id_cart', $id);
+            $cart = $this->detail->getJoin("produk", "produk.id_produk = detail_cart_item.id_produk", "inner");
             $cart = $this->detail->getData()->result_array();
             $total = 0;
-            foreach($cart as $row){
+            foreach ($cart as $row) {
                 $total += $row['harga_produk'] * $row['quantity'];
             }
             $data['total'] = $total;
             $data['cart'] = $cart;
-            $this->load->view('admin/pages/transaksi/detail_cart',$data);
+            $this->load->view('admin/pages/transaksi/detail_cart', $data);
             // die(json_encode($cart));
-        }else{
+        } else {
             redirect('admin/home/login');
         }
     }
@@ -167,7 +167,7 @@ class Transaksi extends MY_Controller
                 $this->load->view('admin/pages/laporan', $data);
             } else if ($this->input->post('export')) {
                 $tgl = explode("-", $this->input->post('tgl'));
-                $name = "Laporan_transaksi_".$this->input->post('tgl');
+                $name = "Laporan_transaksi_" . $this->input->post('tgl');
                 $transaksi = $this->transaksi->getLaporan($tgl);
                 $spreadsheet = new Spreadsheet;
 
@@ -188,7 +188,7 @@ class Transaksi extends MY_Controller
                         ->setCellValue('B' . $kolom, $row['kode_transaksi'])
                         ->setCellValue('C' . $kolom, $row['nama_lengkap'])
                         ->setCellValue('D' . $kolom, $row['no_telp'])
-                        ->setCellValue('E' . $kolom, $row['alamat_1']." ".$row['alamat_2']." ".$row['kota']." ".$row['kabupaten']." ".$row['kode_pos'])
+                        ->setCellValue('E' . $kolom, $row['alamat_1'] . " " . $row['alamat_2'] . " " . $row['kota'] . " " . $row['kabupaten'] . " " . $row['kode_pos'])
                         ->setCellValue('F' . $kolom, $row['status_transaksi']);
                     $kolom++;
                     $nomor++;
@@ -203,7 +203,7 @@ class Transaksi extends MY_Controller
                 $writer = new Xlsx($spreadsheet);
 
                 header('Content-Type: application/vnd.ms-excel');
-                header('Content-Disposition: attachment;filename='.$name.".xlsx");
+                header('Content-Disposition: attachment;filename=' . $name . ".xlsx");
                 header('Cache-Control: max-age=0');
 
                 $writer->save('php://output');
@@ -212,6 +212,37 @@ class Transaksi extends MY_Controller
             }
         } else {
             redirect('admin/home/login');
+        }
+    }
+
+    public function export_address()
+    {
+        try {
+            $id = $this->input->get('id');
+
+            $this->load->library('pdfgenerator');
+        
+            // // title dari pdf
+            $data['title_pdf'] = 'Laporan Penjualan Toko Kita';
+            
+            // // filename dari pdf ketika didownload
+            $file_pdf = 'laporan_penjualan_toko_kita';
+            // setting paper
+            $paper = 'A4';
+            $id = $this->input->get('id');
+            $data['transaksi'] = $this->transaksi->get_transaksiById($id);
+            // $paper = array(0,0,560,160);
+            //orientasi paper potrait / landscape
+            $orientation = "landscape";
+            
+            $html = $this->load->view('admin/pdf/address_transaction',$data, true);
+        
+            
+            // run dompdf
+            $this->pdfgenerator->generate($html, $file_pdf,$paper,$orientation);
+        } catch (\Throwable $th) {
+            die(json_encode($th->getMessage()));
+            // error('500');
         }
     }
 }
