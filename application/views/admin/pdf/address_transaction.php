@@ -12,7 +12,7 @@
 
     .address {
         text-align: left;
-        font-size: 14px;
+        font-size: 12px;
         margin-left: 5px;
         margin-top: 0px;
         margin-bottom: 0px;
@@ -20,7 +20,7 @@
 
     .customer_detail {
         font-weight: lighter;
-        font-size: 14px;
+        font-size: 12px;
         text-align: left;
         margin-left: 5px;
         margin-top: 0px;
@@ -33,12 +33,12 @@
 </style>
 
 <body>
-    <table style="width:100%;border: 1px solid black;">
+    <table style="width:100%;border: 1px solid black;margin:0px;padding: 0px;">
         <tr>
-            <th style="width: 23%;">
+            <th style="">
                 <div class="vl" style="float: right;"></div>
-                <h1 style="text-align: left; font-size: 26px;margin-top: 0; margin-left: 30px; margin-bottom:0px; padding: 0; font-weight: bolder;">CHAMELEON</h1>
-                <h1 style="text-align: left; font-size: 26px;margin-top: 0; margin-left: 30px; padding: 0; font-weight: bolder;">CLOTH</h1>
+                <h1 style="text-align: left; font-size: 26px;margin-top: 0; margin-left: 10px; margin-bottom:0px; padding: 0; font-weight: bolder;">CHAMELEON</h1>
+                <h1 style="text-align: left; font-size: 26px;margin-top: 0; margin-left: 10px; padding: 0; font-weight: bolder;">CLOTH</h1>
             </th>
             <th style="">
                 <p class="address" style="margin-top: -20px;">Jl. Patimuan - Kedungreja, Cinyawang, Rt.02/03, Kec.Patimuan - Cilacap 53264</p>
