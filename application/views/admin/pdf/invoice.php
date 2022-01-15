@@ -64,7 +64,7 @@
     </p>
 
     <p style="font-size: 20px" style="margin: 0px;">
-        <b>INVOICE</b><br/>
+        <b>INVOICE</b><br />
         #<?= $transaksi[0]->kode_transaksi ?>
     </p>
 
@@ -115,7 +115,9 @@
         <?php
         $no = 1;
         $totalHarga = 0;
+        $totalDiskon = 0;
         foreach ($transaksi as $row => $val) {
+            $diskon = (($val->diskon_produk / 100) * $val->harga_produk);
         ?>
             <tr>
                 <td style="text-align: left;margin-left:10px; border: 1px solid black;vertical-align: top;">
@@ -133,6 +135,7 @@
             </tr>
         <?php
             $totalHarga += $val->harga_produk;
+            $totalDiskon += ($diskon * $val->jumlah_produk);
         }  ?>
         <tr>
             <td colspan="3" style="text-align: left;border: 1px solid black;vertical-align: top;">
@@ -150,7 +153,33 @@
             </td>
             <td style="border-top: 1px solid black;">
                 <p style="text-align:center;margin-top: 3px; margin-bottom:3px; margin-left: 18px; margin-right:18px">
-                    Rp. <?= number_format($val->total_ongkir, 0, ',', '.') ?>
+                Rp. <?= number_format($val->total_ongkir, 0, ',', '.') ?>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align: left;border: 1px solid black;vertical-align: top;">
+                <p style="margin-left: 10px;">Diskon Produk</p>
+            </td>
+            <td style="border-top: 1px solid black;">
+                <p style="text-align:center;margin-top: 3px; margin-bottom:3px; margin-left: 18px; margin-right:18px">
+                   - Rp. <?= number_format($totalDiskon, 0, ',', '.') ?>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align: left;border: 1px solid black;vertical-align: top;">
+                <p style="margin-left: 10px;">Diskon Ongkir</p>
+            </td>
+            <td style="border-top: 1px solid black;">
+                <?php
+                if ($transaksi[0]->system_note) {
+                    $arr = explode(":", $transaksi[0]->system_note);
+                    // $arr[3] . " " . $arr[4];
+                }
+                ?>
+                <p style="text-align:center;margin-top: 3px; margin-bottom:3px; margin-left: 18px; margin-right:18px">
+                   - Rp. <?= number_format($arr[6]??0, 0, ',', '.') ?>
                 </p>
             </td>
         </tr>

@@ -296,7 +296,7 @@ class Transaksi extends MY_Controller
             $this->email->set_newline("\r\n");
             $this->email->from($config['smtp_user']);
             $this->email->to($data['transaksi'][0]->email);
-            $this->email->subject('Invoice');
+            $this->email->subject('Invoice Transaksi #' . $data['transaksi'][0]->kode_transaksi);
             $this->email->message($message);
 
             $sendInvoiceMail = $this->email->send();

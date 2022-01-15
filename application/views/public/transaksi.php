@@ -540,33 +540,49 @@ $this->load->view('public/footer');
         $('#btnCheckout').click(function(e) {
             if ($('#kurir').val()) {
                 e.preventDefault();
-                $.ajax({
-                    type: 'GET',
-                    url: "<?php echo site_url() ?>" + "user/produk/check_cart_product_size",
-                    dataType: 'JSON',
-                    success: function(data) {
-                        if (data.status) {
-                            if (data.value > 0) {
-                                // $('#formTransaksi').submit()
-                                $("#btnCheckout").unbind('click').click();
+                var waiting = true;
+                waiting = new Promise((resolve, reject) => {
+                    $.ajax({
+                        type: 'GET',
+                        url: "<?php echo site_url() ?>" + "user/produk/check_cart_product_size",
+                        dataType: 'JSON',
+                        success: function(data) {
+                            resolve(false);
+                            if (data.status) {
+                                if (data.value > 0) {
+                                    // $('#formTransaksi').submit()
+                                    $("#btnCheckout").unbind('click').click();
+                                } else {
+                                    Swal.close();
+                                    Swal.fire({
+                                        title: 'Oops!',
+                                        text: data.message,
+                                        icon: 'info',
+                                        confirmButtonText: 'Ok'
+                                    });
+                                }
                             } else {
                                 Swal.fire({
-                                    title: 'Oops!',
+                                    title: 'Error',
                                     text: data.message,
-                                    icon: 'info',
+                                    icon: 'error',
                                     confirmButtonText: 'Ok'
                                 });
                             }
-                        } else {
-                            Swal.fire({
-                                title: 'Error',
-                                text: data.message,
-                                icon: 'error',
-                                confirmButtonText: 'Ok'
-                            });
                         }
-                    }
+                    })
                 });
+
+                if (waiting) {
+                    Swal.fire({
+                        title: 'Sedang Memproses...',
+                        text: "Mohon menunggu kami sedang memproses pesanan anda.",
+                        icon: 'info',
+                        showConfirmButton: false,
+                        allowOutsideClick: false,
+                        allowEscapeKey: false
+                    })
+                }
             }
 
         });

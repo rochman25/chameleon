@@ -155,7 +155,6 @@ class Order extends MY_Controller
                         $this->sizeStock->decreaseStock($id_produk, $row['size'], $row['quantity']);
                     }
 
-                    // die(json_encode($data_detail));
                     $detail = $this->transaksi->tambahDetail($data_detail);
                     if ($detail) {
                         $this->db->trans_commit();
@@ -170,6 +169,8 @@ class Order extends MY_Controller
                 }
 
                 if ($status) {
+                    // die(json_encode($this->transaksi->get_transaksiById($id_transaksi->id_transaksi)));
+                    $this->sendInvoice($id_transaksi->id_transaksi);
                     $this->session->unset_userdata('kode_transaksi');
                     $this->session->set_flashdata('pesan', "Transaksi anda berhasil, silahkan melakukan pembayaran ke rekening kami, untuk detail dapat dilihat dengan klik button konfirmasi berikut.");
                 } else {
@@ -201,11 +202,10 @@ class Order extends MY_Controller
         $this->load->view('public/orderdetail', $data);
     }
 
-    public function sendInvoice($id = "e6de6dce-7196-11ec-9f7e-001a7dda7113")
+    public function sendInvoice($id)
     {
         $this->load->helper('mail');
         $this->load->helper('date');
-        // die(json_encode($this->transaksi->get_transaksiById($id)));
         $data['transaksi'] = $this->transaksi->get_transaksiById($id);
 
         $data['tanggal'] = hari_ini() . ", " . go2hi::date('d F Y', go2hi::GO2HI_HIJRI) . "H / " . date("d F Y");
