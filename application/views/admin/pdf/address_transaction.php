@@ -5,6 +5,15 @@
     <title>Address Export PDF</title>
 </head>
 <style>
+    @font-face {
+        font-family: "Nirmala";
+        src: url("<?= base_url() ?>assets/public/Nirmala.ttf") format("truetype");
+    }
+
+    body {
+        font-family: 'Nirmala';
+    }
+
     .vl {
         border-left: 2px solid black;
         height: 70px;

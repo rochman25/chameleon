@@ -233,7 +233,7 @@ class Transaksi extends MY_Controller
             // $paper = 'A4';
             $id = $this->input->get('id');
             $data['transaksi'] = $this->transaksi->get_transaksiById($id);
-            $paper = array(0,0,270,500);
+            $paper = array(0,0,300,500);
             //orientasi paper potrait / landscape
             $orientation = "landscape";
 

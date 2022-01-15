@@ -7,6 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice</title>
     <style>
+        @font-face {
+            font-family: "Nirmala";
+            src: url("<?= base_url() ?>assets/public/Nirmala.ttf") format("truetype");
+        }
+
+        body {
+            font-family: 'Nirmala';
+        }
+
         .vl {
             border-left: 2px solid black;
             height: 70px;
@@ -153,7 +162,7 @@
             </td>
             <td style="border-top: 1px solid black;">
                 <p style="text-align:center;margin-top: 3px; margin-bottom:3px; margin-left: 18px; margin-right:18px">
-                Rp. <?= number_format($val->total_ongkir, 0, ',', '.') ?>
+                    Rp. <?= number_format($val->total_ongkir, 0, ',', '.') ?>
                 </p>
             </td>
         </tr>
@@ -163,7 +172,7 @@
             </td>
             <td style="border-top: 1px solid black;">
                 <p style="text-align:center;margin-top: 3px; margin-bottom:3px; margin-left: 18px; margin-right:18px">
-                   - Rp. <?= number_format($totalDiskon, 0, ',', '.') ?>
+                    - Rp. <?= number_format($totalDiskon, 0, ',', '.') ?>
                 </p>
             </td>
         </tr>
@@ -179,7 +188,7 @@
                 }
                 ?>
                 <p style="text-align:center;margin-top: 3px; margin-bottom:3px; margin-left: 18px; margin-right:18px">
-                   - Rp. <?= number_format($arr[6]??0, 0, ',', '.') ?>
+                    - Rp. <?= number_format($arr[6] ?? 0, 0, ',', '.') ?>
                 </p>
             </td>
         </tr>
