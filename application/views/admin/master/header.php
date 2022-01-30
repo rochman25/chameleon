@@ -156,6 +156,9 @@
                 <li class="nav-item">
                     <a href="<?= base_url() ?>admin/produk/reseller" class="nav-link"><i class="fas fa-boxes"></i><span>Produk Reseller</span></a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= base_url() ?>admin/transaksi/reseller" class="nav-link"><i class="fas fa-shopping-cart"></i><span>Transaksi Reseller</span></a>
+                </li>
             <?php } ?>
             <li class="menu-header">Report</li>
             <li class="nav-item">

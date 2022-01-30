@@ -36,6 +36,7 @@ class Transaksi_model extends MY_Model
 
     function get_transaksi(){
         $this->getJoin("pengguna","pengguna.id_pengguna = transaksi.id_pengguna","inner");
+        $this->getWhere("pengguna.is_reseller",false);
         $this->order_by("transaksi.waktu_transaksi","DESC");
         return $this->getData()->result_array();
     }
@@ -125,6 +126,13 @@ class Transaksi_model extends MY_Model
         ];
         $this->getWhere('id_transaksi',$id);
         return $this->update($data);
+    }
+
+    function get_transaksi_reseller(){
+        $this->getJoin("pengguna","pengguna.id_pengguna = transaksi.id_pengguna","inner");
+        $this->getWhere("pengguna.is_reseller",true);
+        $this->order_by("transaksi.waktu_transaksi","DESC");
+        return $this->getData()->result_array();
     }
 
 }
