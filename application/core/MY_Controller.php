@@ -1,10 +1,11 @@
 <?php
 class MY_Controller extends CI_Controller
 {
-
+    protected $reseller_mode;
     function __construct()
     {
         parent::__construct();
+        $this->reseller_mode = $this->config->item('reseller_mode');
     }
 
 

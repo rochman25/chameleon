@@ -775,7 +775,7 @@
 
 @media only screen and (min-width: 992px) {
 	.homepage .hot-product .product-hotcard:last-child {
-		display: none;
+		display: block;
 	}
 }
 

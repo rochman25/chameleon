@@ -7,6 +7,7 @@ class Home extends MY_Controller
     {
         parent::__construct();
         $this->load->model('Produk_model', 'produk');
+        $this->load->model('ProdukReseller_model', 'produk_reseller');
         $this->load->model('SubProduk_model', 'subproduk');
         $this->load->model('Pengguna_model', 'user');
         $this->load->model('Banner_model', 'banner');
@@ -30,6 +31,9 @@ class Home extends MY_Controller
         $data['produk'] = $this->produk->order_by("kode_produk", "desc");
         $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
         // $data['produk'] = $this->produk->getWhere('produk.stok_produk > ', '0');
+        if($this->reseller_mode){
+            $data['produk'] = $this->produk->getJoin("produk_reseller", "produk_reseller.id_produk=produk.id_produk", "inner");
+        }
         $data['produk'] = $this->produk->getData()->result_array();
 
         $data['produk_best'] = $this->produk->getBestProduk();
@@ -45,6 +49,9 @@ class Home extends MY_Controller
         $data['produk_release'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
         $data['produk_release'] = $this->produk->getWhere('produk.stok_produk > ', '0');
         $data['produk_release'] = $this->produk->limit(1);
+        if($this->reseller_mode){
+            $data['produk_release'] = $this->produk->getJoin("produk_reseller", "produk_reseller.id_produk=produk.id_produk", "inner");
+        }
         $data['produk_release'] = $this->produk->getData()->result_array();
 
         $data['kategori'] = $this->kategori->getData()->result_array();
@@ -145,6 +152,9 @@ class Home extends MY_Controller
             $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
             $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
             // $data['produk'] = $this->produk->getWhere("produk.stok_produk >", "0");
+            if($this->reseller_mode){
+                $data['produk'] = $this->produk->getJoin("produk_reseller", "produk_reseller.id_produk=produk.id_produk", "inner");
+            }
             $data['produk'] = $this->produk->getData()->result_array();
             $data['kategori'] = $this->kategori->getData()->result_array();
             foreach ($data['produk'] as $index => $row) {
@@ -174,6 +184,9 @@ class Home extends MY_Controller
                 $data['produk'] = $this->produk->getWhere('produk.id_kategori', $datakategori->id_kategori);
                 $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
                 // $data['produk'] = $this->produk->getWhere("produk.stok_produk >", "0");
+                if($this->reseller_mode){
+                    $data['produk'] = $this->produk->getJoin("produk_reseller", "produk_reseller.id_produk=produk.id_produk", "inner");
+                }
                 $data['produk'] = $this->produk->getData()->result_array();
                 $data['kategori'] = $this->kategori->getData()->result_array();
                 foreach ($data['produk'] as $index => $row) {
@@ -222,7 +235,6 @@ class Home extends MY_Controller
 
     public function produk_detail()
     {
-        $this->load->model('PreRelease_model', 'pre_release');
         $id_produk = $this->input->get('produk');
         $preRelease = $this->pre_release->getByIdProduk($id_produk);
         $release_date = null;
@@ -236,6 +248,12 @@ class Home extends MY_Controller
             $data['produk'] = $this->produk->getWhere("id_produk", $id_produk);
             $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
             $data['produk'] = $this->produk->getData()->row();
+
+            if($this->reseller_mode){
+                $data['produk_reseller'] = $this->produk_reseller->getByIdproduk($id_produk);
+                $data['produk']->harga_produk = $data['produk_reseller']->harga_produk;
+                $data['produk']->diskon_produk = $data['produk_reseller']->diskon_produk;
+            }
 
             $data['subProduk'] = $this->subproduk->getByIdProduk($id_produk);
             $data['kategori'] = $this->kategori->getData()->result_array();
@@ -404,6 +422,9 @@ class Home extends MY_Controller
             $datacart = $this->cart_item->order_by("id_detail_item_cart", "ASC");
             $datacart = $this->cart_item->getJoin("cart_item", "cart_item.id_cart=detail_cart_item.id_cart", "inner");
             $datacart = $this->cart_item->getJoin("produk", "produk.id_produk=detail_cart_item.id_produk", "inner");
+            if($this->reseller_mode){
+                $datacart = $this->cart_item->getJoin("produk_reseller", "produk.id_produk=produk_reseller.id_produk", "inner");
+            }
             $datacart = $this->cart_item->getJoin("sub_produk", "sub_produk.id_sub_produk = detail_cart_item.id_sub_produk", "left");
             $datacart = $this->cart_item->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
             $datacart = $this->cart_item->getWhere("cart_item.id_cart", $this->input->get('id'));
@@ -833,7 +854,7 @@ class Home extends MY_Controller
     }
     public function register()
     {
-        if ($this->userIsLoggedIn()) {
+        if ($this->userIsLoggedIn() && !$this->reseller_mode) {
             redirect(base_url());
         } else {
             if ($this->input->post('kirim')) {
@@ -1161,7 +1182,7 @@ class Home extends MY_Controller
 
     public function konfirmasi()
     {
-        if (!$this->userIsLoggedIn()) {
+        if (!$this->userIsLoggedIn() && !$this->reseller_mode) {
             redirect(base_url());
         } else {
             $id = $this->input->post('idtransaksi');
@@ -1177,7 +1198,7 @@ class Home extends MY_Controller
 
     public function konfirmasi_proses()
     {
-        if (!$this->userIsLoggedIn()) {
+        if (!$this->userIsLoggedIn() && !$this->reseller_mode) {
             redirect(base_url());
         } else {
 
@@ -1230,7 +1251,7 @@ class Home extends MY_Controller
 
     public function lupa_password()
     {
-        if ($this->userIsLoggedIn()) {
+        if ($this->userIsLoggedIn() && !$this->reseller_mode) {
             redirect('user/home');
         } else {
             $code = $this->input->get('code');
