@@ -24,14 +24,14 @@ $this->load->view('public/m_heading');
         </div>
         <div class="new-login">
             <h1>Masuk</h1>
-        <p>Belum punya akun CHAMELEON CLOTH ? <strong>Daftar</strong></p>
+        <p>Belum punya akun CHAMELEON CLOTH ? <?php if(!$this->config->item('reseller_mode')){ ?><strong>Daftar</strong><?php } ?></p>
         <p style="color: red"><b><?= $this->session->flashdata('pesan') ?></b></p>
         <form action="<?= base_url()?>login" method="post">
             <h2>Email</h2>
             <input type="email" name="email">
             <h2>Password</h2>
             <input type="password" name="password">
-            <a class="forget-pass" href="<?=base_url()?>user/home/lupa_password">Lupa Password ?</a>
+            <?php if(!$this->config->item('reseller_mode')){ ?><a class="forget-pass" href="<?=base_url()?>user/home/lupa_password">Lupa Password ?</a><?php } ?>
             <input type="submit" name="kirim" value="Masuk">
         </form>
     </div>

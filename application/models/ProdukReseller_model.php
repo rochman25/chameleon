@@ -28,6 +28,11 @@ class ProdukReseller_model extends MY_Model
         $this->getJoin("produk", "produk.id_produk=produk_reseller.id_produk", "inner");
         return $this->getData()->result_array();
     }
+
+    function getByIdProduk($id){
+        $this->getWhere('id_produk',$id);
+        return $this->getData()->row();
+    }
 	
 
 }

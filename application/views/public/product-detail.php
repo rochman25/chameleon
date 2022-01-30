@@ -511,7 +511,6 @@ $this->load->view('public/footer');
     var harga = '<?= $produk->harga_produk ?>';
     // var harga = '<?= $produk->diskon_produk != 0 ? $produk->harga_produk - (($produk->diskon_produk / 100) * $produk->harga_produk) : $produk->harga_produk ?>';
     var diskon = '<?= $produk->diskon_produk ?>';
-
     var containervideo = document.getElementById('containervideo');
     var containergallery = document.getElementById('containergallery');
     var containermvideo = document.getElementById('containermvideo');
