@@ -20,6 +20,11 @@
 					<img src="<?= base_url() ?>assets/images/chameleon_cloth_logo.png">
 				</a>
 				<ul>
+					<?php if ($this->config->item('reseller_mode')) { ?>
+						<li>
+							<a href="#">Reseller</a>
+						</li>
+					<?php } ?>
 					<li id="koleksi">
 						<a href="#">koleksi</a>
 						<div class="dropdown dropdown-collection">
@@ -107,10 +112,10 @@
 					</div>
 				</div>
 			</div>
-			<?php if(isset($voucher)){ ?>
-			<div class="voucher">
-				<p>Get Free Shipping <b> <?= number_format($voucher->discount_voucher,0) ?> </b> with Voucher Code <b><?= $voucher->code_voucher ?></b> </p>
-			</div>
+			<?php if (isset($voucher)) { ?>
+				<div class="voucher">
+					<p>Get Free Shipping <b> <?= number_format($voucher->discount_voucher, 0) ?> </b> with Voucher Code <b><?= $voucher->code_voucher ?></b> </p>
+				</div>
 			<?php } ?>
 		</div>
 	</header>
