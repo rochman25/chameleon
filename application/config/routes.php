@@ -92,5 +92,7 @@ $route['admin/produk/reseller/tambah'] = 'admin/ProdukReseller/tambah';
 $route['admin/produk/reseller/ubah'] = 'admin/ProdukReseller/ubah';
 $route['admin/produk/reseller/hapus'] = 'admin/ProdukReseller/hapus';
 
+$route['admin/transaksi/reseller'] = 'admin/TransaksiReseller/index';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
