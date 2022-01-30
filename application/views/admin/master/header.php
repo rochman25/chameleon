@@ -144,10 +144,17 @@
                     <a href="<?= base_url() ?>admin/pengguna" class="nav-link"><i class="fas fa-users"></i><span>Pengguna</span></a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= base_url() ?>admin/reseller" class="nav-link"><i class="fas fa-user-check"></i><span>Reseller</span></a>
+                    <a href="<?= base_url() ?>admin/akun" class="nav-link"><i class="fas fa-user-tie"></i><span>Admin</span></a>
+                </li>
+            <?php } ?>
+
+            <?php if($this->session->userdata['admin_data']['role'] == 1){ ?>
+                <li class="menu-header">Reseller</li>
+                <li class="nav-item">
+                    <a href="<?= base_url() ?>admin/reseller" class="nav-link"><i class="fas fa-user-check"></i><span>Akun Reseller</span></a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= base_url() ?>admin/akun" class="nav-link"><i class="fas fa-user-tie"></i><span>Admin</span></a>
+                    <a href="<?= base_url() ?>admin/produk/reseller" class="nav-link"><i class="fas fa-boxes"></i><span>Produk Reseller</span></a>
                 </li>
             <?php } ?>
             <li class="menu-header">Report</li>
