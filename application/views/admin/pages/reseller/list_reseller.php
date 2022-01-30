@@ -61,7 +61,7 @@
                                                         <tr>
                                                             <th scope="row"><?= $no++ ?></th>
                                                             <td id="detail_col" data-id="<?= $row['id_pengguna'] ?>">
-                                                                <a href="<?= base_url() ?>admin/pengguna/detail?id=<?= $row['id_pengguna'] ?>"><?= $row['username'] ?></a>
+                                                                <a href="<?= base_url() ?>admin/reseller/detail?id=<?= $row['id_pengguna'] ?>"><?= $row['username'] ?></a>
                                                             </td>
                                                             <td><?= $row['email'] ?></td>
                                                             <td>

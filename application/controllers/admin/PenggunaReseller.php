@@ -31,10 +31,8 @@ class PenggunaReseller extends MY_Controller
                 $cek = $this->pengguna->getWhere('pengguna.id_pengguna', $id);
                 $cek = $this->pengguna->getJoin("alamat_pengguna", "alamat_pengguna.id_pengguna = pengguna.id_pengguna", "left");
                 $cek = $this->pengguna->getData()->row();
-                if ($cek) {
-                    $data['pengguna'] = $cek;
-                    $this->load->view('admin/pages/pengguna/detail_pengguna', $data);
-                }
+                $data['pengguna'] = $cek;
+                $this->load->view('admin/pages/reseller/detail_reseller', $data);
             }
         } else {
             redirect('admin/home/login');
@@ -64,15 +62,15 @@ class PenggunaReseller extends MY_Controller
                 $cek = $this->pengguna->getWhere('email', $email);
                 $cek = $this->pengguna->getData()->row();
 
-                if($cek){
-                    if($cek->email == $email){
+                if ($cek) {
+                    if ($cek->email == $email) {
                         $this->session->set_flashdata(
                             'pesan',
                             '<div class="alert alert-danger mr-auto alert-dismissible">Email sudah terdaftar</div>'
                         );
                     }
 
-                    if($cek->username == $username){
+                    if ($cek->username == $username) {
                         $this->session->set_flashdata(
                             'pesan',
                             '<div class="alert alert-danger mr-auto alert-dismissible">Username sudah terdaftar</div>'
