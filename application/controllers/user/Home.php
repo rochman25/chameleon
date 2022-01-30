@@ -27,136 +27,62 @@ class Home extends MY_Controller
 
     public function index()
     {
-        $thumbnail = array();
-        $data['produk'] = $this->produk->order_by("kode_produk", "desc");
-        $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
-        // $data['produk'] = $this->produk->getWhere('produk.stok_produk > ', '0');
-        if($this->reseller_mode){
-            $data['produk'] = $this->produk->getJoin("produk_reseller", "produk_reseller.id_produk=produk.id_produk", "inner");
-        }
-        $data['produk'] = $this->produk->getData()->result_array();
-
-        $data['produk_best'] = $this->produk->getBestProduk();
-
-        $data['produk_new'] = $this->produk->getNewProduct();
-
-        $data['produk_best_seller'] = $this->produk->getBestSeller();
-
-        $data['produk_new_release'] = $this->produk->getNewRelease();
-
-
-        $data['produk_release'] = $this->produk->order_by("kode_produk", "DESC");
-        $data['produk_release'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
-        $data['produk_release'] = $this->produk->getWhere('produk.stok_produk > ', '0');
-        $data['produk_release'] = $this->produk->limit(1);
-        if($this->reseller_mode){
-            $data['produk_release'] = $this->produk->getJoin("produk_reseller", "produk_reseller.id_produk=produk.id_produk", "inner");
-        }
-        $data['produk_release'] = $this->produk->getData()->result_array();
-
-        $data['kategori'] = $this->kategori->getData()->result_array();
-        $data['banner'] = $this->banner->order_by("order", "ASC");
-        $data['banner'] = $this->banner->getWhere("active", "1");
-        $data['banner'] = $this->banner->getData()->result_array();
-
-        $data['dataBestSellerOne'] = $this->best_seller->order_by("order", "DESC");
-        $data['dataBestSellerOne'] = $this->best_seller->getWhere("active", "1");
-        $data['dataBestSellerOne'] = $this->best_seller->limit(2);
-        $data['dataBestSellerOne'] = $this->best_seller->getData()->result_array();
-
-
-        $data['dataBestSeller'] = $this->best_seller->order_by("order", "DESC");
-        $data['dataBestSeller'] = $this->best_seller->getWhere("active", "1");
-        $data['dataBestSeller'] = $this->best_seller->getWhere("title", "Best Seller");
-        $data['dataBestSeller'] = $this->best_seller->getData()->result_array();
-
-        $data['dataNewArrivalOne'] = $this->new_arrival->order_by("order", "DESC");
-        $data['dataNewArrivalOne'] = $this->new_arrival->getWhere("active", "1");
-        $data['dataNewArrivalOne'] = $this->new_arrival->limit(2);
-        $data['dataNewArrivalOne'] = $this->new_arrival->getData()->result_array();
-
-        $data['dataNewArrival'] = $this->new_arrival->order_by("order", "DESC");
-        $data['dataNewArrival'] = $this->new_arrival->getWhere("active", "1");
-        $data['dataNewArrival'] = $this->new_arrival->getData()->result_array();
-        foreach ($data['produk'] as $index => $row) {
-            $foto = explode(',', $row['thumbnail_produk']);
-            $thumbnail[$row['id_produk']] = $foto[0];
-            $id_produk = $row['id_produk'];
-            $preRelease = $this->pre_release->getByIdProduk($id_produk);
-            if ($preRelease) {
-                if ($preRelease->release_date > date("Y-m-d H:i:s")) {
-                    $data['produk'][$index]['pre_release'] = $preRelease->release_date;
-                }
+        if ($this->reseller_mode) {
+            if (!$this->userIsLoggedIn()) {
+                redirect(base_url('login'));
             }
-        }
-
-        foreach ($data['produk_best'] as $row) {
-            $foto = explode(',', $row['thumbnail_produk']);
-            $thumbnail[$row['id_produk']] = $foto[0];
-        }
-
-        foreach ($data['produk_new'] as $row) {
-            $foto = explode(',', $row['thumbnail_produk']);
-            $thumbnail[$row['id_produk']] = $foto[0];
-        }
-
-        foreach ($data['produk_new_release'] as $row) {
-            $foto = explode(',', $row['thumbnail_produk']);
-            $thumbnail[$row['id_produk']] = $foto[0];
-        }
-
-        foreach ($data['produk_best_seller'] as $row) {
-            $foto = explode(',', $row['thumbnail_produk']);
-            $thumbnail[$row['id_produk']] = $foto[0];
-        }
-
-        $data['thumbnail'] = $thumbnail;
-
-        // var_dump($thumbnail);die;
-
-        if ($this->userIsLoggedIn()) {
-            $data['id_cart'] = $this->cart->getWhere("id_pengguna", $this->session->userdata['user_data']['id']);
-            $data['id_cart'] = $this->cart->getData()->row();
         } else {
-            $data['id_cart'] = "";
-        }
-        $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
-        //   die(json_encode($data));
-        $this->load->view('public/home', $data);
-    }
-    public function search()
-    {
-        $cari = $this->input->post('search');
-        $data['produk'] = $this->produk->search($cari, "produk")->result_array();
-        // die(json_encode($data));
-        $thumbnail = array();
-        if ($data['produk']) {
-            foreach ($data['produk'] as $row) {
-                $foto = explode(',', $row['thumbnail_produk']);
-                $thumbnail[$row['id_produk']] = $foto[0];
-            }
-        }
-        $data['bg'] = base_url('assets/images/Kemeja/Kemeja-BG.png');
-        $data['section'] = "Hasil pencarian," . $cari;
-        $data['thumbnail'] = $thumbnail;
-        $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
-        $this->load->view('public/product', $data);
-    }
-
-    public function produk($kategori = "")
-    {
-        if ($kategori == "semua" || $kategori == "Semua Produk") {
-            $datakategori = $this->kategori->getData()->row();
-
             $thumbnail = array();
-            $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
+            $data['produk'] = $this->produk->order_by("kode_produk", "desc");
             $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
-            // $data['produk'] = $this->produk->getWhere("produk.stok_produk >", "0");
-            if($this->reseller_mode){
+            // $data['produk'] = $this->produk->getWhere('produk.stok_produk > ', '0');
+            if ($this->reseller_mode) {
                 $data['produk'] = $this->produk->getJoin("produk_reseller", "produk_reseller.id_produk=produk.id_produk", "inner");
             }
             $data['produk'] = $this->produk->getData()->result_array();
+
+            $data['produk_best'] = $this->produk->getBestProduk();
+
+            $data['produk_new'] = $this->produk->getNewProduct();
+
+            $data['produk_best_seller'] = $this->produk->getBestSeller();
+
+            $data['produk_new_release'] = $this->produk->getNewRelease();
+
+
+            $data['produk_release'] = $this->produk->order_by("kode_produk", "DESC");
+            $data['produk_release'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
+            $data['produk_release'] = $this->produk->getWhere('produk.stok_produk > ', '0');
+            $data['produk_release'] = $this->produk->limit(1);
+            if ($this->reseller_mode) {
+                $data['produk_release'] = $this->produk->getJoin("produk_reseller", "produk_reseller.id_produk=produk.id_produk", "inner");
+            }
+            $data['produk_release'] = $this->produk->getData()->result_array();
+
             $data['kategori'] = $this->kategori->getData()->result_array();
+            $data['banner'] = $this->banner->order_by("order", "ASC");
+            $data['banner'] = $this->banner->getWhere("active", "1");
+            $data['banner'] = $this->banner->getData()->result_array();
+
+            $data['dataBestSellerOne'] = $this->best_seller->order_by("order", "DESC");
+            $data['dataBestSellerOne'] = $this->best_seller->getWhere("active", "1");
+            $data['dataBestSellerOne'] = $this->best_seller->limit(2);
+            $data['dataBestSellerOne'] = $this->best_seller->getData()->result_array();
+
+
+            $data['dataBestSeller'] = $this->best_seller->order_by("order", "DESC");
+            $data['dataBestSeller'] = $this->best_seller->getWhere("active", "1");
+            $data['dataBestSeller'] = $this->best_seller->getWhere("title", "Best Seller");
+            $data['dataBestSeller'] = $this->best_seller->getData()->result_array();
+
+            $data['dataNewArrivalOne'] = $this->new_arrival->order_by("order", "DESC");
+            $data['dataNewArrivalOne'] = $this->new_arrival->getWhere("active", "1");
+            $data['dataNewArrivalOne'] = $this->new_arrival->limit(2);
+            $data['dataNewArrivalOne'] = $this->new_arrival->getData()->result_array();
+
+            $data['dataNewArrival'] = $this->new_arrival->order_by("order", "DESC");
+            $data['dataNewArrival'] = $this->new_arrival->getWhere("active", "1");
+            $data['dataNewArrival'] = $this->new_arrival->getData()->result_array();
             foreach ($data['produk'] as $index => $row) {
                 $foto = explode(',', $row['thumbnail_produk']);
                 $thumbnail[$row['id_produk']] = $foto[0];
@@ -168,23 +94,82 @@ class Home extends MY_Controller
                     }
                 }
             }
-            $data['thumbnail'] = $thumbnail;
-        } else {
-            $datakategori =  $this->kategori->getLike('nama_kategori', $kategori);
-            $datakategori = $this->kategori->getData()->row();
-            //   die(json_encode($kategori));
-            if ($datakategori == "" || empty($datakategori) || $datakategori == null) {
-                $thumbnail = array();
 
-                $data['produk'] = null;
-                $data['thumbnail'] = null;
+            foreach ($data['produk_best'] as $row) {
+                $foto = explode(',', $row['thumbnail_produk']);
+                $thumbnail[$row['id_produk']] = $foto[0];
+            }
+
+            foreach ($data['produk_new'] as $row) {
+                $foto = explode(',', $row['thumbnail_produk']);
+                $thumbnail[$row['id_produk']] = $foto[0];
+            }
+
+            foreach ($data['produk_new_release'] as $row) {
+                $foto = explode(',', $row['thumbnail_produk']);
+                $thumbnail[$row['id_produk']] = $foto[0];
+            }
+
+            foreach ($data['produk_best_seller'] as $row) {
+                $foto = explode(',', $row['thumbnail_produk']);
+                $thumbnail[$row['id_produk']] = $foto[0];
+            }
+
+            $data['thumbnail'] = $thumbnail;
+
+            // var_dump($thumbnail);die;
+
+            if ($this->userIsLoggedIn()) {
+                $data['id_cart'] = $this->cart->getWhere("id_pengguna", $this->session->userdata['user_data']['id']);
+                $data['id_cart'] = $this->cart->getData()->row();
             } else {
+                $data['id_cart'] = "";
+            }
+            $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
+            //   die(json_encode($data));
+            $this->load->view('public/home', $data);
+        }
+    }
+    public function search()
+    {
+        if ($this->reseller_mode) {
+            if (!$this->userIsLoggedIn()) {
+                redirect(base_url('login'));
+            }
+        } else {
+            $cari = $this->input->post('search');
+            $data['produk'] = $this->produk->search($cari, "produk")->result_array();
+            // die(json_encode($data));
+            $thumbnail = array();
+            if ($data['produk']) {
+                foreach ($data['produk'] as $row) {
+                    $foto = explode(',', $row['thumbnail_produk']);
+                    $thumbnail[$row['id_produk']] = $foto[0];
+                }
+            }
+            $data['bg'] = base_url('assets/images/Kemeja/Kemeja-BG.png');
+            $data['section'] = "Hasil pencarian," . $cari;
+            $data['thumbnail'] = $thumbnail;
+            $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
+            $this->load->view('public/product', $data);
+        }
+    }
+
+    public function produk($kategori = "")
+    {
+        if ($this->reseller_mode) {
+            if (!$this->userIsLoggedIn()) {
+                redirect(base_url('login'));
+            }
+        } else {
+            if ($kategori == "semua" || $kategori == "Semua Produk") {
+                $datakategori = $this->kategori->getData()->row();
+
                 $thumbnail = array();
                 $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
-                $data['produk'] = $this->produk->getWhere('produk.id_kategori', $datakategori->id_kategori);
                 $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
                 // $data['produk'] = $this->produk->getWhere("produk.stok_produk >", "0");
-                if($this->reseller_mode){
+                if ($this->reseller_mode) {
                     $data['produk'] = $this->produk->getJoin("produk_reseller", "produk_reseller.id_produk=produk.id_produk", "inner");
                 }
                 $data['produk'] = $this->produk->getData()->result_array();
@@ -201,90 +186,135 @@ class Home extends MY_Controller
                     }
                 }
                 $data['thumbnail'] = $thumbnail;
-            }
-        }
+            } else {
+                $datakategori =  $this->kategori->getLike('nama_kategori', $kategori);
+                $datakategori = $this->kategori->getData()->row();
+                //   die(json_encode($kategori));
+                if ($datakategori == "" || empty($datakategori) || $datakategori == null) {
+                    $thumbnail = array();
 
-        $data['thumbnail'] = $thumbnail;
-        if ($this->userIsLoggedIn()) {
-            $data['id_cart'] = $this->cart->getWhere("id_pengguna", $this->session->userdata['user_data']['id']);
-            $data['id_cart'] = $this->cart->getData()->row();
-        } else {
-            $data['id_cart'] = "";
-        }
-        $data['section'] = $kategori;
-
-        // var_dump($data);die;
-
-        if ($kategori == "celana") {
-            $data['bg'] = base_url('assets/images/Celana/Celana-BG.png');
-        } else if ($kategori == "kemeja") {
-            $data['bg'] = base_url('assets/images/Kemeja/Kemeja-BG.png');
-        } else if ($kategori == "jas") {
-            $data['bg'] = base_url('assets/images/Jas/Jas-BG.png');
-        } else {
-            $data['bg'] = base_url('assets/images/Celana/Celana-BG.png');
-        }
-        $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
-        $this->load->view('public/product', $data);
-    }
-
-    public function promo()
-    {
-        $this->load->view('public/product-promo');
-    }
-
-    public function produk_detail()
-    {
-        $id_produk = $this->input->get('produk');
-        $preRelease = $this->pre_release->getByIdProduk($id_produk);
-        $release_date = null;
-        if ($preRelease) {
-            $release_date = $preRelease->release_date;
-        }
-        if ($this->checkPreRelease($release_date) == false) {
-            $thumbnail = array();
-            $ukuran = array();
-
-            $data['produk'] = $this->produk->getWhere("id_produk", $id_produk);
-            $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
-            $data['produk'] = $this->produk->getData()->row();
-
-            if($this->reseller_mode){
-                $data['produk_reseller'] = $this->produk_reseller->getByIdproduk($id_produk);
-                $data['produk']->harga_produk = $data['produk_reseller']->harga_produk;
-                $data['produk']->diskon_produk = $data['produk_reseller']->diskon_produk;
-            }
-
-            $data['subProduk'] = $this->subproduk->getByIdProduk($id_produk);
-            $data['kategori'] = $this->kategori->getData()->result_array();
-            $data['stok_produk'] = $this->sizestock->calculateSizeStock($id_produk) == 0 ? 0 : $this->sizestock->calculateSizeStock($id_produk);
-            $data['size_stock'] = $this->sizestock->getByKodeProduk($id_produk);
-
-            $foto = explode(',', $data['produk']->thumbnail_produk);
-            $size = explode(',', $data['produk']->size_produk);
-
-            foreach ($foto as $f) {
-                $thumbnail[] = $f;
-            }
-            foreach ($size as $u) {
-                $ukuran[] = $u;
+                    $data['produk'] = null;
+                    $data['thumbnail'] = null;
+                } else {
+                    $thumbnail = array();
+                    $data['produk'] = $this->produk->order_by("kode_produk", "ASC");
+                    $data['produk'] = $this->produk->getWhere('produk.id_kategori', $datakategori->id_kategori);
+                    $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
+                    // $data['produk'] = $this->produk->getWhere("produk.stok_produk >", "0");
+                    if ($this->reseller_mode) {
+                        $data['produk'] = $this->produk->getJoin("produk_reseller", "produk_reseller.id_produk=produk.id_produk", "inner");
+                    }
+                    $data['produk'] = $this->produk->getData()->result_array();
+                    $data['kategori'] = $this->kategori->getData()->result_array();
+                    foreach ($data['produk'] as $index => $row) {
+                        $foto = explode(',', $row['thumbnail_produk']);
+                        $thumbnail[$row['id_produk']] = $foto[0];
+                        $id_produk = $row['id_produk'];
+                        $preRelease = $this->pre_release->getByIdProduk($id_produk);
+                        if ($preRelease) {
+                            if ($preRelease->release_date > date("Y-m-d H:i:s")) {
+                                $data['produk'][$index]['pre_release'] = $preRelease->release_date;
+                            }
+                        }
+                    }
+                    $data['thumbnail'] = $thumbnail;
+                }
             }
 
             $data['thumbnail'] = $thumbnail;
-            $data['size'] = $ukuran;
             if ($this->userIsLoggedIn()) {
                 $data['id_cart'] = $this->cart->getWhere("id_pengguna", $this->session->userdata['user_data']['id']);
                 $data['id_cart'] = $this->cart->getData()->row();
             } else {
                 $data['id_cart'] = "";
             }
+            $data['section'] = $kategori;
+
+            // var_dump($data);die;
+
+            if ($kategori == "celana") {
+                $data['bg'] = base_url('assets/images/Celana/Celana-BG.png');
+            } else if ($kategori == "kemeja") {
+                $data['bg'] = base_url('assets/images/Kemeja/Kemeja-BG.png');
+            } else if ($kategori == "jas") {
+                $data['bg'] = base_url('assets/images/Jas/Jas-BG.png');
+            } else {
+                $data['bg'] = base_url('assets/images/Celana/Celana-BG.png');
+            }
             $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
-            $this->load->view('public/product-detail', $data);
+            $this->load->view('public/product', $data);
+        }
+    }
+
+    public function promo()
+    {
+        if ($this->reseller_mode) {
+            if (!$this->userIsLoggedIn()) {
+                redirect(base_url('login'));
+            }
         } else {
-            $data['pre_release'] = $preRelease;
-            $data['kategori'] = $this->kategori->getData()->result_array();
-            $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
-            $this->load->view('public/product-pre_release', $data);
+            $this->load->view('public/product-promo');
+        }
+    }
+
+    public function produk_detail()
+    {
+        if ($this->reseller_mode) {
+            if (!$this->userIsLoggedIn()) {
+                redirect(base_url('login'));
+            }
+        } else {
+            $id_produk = $this->input->get('produk');
+            $preRelease = $this->pre_release->getByIdProduk($id_produk);
+            $release_date = null;
+            if ($preRelease) {
+                $release_date = $preRelease->release_date;
+            }
+            if ($this->checkPreRelease($release_date) == false) {
+                $thumbnail = array();
+                $ukuran = array();
+
+                $data['produk'] = $this->produk->getWhere("id_produk", $id_produk);
+                $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
+                $data['produk'] = $this->produk->getData()->row();
+
+                if ($this->reseller_mode) {
+                    $data['produk_reseller'] = $this->produk_reseller->getByIdproduk($id_produk);
+                    $data['produk']->harga_produk = $data['produk_reseller']->harga_produk;
+                    $data['produk']->diskon_produk = $data['produk_reseller']->diskon_produk;
+                }
+
+                $data['subProduk'] = $this->subproduk->getByIdProduk($id_produk);
+                $data['kategori'] = $this->kategori->getData()->result_array();
+                $data['stok_produk'] = $this->sizestock->calculateSizeStock($id_produk) == 0 ? 0 : $this->sizestock->calculateSizeStock($id_produk);
+                $data['size_stock'] = $this->sizestock->getByKodeProduk($id_produk);
+
+                $foto = explode(',', $data['produk']->thumbnail_produk);
+                $size = explode(',', $data['produk']->size_produk);
+
+                foreach ($foto as $f) {
+                    $thumbnail[] = $f;
+                }
+                foreach ($size as $u) {
+                    $ukuran[] = $u;
+                }
+
+                $data['thumbnail'] = $thumbnail;
+                $data['size'] = $ukuran;
+                if ($this->userIsLoggedIn()) {
+                    $data['id_cart'] = $this->cart->getWhere("id_pengguna", $this->session->userdata['user_data']['id']);
+                    $data['id_cart'] = $this->cart->getData()->row();
+                } else {
+                    $data['id_cart'] = "";
+                }
+                $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
+                $this->load->view('public/product-detail', $data);
+            } else {
+                $data['pre_release'] = $preRelease;
+                $data['kategori'] = $this->kategori->getData()->result_array();
+                $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
+                $this->load->view('public/product-pre_release', $data);
+            }
         }
     }
 
@@ -422,7 +452,7 @@ class Home extends MY_Controller
             $datacart = $this->cart_item->order_by("id_detail_item_cart", "ASC");
             $datacart = $this->cart_item->getJoin("cart_item", "cart_item.id_cart=detail_cart_item.id_cart", "inner");
             $datacart = $this->cart_item->getJoin("produk", "produk.id_produk=detail_cart_item.id_produk", "inner");
-            if($this->reseller_mode){
+            if ($this->reseller_mode) {
                 $datacart = $this->cart_item->getJoin("produk_reseller", "produk.id_produk=produk_reseller.id_produk", "inner");
             }
             $datacart = $this->cart_item->getJoin("sub_produk", "sub_produk.id_sub_produk = detail_cart_item.id_sub_produk", "left");
@@ -519,7 +549,7 @@ class Home extends MY_Controller
                                         <img src="' . base_url() . 'assets/uploads/thumbnail_produk/' . $thumbnail[0] . '">
                                         <div class="content">
                                             <div class="name">' . $nama_produk . '</div>
-                                            <div class="real">' .$dHarga. 'Rp ' . number_format($realHarga, 0) . '</div>
+                                            <div class="real">' . $dHarga . 'Rp ' . number_format($realHarga, 0) . '</div>
                                             <div class="content-detail">
                                                 Jumlah : <strong class="cart-quantity">' . $d->quantity . '/ Ukuran :' . $dsize . '</strong> 
                                             </div>
@@ -1040,9 +1070,15 @@ class Home extends MY_Controller
     }
     public function panduan_ukuran()
     {
-        $data['kategori'] = $this->kategori->getData()->result_array();
-        //
-        $this->load->view('public/panduan_ukuran', $data);
+        if ($this->reseller_mode) {
+            if (!$this->userIsLoggedIn()) {
+                redirect(base_url('login'));
+            }
+        } else {
+            $data['kategori'] = $this->kategori->getData()->result_array();
+            //
+            $this->load->view('public/panduan_ukuran', $data);
+        }
     }
     public function panduan_return()
     {
