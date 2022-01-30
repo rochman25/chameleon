@@ -153,6 +153,11 @@ $this->load->view('public/cart');
             <div class="container">
                 <?php foreach ($produk as $p) {
                     $harga = $p['harga_produk'];
+                    $diskon_produk = $p['diskon_produk'];
+                    if($p['harga_produk_reseller']){
+                        $harga = $p['harga_produk_reseller'];
+                        $diskon_produk = $p['diskon_produk_reseller'];
+                    }
                 ?>
                     <div class="product-hotcard" style="padding-bottom: 0;">
                         <a href="<?= base_url() ?>detail?produk=<?= $p['id_produk'] ?>" style="position: relative;">
@@ -194,12 +199,12 @@ $this->load->view('public/cart');
                                         <?php } ?>
                                         <p style="font-size: 13px; color: #5a5a5a; font-weight: bold;"><?= $p['nama_produk']; ?></p>
                                         <div class="row" style="margin-right: 0;margin-left: 0px;margin-bottom:10px">
-                                            <?php if ($p['diskon_produk'] != 0) { ?>
+                                            <?php if ($diskon_produk != 0) { ?>
                                                 <div class="column" style="width: auto;">
                                                     <div class="price-before" style="font-size:11px; text-decoration : line-through; color:#767171;margin-right:5px">Rp <?php echo number_format($harga, 0); ?></div>
                                                 </div>
                                                 <div class="column" style="width: auto;">
-                                                    <div class="price-after" style="font-size: 11px; color:#ff3a3a;"> Rp <?= number_format($p['harga_produk'] - (($p['diskon_produk'] / 100) * $p['harga_produk']), 0); ?></div>
+                                                    <div class="price-after" style="font-size: 11px; color:#ff3a3a;"> Rp <?= number_format($harga - (($diskon_produk / 100) * $harga), 0); ?></div>
                                                 </div>
                                             <?php } else { ?>
                                                 <div class="column" style="width: auto;">

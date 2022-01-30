@@ -35,7 +35,8 @@ class Home extends MY_Controller
             $data['produk'] = $this->produk->getJoin("kategori", "kategori.id_kategori=produk.id_kategori", "inner");
             // $data['produk'] = $this->produk->getWhere('produk.stok_produk > ', '0');
             if ($this->reseller_mode) {
-                $data['produk'] = $this->produk->getJoin("produk_reseller", "produk_reseller.id_produk=produk.id_produk", "inner");
+                $data['produk'] = $this->produk->select('produk.*,produk_reseller.harga_produk as harga_produk_reseller, produk_reseller.diskon_produk as diskon_produk_reseller');
+                $data['produk'] = $this->produk->getJoin("produk_reseller", "produk_reseller.id_produk=produk.id_produk", "left");
             }
             $data['produk'] = $this->produk->getData()->result_array();
 
