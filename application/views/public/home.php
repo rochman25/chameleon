@@ -154,7 +154,7 @@ $this->load->view('public/cart');
                 <?php foreach ($produk as $p) {
                     $harga = $p['harga_produk'];
                     $diskon_produk = $p['diskon_produk'];
-                    if($p['harga_produk_reseller']){
+                    if(isset($p['harga_produk_reseller'])){
                         $harga = $p['harga_produk_reseller'];
                         $diskon_produk = $p['diskon_produk_reseller'];
                     }
