@@ -82,5 +82,9 @@ $route['admin/sizestock/tambah'] = 'admin/SizeStock/tambah';
 $route['admin/sizestock/ubah/(:any)'] = 'admin/SizeStock/ubah/$1';
 $route['admin/sizestock/hapus'] = 'admin/SizeStock/hapus';
 
+$route['admin/reseller'] = 'admin/PenggunaReseller/index';
+$route['admin/reseller/tambah'] = 'admin/PenggunaReseller/tambah';
+$route['admin/reseller/ubah'] = 'admin/PenggunaReseller/ubah';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
