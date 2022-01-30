@@ -43,4 +43,9 @@ class Pengguna_model extends MY_Model
         return $this->getData()->row();
     }
 
+    function getDataReseller(){
+        $this->getWhere('is_reseller',true);
+        return $this->getData()->result_array();
+    }
+
 }
