@@ -2,7 +2,11 @@
 <header class="mobile">
     <div class="header-fixed">
         <a href="<?= base_url() ?>" class="logo">
-            <img src="<?= base_url() ?>assets/images/chameleon_cloth_logo.png">
+            <?php if ($this->config->item('reseller_mode')) { ?>
+                <img style="margin-top: 0px; height: 37px;" src="<?= base_url() ?>assets/images/reseller_logo.png">
+            <?php } else { ?>
+                <img src="<?= base_url() ?>assets/images/chameleon_cloth_logo.png">
+            <?php } ?>
         </a>
         <div class="mainheader">
             <div class="icon-left">

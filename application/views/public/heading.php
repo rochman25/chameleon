@@ -17,14 +17,13 @@
 			</div>
 			<div class="mainheader">
 				<a href="<?= base_url() ?>" class="logo">
-					<img src="<?= base_url() ?>assets/images/chameleon_cloth_logo.png">
+					<?php if ($this->config->item('reseller_mode')) { ?>
+						<img style="margin-top: 15px;" src="<?= base_url() ?>assets/images/reseller_logo.png">
+					<?php } else { ?>
+						<img src="<?= base_url() ?>assets/images/chameleon_cloth_logo.png">
+					<?php } ?>
 				</a>
 				<ul>
-					<?php if ($this->config->item('reseller_mode')) { ?>
-						<li>
-							<a href="#">Reseller</a>
-						</li>
-					<?php } ?>
 					<li id="koleksi">
 						<a href="#">koleksi</a>
 						<div class="dropdown dropdown-collection">
