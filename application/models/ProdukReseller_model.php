@@ -24,8 +24,9 @@ class ProdukReseller_model extends MY_Model
     }
 
     function getDataReseller(){
-        $this->select('produk.*,produk_reseller.harga_produk as harga_produk_reseller, produk_reseller.id_produk_reseller');
-        $this->getJoin("produk", "produk.id_produk=produk_reseller.id_produk", "inner");
+        $this->table = "produk";
+        $this->select('produk.*,produk_reseller.harga_produk as harga_produk_reseller, produk_reseller.id_produk_reseller, produk_reseller.diskon_produk as diskon_produk_reseller');
+        $this->getJoin("produk_reseller", "produk.id_produk=produk_reseller.id_produk", "left");
         return $this->getData()->result_array();
     }
 

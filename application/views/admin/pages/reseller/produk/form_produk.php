@@ -45,7 +45,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <label for="nama_p">Pilih Produk</label>
-                                                        <select class="form-control select2" name="id_p">
+                                                        <select class="form-control select2" name="id_ps" disabled>
                                                             <?php foreach($master_produk as $index => $item){ ?>
                                                                 <option value="<?=$item->id_produk?>" <?php if(isset($produk) && $produk->id_produk == $item->id_produk) echo "selected"; ?>><?=$item->kode_produk." - ".$item->nama_produk?></option>
                                                             <?php } ?>
@@ -53,6 +53,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <input type="hidden" name="id_p" value="<?=isset($produk) ? $produk->id_produk : null?>">
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-6">
