@@ -41,7 +41,7 @@
                                         <h4>Produk Reseller List</h4>
                                     </div>
                                     <div class="card-body">
-                                        <a href="<?= base_url() ?>admin/produk/reseller/tambah" class="btn btn-primary" style="margin-bottom:10px"><i class="fa fa-plus"></i> Tambah Produk</a>
+                                        <!-- <a href="<?= base_url() ?>admin/produk/reseller/tambah" class="btn btn-primary" style="margin-bottom:10px"><i class="fa fa-plus"></i> Tambah Produk</a> -->
                                         <?= $this->session->flashdata('pesan') ?>
                                         <div class="table-responsive">
                                             <table class="table table-hover" id="table-1">
@@ -62,20 +62,39 @@
                                                     foreach ($produk as $row) { ?>
                                                         <tr>
                                                             <th scope="row"><?= $no++ ?></th>
-                                                            <td id="data-produk" data-id="<?= $row['kode_produk'] ?>"><a href="<?= base_url() ?>admin/produk/reseller/ubah?id=<?= $row['id_produk_reseller'] ?>"><?= $row['kode_produk'] ?></a></td>
+                                                            <td id="data-produk" data-id="<?= $row['kode_produk'] ?>"><a href="<?= base_url() ?>admin/produk/reseller/ubah?id=<?= $row['kode_produk'] ?>"><?= $row['kode_produk'] ?></a></td>
                                                             <td><?= $row['nama_produk'] ?></td>
                                                             <td>
                                                                 <?= $row['stok_produk'] ?>
                                                             </td>
-                                                            <td><?= "Rp ".number_format($row['harga_produk_reseller'],0,'.','.') ?></td>
+                                                            <td>
+                                                                <?php
+                                                                    $harga_diskon = 0;
+                                                                    $harga_produk = $row['harga_produk'];
+                                                                    if($row['harga_produk_reseller']){
+                                                                        $harga_diskon = $row['harga_produk_reseller'] * $row['diskon_produk_reseller'] / 100;
+                                                                        $harga_diskon = $row['harga_produk_reseller'] - $harga_diskon;
+                                                                        $harga_produk = $row['harga_produk_reseller'];
+                                                                    }else{
+                                                                        $harga_diskon = $row['harga_produk'] * $row['diskon_produk'] / 100;
+                                                                        $harga_diskon = $row['harga_produk'] - $harga_diskon;
+                                                                    }
+
+                                                                ?>
+                                                                <?= "Rp " . number_format($harga_produk, 0, '.', '.') ?>
+                                                                <br />
+                                                                <b style="color: red;"><?= "Rp " . number_format($harga_diskon, 0, '.', '.') ?></b>
+                                                            </td>
                                                             <td>
                                                                 <img style="margin:10px" width="100px" height="100px" src="<?= base_url() ?>assets/uploads/thumbnail_produk/<?= $thumbnail[$row['id_produk']] ?>">
                                                             </td>
                                                             <td>
-                                                                <!-- <a href="<?= base_url() ?>admin/sizestock/index/<?=$row['id_produk']?>" class="btn btn-info">Size Stock</a> -->
+                                                                <!-- <a href="<?= base_url() ?>admin/sizestock/index/<?= $row['id_produk'] ?>" class="btn btn-info">Size Stock</a> -->
                                                                 <!-- <button id="btnUbah" data-toggle="modal" data-target="#updateModal" data-id="<?= $row['kode_produk']; ?>" data-stok="<?= $row['stok_produk']; ?>" class="btn btn-success" style="margin-bottom:5px;"><i class="fa fa-pencil" style="margin-right:5px;"></i>Stok</button> -->
                                                                 <!-- <a href="<?= base_url() ?>admin/produk/ubah?id=<?= $row['id_produk'] ?>" class="btn btn-success">Ubah</a> -->
-                                                                 <button id="btnHapus" data-target="#hapusModal" data-toggle="modal" data-id="<?= $row['id_produk_reseller'] ?>" class="btn btn-danger" style="margin-bottom:5px;"><i class="fa fa-trash" style="margin-right:5px;"></i>Hapus</button> 
+                                                                <?php if (isset($row['id_produk_reseller'])) { ?>
+                                                                    <button id="btnHapus" data-target="#hapusModal" data-toggle="modal" data-id="<?= $row['id_produk_reseller'] ?>" class="btn btn-danger" style="margin-bottom:5px;"><i class="fa fa-trash" style="margin-right:5px;"></i>Hapus</button>
+                                                                <?php } ?>
                                                             </td>
                                                         </tr>
                                                     <?php } ?>
@@ -111,7 +130,7 @@
                                     <div class="input-group">
                                         <input type="hidden" class="form-control" id="id_hapus" name="id" required>
                                         <p>
-                                            <h6>Apakah anda yakin menghapus data ini?</h6>
+                                        <h6>Apakah anda yakin menghapus data ini?</h6>
                                         </p>
                                     </div>
                                 </div>
@@ -170,7 +189,7 @@
         });
         $(document).on("click", "#data-produk", function() {
             // alert($(this).data('id'))
-            window.location.href = "<?= base_url() ?>admin/produk/ubah?id=" + $(this).data('id')
+            window.location.href = "<?= base_url() ?>admin/produk/reseller/ubah?id=" + $(this).data('id')
         });
         $(document).on("click", "#btnUbah", function() {
             let id = $(this).data('id');

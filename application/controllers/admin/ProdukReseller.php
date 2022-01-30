@@ -21,6 +21,7 @@ class ProdukReseller extends MY_Controller
         if ($this->adminIsLoggedIn()) {
             $thumbnail = array();
             $data['produk'] = $this->produk_reseller->getDataReseller();
+            // die(json_encode($data));
             foreach ($data['produk'] as $index => $row) {
                 $foto = explode(',', $row['thumbnail_produk']);
                 $thumbnail[$row['id_produk']] = $foto[0];
@@ -85,7 +86,12 @@ class ProdukReseller extends MY_Controller
         if ($this->adminIsLoggedIn()) {
             $id = $this->input->get('id');
             $diskon_percent = 0;
-            $data['produk'] = $this->produk_reseller->getById($id);
+            $data['produk'] = $this->produk->getById($id);
+            $reseller_produk = $this->produk_reseller->getByIdProduk($data['produk']->id_produk);
+            if($reseller_produk){
+                $data['produk']->harga_produk = $reseller_produk->harga_produk;
+                $data['produk']->diskon_produk = $reseller_produk->diskon_produk;
+            }
             if ($this->input->post('kirim')) {
                 $this->db->trans_begin();
                 $id_produk = $this->input->post('id_p');
@@ -97,10 +103,16 @@ class ProdukReseller extends MY_Controller
                 $data = array(
                     "id_produk" => $id_produk,
                     "harga_produk" => $harga_p,
-                    "diskon_produk" => $diskon_percent,
-                    "updated_at" => date("Y-m-d H:i:s")
+                    "diskon_produk" => $diskon_percent
                 );
-                if ($this->produk_reseller->updateData($data, $id)) {
+                if($reseller_produk){
+                    $data['updated_at'] = date("Y-m-d H:i:s");
+                    $query = $this->produk_reseller->updateData($data, $reseller_produk->id_produk_reseller);
+                }else{
+                    $data['created_at'] = date("Y-m-d H:i:s");
+                    $query = $this->produk_reseller->insert($data);
+                }
+                if ($query) {
                     //sub produk
 
                     $this->db->trans_commit();

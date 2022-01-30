@@ -27,10 +27,8 @@ class Home extends MY_Controller
 
     public function index()
     {
-        if ($this->reseller_mode) {
-            if (!$this->userIsLoggedIn()) {
-                redirect(base_url('login'));
-            }
+        if ($this->reseller_mode && !$this->userIsLoggedIn()) {
+            redirect(base_url('login'));
         } else {
             $thumbnail = array();
             $data['produk'] = $this->produk->order_by("kode_produk", "desc");
@@ -132,10 +130,8 @@ class Home extends MY_Controller
     }
     public function search()
     {
-        if ($this->reseller_mode) {
-            if (!$this->userIsLoggedIn()) {
-                redirect(base_url('login'));
-            }
+        if ($this->reseller_mode && !$this->userIsLoggedIn()) {
+            redirect(base_url('login'));
         } else {
             $cari = $this->input->post('search');
             $data['produk'] = $this->produk->search($cari, "produk")->result_array();
@@ -157,10 +153,8 @@ class Home extends MY_Controller
 
     public function produk($kategori = "")
     {
-        if ($this->reseller_mode) {
-            if (!$this->userIsLoggedIn()) {
-                redirect(base_url('login'));
-            }
+        if ($this->reseller_mode && !$this->userIsLoggedIn()) {
+            redirect(base_url('login'));
         } else {
             if ($kategori == "semua" || $kategori == "Semua Produk") {
                 $datakategori = $this->kategori->getData()->row();
@@ -248,10 +242,8 @@ class Home extends MY_Controller
 
     public function promo()
     {
-        if ($this->reseller_mode) {
-            if (!$this->userIsLoggedIn()) {
-                redirect(base_url('login'));
-            }
+        if ($this->reseller_mode && !$this->userIsLoggedIn()) {
+            redirect(base_url('login'));
         } else {
             $this->load->view('public/product-promo');
         }
@@ -259,10 +251,8 @@ class Home extends MY_Controller
 
     public function produk_detail()
     {
-        if ($this->reseller_mode) {
-            if (!$this->userIsLoggedIn()) {
-                redirect(base_url('login'));
-            }
+        if ($this->reseller_mode && !$this->userIsLoggedIn()) {
+            redirect(base_url('login'));
         } else {
             $id_produk = $this->input->get('produk');
             $preRelease = $this->pre_release->getByIdProduk($id_produk);
