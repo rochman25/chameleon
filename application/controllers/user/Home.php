@@ -271,8 +271,10 @@ class Home extends MY_Controller
 
                 if ($this->reseller_mode) {
                     $data['produk_reseller'] = $this->produk_reseller->getByIdproduk($id_produk);
-                    $data['produk']->harga_produk = $data['produk_reseller']->harga_produk;
-                    $data['produk']->diskon_produk = $data['produk_reseller']->diskon_produk;
+                    if($data['produk_reseller']){
+                        $data['produk']->harga_produk = $data['produk_reseller']->harga_produk;
+                        $data['produk']->diskon_produk = $data['produk_reseller']->diskon_produk;
+                    }
                 }
 
                 $data['subProduk'] = $this->subproduk->getByIdProduk($id_produk);
@@ -346,30 +348,62 @@ class Home extends MY_Controller
                 $cek = $this->user->login($where)->row();
                 if ($cek != null) {
                     if ($cek->status == true) {
-                        //   die(json_encode($this->bcrypt->hash_password($pass)));
-                        //    die(json_encode(array("datacek"=>$cek,"datapass"=>$this->bcrypt->hash_password($pass))));
-                        // die(json_encode($this->bcrypt->check_password($pass, $cek->password)));
                         if ($this->bcrypt->check_password($pass, $cek->password)) {
-                            //  if ($cek->password == $pass) {
-                            $datas = array(
-                                "updated_at" => date("Y-m-d H:i:s")
-                            );
-                            $this->user->updateData($datas, $cek->id_pengguna);
-                            $user = array(
-                                "id" => $cek->id_pengguna,
-                                "username" => $cek->username,
-                                "email" => $cek->email,
-                                "status" => $cek->status,
-                                "login" => true,
-                            );
-                            $this->session->set_userdata('user_data', $user);
-                            redirect(base_url());
+                            if($this->reseller_mode){
+                                if($cek->is_reseller){
+                                    $datas = array(
+                                        "updated_at" => date("Y-m-d H:i:s")
+                                    );
+                                    $this->user->updateData($datas, $cek->id_pengguna);
+                                    $user = array(
+                                        "id" => $cek->id_pengguna,
+                                        "username" => $cek->username,
+                                        "email" => $cek->email,
+                                        "status" => $cek->status,
+                                        "login" => true,
+                                    );
+                                    $this->session->set_userdata('user_data', $user);
+                                    redirect(base_url());
+                                }else{
+                                    $data['kategori'] = $this->kategori->getData()->result_array();
+                                    $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
+                                    $this->session->set_flashdata(
+                                        'pesan',
+                                        '<div class="alert alert-danger mr-auto text-center">Mohon maaf anda bukan reseller.</div>'
+                                    );
+                                    $this->load->view('public/login', $data);
+                                }
+                            }else{
+                                if($cek->is_reseller){
+                                    $data['kategori'] = $this->kategori->getData()->result_array();
+                                    $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
+                                    $this->session->set_flashdata(
+                                        'pesan',
+                                        '<div class="alert alert-danger mr-auto text-center">Mohon maaf akun reseller tidak bisa masuk.</div>'
+                                    );
+                                    $this->load->view('public/login', $data);
+                                }else{
+                                    $datas = array(
+                                        "updated_at" => date("Y-m-d H:i:s")
+                                    );
+                                    $this->user->updateData($datas, $cek->id_pengguna);
+                                    $user = array(
+                                        "id" => $cek->id_pengguna,
+                                        "username" => $cek->username,
+                                        "email" => $cek->email,
+                                        "status" => $cek->status,
+                                        "login" => true,
+                                    );
+                                    $this->session->set_userdata('user_data', $user);
+                                    redirect(base_url());
+                                }
+                            }
                         } else {
                             $data['kategori'] = $this->kategori->getData()->result_array();
                             $data['voucher'] = $this->voucher_ongkir->getLastestVoucher();
                             $this->session->set_flashdata(
                                 'pesan',
-                                '<div class="alert alert-danger mr-auto">Password atau Username salah</div>'
+                                '<div class="alert alert-danger mr-auto text-center">Password atau Username salah</div>'
                             );
                             $this->load->view('public/login', $data);
                         }
