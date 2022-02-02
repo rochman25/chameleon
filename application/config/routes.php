@@ -86,6 +86,7 @@ $route['admin/reseller'] = 'admin/PenggunaReseller/index';
 $route['admin/reseller/tambah'] = 'admin/PenggunaReseller/tambah';
 $route['admin/reseller/ubah'] = 'admin/PenggunaReseller/ubah';
 $route['admin/reseller/detail'] = 'admin/PenggunaReseller/detail';
+$route['admin/reseller/disable_account'] = 'admin/PenggunaReseller/disable_reseller';
 
 $route['admin/produk/reseller'] = 'admin/ProdukReseller/index';
 $route['admin/produk/reseller/tambah'] = 'admin/ProdukReseller/tambah';

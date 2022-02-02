@@ -51,4 +51,18 @@ class Pengguna_model extends MY_Model
         return $this->getData()->result_array();
     }
 
+    function getResellerDataByLastCountMonthCreated($param = 3){
+        $sql = "select * from `pengguna` where created_at <= now()-interval $param month and is_reseller = true";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    function disableAccount($id){
+        $data = [
+            "status" => false
+        ];
+        $this->getWhere("id_pengguna",$id);
+        return $this->update($data);
+    }
+
 }

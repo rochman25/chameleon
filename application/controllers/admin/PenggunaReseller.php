@@ -136,4 +136,25 @@ class PenggunaReseller extends MY_Controller
             redirect('admin/home/login');
         }
     }
+
+
+    public function disable_reseller(){
+        try {
+            $reseller_data = $this->pengguna->getResellerDataByLastCountMonthCreated(3);
+            $this->load->model('Transaksi_model','transaksi');
+            $countDisabled = 0;
+            foreach($reseller_data as $index => $item){
+                $data = $this->transaksi->getCountSuccessTransaksiResellerByIdReseller($item['id_pengguna'], 3);
+                if(count($data) == 0){
+                    $this->pengguna->disableAccount($item['id_pengguna']);
+                    $countDisabled ++;
+                }
+            }
+            echo "Total $countDisabled Reseller Account Succesfully disabled";
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+        }
+        
+    }
+
 }

@@ -141,4 +141,10 @@ class Transaksi_model extends MY_Model
         return $this->getData()->result_array();
     }
 
+    function getCountSuccessTransaksiResellerByIdReseller($id, $param = 3){
+        $sql = "select * from `transaksi` where waktu_transaksi >= now()-interval $param month and id_pengguna = '$id' and status_transaksi = 'kirim'";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
 }

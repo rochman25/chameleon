@@ -52,6 +52,7 @@ class Transaksi extends MY_Controller
             $id = $this->input->post('id');
             $status = $this->input->post('status');
             $noresi = $this->input->post('noresi');
+            $reseller = $this->input->post('reseller');
 
             $data = [
                 "status_transaksi" => $status,
@@ -85,12 +86,18 @@ class Transaksi extends MY_Controller
                     'pesan',
                     '<div class="alert alert-success mr-auto alert-dismissible">Data Berhasil diupdate</div>'
                 );
+                if($reseller){
+                    redirect('admin/transaksi/reseller');
+                }
                 redirect('admin/transaksi');
             } else {
                 $this->session->set_flashdata(
                     'pesan',
                     '<div class="alert alert-danger mr-auto alert-dismissible">Ada masalah</div>'
                 );
+                if($reseller){
+                    redirect('admin/transaksi/reseller');
+                }
                 redirect('admin/transaksi');
             }
         } else {

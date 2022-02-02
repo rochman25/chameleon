@@ -64,15 +64,15 @@
                                                             <th scope="row"><?= $no++ ?></th>
                                                             <td id="kode_t" data-id="<?= $row['id_transaksi'] ?>"><a href="<?= base_url() ?>admin/transaksi/detail?id=<?= $row['id_transaksi'] ?>"><?= $row['kode_transaksi'] ?></a></td>
                                                             <td><?= $row['username'] ?></td>
-                                                            <td><?= date("d-M-Y H:i:s",strtotime($row['waktu_transaksi'])) ?></td>
+                                                            <td><?= date("d-M-Y H:i:s", strtotime($row['waktu_transaksi'])) ?></td>
                                                             <td>
                                                                 <?php if ($row['status_transaksi'] == 'pending') {
                                                                     echo "<span class='badge badge-warning'>" . $row['status_transaksi'] . "</span>";
                                                                 } else if ($row['status_transaksi'] == 'validasi') {
                                                                     echo "<span class='badge badge-secondary'>" . $row['status_transaksi'] . "</span>";
-                                                                } else if($row['status_transaksi'] == 'proses'){
+                                                                } else if ($row['status_transaksi'] == 'proses') {
                                                                     echo "<span class='badge badge-primary'>" . $row['status_transaksi'] . "</span>";
-                                                                }else if ($row['status_transaksi'] == 'kirim') {
+                                                                } else if ($row['status_transaksi'] == 'kirim') {
                                                                     echo "<span class='badge badge-info'>" . $row['status_transaksi'] . "</span>";
                                                                 } else if ($row['status_transaksi'] == 'selesai') {
                                                                     echo "<span class='badge badge-success'>" . $row['status_transaksi'] . "</span>";
@@ -82,7 +82,7 @@
                                                             </td>
                                                             <td>
                                                                 <?php if ($row['bukti_transfer'] != null) { ?>
-                                                                    <a href="<?= base_url() ?>assets/uploads/transaksi/<?=$row['bukti_transfer']?>" target="_blank"><span class='badge badge-primary'>Lihat Bukti</span></a>
+                                                                    <a href="<?= base_url() ?>assets/uploads/transaksi/<?= $row['bukti_transfer'] ?>" target="_blank"><span class='badge badge-primary'>Lihat Bukti</span></a>
                                                                 <?php } else { ?>
                                                                     <span class='badge badge-danger'>Belum ada</span>
                                                                 <?php } ?>
@@ -117,6 +117,7 @@
                             </button>
                         </div>
                         <form action="<?= base_url() ?>admin/transaksi/update" method="POST">
+                            <input type="hidden" class="form-control" id="reseller" name="reseller" value="<?= $this->config->item('reseller_mode') ?>">
                             <div class="modal-body">
                                 <div class="form-group">
                                     <div class="row">
@@ -179,9 +180,10 @@
                                     <div class="col-lg-12">
                                         <div class="input-group">
                                             <input type="hidden" class="form-control" id="id_batal" name="id" required>
+                                            <input type="hidden" class="form-control" id="reseller" name="reseller" value="<?= $this->config->item('reseller_mode') ?>">
                                             <input type="hidden" class="form-control" name="status" value="batal">
                                             <p>
-                                                <h6>Apakah anda yakin membatalkan transaksi ini?</h6>
+                                            <h6>Apakah anda yakin membatalkan transaksi ini?</h6>
                                             </p>
                                         </div>
                                     </div>
@@ -231,11 +233,11 @@
                     "targets": [2, 3]
                 }]
             });
-            $("#status").change(function (e){
+            $("#status").change(function(e) {
                 var status = $(this).val();
                 if (status == "kirim") {
                     $('#sub_form').append('<label>No Resi</label><div class="input-group"><input type="text" id="noresi" class="form-control" placeholder="Nomor Resi" name="noresi"></div>');
-                }else{
+                } else {
                     $('#sub_form').remove()
                 }
             });
